@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ShootManager : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class ShootManager : MonoBehaviour
     [SerializeField] private int weaponType = 0;
     [SerializeField] private Vector2 mousePos;
     [SerializeField] private BulletPool bulletPool;
+    [SerializeField] private UnityEvent unityEvent;
 
     #endregion private variables
 
@@ -23,7 +25,20 @@ public class ShootManager : MonoBehaviour
 
     #region public void
 
-    public void GetReadyShootByWeapon(int weaponType)
+    public void ChangeWeaponType(int typeWeapon)
+    {
+        if (typeWeapon >= 0)
+        {
+            weaponType = typeWeapon;
+            unityEvent.Invoke();
+        }
+    }
+
+    #endregion public void
+
+    #region private void
+
+    private void GetReadyShootByWeapon(int weaponType)
     {
         if (weaponType == 0)
         {
@@ -54,17 +69,15 @@ public class ShootManager : MonoBehaviour
         }
     }
 
-    public void ChangeWeaponType(int typeWeapon)
+    private void Awake()
     {
-        if (typeWeapon >= 0)
-        {
-            weaponType = typeWeapon;
-        }
+        unityEvent.AddListener(GetWeaponTypeToBulletPool);
     }
 
-    #endregion public void
-
-    #region private void
+    private void GetWeaponTypeToBulletPool()
+    {
+        bulletPool.InstanceObjectByTypeAndCount(weaponType);
+    }
 
     private void FixedUpdate()
     {

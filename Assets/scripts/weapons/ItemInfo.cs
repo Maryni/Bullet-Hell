@@ -1,0 +1,33 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ItemInfo : MonoBehaviour
+{
+    #region private variables
+
+    [SerializeField] private string name;
+    [Header("0 - weapon, 1 - other thing"), SerializeField] private int typeItem;
+    [SerializeField] private string value;
+    private SpriteRenderer renderer;
+
+    #endregion private variables
+
+    #region public void
+
+    public string GetValue() => value;
+
+    #endregion public void
+
+    #region private void
+
+    private void Start()
+    {
+        renderer = GetComponent<SpriteRenderer>();
+        value = Random.Range(0, 3).ToString();
+        name = "Item";
+        renderer.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
+    }
+
+    #endregion private void
+}

@@ -1,26 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BulletPool : MonoBehaviour
 {
+    #region private variables
+
     [SerializeField] private Transform parentTransform;
     [SerializeField] private List<GameObject> bulletsType;
     [SerializeField] private GameObject[] bullets;
     [SerializeField] private int countPoolObjects;
     [SerializeField] private int typeWeapon;
+    [SerializeField] private UnityEvent unityEvent;
 
-    private void Awake()
-    {
-        typeWeapon = FindObjectOfType<ShootManager>().WeaponType;
-        bullets = new GameObject[countPoolObjects];
-        for (int i = 0; i < countPoolObjects; i++)
-        {
-            Instantiate(bulletsType[typeWeapon], parentTransform);
-            bullets[i] = parentTransform.GetChild(i).gameObject;
-            bullets[i].SetActive(false);
-        }
-    }
+    #endregion private variables
+
+    #region public void
 
     public GameObject GetObject()
     {
@@ -59,8 +55,9 @@ public class BulletPool : MonoBehaviour
         }
     }
 
-    public void InstanceObjectByTypeAndCount(int typeWeapon, int count)
+    public void InstanceObjectByTypeAndCount(int typeWeapon, int count = 20)
     {
+        unityEvent.Invoke();
         this.typeWeapon = typeWeapon;
         countPoolObjects = count;
         bullets = new GameObject[countPoolObjects];
@@ -71,4 +68,36 @@ public class BulletPool : MonoBehaviour
             bullets[i].SetActive(false);
         }
     }
+
+    #endregion public void
+
+    #region private void
+
+    private void Awake()
+    {
+        unityEvent.AddListener(DropTrashBulletsAndRemove);
+        InstanceByDefault();
+    }
+
+    private void InstanceByDefault()
+    {
+        typeWeapon = FindObjectOfType<ShootManager>().WeaponType;
+        bullets = new GameObject[countPoolObjects];
+        for (int i = 0; i < countPoolObjects; i++)
+        {
+            Instantiate(bulletsType[typeWeapon], parentTransform);
+            bullets[i] = parentTransform.GetChild(i).gameObject;
+            bullets[i].SetActive(false);
+        }
+    }
+
+    private void DropTrashBulletsAndRemove()
+    {
+        for (int i = 0; i < bullets.Length; i++)
+        {
+            Destroy(bullets[i]);
+        }
+    }
+
+    #endregion private void
 }
