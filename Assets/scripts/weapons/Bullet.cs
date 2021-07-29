@@ -8,9 +8,8 @@ public class Bullet : MonoBehaviour
 
     [SerializeField] private GameObject bullet;
     [SerializeField] private Rigidbody2D rigidbody2D;
-    [SerializeField] private Transform backupTransform;
     [SerializeField] private float modSpeedBullet;
-    [SerializeField] private int maxBullets;
+    [SerializeField] private Vector3 backupTransformVector3;
 
     #endregion private variables
 
@@ -22,14 +21,16 @@ public class Bullet : MonoBehaviour
 
     #region public void
 
-    public void GetBackupTransform(Transform transform)
-    {
-        backupTransform = transform;
-    }
-
     public void Move(Vector2 pos)
     {
         Vector2 direction = pos - (Vector2)transform.position;
+        rigidbody2D.AddForce(direction * modSpeedBullet, ForceMode2D.Impulse);
+    }
+
+    public void Move(Vector2 pos, Vector3 angle)
+    {
+        Vector2 direction = pos - (Vector2)transform.position;
+        direction = direction * angle;
         rigidbody2D.AddForce(direction * modSpeedBullet, ForceMode2D.Impulse);
     }
 
@@ -37,8 +38,14 @@ public class Bullet : MonoBehaviour
 
     #region private void
 
+    private void Start()
+    {
+        backupTransformVector3 = this.gameObject.transform.localPosition;
+    }
+
     private void OnBecameInvisible()
     {
+        gameObject.transform.position = backupTransformVector3;
         this.gameObject.SetActive(false);
     }
 

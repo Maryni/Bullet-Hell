@@ -8,8 +8,5 @@ public interface IWeaponStats
     float CooldownTime { get; }
     float Damage { get; }
     float ShootingRate { get; }
-
-    void Shot(Vector2 mousePos);
-
-    void Reload();
+    int BulletOnShotUsed { get; }
 }

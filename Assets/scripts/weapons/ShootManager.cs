@@ -11,8 +11,15 @@ public class ShootManager : MonoBehaviour
     [SerializeField] private RocketLaucher rocketLaucher;
     [SerializeField] private int weaponType = 0;
     [SerializeField] private Vector2 mousePos;
+    [SerializeField] private BulletPool bulletPool;
 
     #endregion private variables
+
+    #region properties
+
+    public int WeaponType => weaponType;
+
+    #endregion properties
 
     #region public void
 
@@ -20,24 +27,27 @@ public class ShootManager : MonoBehaviour
     {
         if (weaponType == 0)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0))
             {
+                automaticGun.GetBullet(bulletPool.GetObject());
                 automaticGun.Shot(mousePos);
                 return;
             }
         }
         if (weaponType == 1)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0))
             {
+                shotgun.GetBullet(bulletPool.GetObject());
                 shotgun.Shot(mousePos);
                 return;
             }
         }
         if (weaponType == 2)
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            if (Input.GetKey(KeyCode.Mouse0))
             {
+                rocketLaucher.GetBullet(bulletPool.GetObject());
                 rocketLaucher.Shot(mousePos);
                 return;
             }

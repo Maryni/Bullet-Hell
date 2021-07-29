@@ -2,18 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shotgun : MonoBehaviour, IWeaponStats
+public class AutomaticGun : MonoBehaviour, IWeapon
 {
     #region private variables
 
+    [SerializeField] private ShootManager shootManager;
     [SerializeField] private int bulletCount;
     [SerializeField] private int currentBullets;
     [SerializeField] private float cooldownTime;
     [SerializeField] private float damage;
     [SerializeField] private float shotingRate;
+    [SerializeField] private int bulletOnShotUsed;
+    [SerializeField] private WeaponSettings weaponSettings;
     private bool isReloading;
 
-    private Transform shotgunLocalTransformBullet;
+    private Transform automaticGunLocalTransformBullet;
     [SerializeField] private Bullet bullet;
 
     #endregion private variables
@@ -21,16 +24,32 @@ public class Shotgun : MonoBehaviour, IWeaponStats
     #region properties
 
     public int BulletsCount => bulletCount;
-
     public float CooldownTime => cooldownTime;
-
     public float Damage => damage;
-
     public float ShootingRate => shotingRate;
+    public int BulletOnShotUsed => bulletOnShotUsed;
+    public WeaponSettings WeaponSettings => weaponSettings;
+    public Bullet Bullet => bullet;
 
     #endregion properties
 
     #region public void
+
+    public void GetBullet(GameObject bulletObject)
+    {
+        bullet = bulletObject.GetComponent<Bullet>();
+    }
+
+    public void LoadSettings()
+    {
+        if (!IsValuesChanged())
+        {
+            bulletCount = WeaponSettings.BulletsCount;
+            cooldownTime = WeaponSettings.CooldownTime;
+            damage = WeaponSettings.Damage;
+            shotingRate = WeaponSettings.ShootingRate;
+        }
+    }
 
     public void Reload()
     {
@@ -52,12 +71,21 @@ public class Shotgun : MonoBehaviour, IWeaponStats
     public void Shot(Vector2 mousePos)
     {
         bullet.BulletObject.SetActive(true);
-        if (currentBullets == 0)
+        if (currentBullets <= 0)
         {
             Reload();
         }
-        bullet.Move(mousePos);
+        if (!isReloading)
+            bullet.Move(mousePos);
         currentBullets--;
+    }
+
+    public bool IsValuesChanged()
+    {
+        if (bulletCount == 0 && cooldownTime == 0 && damage == 0 && shotingRate == 0)
+            return false;
+        else
+            return true;
     }
 
     #endregion public void
@@ -66,9 +94,14 @@ public class Shotgun : MonoBehaviour, IWeaponStats
 
     private void Start()
     {
-        shotgunLocalTransformBullet = bullet.BulletObject.transform;
-        bullet.GetBackupTransform(shotgunLocalTransformBullet);
+        LoadSettings();
+        //automaticGunLocalTransformBullet = bullet.BulletObject.transform;
+        currentBullets = bulletCount;
     }
+
+    /// <summary>
+    /// if we didn't write settings in Inspector
+    /// </summary>
 
     #endregion private void
 }

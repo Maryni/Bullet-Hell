@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketLaucher : MonoBehaviour, IWeaponStats
+public class RocketLaucher : MonoBehaviour, IWeapon
 {
     #region private variables
 
@@ -11,6 +11,8 @@ public class RocketLaucher : MonoBehaviour, IWeaponStats
     [SerializeField] private float cooldownTime;
     [SerializeField] private float damage;
     [SerializeField] private float shotingRate;
+    [SerializeField] private int bulletOnShotUsed;
+    [SerializeField] private WeaponSettings weaponSettings;
     private bool isReloading;
 
     private Transform rocketLaucherLocalTransformBullet;
@@ -21,16 +23,31 @@ public class RocketLaucher : MonoBehaviour, IWeaponStats
     #region properties
 
     public int BulletsCount => bulletCount;
-
     public float CooldownTime => cooldownTime;
-
     public float Damage => damage;
-
     public float ShootingRate => shotingRate;
+    public int BulletOnShotUsed => bulletOnShotUsed;
+    public WeaponSettings WeaponSettings => weaponSettings;
 
     #endregion properties
 
     #region public void
+
+    public void GetBullet(GameObject bulletObject)
+    {
+        bullet = bulletObject.GetComponent<Bullet>();
+    }
+
+    public void LoadSettings()
+    {
+        if (!IsValuesChanged())
+        {
+            bulletCount = WeaponSettings.BulletsCount;
+            cooldownTime = WeaponSettings.CooldownTime;
+            damage = WeaponSettings.Damage;
+            shotingRate = WeaponSettings.ShootingRate;
+        }
+    }
 
     public void Reload()
     {
@@ -52,12 +69,21 @@ public class RocketLaucher : MonoBehaviour, IWeaponStats
     public void Shot(Vector2 mousePos)
     {
         bullet.BulletObject.SetActive(true);
-        if (currentBullets == 0)
+        if (currentBullets <= 0)
         {
             Reload();
         }
-        bullet.Move(mousePos);
+        if (!isReloading)
+            bullet.Move(mousePos);
         currentBullets--;
+    }
+
+    public bool IsValuesChanged()
+    {
+        if (bulletCount == 0 && cooldownTime == 0 && damage == 0 && shotingRate == 0)
+            return false;
+        else
+            return true;
     }
 
     #endregion public void
@@ -66,8 +92,9 @@ public class RocketLaucher : MonoBehaviour, IWeaponStats
 
     private void Start()
     {
-        rocketLaucherLocalTransformBullet = bullet.BulletObject.transform;
-        bullet.GetBackupTransform(rocketLaucherLocalTransformBullet);
+        LoadSettings();
+        //rocketLaucherLocalTransformBullet = bullet.BulletObject.transform;
+        currentBullets = bulletCount;
     }
 
     #endregion private void
