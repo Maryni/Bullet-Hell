@@ -10,42 +10,24 @@ namespace Tools
     {
         public T Max
         {
-            get
-            {
-                return max;
-            }
-            set
-            {
-                max = value.CompareTo(min) <= 0 ? Inc(min) : value;
-            }
+            get { return max; }
+            set { max = value.CompareTo(min) <= 0 ? Inc(min) : value; }
         }
 
         [SerializeField] private T max;
 
         public T Current
         {
-            get
-            {
-                return current;
-            }
-            set
-            {
-                current = value.CompareTo(max) > 0 ? max : value.CompareTo(min) < 0 ? min : value;
-            }
+            get { return current; }
+            set { current = value.CompareTo(max) > 0 ? max : value.CompareTo(min) < 0 ? min : value; }
         }
 
         [SerializeField] private T current;
 
         public T Min
         {
-            get
-            {
-                return min;
-            }
-            set
-            {
-                min = value.CompareTo(max) >= 0 ? Dec(max) : value;
-            }
+            get { return min; }
+            set { min = value.CompareTo(max) >= 0 ? Dec(max) : value; }
         }
 
         [SerializeField] private T min;
@@ -76,7 +58,7 @@ namespace Tools
     [Serializable]
     public class RangeInt : AbstractRange<int>
     {
-        public override float Percent => (float)Current / Max;
+        public override float Percent => (float) Current / Max;
 
         protected override int Dec(int value)
         {

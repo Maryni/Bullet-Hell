@@ -36,6 +36,7 @@ namespace Global.Boot
             {
                 baseManagers.Add(Instantiate(bootSetting.Managers[i], managerGameObject.transform));
             }
+
             Services.InitAppWith(baseManagers);
         }
 
@@ -47,6 +48,7 @@ namespace Global.Boot
                 Debug.Log("Next scene after boot is null, please, check the boot settings.");
                 yield break;
             }
+
             SceneLoader.LoadScene(bootSetting.NextSceneIndex);
         }
 

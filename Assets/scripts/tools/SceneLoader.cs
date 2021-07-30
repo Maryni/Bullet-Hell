@@ -13,10 +13,7 @@ namespace Tools
 
         public static void LoadScene(int index, float delayTime)
         {
-            DelayTool.NewDelay(delayTime, () =>
-            {
-                UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(index);
-            });
+            DelayTool.NewDelay(delayTime, () => { UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(index); });
         }
     }
 }

@@ -13,6 +13,7 @@ namespace Tools
             {
                 returned = gameObject.AddComponent<T>();
             }
+
             return returned;
         }
 

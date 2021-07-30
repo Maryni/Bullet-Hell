@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//нет неймспейса
 public class ItemInfo : MonoBehaviour
 {
     #region private variables
+//ты не правильно поставил регион и не правильно используешь сериалайз филды, на них должны быть pragma warning (смотри в доке, что тебе Маша кидала)
 
-    [SerializeField] private string name;
-    [Header("0 - weapon, 1 - other thing"), SerializeField] private int typeItem;
+    [SerializeField] private string name; //ты его не используешь нигде - удалить
+
+    [Header("0 - weapon, 1 - other thing"), SerializeField]
+    private int typeItem; //ты его не используешь нигде - удалить
+
     [SerializeField] private string value;
     private SpriteRenderer renderer;
     [SerializeField] private float timer;
@@ -17,6 +22,8 @@ public class ItemInfo : MonoBehaviour
 
     #region public void
 
+    //что это за валуе, какое оно, за что оно отвечает - под вопросом
+    //не правильный нейминг
     public string GetValue() => value;
 
     #endregion public void
@@ -38,6 +45,7 @@ public class ItemInfo : MonoBehaviour
         {
             timer -= 0.1f;
         }
+
         if (timer < 0)
         {
             timer = timerTemp;
@@ -47,3 +55,7 @@ public class ItemInfo : MonoBehaviour
 
     #endregion private void
 }
+
+//Этот скрипт нарушает принцип единой ответственности
+//скрипт не только хранит в себе информацию, он еще занимаеться каким-то таймингом
+//В идеале это должна быть структура даных, которая что-то помещает, судя по названию класса

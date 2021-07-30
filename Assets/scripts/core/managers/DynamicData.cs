@@ -6,6 +6,6 @@ namespace Global.Managers.Datas
     [Serializable]
     public class DynamicData
     {
-        [SerializeField] private WeaponSettings weaponSettings;
+        //[SerializeField] private WeaponSettings weaponSettings;
     }
 }

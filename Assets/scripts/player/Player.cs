@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//нет неймспейса
 public class Player : MonoBehaviour, IPlayerStats
 {
     #region private variables

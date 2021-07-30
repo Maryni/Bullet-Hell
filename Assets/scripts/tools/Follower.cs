@@ -45,6 +45,7 @@ namespace Tools
                 {
                     EndFollow();
                 }
+
                 yield return null;
             }
         }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//нет неймспейса
 public interface IWeaponStats
 {
     int BulletsCount { get; }

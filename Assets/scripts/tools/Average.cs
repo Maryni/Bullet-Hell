@@ -63,6 +63,7 @@ namespace Tools
                         indexs++;
                     }
                 }
+
                 return indexs != 0 ? sum / indexs : 0;
             }
         }
@@ -88,6 +89,7 @@ namespace Tools
                         indexs++;
                     }
                 }
+
                 return indexs != 0 ? sum / indexs : 0;
             }
         }
@@ -113,6 +115,7 @@ namespace Tools
                         indexs++;
                     }
                 }
+
                 return indexs != 0 ? sum / indexs : Vector2.zero;
             }
         }
@@ -138,6 +141,7 @@ namespace Tools
                         indexs++;
                     }
                 }
+
                 return indexs != 0 ? sum / indexs : Vector3.zero;
             }
         }

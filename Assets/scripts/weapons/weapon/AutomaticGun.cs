@@ -2,14 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutomaticGun : MonoBehaviour, IWeapon
+//нет неймспейса
+public class AutomaticGun : MonoBehaviour, IWeapon //неправильная архитектура интерфейсов, двойная реализация WeaponSettings
 {
     #region private variables
+    //ты не правильно поставил регион и не правильно используешь сериалайз филды, на них должны быть pragma warning (смотри в доке, что тебе Маша кидала)
 
-    [SerializeField] private ShootManager shootManager;
+    [SerializeField] private ShootManager shootManager; //не используется - удалить
 
-    [Header("Not change 0 if we have to load settings")]
-    [SerializeField] private int bulletCount;
+    [Header("Not change 0 if we have to load settings")] [SerializeField]
+    private int bulletCount;
 
     [SerializeField] private int currentBullets;
     [SerializeField] private float cooldownTime;
@@ -37,11 +39,14 @@ public class AutomaticGun : MonoBehaviour, IWeapon
 
     #region public void
 
-    public void GetBullet(GameObject bulletObject)
-    {
+    public void GetBullet(GameObject bulletObject) //неправильный нейминг + ты можешь передать не геймобджект, а скрипт
+    {//гет - получить, сет - задать
+        //в данном случае - ты задаешь
         bullet = bulletObject.GetComponent<Bullet>();
     }
 
+    //откуда подгружаются эти значения, где они указаны - не ясно + если значение не 0 будут в самом начале,
+    //а значения мы изменили - оно не сработает, и данные будут прежними, а где-то изменены
     public void LoadSettings()
     {
         if (!IsValuesChanged())
@@ -53,6 +58,7 @@ public class AutomaticGun : MonoBehaviour, IWeapon
         }
     }
 
+    //посмотри в сторону Coroutine
     public void Reload()
     {
         float timer = cooldownTime;
@@ -62,11 +68,13 @@ public class AutomaticGun : MonoBehaviour, IWeapon
             timer -= 0.1f;
             Debug.Log("Reloading " + this.gameObject.name);
         }
+
         if (timer < 0)
         {
             isReloading = false;
             currentBullets = bulletCount;
         }
+
         Debug.Log("Reloading finished " + this.gameObject.name);
     }
 
@@ -77,17 +85,24 @@ public class AutomaticGun : MonoBehaviour, IWeapon
         {
             Reload();
         }
+
         if (!isReloading)
             bullet.Move(mousePos);
         currentBullets--;
     }
 
+    //она не нужна
     public bool IsValuesChanged()
     {
-        if (bulletCount == 0 && cooldownTime == 0 && damage == 0 && shotingRate == 0)
+        if (bulletCount == 0 && cooldownTime == 0 && damage == 0 && shotingRate == 0) //????????
             return false;
-        else
+        else //скобки не забывай + можно без else
             return true;
+
+        //if(true==true)
+        //return true; //????????
+
+        //ты можешь написать return bulletCount == 0 && cooldownTime == 0 && damage == 0 && shotingRate == 0
     }
 
     #endregion public void
@@ -100,9 +115,17 @@ public class AutomaticGun : MonoBehaviour, IWeapon
         currentBullets = bulletCount;
     }
 
+    //к чему относить этот самари? под ним ничего нет, и лучше почитай для чего он используеться, что не использовать его просто так
     /// <summary>
     /// if we didn't write settings in Inspector
     /// </summary>
 
     #endregion private void
 }
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// а теперь посмотри на свой код с оружием
+// тебе не кажеться, что все три скрипта похожи между собой?
+// много одинаковой реализации, много повторений?
+// почему бы тебе не переписать это более правильно?
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

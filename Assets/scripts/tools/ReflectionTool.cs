@@ -16,12 +16,13 @@ namespace Tools
             List<Type> objects = new List<Type>();
             foreach (Type type in
                 Assembly
-                .GetAssembly(typeof(T))
-                .GetTypes()
-                .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T))))
+                    .GetAssembly(typeof(T))
+                    .GetTypes()
+                    .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(T))))
             {
                 objects.Add(type);
             }
+
             objects = objects.OrderBy(x => x.Name).ToList();
             return objects;
         }

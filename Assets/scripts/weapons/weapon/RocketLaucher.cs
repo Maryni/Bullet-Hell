@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RocketLaucher : MonoBehaviour, IWeapon
+//нет неймспейса
+public class RocketLaucher : MonoBehaviour, IWeapon //неправильная архитектура интерфейсов, двойная реализация WeaponSettings
 {
     #region private variables
 
-    [Header("Not change 0 if we have to load settings")]
-    [SerializeField] private int bulletCount;
+    //ты не правильно поставил регион и не правильно используешь сериалайз филды, на них должны быть pragma warning (смотри в доке, что тебе Маша кидала)
+    [Header("Not change 0 if we have to load settings")] [SerializeField]
+    private int bulletCount;
 
     [SerializeField] private int currentBullets;
     [SerializeField] private float cooldownTime;
@@ -34,11 +36,14 @@ public class RocketLaucher : MonoBehaviour, IWeapon
 
     #region public void
 
-    public void GetBullet(GameObject bulletObject)
-    {
+    public void GetBullet(GameObject bulletObject)//неправильный нейминг + ты можешь передать не геймобджект, а скрипт
+    {//гет - получить, сет - задать
+        //в данном случае - ты задаешь
         bullet = bulletObject.GetComponent<Bullet>();
     }
 
+    //откуда подгружаются эти значения, где они указаны - не ясно + если значение не 0 будут в самом начале,
+    //а значения мы изменили - оно не сработает, и данные будут прежними, а где-то изменены
     public void LoadSettings()
     {
         if (!IsValuesChanged())
@@ -50,6 +55,7 @@ public class RocketLaucher : MonoBehaviour, IWeapon
         }
     }
 
+    //посмотри в сторону Coroutine
     public void Reload()
     {
         float timer = cooldownTime;
@@ -59,11 +65,13 @@ public class RocketLaucher : MonoBehaviour, IWeapon
             timer -= 0.1f;
             Debug.Log("Reloading " + this.gameObject.name);
         }
+
         if (timer < 0)
         {
             isReloading = false;
             currentBullets = bulletCount;
         }
+
         Debug.Log("Reloading finished " + this.gameObject.name);
     }
 
@@ -74,6 +82,7 @@ public class RocketLaucher : MonoBehaviour, IWeapon
         {
             Reload();
         }
+
         if (!isReloading)
             bullet.Move(mousePos);
         currentBullets--;
@@ -81,10 +90,15 @@ public class RocketLaucher : MonoBehaviour, IWeapon
 
     public bool IsValuesChanged()
     {
-        if (bulletCount == 0 && cooldownTime == 0 && damage == 0 && shotingRate == 0)
+        if (bulletCount == 0 && cooldownTime == 0 && damage == 0 && shotingRate == 0) //????????
             return false;
-        else
+        else //скобки не забывай + можно без else
             return true;
+
+        //if(true==true)
+        //return true; //????????
+
+        //ты можешь написать return bulletCount == 0 && cooldownTime == 0 && damage == 0 && shotingRate == 0
     }
 
     #endregion public void
@@ -99,3 +113,10 @@ public class RocketLaucher : MonoBehaviour, IWeapon
 
     #endregion private void
 }
+
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+// а теперь посмотри на свой код с оружием
+// тебе не кажеться, что все три скрипта похожи между собой?
+// много одинаковой реализации, много повторений?
+// почему бы тебе не переписать это более правильно?
+//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!

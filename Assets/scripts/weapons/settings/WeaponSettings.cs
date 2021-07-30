@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//нет неймспейса
 [CreateAssetMenu(fileName = "WeaponSettings", menuName = "Weapon/Settings", order = 4)]
 public class WeaponSettings : ScriptableObject, IWeaponStats
 {

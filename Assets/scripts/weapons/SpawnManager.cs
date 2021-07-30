@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//нет неймспейса
 public class SpawnManager : MonoBehaviour
 {
     #region private variables
 
+    //ты не правильно поставил регион и не правильно используешь сериалайз филды, на них должны быть pragma warning (смотри в доке, что тебе Маша кидала)
     [SerializeField] private Spawner spawner;
     [SerializeField] private float timer;
     private float timerTemp;
@@ -30,7 +32,7 @@ public class SpawnManager : MonoBehaviour
 
     #region private void
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //в менеджере?
     {
         if (collision.tag == "Item")
         {
@@ -57,10 +59,12 @@ public class SpawnManager : MonoBehaviour
         {
             needToSpawn = false;
         }
+
         if (timer > 0 && needToSpawn)
         {
             timer -= 0.1f;
         }
+
         if (timer <= 0 && needToSpawn)
         {
             spawner.Spawn();

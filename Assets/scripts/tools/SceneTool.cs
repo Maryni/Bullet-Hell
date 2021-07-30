@@ -14,6 +14,7 @@ namespace Tools
             {
                 arrayOfNames[i] = Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
             }
+
             return arrayOfNames;
         }
     }

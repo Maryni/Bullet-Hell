@@ -25,7 +25,7 @@ namespace Global.EditorScripts
 
         private void OnEnable()
         {
-            bootSetting = (BootSettings)target;
+            bootSetting = (BootSettings) target;
             Init();
         }
 
@@ -41,12 +41,15 @@ namespace Global.EditorScripts
                     selected = 0;
                 }
             }
+
             selected = EditorGUILayout.Popup("Next scene after boot", selected, scenesArray);
             if (selected != 0)
             {
                 serializedObject.FindProperty(sceneIndexName).intValue = selected;
             }
-            serializedObject.FindProperty(bootTimeName).floatValue = EditorGUILayout.FloatField("Boot time", serializedObject.FindProperty(bootTimeName).floatValue);
+
+            serializedObject.FindProperty(bootTimeName).floatValue = EditorGUILayout.FloatField("Boot time",
+                serializedObject.FindProperty(bootTimeName).floatValue);
             EditorGUILayout.PropertyField(serializedObject.FindProperty(managersName));
 
             serializedObject.ApplyModifiedProperties();

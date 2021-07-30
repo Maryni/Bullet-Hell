@@ -98,19 +98,22 @@ namespace Tools
 
         public static Transform OffsetLocalPositionX(this Transform transform, float XPos)
         {
-            transform.localPosition = new Vector3(transform.localPosition.x + XPos, transform.localPosition.y, transform.localPosition.z);
+            transform.localPosition = new Vector3(transform.localPosition.x + XPos, transform.localPosition.y,
+                transform.localPosition.z);
             return transform;
         }
 
         public static Transform OffsetLocalPositionY(this Transform transform, float YPos)
         {
-            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + YPos, transform.localPosition.z);
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y + YPos,
+                transform.localPosition.z);
             return transform;
         }
 
         public static Transform OffsetLocalPositionZ(this Transform transform, float ZPos)
         {
-            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z + ZPos);
+            transform.localPosition = new Vector3(transform.localPosition.x, transform.localPosition.y,
+                transform.localPosition.z + ZPos);
             return transform;
         }
 
@@ -164,6 +167,7 @@ namespace Tools
             {
                 transform.position = center + (transform.position - center).normalized * radius;
             }
+
             return transform;
         }
 

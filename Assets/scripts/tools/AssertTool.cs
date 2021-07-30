@@ -29,23 +29,29 @@ namespace Tools
                 if (Attribute.GetCustomAttribute(monoBehaviour.GetType(), typeof(Assert)) as Assert != null)
                 {
                     SerializedObject serializedObject = new SerializedObject(monoBehaviour);
-                    foreach (FieldInfo field in monoBehaviour.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+                    foreach (FieldInfo field in monoBehaviour.GetType()
+                        .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
                     {
                         if (field.FieldType.IsClass)
                         {
-                            SerializeField atr = Attribute.GetCustomAttribute(field, typeof(SerializeField)) as SerializeField;
+                            SerializeField atr =
+                                Attribute.GetCustomAttribute(field, typeof(SerializeField)) as SerializeField;
                             if (atr != null)
                             {
-                                if (serializedObject.FindProperty(field.Name).propertyType == SerializedPropertyType.ObjectReference &&
+                                if (serializedObject.FindProperty(field.Name).propertyType ==
+                                    SerializedPropertyType.ObjectReference &&
                                     serializedObject.FindProperty(field.Name).objectReferenceValue == null)
                                 {
-                                    Debug.LogErrorFormat(monoBehaviour.gameObject, monoBehaviour.gameObject.name + "." + field.Name + ", typeof " + field.FieldType.Name + " is null");
+                                    Debug.LogErrorFormat(monoBehaviour.gameObject,
+                                        monoBehaviour.gameObject.name + "." + field.Name + ", typeof " +
+                                        field.FieldType.Name + " is null");
                                 }
                             }
                         }
                     }
                 }
             }
+
             Application.SetStackTraceLogType(LogType.Error, stackTraceLogType);
         }
     }
@@ -53,5 +59,7 @@ namespace Tools
 #endif
 
     [AttributeUsage(AttributeTargets.Class)]
-    public class Assert : Attribute { }
+    public class Assert : Attribute
+    {
+    }
 }

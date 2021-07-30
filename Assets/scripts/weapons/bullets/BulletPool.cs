@@ -3,22 +3,27 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+//нет неймспейса
+//пул должен быть менеджером
 public class BulletPool : MonoBehaviour
 {
     #region private variables
 
+    //ты не правильно поставил регион и не правильно используешь сериалайз филды, на них должны быть pragma warning (смотри в доке, что тебе Маша кидала)
     [SerializeField] private Transform[] parentTransforms;
     [SerializeField] private List<GameObject> bulletsType;
     [SerializeField] private GameObject[] bulletsAutomatic;
     [SerializeField] private GameObject[] bulletsShotgun;
     [SerializeField] private GameObject[] bulletsRocket;
-    [SerializeField] private int countPoolObjects;
-    [SerializeField] private UnityEvent unityEvent;
+    [SerializeField] private int countPoolObjects; //название не совсем понятное
+    [SerializeField] private UnityEvent unityEvent; //если не используешь - удаляй
 
     #endregion private variables
 
     #region public void
 
+    //повторение кода, нарушение принципа DRY
+    //функция в функции? когда мы успели перейти на процедурное программирование? убери. (+ я не уверен, что ты сам это сделал (сори))
     public GameObject GetObject(int indexWeapon)
     {
         if (indexWeapon == 0)
@@ -29,12 +34,14 @@ public class BulletPool : MonoBehaviour
                 {
                     return bulletsAutomatic[i];
                 }
+
                 if (CheckValue(bulletsAutomatic))
                 {
                     InstanceObjectByTypeAndCount(indexWeapon, countPoolObjects + 20);
                 }
             }
         }
+
         if (indexWeapon == 1)
         {
             for (int i = 0; i < bulletsShotgun.Length; i++)
@@ -43,12 +50,14 @@ public class BulletPool : MonoBehaviour
                 {
                     return bulletsShotgun[i];
                 }
+
                 if (CheckValue(bulletsShotgun))
                 {
                     InstanceObjectByTypeAndCount(indexWeapon, countPoolObjects + 20);
                 }
             }
         }
+
         if (indexWeapon == 2)
         {
             for (int i = 0; i < bulletsRocket.Length; i++)
@@ -57,6 +66,7 @@ public class BulletPool : MonoBehaviour
                 {
                     return bulletsRocket[i];
                 }
+
                 if (CheckValue(bulletsRocket))
                 {
                     InstanceObjectByTypeAndCount(indexWeapon, countPoolObjects + 20);
@@ -75,19 +85,26 @@ public class BulletPool : MonoBehaviour
                 {
                     active = true;
                 }
+
                 if (!array[i].activeInHierarchy)
                 {
                     active = false;
                 }
+
                 if (!active)
                 {
                     return active;
                 }
             }
+
             return active;
         }
     }
 
+    //DRY нарушаешь
+    //KISS нарушаешь
+    //проверь свой код, и как он работает
+    //(подсказка: на сцене очень много неактивных пуль)
     public void InstanceObjectByTypeAndCount(int typeWeapon, int count = 20)
     {
         countPoolObjects = count;
@@ -130,10 +147,10 @@ public class BulletPool : MonoBehaviour
 
     #region private void
 
-    private void Awake()
-    {
-        InstanceByDefault();
-    }
+    private void Awake()    //Посмотри в доке оформление, и как должен код выглядеть
+{                           //Посмотри в доке оформление, и как должен код выглядеть
+        InstanceByDefault();//Посмотри в доке оформление, и как должен код выглядеть
+}                           //Посмотри в доке оформление, и как должен код выглядеть
 
     private void InstanceByDefault()
     {
@@ -146,12 +163,14 @@ public class BulletPool : MonoBehaviour
             bulletsAutomatic[i] = parentTransforms[0].GetChild(i).gameObject;
             bulletsAutomatic[i].SetActive(false);
         }
+
         for (int i = 0; i < countPoolObjects; i++)
         {
             Instantiate(bulletsType[1], parentTransforms[1]);
             bulletsShotgun[i] = parentTransforms[1].GetChild(i).gameObject;
             bulletsShotgun[i].SetActive(false);
         }
+
         for (int i = 0; i < countPoolObjects; i++)
         {
             Instantiate(bulletsType[2], parentTransforms[2]);
@@ -162,3 +181,6 @@ public class BulletPool : MonoBehaviour
 
     #endregion private void
 }
+
+//У тебя этот скрипт, по сути, выступает не только пулом, который будет хранить какие-то объекты, а и фабрикой, которая это все создает,
+//что нарушает принцип единой ответственности

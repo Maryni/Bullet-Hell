@@ -2,10 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//нет неймспейса
+
+//нарушается принцип единой ответственности, PlayerMovement отвечает за CameraFollow - не правильно
 public class PlayerMovement : MonoBehaviour
 {
     #region private variables
 
+    //ты не правильно поставил регион и не правильно используешь сериалайз филды, на них должны быть pragma warning (смотри в доке, что тебе Маша кидала)
     [SerializeField] private Player player;
     [SerializeField] private Rigidbody2D rigidbody2D;
     [SerializeField] private CameraFollow cameraFollow;

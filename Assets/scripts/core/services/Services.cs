@@ -34,7 +34,7 @@ namespace Global
 
         public static T GetManager<T>() where T : BaseManager
         {
-            return (T)managersList.Find(x => x.ManagerType == typeof(T));
+            return (T) managersList.Find(x => x.ManagerType == typeof(T));
         }
     }
 }

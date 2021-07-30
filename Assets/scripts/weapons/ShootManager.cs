@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//нет неймспейса
 public class ShootManager : MonoBehaviour
 {
     #region private variables
@@ -17,12 +18,14 @@ public class ShootManager : MonoBehaviour
 
     #region properties
 
-    public int WeaponType => weaponType;
+    public int WeaponType => weaponType; //не используеться - не инкапсулируй переменную
 
     #endregion properties
 
     #region public void
 
+    //функцию можно сломать проще некуда
+    //Важное причемание: перепиши логику оружия
     public void ChangeWeaponType(int typeWeapon)
     {
         if (typeWeapon >= 0)
@@ -35,6 +38,9 @@ public class ShootManager : MonoBehaviour
 
     #region private void
 
+    //DRY
+    //KISS
+    //А что если у нас будет 10000 типов оружий, ты будешь через иф расписывать каждый из них? :)
     private void GetReadyShootByWeapon(int weaponType)
     {
         if (weaponType == 0)
@@ -46,6 +52,7 @@ public class ShootManager : MonoBehaviour
                 return;
             }
         }
+
         if (weaponType == 1)
         {
             if (Input.GetKey(KeyCode.Mouse0))
@@ -55,6 +62,7 @@ public class ShootManager : MonoBehaviour
                 return;
             }
         }
+
         if (weaponType == 2)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -66,6 +74,7 @@ public class ShootManager : MonoBehaviour
         }
     }
 
+    //нажатие мышки может произойти вне фиксед апдейта - в итоге игрок не выстрелит
     private void FixedUpdate()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
