@@ -79,7 +79,10 @@ public class Bullet : MonoBehaviour
 
     private void Explosion()
     {
-        timerToBlowUp -= 0.1f;
+        if (timerToBlowUp > 0)
+        {
+            timerToBlowUp -= 0.1f;
+        }
         if (timerToBlowUp < 0)
         {
             float temp = gameObject.GetComponent<CircleCollider2D>().radius;

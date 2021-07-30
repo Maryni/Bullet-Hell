@@ -98,6 +98,7 @@ MonoBehaviour:
   name: Weapon
   typeItem: 0
   value: 
+  timer: 30
 --- !u!58 &5199016330611447759
 CircleCollider2D:
   m_ObjectHideFlags: 0
