@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 3173164810188786741}
   - component: {fileID: 3173164810188786740}
   - component: {fileID: 3173164810188786743}
-  - component: {fileID: 3173164810188786762}
+  - component: {fileID: 8008349388257537143}
+  - component: {fileID: 1567863624531063333}
   m_Layer: 0
   m_Name: BulletAutomaticGun
-  m_TagString: Untagged
+  m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -27,9 +28,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3173164810188786737}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.113, y: 0.028, z: 0}
-  m_LocalScale: {x: 0.024, y: 0.024, z: 1}
+  m_LocalScale: {x: 0.036, y: 0.036, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -102,7 +103,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3173164810188786762
+--- !u!114 &8008349388257537143
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,11 +112,39 @@ MonoBehaviour:
   m_GameObject: {fileID: 3173164810188786737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f9880af3ecc0e64789c4ab10b954845, type: 3}
+  m_Script: {fileID: 11500000, guid: a2b69b2c31a4b8f4d8bbe9c205098e5e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 3173164810188786737}
   rigidbody2D: {fileID: 3173164810188786743}
   modSpeedBullet: 2
-  maxBullets: 0
   backupTransformVector3: {x: 0, y: 0, z: 0}
+  typeBullet: 0
+  parent: {fileID: 0}
+  timerToBlowUp: 0
+--- !u!61 &1567863624531063333
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3173164810188786737}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.00000047683716, y: -0.00000011920929}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0

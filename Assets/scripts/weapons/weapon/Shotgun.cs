@@ -7,17 +7,18 @@ public class Shotgun : MonoBehaviour, IWeapon
 {
     #region private variables
 
+    [Header("Not change 0 if we have to load settings")]
     [SerializeField] private int bulletCount;
+
     [SerializeField] private int currentBullets;
     [SerializeField] private float cooldownTime;
     [SerializeField] private float damage;
     [SerializeField] private float shotingRate;
     [SerializeField] private int bulletOnShotUsed;
-    [SerializeField] private WeaponSettings weaponSettings;
+    [Space, SerializeField] private WeaponSettings weaponSettings;
     private bool isReloading;
     [SerializeField] private int countBulletToShotByOneTime;
 
-    private Transform shotgunLocalTransformBullet;
     [SerializeField] private List<Bullet> bulletsToShoot;
 
     #endregion private variables
@@ -85,7 +86,24 @@ public class Shotgun : MonoBehaviour, IWeapon
         {
             for (int i = 0; i < bulletsToShoot.Count; i++)
             {
-                bulletsToShoot[i].Move(mousePos, new Vector3(1f, Random.Range(-2f, 2f), 1f));
+                Vector3 angel = Vector3.one;
+                if (mousePos.x > 0.25)
+                {
+                    angel = new Vector3(1f, Random.Range(-2f, 2f), 1f);
+                }
+                if (mousePos.x < -0.25)
+                {
+                    angel = new Vector3(1f, Random.Range(-2f, 2f), 1f);
+                }
+                if (mousePos.y > 0.25)
+                {
+                    angel = new Vector3(Random.Range(-2f, 2f), 1f, 1f);
+                }
+                if (mousePos.y < -0.25)
+                {
+                    angel = new Vector3(Random.Range(-2f, 2f), 1f, 1f);
+                }
+                bulletsToShoot[i].Move(mousePos, angel);
             }
             bulletsToShoot.Clear();
         }
@@ -108,7 +126,6 @@ public class Shotgun : MonoBehaviour, IWeapon
     private void Start()
     {
         LoadSettings();
-        //shotgunLocalTransformBullet = bullet.BulletObject.transform;
         currentBullets = bulletCount;
     }
 

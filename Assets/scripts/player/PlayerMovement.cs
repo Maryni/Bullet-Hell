@@ -24,6 +24,10 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         rigidbody2D.MovePosition(rigidbody2D.position + moveVelocity * Time.fixedDeltaTime);
+    }
+
+    private void LateUpdate()
+    {
         cameraFollow.InvokeFollowing();
     }
 

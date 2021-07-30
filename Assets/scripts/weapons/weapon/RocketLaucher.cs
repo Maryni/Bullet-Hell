@@ -6,16 +6,17 @@ public class RocketLaucher : MonoBehaviour, IWeapon
 {
     #region private variables
 
+    [Header("Not change 0 if we have to load settings")]
     [SerializeField] private int bulletCount;
+
     [SerializeField] private int currentBullets;
     [SerializeField] private float cooldownTime;
     [SerializeField] private float damage;
     [SerializeField] private float shotingRate;
     [SerializeField] private int bulletOnShotUsed;
-    [SerializeField] private WeaponSettings weaponSettings;
+    [Space, SerializeField] private WeaponSettings weaponSettings;
     private bool isReloading;
 
-    private Transform rocketLaucherLocalTransformBullet;
     [SerializeField] private Bullet bullet;
 
     #endregion private variables
@@ -93,7 +94,6 @@ public class RocketLaucher : MonoBehaviour, IWeapon
     private void Start()
     {
         LoadSettings();
-        //rocketLaucherLocalTransformBullet = bullet.BulletObject.transform;
         currentBullets = bulletCount;
     }
 

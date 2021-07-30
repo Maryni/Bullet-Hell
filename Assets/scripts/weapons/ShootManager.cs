@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class ShootManager : MonoBehaviour
 {
@@ -13,7 +12,6 @@ public class ShootManager : MonoBehaviour
     [SerializeField] private int weaponType = 0;
     [SerializeField] private Vector2 mousePos;
     [SerializeField] private BulletPool bulletPool;
-    [SerializeField] private UnityEvent unityEvent;
 
     #endregion private variables
 
@@ -30,7 +28,6 @@ public class ShootManager : MonoBehaviour
         if (typeWeapon >= 0)
         {
             weaponType = typeWeapon;
-            unityEvent.Invoke();
         }
     }
 
@@ -44,7 +41,7 @@ public class ShootManager : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
-                automaticGun.GetBullet(bulletPool.GetObject());
+                automaticGun.GetBullet(bulletPool.GetObject(weaponType));
                 automaticGun.Shot(mousePos);
                 return;
             }
@@ -53,30 +50,20 @@ public class ShootManager : MonoBehaviour
         {
             if (Input.GetKey(KeyCode.Mouse0))
             {
-                shotgun.GetBullet(bulletPool.GetObject());
+                shotgun.GetBullet(bulletPool.GetObject(weaponType));
                 shotgun.Shot(mousePos);
                 return;
             }
         }
         if (weaponType == 2)
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (Input.GetKeyDown(KeyCode.Mouse0))
             {
-                rocketLaucher.GetBullet(bulletPool.GetObject());
+                rocketLaucher.GetBullet(bulletPool.GetObject(weaponType));
                 rocketLaucher.Shot(mousePos);
                 return;
             }
         }
-    }
-
-    private void Awake()
-    {
-        unityEvent.AddListener(GetWeaponTypeToBulletPool);
-    }
-
-    private void GetWeaponTypeToBulletPool()
-    {
-        bulletPool.InstanceObjectByTypeAndCount(weaponType);
     }
 
     private void FixedUpdate()

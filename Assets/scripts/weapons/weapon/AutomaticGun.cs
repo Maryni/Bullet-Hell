@@ -7,16 +7,18 @@ public class AutomaticGun : MonoBehaviour, IWeapon
     #region private variables
 
     [SerializeField] private ShootManager shootManager;
+
+    [Header("Not change 0 if we have to load settings")]
     [SerializeField] private int bulletCount;
+
     [SerializeField] private int currentBullets;
     [SerializeField] private float cooldownTime;
     [SerializeField] private float damage;
     [SerializeField] private float shotingRate;
     [SerializeField] private int bulletOnShotUsed;
-    [SerializeField] private WeaponSettings weaponSettings;
+    [Space, SerializeField] private WeaponSettings weaponSettings;
     private bool isReloading;
 
-    private Transform automaticGunLocalTransformBullet;
     [SerializeField] private Bullet bullet;
 
     #endregion private variables
@@ -95,7 +97,6 @@ public class AutomaticGun : MonoBehaviour, IWeapon
     private void Start()
     {
         LoadSettings();
-        //automaticGunLocalTransformBullet = bullet.BulletObject.transform;
         currentBullets = bulletCount;
     }
 

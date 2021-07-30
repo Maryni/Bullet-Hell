@@ -10,30 +10,33 @@ public class Spawner : MonoBehaviour
     [SerializeField] private List<GameObject> spawnList;
     [SerializeField] private GameObject itemExample;
     [SerializeField] private int countForOneTimeSpawn;
-    [SerializeField] private float timerForSpawn;
     [SerializeField] private Vector2 spawnPoint;
+    [SerializeField] private SpriteRenderer planeSpriteRenderer;
 
     #endregion private variables
+
+    #region properties
+
+    public List<GameObject> SpawnList => spawnList;
+
+    #endregion properties
 
     #region public void
 
     public void Spawn()
     {
-        if (timerForSpawn <= 0)
+        if (!spawnList.Contains(itemExample))
         {
-            if (!spawnList.Contains(itemExample))
+            for (int i = 0; i < countForOneTimeSpawn; i++)
             {
-                for (int i = 0; i < countForOneTimeSpawn; i++)
-                {
-                    Instantiate(itemExample, RandomSpawnPoint(), Quaternion.identity, spawnerPool.transform);
-                    spawnList.Add(spawnerPool.transform.GetChild(i).gameObject);
-                }
+                Instantiate(itemExample, RandomSpawnPoint(), Quaternion.identity, spawnerPool.transform);
+                spawnList.Add(spawnerPool.transform.GetChild(i).gameObject);
             }
-            else
-            {
-                spawnList[spawnList.Count - 1].transform.position = RandomSpawnPoint();
-                spawnList[spawnList.Count - 1].SetActive(true);
-            }
+        }
+        else
+        {
+            spawnList[spawnList.Count - 1].transform.position = RandomSpawnPoint();
+            spawnList[spawnList.Count - 1].SetActive(true);
         }
     }
 
@@ -43,7 +46,9 @@ public class Spawner : MonoBehaviour
 
     private Vector2 RandomSpawnPoint()
     {
-        Vector2 pos = new Vector2(itemExample.transform.position.x - itemExample.transform.GetComponent<SpriteRenderer>().bounds.size.y / 2, itemExample.transform.position.y - itemExample.transform.GetComponent<SpriteRenderer>().bounds.size.y / 2);
+        float randX = Random.Range(planeSpriteRenderer.bounds.min.x, planeSpriteRenderer.bounds.max.x);
+        float randY = Random.Range(planeSpriteRenderer.bounds.min.y, planeSpriteRenderer.bounds.max.y);
+        Vector2 pos = new Vector2(randX, randY);
         return pos;
     }
 
