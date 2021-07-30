@@ -12,6 +12,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] private int countForOneTimeSpawn;
     [SerializeField] private Vector2 spawnPoint;
     [SerializeField] private SpriteRenderer planeSpriteRenderer;
+    [SerializeField] private float timerToHide;
 
     #endregion private variables
 
@@ -23,6 +24,8 @@ public class Spawner : MonoBehaviour
 
     #region public void
 
+    public void SetTimer(float timer) => timerToHide = timer;
+
     public void Spawn()
     {
         if (!spawnList.Contains(itemExample))
@@ -31,6 +34,7 @@ public class Spawner : MonoBehaviour
             {
                 Instantiate(itemExample, RandomSpawnPoint(), Quaternion.identity, spawnerPool.transform);
                 spawnList.Add(spawnerPool.transform.GetChild(i).gameObject);
+                spawnList[i].GetComponent<ItemInfo>().SetTimer(timerToHide);
             }
         }
         else

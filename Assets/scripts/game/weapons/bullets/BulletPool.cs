@@ -19,6 +19,8 @@ public class BulletPool : MonoBehaviour
 
     #region public void
 
+    public void SetTimerToBlowUpRocket(float timer) => bulletsType[2].GetComponent<Bullet>().SetTimer(timer);
+
     public GameObject GetObject(int indexWeapon)
     {
         if (indexWeapon == 0)

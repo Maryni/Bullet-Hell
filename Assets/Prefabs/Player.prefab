@@ -485,7 +485,7 @@ MonoBehaviour:
   spawner: {fileID: 0}
   timer: 10
   needToSpawn: 1
-  shootManager: {fileID: 3691523425123133484}
+  shootController: {fileID: 3691523425123133484}
   currentItemInfo: {fileID: 0}
   countSpawnInfo: 5
 --- !u!1 &3691523426047628819

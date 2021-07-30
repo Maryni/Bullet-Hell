@@ -6,7 +6,7 @@ public class AutomaticGun : MonoBehaviour, IWeapon
 {
     #region private variables
 
-    [SerializeField] private ShootManager shootManager;
+    [SerializeField] private ShootController shootManager;
 
     [Header("Not change 0 if we have to load settings")]
     [SerializeField] private int bulletCount;

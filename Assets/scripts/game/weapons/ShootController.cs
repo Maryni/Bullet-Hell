@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Global;
 
-public class ShootManager : MonoBehaviour
+public class ShootController : MonoBehaviour
 {
     #region private variables
 
@@ -25,10 +26,12 @@ public class ShootManager : MonoBehaviour
 
     public void ChangeWeaponType(int typeWeapon)
     {
-        if (typeWeapon >= 0)
+        if (typeWeapon >= 0 && typeWeapon < 4)
         {
             weaponType = typeWeapon;
         }
+        else
+            Debug.LogError("uncorrect typeWeapon");
     }
 
     #endregion public void

@@ -28,6 +28,12 @@ public class Bullet : MonoBehaviour
 
     #region public void
 
+    public void SetTimer(float timer)
+    {
+        timerToBlowUp = timer;
+        timerTemp = timerToBlowUp;
+    }
+
     public void Move(Vector2 pos)
     {
         Vector2 direction = pos - (Vector2)transform.position;

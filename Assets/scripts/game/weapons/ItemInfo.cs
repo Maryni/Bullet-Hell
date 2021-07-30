@@ -17,6 +17,12 @@ public class ItemInfo : MonoBehaviour
 
     #region public void
 
+    public void SetTimer(float timer)
+    {
+        this.timer = timer;
+        timerTemp = this.timer;
+    }
+
     public string GetValue() => value;
 
     #endregion public void
