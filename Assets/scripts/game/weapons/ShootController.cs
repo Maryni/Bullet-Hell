@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Global;
+using Global.Shooting.BulletSpace;
+using Global.Shooting;
+using Global.Controllers;
 
 public class ShootController : MonoBehaviour
 {
     #region private variables
 
-    [SerializeField] private AutomaticGun automaticGun;
-    [SerializeField] private Shotgun shotgun;
-    [SerializeField] private RocketLaucher rocketLaucher;
+#pragma warning disable
+    [SerializeField] private BaseWeapon baseWeapon;
     [SerializeField] private int weaponType = 0;
     [SerializeField] private Vector2 mousePos;
-    [SerializeField] private BulletPool bulletPool;
+    [SerializeField] private BulletManager bulletPool;
+#pragma warning restore
 
     #endregion private variables
 
@@ -40,32 +43,11 @@ public class ShootController : MonoBehaviour
 
     private void GetReadyShootByWeapon(int weaponType)
     {
-        if (weaponType == 0)
+        if (Input.GetKey(KeyCode.Mouse0))
         {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                automaticGun.GetBullet(bulletPool.GetObject(weaponType));
-                automaticGun.Shot(mousePos);
-                return;
-            }
-        }
-        if (weaponType == 1)
-        {
-            if (Input.GetKey(KeyCode.Mouse0))
-            {
-                shotgun.GetBullet(bulletPool.GetObject(weaponType));
-                shotgun.Shot(mousePos);
-                return;
-            }
-        }
-        if (weaponType == 2)
-        {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
-            {
-                rocketLaucher.GetBullet(bulletPool.GetObject(weaponType));
-                rocketLaucher.Shot(mousePos);
-                return;
-            }
+            baseWeapon.GetBullet(bulletPool.GetObject(weaponType));
+            baseWeapon.Shot(mousePos);
+            return;
         }
     }
 

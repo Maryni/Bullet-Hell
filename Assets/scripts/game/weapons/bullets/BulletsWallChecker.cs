@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletsWallChecker : MonoBehaviour
+namespace Global.Shooting.BulletSpace
 {
-    [SerializeField] private string tagForTrigget2D;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class BulletsWallChecker : MonoBehaviour
     {
-        if (collision.tag == tagForTrigget2D)
+        [SerializeField] private string tagForTrigget2D;
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            collision.gameObject.GetComponent<Bullet>().GetBackToParent();
+            if (collision.tag == tagForTrigget2D)
+            {
+                collision.GetComponent<Bullet>().GetBackToParent();
+            }
         }
     }
 }

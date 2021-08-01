@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IWeapon : IWeaponAction, IWeaponStats, IWeaponSettingsAction
+namespace Global.Interfaces.Weapon
 {
+    public interface IWeapon : IWeaponAction, IWeaponStats, IWeaponSettingsAction
+    {
+    }
 }

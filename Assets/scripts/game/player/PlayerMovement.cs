@@ -1,35 +1,42 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Global.Player;
+using Global.Camera;
 
-public class PlayerMovement : MonoBehaviour
+namespace Global.Player
 {
-    #region private variables
-
-    [SerializeField] private Player player;
-    [SerializeField] private Rigidbody2D rigidbody2D;
-    [SerializeField] private CameraFollow cameraFollow;
-    private Vector2 moveVelocity;
-
-    #endregion private variables
-
-    #region private void
-
-    private void Update()
+    public class PlayerMovement : MonoBehaviour
     {
-        Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-        moveVelocity = moveInput.normalized * player.Speed;
-    }
+        #region private variables
 
-    private void FixedUpdate()
-    {
-        rigidbody2D.MovePosition(rigidbody2D.position + moveVelocity * Time.fixedDeltaTime);
-    }
+#pragma warning disable
+        [SerializeField] private Player player;
+        [SerializeField] private Rigidbody2D rigidbody2D;
+        [SerializeField] private CameraFollow cameraFollow;
+#pragma warning restore
+        private Vector2 moveVelocity;
 
-    private void LateUpdate()
-    {
-        cameraFollow.InvokeFollowing();
-    }
+        #endregion private variables
 
-    #endregion private void
+        #region private void
+
+        private void Update()
+        {
+            Vector2 moveInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+            moveVelocity = moveInput.normalized * player.Speed;
+        }
+
+        private void FixedUpdate()
+        {
+            rigidbody2D.MovePosition(rigidbody2D.position + moveVelocity * Time.fixedDeltaTime);
+        }
+
+        private void LateUpdate()
+        {
+            cameraFollow.InvokeFollowing();
+        }
+
+        #endregion private void
+    }
 }

@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IWeaponStats
+namespace Global.Interfaces.Weapon
 {
-    int BulletsCount { get; }
-    float CooldownTime { get; }
-    float Damage { get; }
-    float ShootingRate { get; }
-    int BulletOnShotUsed { get; }
+    public interface IWeaponStats
+    {
+        int BulletsCount { get; }
+        float CooldownTime { get; }
+        float Damage { get; }
+        float ShootingRate { get; }
+        int BulletOnShotUsed { get; }
+    }
 }

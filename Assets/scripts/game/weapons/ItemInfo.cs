@@ -6,12 +6,13 @@ public class ItemInfo : MonoBehaviour
 {
     #region private variables
 
-    [SerializeField] private string name;
+#pragma warning disable
     [Header("0 - weapon, 1 - other thing"), SerializeField] private int typeItem;
     [SerializeField] private string value;
     private SpriteRenderer renderer;
     [SerializeField] private float timer;
     private float timerTemp;
+#pragma warning restore
 
     #endregion private variables
 

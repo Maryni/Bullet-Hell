@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPlayerStats
+namespace Global.Interfaces.Player
 {
-    int HP { get; }
-    float Speed { get; }
+    public interface IPlayerStats
+    {
+        int HP { get; }
+        float Speed { get; }
+    }
 }

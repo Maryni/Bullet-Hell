@@ -71,9 +71,7 @@ GameObject:
   - component: {fileID: 3691523425123133456}
   - component: {fileID: 3691523425123133485}
   - component: {fileID: 3691523425123133484}
-  - component: {fileID: 3691523425123133459}
-  - component: {fileID: 3691523425123133458}
-  - component: {fileID: 3691523425123133457}
+  - component: {fileID: 4368398231892144231}
   m_Layer: 0
   m_Name: Weapon
   m_TagString: Untagged
@@ -161,13 +159,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7959ecb48c9bee04988905998925d928, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  automaticGun: {fileID: 3691523425123133459}
-  shotgun: {fileID: 3691523425123133458}
-  rocketLaucher: {fileID: 3691523425123133457}
+  baseWeapon: {fileID: 4368398231892144231}
   weaponType: 0
   mousePos: {x: 0, y: 0}
   bulletPool: {fileID: 3691523425920945724}
---- !u!114 &3691523425123133459
+--- !u!114 &4368398231892144231
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -176,10 +172,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3691523425123133463}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 85f5a32eb4ff6024ba3546dd2c5d8efb, type: 3}
+  m_Script: {fileID: 11500000, guid: 8478946aac90805419e0d4cb8ab898ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootManager: {fileID: 3691523425123133484}
   bulletCount: 0
   currentBullets: 0
   cooldownTime: 0
@@ -188,47 +183,7 @@ MonoBehaviour:
   bulletOnShotUsed: 0
   weaponSettings: {fileID: 11400000, guid: efd656f2800ef9248932e7ac50170879, type: 2}
   bullet: {fileID: 0}
---- !u!114 &3691523425123133458
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3691523425123133463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76957c551a01c3541a91a64ad6f11adc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletCount: 0
-  currentBullets: 0
-  cooldownTime: 0
-  damage: 0
-  shotingRate: 0
-  bulletOnShotUsed: 0
-  weaponSettings: {fileID: 11400000, guid: bd6c9091d90a01c45bbe66ac57520cd2, type: 2}
-  countBulletToShotByOneTime: 3
-  bulletsToShoot: []
---- !u!114 &3691523425123133457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3691523425123133463}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 548a611fcec9ff84599a84acaa4101a4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bulletCount: 0
-  currentBullets: 0
-  cooldownTime: 0
-  damage: 0
-  shotingRate: 0
-  bulletOnShotUsed: 0
-  weaponSettings: {fileID: 11400000, guid: 3217a1b5d96db8c4e85873ee1f9b0670, type: 2}
-  bullet: {fileID: 0}
+  needFramePerRate: 10
 --- !u!1 &3691523425920945698
 GameObject:
   m_ObjectHideFlags: 0
@@ -239,6 +194,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3691523425920945699}
   - component: {fileID: 3691523425920945724}
+  - component: {fileID: 4330337458151485393}
   m_Layer: 0
   m_Name: BulletPool
   m_TagString: Untagged
@@ -286,10 +242,20 @@ MonoBehaviour:
   bulletsAutomatic: []
   bulletsShotgun: []
   bulletsRocket: []
-  countPoolObjects: 20
-  unityEvent:
-    m_PersistentCalls:
-      m_Calls: []
+  countObjectsInPool: 0
+  bulletFactory: {fileID: 4330337458151485393}
+--- !u!114 &4330337458151485393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691523425920945698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df565d229714ed1469e7437abca07987, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3691523426021728050
 GameObject:
   m_ObjectHideFlags: 0
@@ -488,6 +454,7 @@ MonoBehaviour:
   shootController: {fileID: 3691523425123133484}
   currentItemInfo: {fileID: 0}
   countSpawnInfo: 5
+  dataManager: {fileID: 0}
 --- !u!1 &3691523426047628819
 GameObject:
   m_ObjectHideFlags: 0

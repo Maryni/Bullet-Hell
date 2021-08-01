@@ -1,29 +1,35 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Global.Interfaces.Player;
 
-public class Player : MonoBehaviour, IPlayerStats
+namespace Global.Player
 {
-    #region private variables
-
-    [SerializeField] private int hp = 100;
-    [SerializeField] private float speed;
-
-    #endregion private variables
-
-    #region properties
-
-    public int HP => hp;
-    public float Speed => speed;
-
-    #endregion properties
-
-    #region public void
-
-    public void GetDamage(int damage)
+    public class Player : MonoBehaviour, IPlayerStats
     {
-        hp -= damage;
-    }
+        #region private variables
 
-    #endregion public void
+#pragma warning disable
+        [SerializeField] private int hp = 100;
+        [SerializeField] private float speed;
+#pragma warning restore
+
+        #endregion private variables
+
+        #region properties
+
+        public int HP => hp;
+        public float Speed => speed;
+
+        #endregion properties
+
+        #region public void
+
+        public void GetDamage(int damage)
+        {
+            hp -= damage;
+        }
+
+        #endregion public void
+    }
 }

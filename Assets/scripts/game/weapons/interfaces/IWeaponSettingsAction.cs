@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IWeaponSettingsAction
+namespace Global.Interfaces.Weapon
 {
-    WeaponSettings WeaponSettings { get; }
+    public interface IWeaponSettingsAction
+    {
+        WeaponSettings WeaponSettings { get; }
 
-    void LoadSettings();
+        void LoadSettings();
 
-    bool IsValuesChanged();
+        bool IsValuesChanged();
+    }
 }
