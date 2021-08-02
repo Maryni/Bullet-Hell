@@ -8,7 +8,7 @@ namespace Global.Interfaces.Weapon
     {
         WeaponSettings WeaponSettings { get; }
 
-        void LoadSettings();
+        void LoadSettings(WeaponSettings weaponSettings);
 
         bool IsValuesChanged();
     }

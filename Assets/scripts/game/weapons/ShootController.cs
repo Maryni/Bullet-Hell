@@ -29,12 +29,12 @@ public class ShootController : MonoBehaviour
 
     public void ChangeWeaponType(int typeWeapon)
     {
-        if (typeWeapon >= 0 && typeWeapon < 4)
+        if (typeWeapon >= 0 && typeWeapon < 3)
         {
             weaponType = typeWeapon;
         }
         else
-            Debug.LogError("uncorrect typeWeapon");
+            Debug.LogError("uncorrect typeWeapon value (not 0..2)");
     }
 
     #endregion public void
@@ -45,17 +45,21 @@ public class ShootController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0))
         {
-            baseWeapon.GetBullet(bulletPool.GetObject(weaponType));
+            baseWeapon.SetBullet(bulletPool.GetObject(weaponType));
             baseWeapon.Shot(mousePos);
             return;
         }
     }
+
+    #region Unity function
 
     private void FixedUpdate()
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         GetReadyShootByWeapon(weaponType);
     }
+
+    #endregion Unity function
 
     #endregion private void
 }

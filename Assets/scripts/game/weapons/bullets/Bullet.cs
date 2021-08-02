@@ -35,7 +35,12 @@ namespace Global.Shooting.BulletSpace
 
         public void GetTypeBullet(WeaponSettings settings)
         {
-            //typeBulletEnum = WeaponSettings.typeBullet.RocketLaucher;
+            switch (typeBullet)
+            {
+                case 0: typeBulletEnum = settings.TypeBulletAutomatic; break;
+                case 1: typeBulletEnum = settings.TypeBulletShotgun; break;
+                case 2: typeBulletEnum = settings.TypeBulletRocket; break;
+            }
         }
 
         public void SetTimer(float timer)
@@ -58,11 +63,6 @@ namespace Global.Shooting.BulletSpace
             rigidbody2D.AddForce(direction * modSpeedBullet, ForceMode2D.Impulse);
         }
 
-        public void SetParent(GameObject gameObject)
-        {
-            parent = gameObject.transform;
-        }
-
         public void GetBackToParent()
         {
             SetBackupVectorPosition();
@@ -74,6 +74,8 @@ namespace Global.Shooting.BulletSpace
 
         #region private void
 
+        #region Unity function
+
         private void Start()
         {
             backupTransformVector3 = this.gameObject.transform.localPosition;
@@ -82,15 +84,20 @@ namespace Global.Shooting.BulletSpace
 
         private void FixedUpdate()
         {
-            //if (typeBulletEnum == typeBulletEnum.RocketLaucher && isMoving)
-            //{
-            //    Explosion();
-            //}
+            if (gameObject.activeInHierarchy)
+            {
+                if (typeBulletEnum == WeaponSettings.typeBullet.RocketLaucher && isMoving)
+                {
+                    Explosion();
+                }
+            }
         }
+
+        #endregion Unity function
 
         private void SetBackupVectorPosition()
         {
-            backupTransformVector3 = new Vector3(parent.localPosition.x + 0.1f, parent.localPosition.y + 0.1f, 0);
+            backupTransformVector3 = new Vector3(parent.localPosition.x, parent.localPosition.y, 0);
         }
 
         private void Explosion()

@@ -13,13 +13,14 @@ namespace Global.Player
 #pragma warning disable
         [SerializeField] private Player player;
         [SerializeField] private Rigidbody2D rigidbody2D;
-        [SerializeField] private CameraFollow cameraFollow;
 #pragma warning restore
         private Vector2 moveVelocity;
 
         #endregion private variables
 
         #region private void
+
+        #region Unity function
 
         private void Update()
         {
@@ -32,10 +33,7 @@ namespace Global.Player
             rigidbody2D.MovePosition(rigidbody2D.position + moveVelocity * Time.fixedDeltaTime);
         }
 
-        private void LateUpdate()
-        {
-            cameraFollow.InvokeFollowing();
-        }
+        #endregion Unity function
 
         #endregion private void
     }

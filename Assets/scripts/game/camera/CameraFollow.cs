@@ -7,6 +7,8 @@ namespace Global.Camera
 {
     public class CameraFollow : MonoBehaviour
     {
+        #region private variables
+
 #pragma warning disable
         [SerializeField] private GameObject camera;
         [SerializeField] private GameObject player;
@@ -16,12 +18,9 @@ namespace Global.Camera
         [SerializeField] private Vector3 offset;
 #pragma warning restore
 
-        private void Start()
-        {
-            if (cameraFollow == null)
-                cameraFollow = new UnityEvent();
-            cameraFollow.AddListener(CameraFollowing);
-        }
+        #endregion private variables
+
+        #region public void
 
         public void InvokeFollowing()
         {
@@ -42,5 +41,22 @@ namespace Global.Camera
                 camera.transform.LookAt(player.transform);
             }
         }
+
+        #endregion public void
+
+        #region private void
+
+        #region Unity function
+
+        private void Start()
+        {
+            if (cameraFollow == null)
+                cameraFollow = new UnityEvent();
+            cameraFollow.AddListener(CameraFollowing);
+        }
+
+        #endregion Unity function
+
+        #endregion private void
     }
 }

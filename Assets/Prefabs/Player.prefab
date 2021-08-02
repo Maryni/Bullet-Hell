@@ -181,9 +181,9 @@ MonoBehaviour:
   damage: 0
   shotingRate: 0
   bulletOnShotUsed: 0
-  weaponSettings: {fileID: 11400000, guid: efd656f2800ef9248932e7ac50170879, type: 2}
+  weaponSettings: {fileID: 0}
   bullet: {fileID: 0}
-  needFramePerRate: 10
+  needFramePerRate: 2
 --- !u!1 &3691523425920945698
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +242,8 @@ MonoBehaviour:
   bulletsAutomatic: []
   bulletsShotgun: []
   bulletsRocket: []
-  countObjectsInPool: 0
+  countObjectsInPool: 20
+  countStepAddToArray: 20
   bulletFactory: {fileID: 4330337458151485393}
 --- !u!114 &4330337458151485393
 MonoBehaviour:
@@ -272,6 +273,7 @@ GameObject:
   - component: {fileID: 3691523426021728072}
   - component: {fileID: 3691523426021728073}
   - component: {fileID: 3691523426021728074}
+  - component: {fileID: 5723351859305830457}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -393,7 +395,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3691523426021728078}
   rigidbody2D: {fileID: 3691523426021728079}
-  cameraFollow: {fileID: 3691523426021728072}
 --- !u!114 &3691523426021728072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -455,6 +456,19 @@ MonoBehaviour:
   currentItemInfo: {fileID: 0}
   countSpawnInfo: 5
   dataManager: {fileID: 0}
+--- !u!114 &5723351859305830457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691523426021728050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00f1d266c778c84fad2a97d68ce1b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraFollow: {fileID: 3691523426021728072}
 --- !u!1 &3691523426047628819
 GameObject:
   m_ObjectHideFlags: 0

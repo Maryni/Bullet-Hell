@@ -38,7 +38,7 @@ namespace Global.Controllers.Spawn
                 {
                     Instantiate(itemExample, RandomSpawnPoint(), Quaternion.identity, spawnerPool.transform);
                     spawnList.Add(spawnerPool.transform.GetChild(i).gameObject);
-                    spawnList[i].GetComponent<ItemInfo>().SetTimer(timerToHide);
+                    spawnList[i].GetComponent<ItemInfo>().SetTimeForTimer(timerToHide);
                 }
             }
             else

@@ -33,15 +33,34 @@ namespace Global.Controllers
 
         public void DisableSpawn() => needToSpawn = false;
 
-        #endregion public void
-
-        #region private void
-
         public void LoadSettings(float timer, float timerToSpawner)
         {
             this.timer = timer;
             spawner.SetTimer(timerToSpawner);
         }
+
+        #endregion public void
+
+        #region private void
+
+        private void SpawnUntilCount(int count)
+        {
+            if (spawner.SpawnList.Count >= count)
+            {
+                needToSpawn = false;
+            }
+            if (timer > 0 && needToSpawn)
+            {
+                timer -= 0.1f;
+            }
+            if (timer <= 0 && needToSpawn)
+            {
+                spawner.Spawn();
+                timer = timerTemp;
+            }
+        }
+
+        #region Unity function
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -64,22 +83,7 @@ namespace Global.Controllers
             SpawnUntilCount(countSpawnInfo);
         }
 
-        private void SpawnUntilCount(int count)
-        {
-            if (spawner.SpawnList.Count >= count)
-            {
-                needToSpawn = false;
-            }
-            if (timer > 0 && needToSpawn)
-            {
-                timer -= 0.1f;
-            }
-            if (timer <= 0 && needToSpawn)
-            {
-                spawner.Spawn();
-                timer = timerTemp;
-            }
-        }
+        #endregion Unity function
 
         #endregion private void
     }

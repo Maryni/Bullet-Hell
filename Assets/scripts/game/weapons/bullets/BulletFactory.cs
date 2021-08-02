@@ -38,11 +38,11 @@ namespace Global.Shooting.BulletSpace
             {
                 array = IncreasedArrayRange(array, countPoolObjects);
             }
-            for (int i = 0; i < countPoolObjects - transformParent.childCount; i++)
+            for (int i = 0; i < (countPoolObjects - transformParent.childCount); i++)
             {
                 Instantiate(gameObject, transformParent);
             }
-            for (int i = 0; i < transformParent.childCount; i++)
+            for (int i = 0; i < countPoolObjects; i++)
             {
                 var tempGO = transformParent.GetChild(i).gameObject;
                 tempGO.SetActive(false);

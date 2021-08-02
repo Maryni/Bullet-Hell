@@ -10,6 +10,6 @@ namespace Global.Interfaces.Weapon
 
         void Reload();
 
-        void LoadSettings();
+        void LoadSettings(WeaponSettings weaponSettings);
     }
 }

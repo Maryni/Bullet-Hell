@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace Global.Shooting
 {
-    public class BaseWeapon : MonoBehaviour
+    public class BaseWeapon : MonoBehaviour, IWeapon
     {
         #region private variables
 
 #pragma warning disable
-
+        [SerializeField] private bool noLoadSettingFromFile;
         [Header("Settings"), Space, SerializeField] private int bulletCount;
 
         [SerializeField] private int currentBullets;
@@ -34,24 +34,56 @@ namespace Global.Shooting
         #region properties
 
         public WeaponSettings WeaponSettings => weaponSettings;
+        int IWeaponStats.BulletsCount => bulletCount;
+        float IWeaponStats.CooldownTime => cooldownTime;
+        float IWeaponStats.Damage => damage;
+        float IWeaponStats.ShootingRate => shotingRate;
+        int IWeaponStats.BulletOnShotUsed => bulletOnShotUsed;
 
         #endregion properties
 
         #region public void
 
-        public void GetBullet(GameObject bulletObject)
+        public void SetBullet(GameObject bulletObject)
         {
             bullet = bulletObject.GetComponent<Bullet>();
         }
 
         public void LoadSettings(WeaponSettings weaponSettings)
         {
-            this.weaponSettings = weaponSettings;
+            if (!noLoadSettingFromFile)
+            {
+                this.weaponSettings = weaponSettings;
 
-            bulletCount = weaponSettings.BulletsCount;
-            cooldownTime = weaponSettings.CooldownTime;
-            damage = weaponSettings.Damage;
-            shotingRate = weaponSettings.ShootingRate;
+                bulletCount = weaponSettings.BulletsCount;
+                cooldownTime = weaponSettings.CooldownTime;
+                damage = weaponSettings.Damage;
+                shotingRate = weaponSettings.ShootingRate;
+                bulletOnShotUsed = weaponSettings.BulletOnShotUsed;
+            }
+            if (noLoadSettingFromFile)
+            {
+                if (bulletCount == 0)
+                {
+                    bulletCount = weaponSettings.BulletsCount;
+                }
+                if (cooldownTime == 0)
+                {
+                    cooldownTime = weaponSettings.CooldownTime;
+                }
+                if (damage == 0)
+                {
+                    damage = weaponSettings.Damage;
+                }
+                if (shotingRate == 0)
+                {
+                    shotingRate = weaponSettings.ShootingRate;
+                }
+                if (bulletOnShotUsed == 0)
+                {
+                    bulletOnShotUsed = weaponSettings.BulletOnShotUsed;
+                }
+            }
         }
 
         public void Reload()
@@ -78,9 +110,10 @@ namespace Global.Shooting
             {
                 Reload();
             }
-            if (!isReloading && IsCanShoot())
+            if (!isReloading && IsCanShoot() && bullet != null)
             {
                 bullet.Move(mousePos);
+                bullet = null;
             }
 
             currentBullets--;
@@ -92,6 +125,8 @@ namespace Global.Shooting
 
         #region private void
 
+        #region Unity function
+
         private void Start()
         {
             currentBullets = bulletCount;
@@ -101,6 +136,8 @@ namespace Global.Shooting
         {
             frameComplete += shotingRate;
         }
+
+        #endregion Unity function
 
         private bool IsCanShoot()
         {

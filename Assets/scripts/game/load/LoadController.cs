@@ -23,17 +23,19 @@ namespace Global.Controllers
 
         #endregion private variables
 
-        public void LoadSettingsWeapon()
-        {
-            baseWeapon.LoadSettings(settingsWeapon[shootController.WeaponType]);
-        }
+        #region public void
 
-        public void LoadSettingsWeapon(int typeWeapon)
-        {
-            baseWeapon.LoadSettings(settingsWeapon[typeWeapon]);
-        }
+        public void LoadSettingsWeapon() => baseWeapon.LoadSettings(settingsWeapon[shootController.WeaponType]);
+
+        public void LoadSettingsWeapon(int typeWeapon) => baseWeapon.LoadSettings(settingsWeapon[typeWeapon]);
+
+        public void RestoreTimeScale() => Time.timeScale = 1f;
+
+        #endregion public void
 
         #region private void
+
+        private void PauseOnStart() => Time.timeScale = 0f;
 
         private void LoadSettingsFromData()
         {
@@ -46,11 +48,20 @@ namespace Global.Controllers
             shootController.ChangeWeaponType(temp2);
         }
 
+        #region Unity function
+
         private void Start()
         {
             LoadSettingsFromData();
             LoadSettingsWeapon();
         }
+
+        private void Awake()
+        {
+            PauseOnStart();
+        }
+
+        #endregion Unity function
 
         #endregion private void
     }

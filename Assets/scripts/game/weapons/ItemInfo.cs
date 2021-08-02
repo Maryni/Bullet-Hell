@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Global.Timer;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,18 +12,14 @@ public class ItemInfo : MonoBehaviour
     [SerializeField] private string value;
     private SpriteRenderer renderer;
     [SerializeField] private float timer;
-    private float timerTemp;
+    [SerializeField] private Timer timerScript;
 #pragma warning restore
 
     #endregion private variables
 
     #region public void
 
-    public void SetTimer(float timer)
-    {
-        this.timer = timer;
-        timerTemp = this.timer;
-    }
+    public void SetTimeForTimer(float timerValue) => timer = timerValue;
 
     public string GetValue() => value;
 
@@ -30,27 +27,34 @@ public class ItemInfo : MonoBehaviour
 
     #region private void
 
+    #region Unity function
+
     private void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
-        value = Random.Range(0, 3).ToString();
-        name = "Item";
+        if (typeItem == 0)
+        {
+            value = Random.Range(0, 3).ToString();
+            name = "RandomWeapon";
+        }
+        else
+        {
+            value = "0";
+            name = "Weapon_0";
+        }
         renderer.color = Random.ColorHSV(0f, 1f, 1f, 1f, 0.5f, 1f);
-        timerTemp = timer;
+        timerScript.SetTimerValue(timer);
     }
 
     private void FixedUpdate()
     {
-        if (timer > 0)
+        if (timerScript.GetTimerFinishedOnce())
         {
-            timer -= 0.1f;
-        }
-        if (timer < 0)
-        {
-            timer = timerTemp;
             gameObject.SetActive(false);
         }
     }
+
+    #endregion Unity function
 
     #endregion private void
 }

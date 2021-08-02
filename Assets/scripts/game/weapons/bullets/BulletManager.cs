@@ -17,6 +17,7 @@ namespace Global.Shooting.BulletSpace
         [SerializeField] private GameObject[] bulletsRocket;
         [SerializeField] private List<GameObject[]> bulletsList = new List<GameObject[]>();
         [SerializeField] private int countObjectsInPool;
+        [SerializeField] private int countStepAddToArray;
         [SerializeField] private BulletFactory bulletFactory;
 #pragma warning restore
 
@@ -34,6 +35,11 @@ namespace Global.Shooting.BulletSpace
 
         public GameObject GetObject(int indexWeapon)
         {
+            if (CheckValue(bulletsList[indexWeapon]))
+            {
+                bulletsList.Insert(indexWeapon, bulletFactory.SpawnObjectsForFillArray(bulletsList[indexWeapon], parentTransforms[indexWeapon], bulletsType[indexWeapon], bulletsList[indexWeapon].Length + countStepAddToArray));
+                bulletsList.RemoveAt(indexWeapon + 1);
+            }
             for (int i = 0; i < bulletsList[indexWeapon].Length; i++)
             {
                 if (bulletsList[indexWeapon][i].activeInHierarchy == false)
@@ -42,11 +48,8 @@ namespace Global.Shooting.BulletSpace
                     return bulletsList[indexWeapon][i];
                 }
             }
-            if (CheckValue(bulletsList[indexWeapon]))
-            {
-                bulletsList.Insert(indexWeapon, bulletFactory.SpawnObjectsForFillArray(bulletsList[indexWeapon], parentTransforms[indexWeapon], bulletsType[indexWeapon], bulletsList[indexWeapon].Length + 20));
-                bulletsList.RemoveAt(indexWeapon + 1);
-            }
+
+            GetObject(indexWeapon);
             return null;
 
             bool CheckValue(GameObject[] array)
@@ -60,7 +63,7 @@ namespace Global.Shooting.BulletSpace
                     }
                     if (!array[i].activeInHierarchy)
                     {
-                        return active = false;
+                        return false;
                     }
                 }
                 return active;
@@ -71,11 +74,15 @@ namespace Global.Shooting.BulletSpace
 
         #region private void
 
+        #region Unity function
+
         private void Awake()
         {
             SetArraysInBulletsList();
             SetDefaultArrays();
         }
+
+        #endregion Unity function
 
         private void SetArraysInBulletsList()
         {
