@@ -13,5 +13,7 @@ MonoBehaviour:
   m_Name: BootSettings
   m_EditorClassIdentifier: 
   bootTime: 0
-  nextSceneIndex: 1
-  managers: []
+  nextSceneIndex: 2
+  managers:
+  - {fileID: 2041063571288853126, guid: 35397cf63f7d25c479f2719165b79557, type: 3}
+  - {fileID: 9187244565436015841, guid: f63a49e66919ab14fa9b3746784c54ad, type: 3}

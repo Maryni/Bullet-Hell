@@ -7,13 +7,17 @@ namespace Global.Managers.Datas
     {
         #region private variables
 
-        private DynamicData dynamicData;
+#pragma warning disable
+        [SerializeField] private DynamicData dynamicData;
+        [SerializeField] private StaticData staticData;
+#pragma warning restore
 
         #endregion private variables
 
         #region properties
 
         public DynamicData DynamicData => dynamicData;
+        public StaticData StaticData => staticData;
         public override Type ManagerType => typeof(DataManager);
 
         #endregion properties
@@ -22,47 +26,5 @@ namespace Global.Managers.Datas
         {
             return true;
         }
-
-        #region public void
-
-        public void AddData(string value)
-        {
-            if (dynamicData.ArrayData.Count >= 0 && dynamicData.ArrayData.Count < 5)
-            {
-                dynamicData.AddData(value);
-            }
-            SaveData();
-            print(dynamicData.GetDataAllLines());
-        }
-
-        public void GetData(int index)
-        {
-            dynamicData.GetDataByIndex(index);
-        }
-
-        public void SaveData()
-        {
-            PlayerPrefs.SetString("data", dynamicData.GetDataAllLines());
-        }
-
-        #endregion public void
-
-        #region private void
-
-        private void LoadData()
-        {
-            if (PlayerPrefs.GetString("data").Length > 0)
-            {
-                dynamicData.SetDataByLine(PlayerPrefs.GetString("data"));
-            }
-        }
-
-        private void Awake()
-        {
-            dynamicData = new DynamicData();
-            LoadData();
-        }
-
-        #endregion private void
     }
 }

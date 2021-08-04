@@ -9,44 +9,41 @@ namespace Global.Managers.Datas
     {
         #region private variables
 
-        private List<string> arrayData = new List<string>();
+#pragma warning disable
+        [SerializeField] private PlayerData playerData;
+        [SerializeField] private SpawnItemData spawnItemData;
+        [SerializeField] private RocketData rocketData;
+#pragma warning restore
 
         #endregion private variables
 
         #region properties
 
-        public List<string> ArrayData => arrayData;
+        public PlayerData PlayerData => playerData;
+        public SpawnItemData SpawnItemData => spawnItemData;
+        public RocketData RocketData => rocketData;
 
         #endregion properties
+    }
 
-        #region public void
+    [Serializable]
+    public class PlayerData
+    {
+        public int hp;
+        public int speed;
+    }
 
-        public void AddData(string value)
-        {
-            arrayData.Add(value);
-        }
+    [Serializable]
+    public class SpawnItemData
+    {
+        public int spawnTime;
+        public int destroyTime;
+    }
 
-        public string GetDataByIndex(int index) => arrayData[index];
-
-        public string GetDataAllLines()
-        {
-            string temp = "";
-            foreach (string item in arrayData)
-            {
-                temp += (item + "|");
-            }
-            return temp;
-        }
-
-        public void SetDataByLine(string value)
-        {
-            string[] temp = value.Split('|');
-            foreach (string item in temp)
-            {
-                arrayData.Add(item);
-            }
-        }
-
-        #endregion public void
+    [Serializable]
+    public class RocketData
+    {
+        public int timeToBlowUp;
+        public float radiutBlowUp;
     }
 }
