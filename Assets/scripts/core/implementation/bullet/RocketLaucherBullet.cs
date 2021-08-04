@@ -14,12 +14,20 @@ namespace Global.Bullet
         {
             Vector2 direction = pointForShooting.up;
             Rig2D.AddForce(direction * BulletStats.speed, ForceMode2D.Impulse);
-            StartCoroutine(Explosive());
+            InvokeRepeating("Explosive", timeToBlowUp + 1, .1f);
         }
 
         private void Start()
         {
             timeToBlowUp = Services.GetManager<DataManager>().DynamicData.RocketData.timeToBlowUp;
+        }
+
+        private void Update()
+        {
+            if (this.gameObject.activeInHierarchy)
+            {
+                StartCoroutine(Explosive());
+            }
         }
 
         private void OnValidate()
@@ -29,7 +37,7 @@ namespace Global.Bullet
 
         private IEnumerator Explosive()
         {
-            if (timeToBlowUp > 0)
+            if (timeToBlowUp >= 0)
             {
                 timeToBlowUp -= 0.1f;
             }
@@ -40,6 +48,7 @@ namespace Global.Bullet
                 circleCollider2D.radius = tempRadius;
                 timeToBlowUp = Services.GetManager<DataManager>().DynamicData.RocketData.timeToBlowUp;
                 gameObject.SetActive(false);
+                StopCoroutine(Explosive());
             }
             yield return new WaitForSeconds(.1f);
         }
