@@ -17,6 +17,8 @@ namespace Global.Shooting
 
         public WeaponType WeaponType => weaponType;
 
+        protected WeaponStats Stats => weaponStats;
+
         public virtual void Init()
         {
             weaponStats = Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(weaponType);
@@ -26,6 +28,11 @@ namespace Global.Shooting
         {
         }
 
-        public abstract IEnumerator Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent);
+        public void Shoot()
+        {
+            StartCoroutine();
+        }
+
+        public abstract IEnumerator Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent, Action callback = null);
     }
 }

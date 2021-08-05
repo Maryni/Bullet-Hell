@@ -1,4 +1,5 @@
-﻿using Global;
+﻿using System;
+using Global;
 using Global.Managers;
 using Global.Shooting;
 using System.Collections;
@@ -12,7 +13,7 @@ public class AutomaticGunWeapon : BaseWeapon
         Init();
     }
 
-    public override IEnumerator Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent)
+    public override IEnumerator Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent, Action callback = null)
     {
         var bullet = Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
         bullet.transform.position = transformParent.position;

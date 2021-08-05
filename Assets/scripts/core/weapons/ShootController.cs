@@ -22,6 +22,12 @@ public class ShootController : MonoBehaviour
 
     #endregion private variables
 
+    #region Private variables
+
+    private Coroutine readyForShootCoroutine;
+
+    #endregion Private variables
+
     #region properties
 
     public BaseWeapon CurrentWeapon => baseWeapon;
@@ -41,10 +47,11 @@ public class ShootController : MonoBehaviour
 
     private void GetReadyShootByWeapon()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && readyForShootCoroutine == null)
         {
-            StartCoroutine(baseWeapon.Shoot(mousePos, bulletSaver, cannonTransform));
-            return;
+            baseWeapon.Shoot();
+            //readyForShootCoroutine = StartCoroutine(baseWeapon.Shoot(mousePos, bulletSaver, cannonTransform,
+            //    () => readyForShootCoroutine = null));
         }
     }
 
