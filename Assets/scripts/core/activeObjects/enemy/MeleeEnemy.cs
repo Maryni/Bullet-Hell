@@ -24,7 +24,7 @@ namespace Global.ActiveObjects
         private void Start()
         {
             Init();
-            InvokeRepeating("ResetVelocity", timeInvokeReapeating, rateInvokeReapeatingReset); //for deleting "curve" when player moving, and enemy "drifting" in circle around player
+            InvokeRepeating("ResetVelocity", timeInvokeReapeating, rateInvokeReapeatingReset);
             InvokeRepeating("Movement", timeInvokeReapeating, rateInvokeReapeatingMovement);
         }
 
