@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Global.Interfaces;
+using Global.Managers.Datas;
 
 namespace Global.Player
 {
@@ -10,8 +11,7 @@ namespace Global.Player
         #region private variables
 
 #pragma warning disable
-        [SerializeField] private int hp = 100;
-        [SerializeField] private float speed;
+        [SerializeField] private PlayerData playerData;
         [SerializeField] private int hpValue;
 #pragma warning restore
 
@@ -19,8 +19,8 @@ namespace Global.Player
 
         #region properties
 
-        public int HP => hp;
-        public float Speed => speed;
+        public int HP => playerData.hp;
+        public float Speed => playerData.speed;
         public int HPValue => hpValue;
 
         #endregion properties
@@ -41,6 +41,11 @@ namespace Global.Player
             return false;
         }
 
+        public void ObjectTriggered()
+        {
+            Debug.Log("Im triggered");
+        }
+
         #endregion public void
 
         #region private void
@@ -49,15 +54,15 @@ namespace Global.Player
 
         private void Start()
         {
+            Init();
             RestoreHPToMaxHP();
         }
 
         #endregion Unity functions
 
-        private void RestoreHPToMaxHP()
-        {
-            hpValue = hp;
-        }
+        private void RestoreHPToMaxHP() => hpValue = playerData.hp;
+
+        private void Init() => playerData = Services.GetManager<DataManager>().DynamicData.PlayerData;
 
         #endregion private void
     }

@@ -53,4 +53,11 @@ MonoBehaviour:
     rocketData:
       timeToBlowUp: 5
       radiutBlowUp: 2
+    enemyStatsData:
+      hp: 100
+      speed: 3
+      hpValue: 100
+      damage: 10
+      intellegence: 1
+      weaponStats: {fileID: 11400000, guid: ce660fa9e67c913468f5cb0f5fb3c8b0, type: 2}
   staticData: {fileID: 11400000, guid: d954cc5a7cd76f94d9809cafd4e20c92, type: 2}

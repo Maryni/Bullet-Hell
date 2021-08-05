@@ -128,7 +128,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseWeapon: {fileID: 2468213343802390218}
-  weaponType: 0
   cannonTransform: {fileID: 0}
   bulletSaver: {fileID: 3691523426021728076}
   mousePos: {x: 0, y: 0}
@@ -160,6 +159,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 1
   weaponStats: {fileID: 11400000, guid: 2250b90b13e00064c81f837afd7f9f35, type: 2}
+  countBulletForShot: 5
+  defaultAngleBullet: 15
+  countSplitLines: 2
 --- !u!114 &3595048804069863770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,6 +191,7 @@ GameObject:
   - component: {fileID: 3691523426021728077}
   - component: {fileID: 3691523426021728072}
   - component: {fileID: 3691523426021728073}
+  - component: {fileID: 7769348892973176997}
   - component: {fileID: 5723351859305830457}
   - component: {fileID: 1263783476}
   m_Layer: 0
@@ -298,8 +301,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58179e24c4e8a44418a27d04868496b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 100
-  speed: 5
+  playerData:
+    hp: 0
+    speed: 0
   hpValue: 0
 --- !u!114 &3691523426021728077
 MonoBehaviour:
@@ -356,6 +360,32 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
+  m_EdgeRadius: 0
+--- !u!61 &7769348892973176997
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691523426021728050}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 5de827b47f971994badde8ef01f7dc31, type: 2}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.25, y: 1.25}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.25, y: 1.25}
   m_EdgeRadius: 0
 --- !u!114 &5723351859305830457
 MonoBehaviour:

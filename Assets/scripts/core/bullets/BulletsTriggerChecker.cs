@@ -6,13 +6,13 @@ namespace Global.Shooting.BulletSpace
 {
     public class BulletsTriggerChecker : MonoBehaviour
     {
-        #region private variables
+        #region Inspector variables
 
 #pragma warning disable
         [SerializeField] private string tagForTrigget2D;
 #pragma warning restore
 
-        #endregion private variables
+        #endregion Inspector variables
 
         #region private void
 

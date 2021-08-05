@@ -10,7 +10,8 @@ namespace Global.Managers.Datas
     {
         AutomaticGun,
         Shotgun,
-        RocketLaucher
+        RocketLaucher,
+        MeleeAttack
     }
 
     [CreateAssetMenu(fileName = "StaticData", menuName = "Data/StaticData")]

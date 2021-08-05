@@ -15,12 +15,17 @@ namespace Global.Weapon
 
 #pragma warning disable
         [SerializeField] private int countBulletForShot = 5;
-        [SerializeField] private float angleBullet;
         [SerializeField] private float defaultAngleBullet = 15;
-        [SerializeField] private int countSplitLines = 2;//2 - for cut countBulletForShot on 2 parts, left part from main bullet without rotation, and right part, not change it
+        [Header("2 - default"), SerializeField] private int countSplitLines = 2;//2 - for cut countBulletForShot on 2 parts, left part from main bullet without rotation, and right part, not change it
 #pragma warning restore
 
         #endregion Inspector variables
+
+        #region private variables
+
+        private float angleBullet;
+
+        #endregion private variables
 
         #region Unity functions
 

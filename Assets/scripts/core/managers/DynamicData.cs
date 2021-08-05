@@ -13,6 +13,7 @@ namespace Global.Managers.Datas
         [SerializeField] private PlayerData playerData;
         [SerializeField] private SpawnItemData spawnItemData;
         [SerializeField] private RocketData rocketData;
+        [SerializeField] private EnemyStats enemyStatsData;
 #pragma warning restore
 
         #endregion private variables
@@ -22,6 +23,7 @@ namespace Global.Managers.Datas
         public PlayerData PlayerData => playerData;
         public SpawnItemData SpawnItemData => spawnItemData;
         public RocketData RocketData => rocketData;
+        public EnemyStats EnemyStats => enemyStatsData;
 
         #endregion properties
     }
