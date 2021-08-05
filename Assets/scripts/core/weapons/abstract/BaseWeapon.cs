@@ -11,11 +11,23 @@ namespace Global.Shooting
 {
     public abstract class BaseWeapon : MonoBehaviour
     {
-        [SerializeField] private WeaponType weaponType;
+        #region Inspector variables
 
+#pragma warning disable
+        [SerializeField] private WeaponType weaponType;
         [SerializeField] protected WeaponStats weaponStats;
+#pragma warning restore
+
+        #endregion Inspector variables
+
+        #region properties
 
         public WeaponType WeaponType => weaponType;
+        public WeaponStats WeaponStats => weaponStats;
+
+        #endregion properties
+
+        #region public void
 
         public virtual void Init()
         {
@@ -26,6 +38,13 @@ namespace Global.Shooting
         {
         }
 
-        public abstract IEnumerator Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent);
+        public void Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent)
+        {
+            StartCoroutine(Shoot(mousePos, transformCanon, transformParent, callback: null));
+        }
+
+        public abstract IEnumerator Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent, Action callback = null);
+
+        #endregion public void
     }
 }

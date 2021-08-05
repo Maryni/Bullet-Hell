@@ -8,43 +8,32 @@ using Global.Controllers;
 
 public class ShootController : MonoBehaviour
 {
-    #region private variables
+    #region Inspector variables
 
 #pragma warning disable
 
     [SerializeField] private BaseWeapon baseWeapon;
-    [SerializeField] private int weaponType = 0;
     [SerializeField] private Transform cannonTransform;
     [SerializeField] private Transform bulletSaver;
     [SerializeField] private Vector2 mousePos;
 
 #pragma warning restore
 
-    #endregion private variables
+    #endregion Inspector variables
 
     #region properties
 
     public BaseWeapon CurrentWeapon => baseWeapon;
-    public int WeaponType => weaponType;
 
     #endregion properties
-
-    #region public void
-
-    public void ChangeWeaponType(int typeWeapon)
-    {
-    }
-
-    #endregion public void
 
     #region private void
 
     private void GetReadyShootByWeapon()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0))
         {
-            StartCoroutine(baseWeapon.Shoot(mousePos, bulletSaver, cannonTransform));
-            return;
+            baseWeapon.Shoot(mousePos, bulletSaver, cannonTransform);
         }
     }
 

@@ -160,7 +160,7 @@ MonoBehaviour:
     type: 3}
   rocketLaucherBulletPrefab: {fileID: 4434291374952679431, guid: 14e0a9af979b9354e954ad51d12a0a22,
     type: 3}
-  transforAutomatic: {fileID: 2384044451755290328}
+  transformAutomatic: {fileID: 2384044451755290328}
   transformShotgun: {fileID: 4323250419504820783}
   transformRocket: {fileID: 5539395963896257698}
 --- !u!1 &9189389550252910861

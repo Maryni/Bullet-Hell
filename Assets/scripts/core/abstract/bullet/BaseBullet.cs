@@ -14,28 +14,41 @@ namespace Global.Managers.Datas
 
         public int speed;
     }
-
-    [Serializable]
-    public class BulletStatsShotgun : BulletStats
-    {
-        //TODO: move BulletStats to ScriptableObjects, add bulletStats to nessasaryWeapon
-        public float angel;
-
-        public float defaultAngel;
-    }
 }
 
 namespace Global.Bullet
 {
     public abstract class BaseBullet : MonoBehaviour
     {
+        #region Inspector variables
+
+#pragma warning disable
         [SerializeField] private Rigidbody2D rig2D;
         [SerializeField] private BulletStats bulletStats;
-        [SerializeField] private BulletStatsShotgun bulletStatsShotgun;
+#pragma warning restore
+
+        #endregion Inspector variables
+
+        #region properties
 
         public BulletStats BulletStats => bulletStats;
-        public BulletStatsShotgun BulletStatsShotgun => bulletStatsShotgun;
         public Rigidbody2D Rig2D => rig2D;
+
+        #endregion properties
+
+        #region Unity functions
+
+        private void OnValidate()
+        {
+            if (rig2D == null)
+            {
+                rig2D = GetComponent<Rigidbody2D>();
+            }
+        }
+
+        #endregion Unity functions
+
+        #region public void
 
         public virtual void Init(BulletStats bulletStats)
         {
@@ -45,15 +58,9 @@ namespace Global.Bullet
         ///
         /// </summary>
         /// <param name="pos"></param>
-        /// <param name="pointForShooting">palka (like tank big gun)</param>
-        public abstract void Move(Vector2 pos, Transform pointForShooting);
+        /// <param name="pointForShooting">cannon (like tank big gun)</param>
+        public abstract void Move(Transform pointForShooting);
 
-        private void OnValidate()
-        {
-            if (rig2D == null)
-            {
-                rig2D = GetComponent<Rigidbody2D>();
-            }
-        }
+        #endregion public void
     }
 }

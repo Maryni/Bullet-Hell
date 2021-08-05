@@ -65,7 +65,7 @@ namespace Global.Controllers
             {
                 currentItemInfo = collision.gameObject.GetComponent<ItemInfo>();
                 int value = int.Parse(currentItemInfo.GetValue());
-                shootController.ChangeWeaponType(value);
+                //shootController.ChangeWeaponType(value);
                 collision.gameObject.SetActive(false);
             }
         }

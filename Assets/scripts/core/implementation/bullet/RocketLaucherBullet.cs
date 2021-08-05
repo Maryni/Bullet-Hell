@@ -7,27 +7,19 @@ namespace Global.Bullet
 {
     public class RocketLaucherBullet : BaseBullet
     {
-        [SerializeField] private CircleCollider2D circleCollider2D;
-        [SerializeField] private float timeToBlowUp;
+        #region Inspector variables
 
-        public override void Move(Vector2 pos, Transform pointForShooting)
-        {
-            Vector2 direction = pointForShooting.up;
-            Rig2D.AddForce(direction * BulletStats.speed, ForceMode2D.Impulse);
-            InvokeRepeating("Explosive", timeToBlowUp + 1, .1f);
-        }
+#pragma warning disable
+        [SerializeField] private CircleCollider2D circleCollider2D;
+#pragma warning restore
+
+        #endregion Inspector variables
+
+        #region Unity functions
 
         private void Start()
         {
-            timeToBlowUp = Services.GetManager<DataManager>().DynamicData.RocketData.timeToBlowUp;
-        }
-
-        private void Update()
-        {
-            if (this.gameObject.activeInHierarchy)
-            {
-                StartCoroutine(Explosive());
-            }
+            StartCoroutine(ExplosiveByTime());
         }
 
         private void OnValidate()
@@ -35,22 +27,36 @@ namespace Global.Bullet
             circleCollider2D = GetComponent<CircleCollider2D>();
         }
 
-        private IEnumerator Explosive()
+        #endregion Unity functions
+
+        #region public void
+
+        public override void Move(Transform pointForShooting)
         {
-            if (timeToBlowUp >= 0)
-            {
-                timeToBlowUp -= 0.1f;
-            }
-            if (timeToBlowUp < 0)
-            {
-                float tempRadius = circleCollider2D.radius;
-                circleCollider2D.radius = Services.GetManager<DataManager>().DynamicData.RocketData.radiutBlowUp;
-                circleCollider2D.radius = tempRadius;
-                timeToBlowUp = Services.GetManager<DataManager>().DynamicData.RocketData.timeToBlowUp;
-                gameObject.SetActive(false);
-                StopCoroutine(Explosive());
-            }
-            yield return new WaitForSeconds(.1f);
+            Vector2 direction = pointForShooting.up;
+            Rig2D.AddForce(direction * BulletStats.speed, ForceMode2D.Impulse);
         }
+
+        public void ExplosiveByCollision()
+        {
+        }
+
+        #endregion public void
+
+        #region private void
+
+        private IEnumerator ExplosiveByTime()
+        {
+            yield return new WaitForSeconds(Services.GetManager<DataManager>().DynamicData.RocketData.timeToBlowUp);
+            float tempRadius = circleCollider2D.radius;
+            circleCollider2D.radius = Services.GetManager<DataManager>().DynamicData.RocketData.radiutBlowUp;
+            circleCollider2D.radius = tempRadius;
+
+            gameObject.SetActive(false);
+
+            yield return 0;
+        }
+
+        #endregion private void
     }
 }
