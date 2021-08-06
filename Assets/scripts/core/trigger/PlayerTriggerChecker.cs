@@ -11,6 +11,13 @@ public class PlayerTriggerChecker : MonoBehaviour
 
     #endregion Inspector variables
 
+    #region Unity functions
+
+    private void Start()
+    {
+        this.enabled = false;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == tagObject)
@@ -18,4 +25,6 @@ public class PlayerTriggerChecker : MonoBehaviour
             collision.GetComponent<Player>().ObjectTriggered();
         }
     }
+
+    #endregion Unity functions
 }

@@ -15,6 +15,7 @@ namespace Global.ActiveObjects
         [SerializeField] private float timeInvokeReapeating;
         [SerializeField] private float rateInvokeReapeatingMovement;
         [SerializeField] private float rateInvokeReapeatingReset;
+        [SerializeField] private EnemyMovement enemyMovement;
 #pragma warning restore
 
         #endregion Inspector variables
@@ -41,8 +42,7 @@ namespace Global.ActiveObjects
         {
             SetPlayerTransform();
             transform.rotation = Rotation(transformPlayer.position, transform);
-            Vector2 pos = transformPlayer.position - transform.position;
-            rig2d.AddForce(pos * EnemyStats.speed, ForceMode2D.Force);
+            enemyMovement.Movement(transformPlayer, rig2d, EnemyStats.speed);
         }
 
         public override void Attack()
@@ -53,6 +53,8 @@ namespace Global.ActiveObjects
         #endregion public void
 
         #region private void
+
+        private void EnableTriggerChecker() => transform.GetComponentInChildren<PlayerTriggerChecker>().enabled = true;
 
         private void ResetVelocity() => rig2d.velocity = Vector2.zero;
 
