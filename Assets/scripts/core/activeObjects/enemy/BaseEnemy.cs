@@ -6,20 +6,6 @@ using Global.Interfaces;
 using System;
 using Global.Managers.Datas;
 
-namespace Global.Managers.Datas
-{
-    [Serializable]
-    public class EnemyStats
-    {
-        [SerializeField] public int hp;
-        [SerializeField] public float speed;
-        [SerializeField] public int hpValue;
-        [SerializeField] public float damage;
-        [SerializeField] public int intellegence;
-        [SerializeField] private WeaponStats weaponStats;
-    }
-}
-
 namespace Global.ActiveObjects
 {
     public abstract class BaseEnemy : MonoBehaviour
@@ -45,9 +31,12 @@ namespace Global.ActiveObjects
             enemyStatsData = Services.GetManager<DataManager>().DynamicData.EnemyStats;
         }
 
-        public abstract void Movement();
+        public virtual void ObjectTriggered()
+        {
+            StopCoroutine("ObjectTriggered");
+        }
 
-        public abstract void Attack();
+        public abstract void Movement();
 
         #endregion public void
     }

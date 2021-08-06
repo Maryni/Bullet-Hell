@@ -43,7 +43,7 @@ namespace Global.Player
 
         public void ObjectTriggered()
         {
-            Debug.Log("Im triggered");
+            Debug.Log($"Im [ {name} ] triggered");
         }
 
         #endregion public void

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2069245332859280949}
   - component: {fileID: 9208896196697214584}
   - component: {fileID: 8928466754881152942}
+  - component: {fileID: 7520880327365492212}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -148,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   meleeEnemy: {fileID: 9208896196697214584}
-  enemyMovement: {fileID: 8928466754881152942}
+  enemyTrigger: {fileID: 4228135872391124547}
 --- !u!114 &9208896196697214584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +163,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyStatsData:
+    enemyType: 0
     hp: 0
     speed: 0
     hpValue: 0
@@ -186,6 +188,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba34d03d39e19724ab8e17af658d17a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7520880327365492212
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210989136882216523}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa7872af94be1e4aaf35baa036fc88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagForTrigget2D: Bullet
 --- !u!1 &8285328062948695419
 GameObject:
   m_ObjectHideFlags: 0
@@ -308,3 +323,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagObject: Player
+  canAttack: 0

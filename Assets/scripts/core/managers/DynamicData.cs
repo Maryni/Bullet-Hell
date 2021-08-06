@@ -48,4 +48,16 @@ namespace Global.Managers.Datas
         public int timeToBlowUp;
         public float radiutBlowUp;
     }
+
+    [Serializable]
+    public class EnemyStats
+    {
+        [SerializeField] public EnemyType enemyType;
+        [SerializeField] public int hp;
+        [SerializeField] public float speed;
+        [SerializeField] public int hpValue;
+        [SerializeField] public float damage;
+        [SerializeField] public int intellegence;
+        [SerializeField] public WeaponStats weaponStats;
+    }
 }

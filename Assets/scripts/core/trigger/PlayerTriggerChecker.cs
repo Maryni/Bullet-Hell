@@ -8,21 +8,29 @@ public class PlayerTriggerChecker : MonoBehaviour
     #region Inspector variables
 
     [SerializeField] private string tagObject;
+    [SerializeField] private bool canAttack;
 
     #endregion Inspector variables
 
-    #region Unity functions
+    #region public void
 
-    private void Start()
-    {
-        this.enabled = false;
-    }
+    public void EnableAttack() => canAttack = true;
+
+    public void DisableAttacl() => canAttack = false;
+
+    #endregion public void
+
+    #region Unity functions
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == tagObject)
         {
-            collision.GetComponent<Player>().ObjectTriggered();
+            if (tagObject == "Player" && canAttack)
+            {
+                collision.GetComponent<Player>().StartCoroutine("ObjectTriggered");
+                Debug.Log($"[ {collision.name} ] are triggered by me [ {name} ]");
+            }
         }
     }
 

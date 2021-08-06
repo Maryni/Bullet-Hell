@@ -10,6 +10,7 @@ namespace Global.Shooting.BulletSpace
 
 #pragma warning disable
         [SerializeField] private string tagForTrigget2D;
+        [SerializeField] private bool haveToDisableWhoTrigger;
 #pragma warning restore
 
         #endregion Inspector variables
@@ -22,7 +23,14 @@ namespace Global.Shooting.BulletSpace
         {
             if (collision.tag == tagForTrigget2D)
             {
-                collision.gameObject.SetActive(false);
+                if (haveToDisableWhoTrigger)
+                {
+                    collision.gameObject.SetActive(false);
+                }
+                else
+                {
+                    gameObject.SetActive(false);
+                }
             }
         }
 

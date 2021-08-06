@@ -14,6 +14,14 @@ namespace Global.Managers.Datas
         MeleeAttack
     }
 
+    public enum EnemyType
+    {
+        MeleeGrounded,
+        MeleeFlyed,
+        ShootingGrounded,
+        ShootingFlyed
+    }
+
     [CreateAssetMenu(fileName = "StaticData", menuName = "Data/StaticData")]
     public class StaticData : ScriptableObject
     {

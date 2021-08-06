@@ -2997,6 +2997,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7362833743018483185, guid: 3feba08310ae7e147ab7d08664b6fa6f,
+        type: 3}
+      propertyPath: haveToDisableWhoTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362833743144941703, guid: 3feba08310ae7e147ab7d08664b6fa6f,
+        type: 3}
+      propertyPath: haveToDisableWhoTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7362833743574595813, guid: 3feba08310ae7e147ab7d08664b6fa6f,
         type: 3}
       propertyPath: m_RootOrder
@@ -3056,6 +3066,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Terrain
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362833743972364512, guid: 3feba08310ae7e147ab7d08664b6fa6f,
+        type: 3}
+      propertyPath: haveToDisableWhoTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7362833744728526098, guid: 3feba08310ae7e147ab7d08664b6fa6f,
+        type: 3}
+      propertyPath: haveToDisableWhoTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3feba08310ae7e147ab7d08664b6fa6f, type: 3}

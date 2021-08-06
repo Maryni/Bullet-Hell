@@ -148,8 +148,3 @@ MonoBehaviour:
   bulletStats:
     damage: 7
     speed: 1
-  bulletStatsShotgun:
-    damage: 7
-    speed: 1
-    angel: 0
-    defaultAngel: 15

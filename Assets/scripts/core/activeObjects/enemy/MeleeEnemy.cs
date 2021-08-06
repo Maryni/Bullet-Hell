@@ -25,6 +25,7 @@ namespace Global.ActiveObjects
         private void Start()
         {
             Init();
+            enemyMovement = GetComponent<EnemyMovement>();
         }
 
         private void OnValidate()
@@ -42,17 +43,16 @@ namespace Global.ActiveObjects
             InvokeRepeating("Move", timeInvokeReapeating, rateInvokeReapeatingMovement);
         }
 
-        public override void Attack()
+        public override void ObjectTriggered()
         {
-            Debug.Log("Attacking");
-            EnableTriggerChecker();
+            base.ObjectTriggered();
+            Debug.Log($"Im Enemy[ {name} ] triggered");
+            transform.parent.gameObject.SetActive(false);
         }
 
         #endregion public void
 
         #region private void
-
-        private void EnableTriggerChecker() => transform.GetComponentInChildren<PlayerTriggerChecker>().enabled = true;
 
         private void ResetVelocity() => rig2d.velocity = Vector2.zero;
 
