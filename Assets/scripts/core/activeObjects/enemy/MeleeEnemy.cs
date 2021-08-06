@@ -25,8 +25,6 @@ namespace Global.ActiveObjects
         private void Start()
         {
             Init();
-            InvokeRepeating("ResetVelocity", timeInvokeReapeating, rateInvokeReapeatingReset);
-            InvokeRepeating("Movement", timeInvokeReapeating, rateInvokeReapeatingMovement);
         }
 
         private void OnValidate()
@@ -40,14 +38,14 @@ namespace Global.ActiveObjects
 
         public override void Movement()
         {
-            SetPlayerTransform();
-            transform.rotation = Rotation(transformPlayer.position, transform);
-            enemyMovement.Movement(transformPlayer, rig2d, EnemyStats.speed);
+            InvokeRepeating("ResetVelocity", timeInvokeReapeating, rateInvokeReapeatingReset);
+            InvokeRepeating("Move", timeInvokeReapeating, rateInvokeReapeatingMovement);
         }
 
         public override void Attack()
         {
             Debug.Log("Attacking");
+            EnableTriggerChecker();
         }
 
         #endregion public void
@@ -67,6 +65,13 @@ namespace Global.ActiveObjects
             AngleRad += 90;
             AngleRad += 180;
             return transformObject.rotation = Quaternion.Euler(0, 0, AngleRad);
+        }
+
+        private void Move()
+        {
+            SetPlayerTransform();
+            transform.rotation = Rotation(transformPlayer.position, transform);
+            enemyMovement.Movement(transformPlayer, rig2d, EnemyStats.speed);
         }
 
         #endregion private void

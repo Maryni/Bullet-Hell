@@ -2,15 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+namespace Global.ActiveObjects
 {
-    #region public void
-
-    public void Movement(Transform transformPlayer, Rigidbody2D rig2D, float speed)
+    public class EnemyMovement : MonoBehaviour
     {
-        Vector2 pos = transformPlayer.position - transform.position;
-        rig2D.AddForce(pos * speed, ForceMode2D.Force);
-    }
+        #region public void
 
-    #endregion public void
+        public void Movement(Transform transformPlayer, Rigidbody2D rig2D, float speed)
+        {
+            Vector2 pos = transformPlayer.position - transform.position;
+            rig2D.AddForce(pos * speed, ForceMode2D.Force);
+        }
+
+        #endregion public void
+    }
 }
