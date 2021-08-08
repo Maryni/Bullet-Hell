@@ -9,7 +9,7 @@ namespace Global.Shooting.BulletSpace
         #region Inspector variables
 
 #pragma warning disable
-        [SerializeField] private string tagForTrigget2D;
+        [SerializeField] private string tagForTrigget2D; //неправильный нейминг
         [SerializeField] private bool haveToDisableWhoTrigger;
 #pragma warning restore
 

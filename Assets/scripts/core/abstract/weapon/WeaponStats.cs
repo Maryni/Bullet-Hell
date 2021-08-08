@@ -8,8 +8,8 @@ namespace Global.Managers.Datas
     public class WeaponStats : ScriptableObject
     {
         public WeaponType weaponType;
-        public int bulletCount;
-        public float cooldownTime;
+        public int bulletCount; //не испозуется
+        public float cooldownTime; //не испозуется
         public float shooringRate;
     }
 }

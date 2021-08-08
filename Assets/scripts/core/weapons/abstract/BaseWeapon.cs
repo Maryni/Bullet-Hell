@@ -43,6 +43,9 @@ namespace Global.Shooting
             StartCoroutine(Shoot(mousePos, transformCanon, transformParent, callback: null));
         }
 
+        //эта функция не должна быть публичной
+        //ты стреляешь одной функцией (та что сверху)
+        //все остальное ты должен инкапсулировать
         public abstract IEnumerator Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent, Action callback = null);
 
         #endregion public void

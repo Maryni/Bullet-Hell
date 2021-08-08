@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Global.Player
 {
+    //удали этот скрипт, переделай так, как я писал в КамераФолоу
     public class PlayerCameraController : MonoBehaviour
     {
         #region private variables

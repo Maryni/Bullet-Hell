@@ -15,7 +15,8 @@ namespace Global.ActiveObjects
         [SerializeField] private float timeInvokeReapeating;
         [SerializeField] private float rateInvokeReapeatingMovement;
         [SerializeField] private float rateInvokeReapeatingReset;
-        [SerializeField] private EnemyMovement enemyMovement;
+        [SerializeField] private EnemyMovement enemyMovement; //зачем ты сериализируешь поле, если ты его в старте ищешь?
+        //+ что я говорил ранее за онвалидейт?
 #pragma warning restore
 
         #endregion Inspector variables
@@ -28,7 +29,7 @@ namespace Global.ActiveObjects
             enemyMovement = GetComponent<EnemyMovement>();
         }
 
-        private void OnValidate()
+        private void OnValidate() //тут он у тебя есть, но мувмент ты ищешь в старте
         {
             rig2d = GetComponent<Rigidbody2D>();
         }
@@ -39,8 +40,8 @@ namespace Global.ActiveObjects
 
         public override void Movement()
         {
-            InvokeRepeating("ResetVelocity", timeInvokeReapeating, rateInvokeReapeatingReset);
-            InvokeRepeating("Move", timeInvokeReapeating, rateInvokeReapeatingMovement);
+            InvokeRepeating("ResetVelocity", timeInvokeReapeating, rateInvokeReapeatingReset); //избавляйся от инвоук репитинг
+            InvokeRepeating("Move", timeInvokeReapeating, rateInvokeReapeatingMovement); //избавляйся от инвоук репитинг
         }
 
         public override void ObjectTriggered()
@@ -54,9 +55,9 @@ namespace Global.ActiveObjects
 
         #region private void
 
-        private void ResetVelocity() => rig2d.velocity = Vector2.zero;
+        private void ResetVelocity() => rig2d.velocity = Vector2.zero; //неправильное форматирование, ставь скобки, это функция. Сокращение в данном случае - неуместно
 
-        private void SetPlayerTransform() => transformPlayer = FindObjectOfType<Player.Player>().transform;
+        private void SetPlayerTransform() => transformPlayer = FindObjectOfType<Player.Player>().transform; //неправильное форматирование, ставь скобки, это функция. Сокращение в данном случае - неуместно
 
         private Quaternion Rotation(Vector3 mousePos, Transform transformObject)
         {
@@ -69,7 +70,7 @@ namespace Global.ActiveObjects
 
         private void Move()
         {
-            SetPlayerTransform();
+            SetPlayerTransform(); //ты каждое Н время получаешь игрока через FindObjectOfType. УДОЛИ!
             transform.rotation = Rotation(transformPlayer.position, transform);
             enemyMovement.Movement(transformPlayer, rig2d, EnemyStats.speed);
         }

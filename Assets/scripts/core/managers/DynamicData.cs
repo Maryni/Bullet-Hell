@@ -13,7 +13,8 @@ namespace Global.Managers.Datas
         [SerializeField] private PlayerData playerData;
         [SerializeField] private SpawnItemData spawnItemData;
         [SerializeField] private RocketData rocketData;
-        [SerializeField] private EnemyStats enemyStatsData;
+        [SerializeField] private EnemyStats enemyStatsData;//зачем тебе вся информация о враге в динамеческой дате? Ты будешь всю ее менять?
+                                                            //ее здесь не должно быть, ты нарушаешь логику этого класса
 #pragma warning restore
 
         #endregion private variables
