@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8928466754881152942}
   - component: {fileID: 7520880327365492212}
   m_Layer: 0
-  m_Name: Enemy
+  m_Name: EnemyMeleeMiddle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 4640390578916535481}
   - component: {fileID: 4879610770435327710}
   - component: {fileID: 4228135872391124547}
+  - component: {fileID: 799584758735322575}
   m_Layer: 0
   m_Name: Hands
   m_TagString: Untagged
@@ -325,3 +326,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tagObject: Player
   canAttack: 0
+  player: {fileID: 0}
+--- !u!114 &799584758735322575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8285328062948695419}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f48bcbbf7edf186478e9e926f2916673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponType: 3
+  weaponStats: {fileID: 0}
+  playerTriggerChecker: {fileID: 0}

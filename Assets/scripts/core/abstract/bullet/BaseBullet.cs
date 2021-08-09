@@ -55,7 +55,7 @@ namespace Global.Bullet
         /// </summary>
         /// <param name="pos"></param>
         /// <param name="pointForShooting">cannon (like tank big gun)</param>
-        public abstract void Move(Transform pointForShooting);
+        public abstract void Move();
 
         #endregion public void
     }

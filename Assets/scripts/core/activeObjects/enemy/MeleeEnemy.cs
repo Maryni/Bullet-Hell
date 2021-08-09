@@ -60,18 +60,14 @@ namespace Global.ActiveObjects
             rig2d.velocity = Vector2.zero;
         }
 
-        private Quaternion Rotation(Vector3 mousePos, Transform transformObject)
+        private Vector2 Rotation(Transform transformObject)
         {
-            float AngleRad = Mathf.Atan2(mousePos.y - this.transform.position.y, mousePos.x - this.transform.position.x);
-            AngleRad = (180 / Mathf.PI) * AngleRad;
-            AngleRad += 90;
-            AngleRad += 180;
-            return transformObject.rotation = Quaternion.Euler(0, 0, AngleRad);
+            return ((Vector2)transformPlayer.position - (Vector2)transformObject.position).normalized;
         }
 
         private void Move()
         {
-            transform.rotation = Rotation(transformPlayer.position, transform);
+            transform.up = Rotation(transform);
             enemyMovement.Movement(transformPlayer, rig2d, EnemyStats.speed);
         }
 

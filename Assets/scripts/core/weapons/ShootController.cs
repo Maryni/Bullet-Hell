@@ -34,7 +34,7 @@ public class ShootController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.Mouse0) && coroutineShoot == null)
         {
-            coroutineShoot = StartCoroutine(baseWeapon.Shoot(mousePos, cannonTransform, bulletPool, () => coroutineShoot = null));
+            coroutineShoot = StartCoroutine(baseWeapon.Shoot(mousePos, bulletPool, () => coroutineShoot = null));
         }
     }
 

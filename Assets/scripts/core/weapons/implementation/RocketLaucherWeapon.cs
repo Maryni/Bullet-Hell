@@ -1,4 +1,5 @@
-﻿using Global.Managers;
+﻿using Global.Bullet;
+using Global.Managers;
 using Global.Shooting;
 using System;
 using System.Collections;
@@ -28,16 +29,17 @@ namespace Global.Weapon
 
         #region public void
 
-        public override IEnumerator Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent, Action callback)
+        public override IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
         {
             StartCoroutine(Reload());
             if (canShoot)
             {
                 bulletCountCurrent--;
-                var bullet = Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
-                bullet.transform.parent = transformParent;
+                var bullet = (RocketLaucherBullet)Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
+                bullet.transform.position = transformParent.position;
                 bullet.gameObject.SetActive(true);
-                bullet.Move(transformCanon);
+                bullet.Rotate(gameObject.transform.parent.transform);
+                bullet.Move();
                 yield return new WaitForSeconds(weaponStats.shooringRate);
                 callback?.Invoke();
             }

@@ -36,9 +36,9 @@ namespace Global.Shooting
 
         public abstract IEnumerator Reload();
 
-        public virtual IEnumerator Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent, Action callback = null)
+        public virtual IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
         {
-            StartCoroutine(Shoot(mousePos, transformCanon, transformParent, callback: null));
+            StartCoroutine(Shoot(mousePos, transformParent, callback: null));
             yield return new WaitForSeconds(weaponStats.shooringRate);
         }
 

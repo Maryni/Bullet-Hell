@@ -9,15 +9,14 @@ namespace Global.Bullet
     {
         #region public void
 
-        public void Rotate(float angle)
+        public void Rotate(float angle, Transform transformCannon)
         {
-            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, angle);
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transformCannon.rotation.eulerAngles.z + angle);
         }
 
-        public override void Move(Transform pointForShooting)
+        public override void Move()
         {
-            Vector2 direction = pointForShooting.up;
-            Rig2D.AddForce(direction * BulletStats.speed, ForceMode2D.Impulse);
+            Rig2D.AddForce(transform.up * BulletStats.speed, ForceMode2D.Impulse);
         }
 
         #endregion public void

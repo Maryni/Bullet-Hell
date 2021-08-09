@@ -16,7 +16,9 @@ namespace Global.Managers.Datas
 
     public enum EnemyType
     {
-        MeleeGrounded,
+        MeleeGrounded_LowSpeed,
+        MeleeGrounded_MiddleSpeed,
+        MeleeGrounded_FastSpeed,
         MeleeFlyed,
         ShootingGrounded,
         ShootingFlyed

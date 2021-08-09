@@ -41,7 +41,7 @@ namespace Global.Weapon
 
         #region public void
 
-        public override IEnumerator Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent, Action callback = null)
+        public override IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
         {
             StartCoroutine(Reload());
             if (canShoot)
@@ -52,10 +52,10 @@ namespace Global.Weapon
                 {
                     var bullet = (ShotgunBullet)Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
                     angleBullet = (-defaultAngleBullet * Mathf.FloorToInt(countBulletForShot / countSplitLines)) + (defaultAngleBullet * i);
-                    bullet.Rotate(angleBullet);
                     bullet.transform.position = transformParent.position;
                     bullet.gameObject.SetActive(true);
-                    bullet.Move(transformCanon);
+                    bullet.Rotate(angleBullet, gameObject.transform.parent.transform);
+                    bullet.Move();
 
                     i++;
                     yield return null;
