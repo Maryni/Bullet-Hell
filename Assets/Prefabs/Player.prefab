@@ -128,9 +128,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseWeapon: {fileID: 2468213343802390218}
-  cannonTransform: {fileID: 0}
-  bulletSaver: {fileID: 3691523426021728076}
+  cannonTransform: {fileID: 3691523426021728076}
+  bulletPool: {fileID: 585559015181989958}
   mousePos: {x: 0, y: 0}
+  turnRate: 360
 --- !u!114 &3679002933434292781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,10 +190,8 @@ GameObject:
   - component: {fileID: 3691523426021728079}
   - component: {fileID: 3691523426021728078}
   - component: {fileID: 3691523426021728077}
-  - component: {fileID: 3691523426021728072}
   - component: {fileID: 3691523426021728073}
   - component: {fileID: 7769348892973176997}
-  - component: {fileID: 5723351859305830457}
   - component: {fileID: 1263783476}
   m_Layer: 0
   m_Name: Player
@@ -302,7 +301,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData:
-    hp: 0
+    hpMaximum: 0
     speed: 0
   hpValue: 0
 --- !u!114 &3691523426021728077
@@ -319,22 +318,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 3691523426021728078}
   rigidbody2D: {fileID: 3691523426021728079}
---- !u!114 &3691523426021728072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3691523426021728050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2272664e09c5e4543aa7120b3a037003, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  camera: {fileID: 0}
-  player: {fileID: 3691523426021728050}
-  typeFollowingCamera: 0
-  offset: {x: 0, y: 0, z: -10}
 --- !u!61 &3691523426021728073
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -387,19 +370,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.25, y: 1.25}
   m_EdgeRadius: 0
---- !u!114 &5723351859305830457
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3691523426021728050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c00f1d266c778c84fad2a97d68ce1b70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraFollow: {fileID: 3691523426021728072}
 --- !u!114 &1263783476
 MonoBehaviour:
   m_ObjectHideFlags: 0

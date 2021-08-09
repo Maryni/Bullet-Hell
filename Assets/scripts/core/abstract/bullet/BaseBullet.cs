@@ -50,10 +50,6 @@ namespace Global.Bullet
 
         #region public void
 
-        public virtual void Init(BulletStats bulletStats)
-        {
-        }
-
         /// <summary>
         ///
         /// </summary>

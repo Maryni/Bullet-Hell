@@ -1,10 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Global;
-using Global.Shooting.BulletSpace;
+﻿using UnityEngine;
 using Global.Shooting;
-using Global.Controllers;
 
 public class ShootController : MonoBehaviour
 {
@@ -14,12 +9,18 @@ public class ShootController : MonoBehaviour
 
     [SerializeField] private BaseWeapon baseWeapon;
     [SerializeField] private Transform cannonTransform;
-    [SerializeField] private Transform bulletSaver;
+    [SerializeField] private Transform bulletPool;
     [SerializeField] private Vector2 mousePos;
 
 #pragma warning restore
 
     #endregion Inspector variables
+
+    #region private variables
+
+    private Coroutine coroutineShoot;
+
+    #endregion private variables
 
     #region properties
 
@@ -31,32 +32,23 @@ public class ShootController : MonoBehaviour
 
     private void GetReadyShootByWeapon()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (Input.GetKey(KeyCode.Mouse0) && coroutineShoot == null)
         {
-            baseWeapon.Shoot(mousePos, bulletSaver, cannonTransform);
+            coroutineShoot = StartCoroutine(baseWeapon.Shoot(mousePos, cannonTransform, bulletPool, () => coroutineShoot = null));
         }
     }
 
-    private Quaternion Rotation(Vector3 mousePos, Transform transformObject)
+    private Vector2 Rotation(Transform transformObject)
     {
-        float AngleRad = Mathf.Atan2(mousePos.y - this.transform.position.y, mousePos.x - this.transform.position.x);
-        AngleRad = (180 / Mathf.PI) * AngleRad;
-        AngleRad += 90;
-        AngleRad += 180;
-        return transformObject.rotation = Quaternion.Euler(0, 0, AngleRad);
+        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        return (mousePos - (Vector2)transformObject.position).normalized;
     }
 
     #region Unity function
 
-    private void Start()
-    {
-        cannonTransform = bulletSaver;
-    }
-
     private void Update()
     {
-        mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        cannonTransform.rotation = Rotation(mousePos, cannonTransform);
+        cannonTransform.up = Rotation(cannonTransform);
         GetReadyShootByWeapon();
     }
 

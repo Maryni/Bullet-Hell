@@ -19,7 +19,7 @@ namespace Global.Player
 
         #region properties
 
-        public int HP => playerData.hp;
+        public int HP => playerData.hpMaximum;
         public float Speed => playerData.speed;
         public int HPValue => hpValue;
 
@@ -60,7 +60,7 @@ namespace Global.Player
 
         #endregion Unity functions
 
-        private void RestoreHPToMaxHP() => hpValue = playerData.hp;
+        private void RestoreHPToMaxHP() => hpValue = playerData.hpMaximum;
 
         private void Init() => playerData = Services.GetManager<DataManager>().DynamicData.PlayerData;
 

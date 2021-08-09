@@ -164,9 +164,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyStatsData:
     enemyType: 0
-    hp: 0
+    hpMaximum: 0
     speed: 0
-    hpValue: 0
+    hpValueCurrent: 0
     damage: 0
     intellegence: 0
     weaponStats: {fileID: 0}
@@ -201,6 +201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tagForTrigget2D: Bullet
+  haveToDisableWhoTrigger: 0
 --- !u!1 &8285328062948695419
 GameObject:
   m_ObjectHideFlags: 0
@@ -214,7 +215,7 @@ GameObject:
   - component: {fileID: 4879610770435327710}
   - component: {fileID: 4228135872391124547}
   m_Layer: 0
-  m_Name: Hands (Weapon)
+  m_Name: Hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

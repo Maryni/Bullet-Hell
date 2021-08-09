@@ -34,16 +34,13 @@ namespace Global.Shooting
             weaponStats = Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(weaponType);
         }
 
-        public virtual void Reload()
-        {
-        }
+        public abstract IEnumerator Reload();
 
-        public void Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent)
+        public virtual IEnumerator Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent, Action callback = null)
         {
             StartCoroutine(Shoot(mousePos, transformCanon, transformParent, callback: null));
+            yield return new WaitForSeconds(weaponStats.shooringRate);
         }
-
-        public abstract IEnumerator Shoot(Vector2 mousePos, Transform transformCanon, Transform transformParent, Action callback = null);
 
         #endregion public void
     }

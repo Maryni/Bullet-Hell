@@ -31,7 +31,7 @@ namespace Global.Managers.Datas
     [Serializable]
     public class PlayerData
     {
-        public int hp;
+        public int hpMaximum;
         public int speed;
     }
 
@@ -53,9 +53,9 @@ namespace Global.Managers.Datas
     public class EnemyStats
     {
         [SerializeField] public EnemyType enemyType;
-        [SerializeField] public int hp;
+        [SerializeField] public int hpMaximum;
         [SerializeField] public float speed;
-        [SerializeField] public int hpValue;
+        [SerializeField] public int hpValueCurrent;
         [SerializeField] public float damage;
         [SerializeField] public int intellegence;
         [SerializeField] public WeaponStats weaponStats;

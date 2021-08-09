@@ -25,12 +25,13 @@ namespace Global.ActiveObjects
         private void Start()
         {
             Init();
-            enemyMovement = GetComponent<EnemyMovement>();
+            transformPlayer = FindObjectOfType<Player.Player>().transform;
         }
 
         private void OnValidate()
         {
             rig2d = GetComponent<Rigidbody2D>();
+            enemyMovement = GetComponent<EnemyMovement>();
         }
 
         #endregion Unity functions
@@ -54,9 +55,10 @@ namespace Global.ActiveObjects
 
         #region private void
 
-        private void ResetVelocity() => rig2d.velocity = Vector2.zero;
-
-        private void SetPlayerTransform() => transformPlayer = FindObjectOfType<Player.Player>().transform;
+        private void ResetVelocity()
+        {
+            rig2d.velocity = Vector2.zero;
+        }
 
         private Quaternion Rotation(Vector3 mousePos, Transform transformObject)
         {
@@ -69,7 +71,6 @@ namespace Global.ActiveObjects
 
         private void Move()
         {
-            SetPlayerTransform();
             transform.rotation = Rotation(transformPlayer.position, transform);
             enemyMovement.Movement(transformPlayer, rig2d, EnemyStats.speed);
         }
