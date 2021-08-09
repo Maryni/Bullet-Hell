@@ -1,4 +1,5 @@
-﻿using Global.Player;
+﻿using Global.Managers.Datas;
+using Global.Player;
 using Global.Shooting;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,13 +7,14 @@ using UnityEngine;
 
 namespace Global.Weapon
 {
-    public class MeleeWeapon : BaseWeapon
+    public class MeleeAttack : MonoBehaviour
     {
         #region Inspector variables
 
 #pragma warning disable
         [SerializeField] private PlayerTriggerChecker playerTriggerChecker;
         [SerializeField] private GameObject player;
+
 #pragma warning restore
 
         #endregion Inspector variables
@@ -26,11 +28,6 @@ namespace Global.Weapon
 
         #region Unity function
 
-        private void Start()
-        {
-            Init();
-        }
-
         private void OnValidate()
         {
             playerTriggerChecker = GetComponent<PlayerTriggerChecker>();
@@ -40,30 +37,16 @@ namespace Global.Weapon
 
         #region public void
 
-        public override IEnumerator Reload()
-        {
-            canAttack = true;
-            if (bulletCountCurrent <= 0)
-            {
-                canAttack = false;
-                yield return new WaitForSeconds(weaponStats.cooldownTime);
-                bulletCountCurrent = weaponStats.bulletCount;
-                canAttack = true;
-                yield return canAttack;
-            }
-            yield return canAttack;
-        }
-
-        public void Attack()
+        public IEnumerator Attack(EnemyType enemyType)
         {
             if (canAttack)
             {
-                StartCoroutine(Reload());
                 player = playerTriggerChecker.GetPlayer();
                 if (player != null)
                 {
-                    player.GetComponent<Global.Player.Player>().StartCoroutine("ObjectTriggered");
+                    player.GetComponent<Global.Player.Player>().StartCoroutine("ObjectTriggered", Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType).damage);
                 }
+                yield return new WaitForSeconds(Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType).attackRate);
             }
         }
 

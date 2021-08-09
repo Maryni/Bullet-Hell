@@ -27,11 +27,6 @@ namespace Global.Player
 
         #region public void
 
-        public void GetDamage(int damage)
-        {
-            hpValue -= damage;
-        }
-
         public bool IsDead()
         {
             if (hpValue < 0)
@@ -41,9 +36,14 @@ namespace Global.Player
             return false;
         }
 
-        public void ObjectTriggered()
+        public void ObjectTriggered(int damage)
         {
             Debug.Log($"Im [ {name} ] triggered");
+            GetDamage(damage);
+            if (IsDead())
+            {
+                Debug.Log("Player die");
+            }
         }
 
         #endregion public void
@@ -63,6 +63,11 @@ namespace Global.Player
         private void RestoreHPToMaxHP() => hpValue = playerData.hpMaximum;
 
         private void Init() => playerData = Services.GetManager<DataManager>().DynamicData.PlayerData;
+
+        private void GetDamage(int damage)
+        {
+            hpValue -= damage;
+        }
 
         #endregion private void
     }

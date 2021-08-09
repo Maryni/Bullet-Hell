@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using Global.Managers.Datas;
+using Global.Weapon;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,6 +12,7 @@ namespace Global.ActiveObjects
 
         [SerializeField] private MeleeEnemy meleeEnemy;
         [SerializeField] private PlayerTriggerChecker enemyTrigger;
+        [SerializeField] private MeleeAttack meleeAttack;
 
         #endregion Inspector variables
 
@@ -21,19 +24,28 @@ namespace Global.ActiveObjects
 
         #region Unity functions
 
-        private void Start()
+        private void OnValidate()
         {
             enemyTrigger = GetComponentInChildren<PlayerTriggerChecker>();
             meleeEnemy = GetComponent<MeleeEnemy>();
+            meleeAttack = GetComponentInChildren<MeleeAttack>();
+        }
+
+        private void Start()
+        {
             meleeEnemy.Movement();
             EnableAttack();
+            StartCoroutine(meleeAttack.Attack(meleeEnemy.EnemyStats.enemyType));
         }
 
         #endregion Unity functions
 
         #region public void
 
-        public void EnableAttack() => enemyTrigger.EnableAttack();
+        public void EnableAttack()
+        {
+            enemyTrigger.EnableAttack();
+        }
 
         #endregion public void
     }

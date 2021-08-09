@@ -10,8 +10,7 @@ namespace Global.Managers.Datas
     {
         AutomaticGun,
         Shotgun,
-        RocketLaucher,
-        MeleeAttack
+        RocketLaucher
     }
 
     public enum EnemyType
@@ -24,14 +23,32 @@ namespace Global.Managers.Datas
         ShootingFlyed
     }
 
+    [Serializable]
+    public class EnemyStats
+    {
+        [SerializeField] public EnemyType enemyType;
+        [SerializeField] public int hpMaximum;
+        [SerializeField] public float speed;
+        [SerializeField] public int hpValueCurrent;
+        [SerializeField] public float damage;
+        [SerializeField] public int intellegence;
+        [SerializeField] public float attackRate;
+    }
+
     [CreateAssetMenu(fileName = "StaticData", menuName = "Data/StaticData")]
     public class StaticData : ScriptableObject
     {
         [SerializeField] private WeaponStats[] weaponStats;
+        [SerializeField] private EnemyStats[] enemyStats;
 
         public WeaponStats GetWeaponStatsByType(WeaponType weaponType)
         {
             return weaponStats.FirstOrDefault(x => x.weaponType == weaponType);
+        }
+
+        public EnemyStats GetEnemyStatsByType(EnemyType enemyType)
+        {
+            return enemyStats.FirstOrDefault(x => x.enemyType == enemyType);
         }
     }
 }
