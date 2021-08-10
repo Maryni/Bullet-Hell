@@ -148,7 +148,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0afa12a64ea30a34680e8714d8745edc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyType: 1
   meleeEnemy: {fileID: 9208896196697214584}
   enemyTrigger: {fileID: 4228135872391124547}
   meleeAttack: {fileID: 799584758735322575}
@@ -164,14 +163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 584dc69dfded85946b5b39b55e63b3e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyStatsData:
-    enemyType: 1
-    hpMaximum: 0
-    speed: 0
-    hpValueCurrent: 0
-    damage: 0
-    intellegence: 0
-    attackRate: 0
+  enemyStatsData: {fileID: 0}
+  enemyType: 1
   transformPlayer: {fileID: 0}
   rig2d: {fileID: 8016033398503209153}
   timeInvokeReapeating: 0

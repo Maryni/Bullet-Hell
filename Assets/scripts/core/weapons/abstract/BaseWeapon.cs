@@ -1,8 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
-using Global.Interfaces.Weapon;
-using Global.Settings;
-using Global.Shooting.BulletSpace;
 using System;
 using UnityEngine;
 using Global.Managers.Datas;
@@ -34,7 +30,7 @@ namespace Global.Shooting
             weaponStats = Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(weaponType);
         }
 
-        public abstract IEnumerator Reload();
+        protected abstract IEnumerator Reload();
 
         public virtual IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
         {

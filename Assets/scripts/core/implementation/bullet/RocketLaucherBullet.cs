@@ -26,9 +26,9 @@ namespace Global.Bullet
 
         #region public void
 
-        public void Rotate(Transform transformCannon)
+        public void Rotate(float angle)
         {
-            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transformCannon.rotation.eulerAngles.z);
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, angle);
         }
 
         public override void Move()

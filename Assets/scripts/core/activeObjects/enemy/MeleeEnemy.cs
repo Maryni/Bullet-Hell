@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Global.Player;
+using Global.Managers.Datas;
 
 namespace Global.ActiveObjects
 {
@@ -10,12 +11,14 @@ namespace Global.ActiveObjects
         #region Inspector variables
 
 #pragma warning disable
+        [SerializeField] protected EnemyType enemyType;
         [SerializeField] private Transform transformPlayer;
         [SerializeField] private Rigidbody2D rig2d;
         [SerializeField] private float timeInvokeReapeating;
         [SerializeField] private float rateInvokeReapeatingMovement;
         [SerializeField] private float rateInvokeReapeatingReset;
         [SerializeField] private EnemyMovement enemyMovement;
+
 #pragma warning restore
 
         #endregion Inspector variables
@@ -24,7 +27,7 @@ namespace Global.ActiveObjects
 
         private void Start()
         {
-            Init();
+            Init(enemyType);
             transformPlayer = FindObjectOfType<Player.Player>().transform;
         }
 

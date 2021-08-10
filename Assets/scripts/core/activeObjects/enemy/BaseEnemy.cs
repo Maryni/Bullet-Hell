@@ -26,9 +26,9 @@ namespace Global.ActiveObjects
 
         #region public void
 
-        public virtual void Init()
+        public virtual void Init(EnemyType enemyType)
         {
-            enemyStatsData = Services.GetManager<DataManager>().DynamicData.EnemyStats;
+            enemyStatsData = Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType);
         }
 
         public virtual void ObjectTriggered()

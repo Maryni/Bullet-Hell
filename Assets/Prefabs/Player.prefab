@@ -159,9 +159,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 1
   weaponStats: {fileID: 11400000, guid: 2250b90b13e00064c81f837afd7f9f35, type: 2}
-  countBulletForShot: 5
-  defaultAngleBullet: 15
-  countSplitLines: 2
+  countBulletForShot: 4
+  maxAngle: 70
+  bulletCountCurrent: 0
 --- !u!114 &3595048804069863770
 MonoBehaviour:
   m_ObjectHideFlags: 0
