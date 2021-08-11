@@ -35,7 +35,7 @@ namespace Global.ActiveObjects
         {
             meleeEnemy.Movement();
             EnableAttack();
-            StartCoroutine(meleeAttack.Attack(meleeEnemy.EnemyStats.enemyType));
+            StartCoroutine(meleeAttack.Attack(meleeEnemy.EnemyType));
         }
 
         #endregion Unity functions

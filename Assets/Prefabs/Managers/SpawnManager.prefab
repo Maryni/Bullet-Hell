@@ -108,7 +108,9 @@ MonoBehaviour:
   listWeaponPrefabs:
   - {fileID: 8966993168899887743, guid: 54d35295ab9339948ad14f8e452ef923, type: 3}
   listEnemyPrefabs:
+  - {fileID: 210989136882216523, guid: 92bc103e26fb77346a08bf744948e442, type: 3}
   - {fileID: 210989136882216523, guid: 1292b40f60c1e604485ec8ef57324ffc, type: 3}
+  - {fileID: 210989136882216523, guid: bb8d6a4c76b7a9f42b4ad4a195a40275, type: 3}
   itemPool: {fileID: 942137560151461138}
   enemyPool: {fileID: 6604992005047499329}
   listEnemies: []

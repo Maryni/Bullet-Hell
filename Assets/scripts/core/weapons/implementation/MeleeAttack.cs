@@ -22,7 +22,6 @@ namespace Global.Weapon
         #region private variables
 
         private bool canAttack;
-        private int bulletCountCurrent;
 
         #endregion private variables
 
@@ -48,6 +47,7 @@ namespace Global.Weapon
                 }
                 yield return new WaitForSeconds(Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType).attackRate);
             }
+            Attack(enemyType);
         }
 
         #endregion public void

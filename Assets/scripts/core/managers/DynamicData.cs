@@ -31,6 +31,7 @@ namespace Global.Managers.Datas
     {
         public int hpMaximum;
         public int speed;
+        public int defence;
     }
 
     [Serializable]

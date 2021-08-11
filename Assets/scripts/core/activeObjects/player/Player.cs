@@ -13,6 +13,7 @@ namespace Global.Player
 #pragma warning disable
         [SerializeField] private PlayerData playerData;
         [SerializeField] private int hpValue;
+
 #pragma warning restore
 
         #endregion private variables
@@ -24,6 +25,16 @@ namespace Global.Player
         public int HPValue => hpValue;
 
         #endregion properties
+
+        #region Unity functions
+
+        private void Start()
+        {
+            Init();
+            RestoreHPToMaxHP();
+        }
+
+        #endregion Unity functions
 
         #region public void
 
@@ -38,7 +49,7 @@ namespace Global.Player
 
         public void ObjectTriggered(int damage)
         {
-            Debug.Log($"Im [ {name} ] triggered");
+            Debug.Log($"Im [ {name} ] triggered, I take {damage}");
             GetDamage(damage);
             if (IsDead())
             {
@@ -50,23 +61,24 @@ namespace Global.Player
 
         #region private void
 
-        #region Unity functions
-
-        private void Start()
+        private void RestoreHPToMaxHP()
         {
-            Init();
-            RestoreHPToMaxHP();
+            hpValue = playerData.hpMaximum;
         }
 
-        #endregion Unity functions
-
-        private void RestoreHPToMaxHP() => hpValue = playerData.hpMaximum;
-
-        private void Init() => playerData = Services.GetManager<DataManager>().DynamicData.PlayerData;
+        private void Init()
+        {
+            playerData = Services.GetManager<DataManager>().DynamicData.PlayerData;
+        }
 
         private void GetDamage(int damage)
         {
-            hpValue -= damage;
+            var hpDecrease = damage - playerData.defence;
+            if (hpDecrease < 0)
+            {
+                hpDecrease = 0;
+            }
+            hpValue -= hpDecrease;
         }
 
         #endregion private void

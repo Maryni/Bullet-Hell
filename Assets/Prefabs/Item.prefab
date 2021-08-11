@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8611011887542833602}
   - component: {fileID: 4353361398985732344}
-  - component: {fileID: 7037149379031454181}
   - component: {fileID: 5199016330611447759}
   m_Layer: 0
   m_Name: Item
@@ -83,22 +82,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &7037149379031454181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8966993168899887743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c4b9c0ea7a0db04ab08fb6075d9f5c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: Weapon
-  typeItem: 0
-  value: 
-  timer: 30
 --- !u!58 &5199016330611447759
 CircleCollider2D:
   m_ObjectHideFlags: 0

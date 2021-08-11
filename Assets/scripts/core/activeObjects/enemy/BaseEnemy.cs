@@ -31,10 +31,14 @@ namespace Global.ActiveObjects
             enemyStatsData = Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType);
         }
 
-        public virtual void ObjectTriggered()
+        public virtual void ObjectTriggered(int damage)
         {
             StopCoroutine("ObjectTriggered");
         }
+
+        public abstract int DamageTakenCalculator(int damage);
+
+        public abstract void Dead();
 
         public abstract void Movement();
 

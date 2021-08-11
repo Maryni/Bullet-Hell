@@ -28,7 +28,7 @@ namespace Global.Managers
 
         public void SpawnEnemy(EnemyType enemyType)
         {
-            var objectEnemy = listEnemyPrefabs.FirstOrDefault(x => x.GetComponent<MeleeEnemy>().EnemyStats.enemyType == enemyType);
+            var objectEnemy = listEnemyPrefabs.FirstOrDefault(x => x.GetComponent<MeleeEnemy>().EnemyType == enemyType);
             var objectEnemyInit = Instantiate(objectEnemy, enemyPool);
             listEnemies.Add(objectEnemyInit.GetComponent<EnemyController>());
         }
@@ -39,6 +39,18 @@ namespace Global.Managers
             var objectWeaponInit = Instantiate(objectWeapon, itemPool);
             listWeapons.Add(objectWeaponInit.GetComponent<ItemInfo>());
         }
+
+        public WeaponType GetRandomWeaponType() => (WeaponType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(WeaponType)).Length - 1);
+
+        public EnemyType GetRandomEnemyType() => (EnemyType)UnityEngine.Random.Range(0, 4);
+
+        public int GetLengthEnemyPrefabs() => listEnemyPrefabs.Count;
+
+        public int GetLengthWeaponPrefabs() => listWeaponPrefabs.Count;
+
+        public int GetLengthEnemySpawned() => listEnemies.Count;
+
+        public int GetLengthWeaponSpawned() => listWeapons.Count;
 
         public override Type ManagerType => typeof(SpawnManager);
 

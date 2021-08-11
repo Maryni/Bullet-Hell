@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 8928466754881152942}
   - component: {fileID: 7520880327365492212}
   m_Layer: 0
-  m_Name: EnemyMeleeMiddle
+  m_Name: EnemyMeleeFastSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -164,12 +164,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyStatsData: {fileID: 0}
-  enemyType: 1
+  enemyType: 2
   transformPlayer: {fileID: 0}
   rig2d: {fileID: 8016033398503209153}
-  timeInvokeReapeating: 0
-  rateInvokeReapeatingMovement: 0.1
-  rateInvokeReapeatingReset: 3
+  rateMovement: 0.2
+  rateReset: 0.2
+  movementEnable: 1
+  resetEnable: 1
   enemyMovement: {fileID: 8928466754881152942}
 --- !u!114 &8928466754881152942
 MonoBehaviour:
