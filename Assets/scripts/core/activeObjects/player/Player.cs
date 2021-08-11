@@ -11,7 +11,9 @@ namespace Global.Player
         #region private variables
 
 #pragma warning disable
-        [SerializeField] private PlayerData playerData;
+        [SerializeField] private int hpMaximum;
+        [SerializeField] private int speed;
+        [SerializeField] private int defence;
         [SerializeField] private int hpValue;
 
 #pragma warning restore
@@ -20,8 +22,8 @@ namespace Global.Player
 
         #region properties
 
-        public int HP => playerData.hpMaximum;
-        public float Speed => playerData.speed;
+        public int HP => hpMaximum;
+        public float Speed => speed;
         public int HPValue => hpValue;
 
         #endregion properties
@@ -30,7 +32,6 @@ namespace Global.Player
 
         private void Start()
         {
-            Init();
             RestoreHPToMaxHP();
         }
 
@@ -63,17 +64,12 @@ namespace Global.Player
 
         private void RestoreHPToMaxHP()
         {
-            hpValue = playerData.hpMaximum;
-        }
-
-        private void Init()
-        {
-            playerData = Services.GetManager<DataManager>().DynamicData.PlayerData;
+            hpValue = hpMaximum;
         }
 
         private void GetDamage(int damage)
         {
-            var hpDecrease = damage - playerData.defence;
+            var hpDecrease = damage - defence;
             if (hpDecrease < 0)
             {
                 hpDecrease = 0;

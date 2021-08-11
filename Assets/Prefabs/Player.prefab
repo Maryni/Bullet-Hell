@@ -191,7 +191,6 @@ GameObject:
   - component: {fileID: 3691523426021728077}
   - component: {fileID: 3691523426021728073}
   - component: {fileID: 7769348892973176997}
-  - component: {fileID: 1263783476}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -299,9 +298,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58179e24c4e8a44418a27d04868496b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerData:
-    hpMaximum: 0
-    speed: 0
+  hpMaximum: 100
+  speed: 2
+  defence: 0
   hpValue: 0
 --- !u!114 &3691523426021728077
 MonoBehaviour:
@@ -369,16 +368,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.25, y: 1.25}
   m_EdgeRadius: 0
---- !u!114 &1263783476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3691523426021728050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59968bb132fb3b54ba41a2bad2e66260, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timer: 0

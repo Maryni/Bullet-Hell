@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyType: 0
   hpMaximum: 100
-  speed: 1
+  speed: 2.5
   hpValueCurrent: 100
   damage: 20
   defence: 15

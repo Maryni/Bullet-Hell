@@ -10,7 +10,6 @@ namespace Global.Managers.Datas
         #region private variables
 
 #pragma warning disable
-        [SerializeField] private PlayerData playerData;
         [SerializeField] private SpawnItemData spawnItemData;
         [SerializeField] private RocketData rocketData;
 #pragma warning restore
@@ -19,19 +18,10 @@ namespace Global.Managers.Datas
 
         #region properties
 
-        public PlayerData PlayerData => playerData;
         public SpawnItemData SpawnItemData => spawnItemData;
         public RocketData RocketData => rocketData;
 
         #endregion properties
-    }
-
-    [Serializable]
-    public class PlayerData
-    {
-        public int hpMaximum;
-        public int speed;
-        public int defence;
     }
 
     [Serializable]

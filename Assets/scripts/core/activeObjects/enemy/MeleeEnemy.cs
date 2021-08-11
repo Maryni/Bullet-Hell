@@ -12,12 +12,12 @@ namespace Global.ActiveObjects
 
 #pragma warning disable
         [SerializeField] protected EnemyType enemyType;
-        [SerializeField] private Transform transformPlayer;
-        [SerializeField] private Rigidbody2D rig2d;
+
         [SerializeField] private float rateMovement;
         [SerializeField] private float rateReset;
         [SerializeField] private bool movementEnable = true;
         [SerializeField] private bool resetEnable = true;
+        [SerializeField] private Rigidbody2D rig2d;
         [SerializeField] private EnemyMovement enemyMovement;
 
 #pragma warning restore
@@ -32,16 +32,29 @@ namespace Global.ActiveObjects
 
         #region Unity functions
 
-        private void Start()
+        private void Awake()
         {
             Init(enemyType);
-            StartCoroutine(SetPlayerTransform());
         }
 
         private void OnValidate()
         {
-            rig2d = GetComponent<Rigidbody2D>();
-            enemyMovement = GetComponent<EnemyMovement>();
+            if (rig2d == null)
+            {
+                rig2d = GetComponent<Rigidbody2D>();
+            }
+            if (enemyMovement == null)
+            {
+                enemyMovement = GetComponent<EnemyMovement>();
+            }
+        }
+
+        private void Start()
+        {
+            if (transformPlayer == null)
+            {
+                transformPlayer = FindObjectOfType<Player.Player>().transform;
+            }
         }
 
         #endregion Unity functions
@@ -50,7 +63,6 @@ namespace Global.ActiveObjects
 
         public override void Movement()
         {
-            StartCoroutine(ResetVelocity());
             StartCoroutine(Move());
         }
 
@@ -85,26 +97,6 @@ namespace Global.ActiveObjects
 
         #region private void
 
-        private IEnumerator SetPlayerTransform()
-        {
-            if (transformPlayer == null)
-            {
-                transformPlayer = FindObjectOfType<Player.Player>().transform;
-            }
-            yield return new WaitForEndOfFrame();
-            SetPlayerTransform();
-        }
-
-        private IEnumerator ResetVelocity()
-        {
-            if (resetEnable)
-            {
-                rig2d.velocity = Vector2.zero;
-                yield return new WaitForSeconds(rateReset);
-            }
-            ResetVelocity();
-        }
-
         private Vector2 Rotation(Transform transformObject)
         {
             return ((Vector2)transformPlayer.position - (Vector2)transformObject.position).normalized;
@@ -112,16 +104,17 @@ namespace Global.ActiveObjects
 
         private IEnumerator Move()
         {
-            if (movementEnable)
+            Debug.Log(transformPlayer);
+            if (transformPlayer != null)
             {
-                if (transformPlayer != null)
+                while (movementEnable)
                 {
                     transform.up = Rotation(transform);
                     enemyMovement.Movement(transformPlayer, rig2d, EnemyStats.speed);
+
+                    yield return null;
                 }
-                yield return new WaitForSeconds(rateMovement);
             }
-            Move();
         }
 
         #endregion private void

@@ -13,10 +13,16 @@ namespace Global.ActiveObjects
         #region Inspector variables
 
 #pragma warning disable
-        [SerializeField] private EnemyStats enemyStatsData;
+        [SerializeField] protected Transform transformPlayer;
 #pragma warning restore
 
         #endregion Inspector variables
+
+        #region private variables
+
+        private EnemyStats enemyStatsData;
+
+        #endregion private variables
 
         #region properties
 

@@ -15,8 +15,6 @@ namespace Global.Shooting.BulletSpace
 
         #endregion Inspector variables
 
-        #region private void
-
         #region Unity function
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -35,7 +33,5 @@ namespace Global.Shooting.BulletSpace
         }
 
         #endregion Unity function
-
-        #endregion private void
     }
 }

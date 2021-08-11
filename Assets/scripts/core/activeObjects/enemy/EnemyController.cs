@@ -33,14 +33,19 @@ namespace Global.ActiveObjects
 
         private void Start()
         {
-            meleeEnemy.Movement();
-            EnableAttack();
-            StartCoroutine(meleeAttack.Attack(meleeEnemy.EnemyType));
+            ActivateEnemy();
         }
 
         #endregion Unity functions
 
         #region public void
+
+        public void ActivateEnemy()
+        {
+            meleeEnemy.Movement();
+            EnableAttack();
+            StartCoroutine(meleeAttack.Attack(meleeEnemy.EnemyType));
+        }
 
         public void EnableAttack()
         {
