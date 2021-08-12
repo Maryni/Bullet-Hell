@@ -56,7 +56,7 @@ namespace Global.Managers.Datas
         {
             for (int i = 0; i < listEnemyPrefabs.Count; i++)
             {
-                InitEnemyInPool(listEnemies, listEnemyPrefabs[i].GetComponent<BaseEnemy>(), enemyPool);
+                InitEnemyInPool(listEnemies, listEnemyPrefabs[i], enemyPool);
             }
         }
 
@@ -64,7 +64,7 @@ namespace Global.Managers.Datas
         {
             for (int i = 0; i < 20; i++)
             {
-                var tempObject = Instantiate(enemyPrefab, enemyPool);
+                var tempObject = Instantiate(enemyPrefab, parentTransform);
                 pool.Add(tempObject);
                 tempObject.gameObject.SetActive(false);
             }

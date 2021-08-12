@@ -8,29 +8,22 @@ namespace Global.UI
 {
     public class SettingsAction : MonoBehaviour
     {
-        #region private variables
-
-#pragma warning disable
-        [SerializeField] private InputField[] inputFields;
-        [SerializeField] private DataManager dataManager;
-#pragma warning restore
-
-        #endregion private variables
+        //in future it will save
 
         #region public void
 
-        public void GetValue(int index)
+        public void AddValue(Text textObjectForAdd)
         {
-            if (index > 0 && index < inputFields.Length + 1)
-            {
-                print(inputFields[index - 1].text);
-                if (inputFields[index - 1].text != "")
-                {
-                    //dataManager.AddData(inputFields[index - 1].text);
-                }
-            }
-            else
-                Debug.LogError("index is incorrent, use index+1 (0 -> 1| 1 -> 2)");
+            var parseValue = int.Parse(textObjectForAdd.text);
+            parseValue++;
+            textObjectForAdd.text = parseValue.ToString();
+        }
+
+        public void LessValue(Text textObjectForAdd)
+        {
+            var parseValue = int.Parse(textObjectForAdd.text);
+            parseValue--;
+            textObjectForAdd.text = parseValue.ToString();
         }
 
         #endregion public void
