@@ -3,78 +3,81 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SmoothPause : MonoBehaviour
+namespace Global.Game.Component
 {
-    #region Inspector variables
+    public class SmoothPause : MonoBehaviour
+    {
+        #region Inspector variables
 
 #pragma warning disable
-    [SerializeField] private GameObject panelMenu;
-    [SerializeField] private float timeScaleStep;
-    [SerializeField] private float timeScaleRate;
+        [SerializeField] private GameObject panelMenu;
+        [SerializeField] private float timeScaleStep;
+        [SerializeField] private float timeScaleRate;
 
 #pragma warning restore
 
-    #endregion Inspector variables
+        #endregion Inspector variables
 
-    #region private variables
+        #region private variables
 
-    private Coroutine coroutineCurrent;
+        private Coroutine coroutineDecreaseToOne;
 
-    #endregion private variables
+        #endregion private variables
 
-    #region Unity functions
+        #region Unity functions
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("Cancel") && coroutineCurrent == null && Time.timeScale >= 0)
+        private void Update()
         {
-            coroutineCurrent = ValueMoveToZero();
-        }
-    }
-
-    #endregion Unity functions
-
-    #region public void
-
-    public Coroutine ValueMoveToZero()
-    {
-        return StartCoroutine(DecreaseValueTimeScale());
-    }
-
-    public void ValueMoveFromZero()
-    {
-        StartCoroutine(IncreaseValueTimeScale());
-    }
-
-    #endregion public void
-
-    #region private void
-
-    private IEnumerator DecreaseValueTimeScale(Action callback = null)
-    {
-        while (Time.timeScale > 0)
-        {
-            Time.timeScale -= timeScaleStep;
-            if (Time.timeScale > 0 && Time.timeScale < timeScaleStep)
+            if (Input.GetKeyDown(KeyCode.Escape) && coroutineDecreaseToOne == null)
             {
-                Time.timeScale = 0f;
+                coroutineDecreaseToOne = StartCoroutine(DecreaseValueTimeScale());
             }
-            yield return new WaitForSecondsRealtime(timeScaleRate);
         }
 
-        panelMenu.SetActive(true);
-        callback?.Invoke();
-    }
+        #endregion Unity functions
 
-    private IEnumerator IncreaseValueTimeScale()
-    {
-        StopCoroutine(DecreaseValueTimeScale());
-        while (Time.timeScale < 1)
+        #region public void
+
+        public void ValueMoveFromZero()
         {
-            Time.timeScale += timeScaleStep;
-            yield return new WaitForSecondsRealtime(timeScaleRate);
+            StartCoroutine(IncreaseValueTimeScale());
         }
-    }
 
-    #endregion private void
+        public void ResetTimeScale()
+        {
+            Time.timeScale = 1f;
+        }
+
+        #endregion public void
+
+        #region private void
+
+        private IEnumerator DecreaseValueTimeScale(Action callback = null)
+        {
+            while (Time.timeScale > 0)
+            {
+                Time.timeScale -= timeScaleStep;
+                if (Time.timeScale > 0 && Time.timeScale < timeScaleStep)
+                {
+                    Time.timeScale = 0f;
+                }
+                yield return new WaitForSecondsRealtime(timeScaleRate);
+            }
+
+            panelMenu.SetActive(true);
+            callback?.Invoke();
+        }
+
+        private IEnumerator IncreaseValueTimeScale()
+        {
+            StopCoroutine(DecreaseValueTimeScale());
+            while (Time.timeScale < 1)
+            {
+                Time.timeScale += timeScaleStep;
+                yield return new WaitForSecondsRealtime(timeScaleRate);
+            }
+        }
+
+        #endregion private void
+    }
 }

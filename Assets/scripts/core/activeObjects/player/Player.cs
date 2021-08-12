@@ -6,11 +6,12 @@ using Global.Managers.Datas;
 
 namespace Global.Player
 {
-    public class Player : MonoBehaviour, IActiveOnSceneObjectStats
+    public class Player : MonoBehaviour
     {
         #region private variables
 
 #pragma warning disable
+
         [SerializeField] private int hpMaximum;
         [SerializeField] private int speed;
         [SerializeField] private int defence;

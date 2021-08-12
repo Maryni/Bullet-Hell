@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Global.Player;
-using Global.Camera;
 
 namespace Global.Player
 {
@@ -18,8 +17,6 @@ namespace Global.Player
 
         #endregion private variables
 
-        #region private void
-
         #region Unity function
 
         private void Update()
@@ -34,7 +31,5 @@ namespace Global.Player
         }
 
         #endregion Unity function
-
-        #endregion private void
     }
 }

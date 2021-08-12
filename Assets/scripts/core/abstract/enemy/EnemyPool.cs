@@ -35,7 +35,7 @@ namespace Global.Managers.Datas
             var findedObj = listEnemies.FirstOrDefault(x => x.EnemyStats.enemyType == enemyType && !x.gameObject.activeInHierarchy);
             if (findedObj == null)
             {
-                var newEnemy = Instantiate(listEnemyPrefabs.FirstOrDefault(x => x.GetComponent<BaseEnemy>().EnemyStats.enemyType == enemyType).GetComponent<BaseEnemy>(), enemyPool);
+                var newEnemy = Instantiate(listEnemyPrefabs.FirstOrDefault(x => x.EnemyStats.enemyType == enemyType), enemyPool);
                 listEnemies.Add(newEnemy);
                 return newEnemy;
             }
@@ -43,10 +43,6 @@ namespace Global.Managers.Datas
         }
 
         public EnemyType GetRandomEnemyType() => (EnemyType)UnityEngine.Random.Range(0, 3);
-
-        public int GetLengthEnemySpawned() => listEnemies.Count;
-
-        public int GetLengthEnemyPrefabs() => listEnemyPrefabs.Count;
 
         #endregion public void
 

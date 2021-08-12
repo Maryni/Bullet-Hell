@@ -74,7 +74,7 @@ namespace Global.Weapon
                 i++;
                 yield return null;
             }
-            yield return new WaitForSeconds(weaponStats.shooringRate);
+            yield return new WaitForSeconds(weaponStats.shootingRate);
 
             callback?.Invoke();
         }

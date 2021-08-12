@@ -35,7 +35,7 @@ namespace Global.Shooting
         public virtual IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
         {
             StartCoroutine(Shoot(mousePos, transformParent, callback: null));
-            yield return new WaitForSeconds(weaponStats.shooringRate);
+            yield return new WaitForSeconds(weaponStats.shootingRate);
         }
 
         #endregion public void

@@ -15,4 +15,4 @@ MonoBehaviour:
   weaponType: 1
   bulletCount: 15
   cooldownTime: 1.5
-  shooringRate: 2
+  shootingRate: 1

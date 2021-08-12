@@ -4,18 +4,6 @@ using UnityEngine;
 using System;
 using Global.Managers.Datas;
 
-namespace Global.Managers.Datas
-{
-    [Serializable]
-    public class BulletStats
-    {
-        //TODO: move BulletStats to ScriptableObjects, add bulletStats to nessasaryWeapon
-        public int damage;
-
-        public int speed;
-    }
-}
-
 namespace Global.Bullet
 {
     public abstract class BaseBullet : MonoBehaviour
@@ -50,11 +38,11 @@ namespace Global.Bullet
 
         #region public void
 
-        /// <summary>
-        ///
-        /// </summary>
-        /// <param name="pos"></param>
-        /// <param name="pointForShooting">cannon (like tank big gun)</param>
+        public void Rotate(float angle)
+        {
+            transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, angle);
+        }
+
         public abstract void Move();
 
         #endregion public void

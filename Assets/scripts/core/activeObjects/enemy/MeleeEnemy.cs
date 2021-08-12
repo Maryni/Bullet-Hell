@@ -12,13 +12,7 @@ namespace Global.ActiveObjects
 
 #pragma warning disable
         [SerializeField] protected EnemyType enemyType;
-
         [SerializeField] private float rateMovement;
-        [SerializeField] private float rateReset;
-        [SerializeField] private bool movementEnable = true;
-        [SerializeField] private bool resetEnable = true;
-        [SerializeField] private Rigidbody2D rig2d;
-        [SerializeField] private EnemyMovement enemyMovement;
 
 #pragma warning restore
 
@@ -61,11 +55,6 @@ namespace Global.ActiveObjects
 
         #region public void
 
-        public override void Movement()
-        {
-            StartCoroutine(Move());
-        }
-
         public override void ObjectTriggered(int damage)
         {
             base.ObjectTriggered(damage);
@@ -77,46 +66,6 @@ namespace Global.ActiveObjects
             }
         }
 
-        public override void Dead()
-        {
-            transform.parent.gameObject.SetActive(false);
-            EnemyStats.hpValueCurrent = EnemyStats.hpMaximum;
-        }
-
-        public override int DamageTakenCalculator(int damage)
-        {
-            var hpDecrese = damage - EnemyStats.defence;
-            if (hpDecrese < 0)
-            {
-                hpDecrese = 0;
-            }
-            return hpDecrese;
-        }
-
         #endregion public void
-
-        #region private void
-
-        private Vector2 Rotation(Transform transformObject)
-        {
-            return ((Vector2)transformPlayer.position - (Vector2)transformObject.position).normalized;
-        }
-
-        private IEnumerator Move()
-        {
-            Debug.Log(transformPlayer);
-            if (transformPlayer != null)
-            {
-                while (movementEnable)
-                {
-                    transform.up = Rotation(transform);
-                    enemyMovement.Movement(transformPlayer, rig2d, EnemyStats.speed);
-
-                    yield return null;
-                }
-            }
-        }
-
-        #endregion private void
     }
 }

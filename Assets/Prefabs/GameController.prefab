@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8400335556623274007}
   - component: {fileID: 8400335556623273992}
   m_Layer: 0
-  m_Name: SpawnEnemyController
+  m_Name: GameController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f748e12ed984b4418a8925c290eb516, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  countSpawnEnemyOnStart: 3
+  countSpawnEnemy: 3
   timerSpawnEnemy: 3

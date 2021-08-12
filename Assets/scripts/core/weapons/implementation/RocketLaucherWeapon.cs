@@ -41,7 +41,7 @@ namespace Global.Weapon
             bullet.gameObject.SetActive(true);
             bullet.Rotate(zParentRotation);
             bullet.Move();
-            yield return new WaitForSeconds(weaponStats.shooringRate);
+            yield return new WaitForSeconds(weaponStats.shootingRate);
             callback?.Invoke();
         }
 

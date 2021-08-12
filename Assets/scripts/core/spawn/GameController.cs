@@ -1,21 +1,21 @@
 ﻿using Global.ActiveObjects;
-using Global.Controllers.Spawn;
 using Global.Managers;
 using Global.Managers.Datas;
-using Global.Timer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Global.Controllers
 {
-    public class SpawnEnemyController : MonoBehaviour
+    public class GameController : MonoBehaviour
     {
         #region Inspector variables
 
+        //Add spawning random when camera not see enemy
+
 #pragma warning disable
 
-        [SerializeField] private int countSpawnEnemyOnStart;
+        [SerializeField] private int countSpawnEnemy;
         [SerializeField] private float timerSpawnEnemy;
 
 #pragma warning restore
@@ -26,8 +26,8 @@ namespace Global.Controllers
 
         private void Start()
         {
-            GetEnemy(countSpawnEnemyOnStart);
-            StartCoroutine(SpawnEnemyByTimeByCount(timerSpawnEnemy, countSpawnEnemyOnStart));
+            GetEnemy(countSpawnEnemy);
+            StartCoroutine(SpawnEnemyByTimeByCount(timerSpawnEnemy, countSpawnEnemy));
         }
 
         #endregion Unity functions
@@ -36,9 +36,10 @@ namespace Global.Controllers
 
         private IEnumerator SpawnEnemyByTimeByCount(float time, int countSpawnPerTime)
         {
+            var tempEnemyPoolObject = Services.GetManager<PoolManager>().EnemyPool;
             for (int i = 0; i < countSpawnPerTime; i++)
             {
-                var tempObject = Services.GetManager<PoolManager>().EnemyPool.GetObject((EnemyType)UnityEngine.Random.Range(0, 3));
+                var tempObject = tempEnemyPoolObject.GetObject(tempEnemyPoolObject.GetRandomEnemyType());
                 tempObject.gameObject.SetActive(true);
                 tempObject.GetComponent<EnemyController>().ActivateEnemy();
             }
@@ -48,9 +49,10 @@ namespace Global.Controllers
 
         private void GetEnemy(int timesRepeat)
         {
+            var tempEnemyPoolObject = Services.GetManager<PoolManager>().EnemyPool;
             for (int i = 0; i < timesRepeat; i++)
             {
-                var tempObject = Services.GetManager<PoolManager>().EnemyPool.GetObject((EnemyType)UnityEngine.Random.Range(0, 3));
+                var tempObject = tempEnemyPoolObject.GetObject(tempEnemyPoolObject.GetRandomEnemyType());
                 tempObject.gameObject.SetActive(true);
             }
         }

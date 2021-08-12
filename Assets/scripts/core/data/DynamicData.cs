@@ -37,4 +37,13 @@ namespace Global.Managers.Datas
         public int timeToBlowUp;
         public float radiutBlowUp;
     }
+
+    [Serializable]
+    public class BulletStats
+    {
+        //TODO: move BulletStats to ScriptableObjects, add bulletStats to nessasaryWeapon
+        public int damage;
+
+        public int speed;
+    }
 }

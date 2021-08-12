@@ -79,7 +79,7 @@ SpriteRenderer:
   m_SortingOrder: 1
   m_Sprite: {fileID: 1785448080195910780, guid: cfee4fb2d3384e0448a0e2dedfa23ce9,
     type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.035514116, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -180,6 +180,8 @@ MonoBehaviour:
   rateReset: 2
   movementEnable: 1
   resetEnable: 1
+  rig2d: {fileID: 8016033398503209153}
+  enemyMovement: {fileID: 8928466754881152942}
 --- !u!114 &2069245332859280949
 MonoBehaviour:
   m_ObjectHideFlags: 0

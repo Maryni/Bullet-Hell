@@ -10,7 +10,7 @@ namespace Global.ActiveObjects
     {
         #region Inspector variables
 
-        [SerializeField] private MeleeEnemy meleeEnemy;
+        [SerializeField] private BaseEnemy meleeEnemy;
         [SerializeField] private PlayerTriggerChecker enemyTrigger;
         [SerializeField] private MeleeAttack meleeAttack;
 
@@ -18,7 +18,7 @@ namespace Global.ActiveObjects
 
         #region properties
 
-        public MeleeEnemy MeleeEnemy => meleeEnemy;
+        public MeleeEnemy MeleeEnemy => (MeleeEnemy)meleeEnemy;
 
         #endregion properties
 
@@ -44,7 +44,7 @@ namespace Global.ActiveObjects
         {
             meleeEnemy.Movement();
             EnableAttack();
-            StartCoroutine(meleeAttack.Attack(meleeEnemy.EnemyType));
+            StartCoroutine(meleeAttack.Attack(meleeEnemy.EnemyStats.enemyType));
         }
 
         public void EnableAttack()

@@ -10,6 +10,6 @@ namespace Global.Managers.Datas
         public WeaponType weaponType;
         public int bulletCount;
         public float cooldownTime;
-        public float shooringRate;
+        public float shootingRate;
     }
 }

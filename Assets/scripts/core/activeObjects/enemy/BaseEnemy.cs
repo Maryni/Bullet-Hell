@@ -1,9 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Global.Settings;
-using Global.Interfaces;
-using System;
 using Global.Managers.Datas;
 
 namespace Global.ActiveObjects
@@ -14,6 +10,9 @@ namespace Global.ActiveObjects
 
 #pragma warning disable
         [SerializeField] protected Transform transformPlayer;
+        [SerializeField] protected EnemyMovement enemyMovement;
+        [SerializeField] protected bool movementEnable = true;
+        [SerializeField] protected Rigidbody2D rig2d;
 #pragma warning restore
 
         #endregion Inspector variables
@@ -32,22 +31,70 @@ namespace Global.ActiveObjects
 
         #region public void
 
+        public Transform ShowTransform()
+        {
+            return transformPlayer;
+        }
+
         public virtual void Init(EnemyType enemyType)
         {
             enemyStatsData = Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType);
         }
 
-        public virtual void ObjectTriggered(int damage)
+        public virtual void ObjectTriggered(int damage) //GetDamage
         {
             StopCoroutine("ObjectTriggered");
         }
 
-        public abstract int DamageTakenCalculator(int damage);
-
-        public abstract void Dead();
-
-        public abstract void Movement();
+        public void Movement()
+        {
+            StartCoroutine(Move());
+        }
 
         #endregion public void
+
+        #region protected void
+
+        protected void Dead()
+        {
+            transform.parent.gameObject.SetActive(false);
+            EnemyStats.hpValueCurrent = EnemyStats.hpMaximum;
+        }
+
+        protected int DamageTakenCalculator(int damage)
+        {
+            var hpDecrese = damage - EnemyStats.defence;
+            if (hpDecrese < 0)
+            {
+                hpDecrese = 0;
+            }
+            return hpDecrese;
+        }
+
+        protected Vector2 Rotation(Transform transformObject)
+        {
+            return ((Vector2)transformPlayer.position - (Vector2)transformObject.position).normalized;
+        }
+
+        #endregion protected void
+
+        #region private void
+
+        private IEnumerator Move()
+        {
+            Debug.Log(transformPlayer);
+            if (transformPlayer != null)
+            {
+                while (movementEnable)
+                {
+                    transform.up = Rotation(transform);
+                    enemyMovement.Movement(transformPlayer, rig2d, EnemyStats.speed);
+
+                    yield return null;
+                }
+            }
+        }
+
+        #endregion private void
     }
 }
