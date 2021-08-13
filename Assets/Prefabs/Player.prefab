@@ -161,7 +161,6 @@ MonoBehaviour:
   weaponStats: {fileID: 11400000, guid: 2250b90b13e00064c81f837afd7f9f35, type: 2}
   countBulletForShot: 4
   maxAngle: 70
-  bulletCountCurrent: 0
 --- !u!114 &3595048804069863770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,10 +186,11 @@ GameObject:
   - component: {fileID: 3691523426021728076}
   - component: {fileID: 3691523426021728051}
   - component: {fileID: 3691523426021728079}
-  - component: {fileID: 3691523426021728078}
-  - component: {fileID: 3691523426021728077}
   - component: {fileID: 3691523426021728073}
   - component: {fileID: 7769348892973176997}
+  - component: {fileID: 3691523426021728078}
+  - component: {fileID: 3691523426021728077}
+  - component: {fileID: 3789468437333692138}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -286,36 +286,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3691523426021728078
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3691523426021728050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58179e24c4e8a44418a27d04868496b9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hpMaximum: 100
-  speed: 2
-  defence: 0
-  hpValue: 0
---- !u!114 &3691523426021728077
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3691523426021728050}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eaf2ddea40e62d945836a2f6b10726eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 3691523426021728078}
-  rigidbody2D: {fileID: 3691523426021728079}
 --- !u!61 &3691523426021728073
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -368,3 +338,52 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.25, y: 1.25}
   m_EdgeRadius: 0
+--- !u!114 &3691523426021728078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691523426021728050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58179e24c4e8a44418a27d04868496b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpMaximum: 100
+  speed: 2
+  defence: 0
+  hpValue: 0
+--- !u!114 &3691523426021728077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691523426021728050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eaf2ddea40e62d945836a2f6b10726eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 3691523426021728078}
+  rigidbody2D: {fileID: 3691523426021728079}
+--- !u!114 &3789468437333692138
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3691523426021728050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c288648417d3a2e48b73c92321b7f071, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 3691523426021728078}
+  playerMovement: {fileID: 3691523426021728077}
+  shootController: {fileID: 3691523425123133484}
+  listWeapons:
+  - {fileID: 3679002933434292781}
+  - {fileID: 2468213343802390218}
+  - {fileID: 3595048804069863770}

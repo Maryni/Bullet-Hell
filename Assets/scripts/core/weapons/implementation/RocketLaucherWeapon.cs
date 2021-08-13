@@ -9,12 +9,6 @@ namespace Global.Weapon
 {
     public class RocketLaucherWeapon : BaseWeapon
     {
-        #region private variables
-
-        private int bulletCountCurrent;
-
-        #endregion private variables
-
         #region Unity functions
 
         private void Start()
@@ -27,7 +21,7 @@ namespace Global.Weapon
 
         #region public void
 
-        public override IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
+        protected override IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
         {
             if (bulletCountCurrent == 0)
             {
@@ -42,13 +36,8 @@ namespace Global.Weapon
             bullet.Rotate(zParentRotation);
             bullet.Move();
             yield return new WaitForSeconds(weaponStats.shootingRate);
+            StartCoroutine(base.Shoot(mousePos, transformParent, callback));
             callback?.Invoke();
-        }
-
-        protected override IEnumerator Reload()
-        {
-            yield return new WaitForSeconds(weaponStats.cooldownTime);
-            bulletCountCurrent = weaponStats.bulletCount;
         }
 
         #endregion public void

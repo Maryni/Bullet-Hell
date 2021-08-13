@@ -23,6 +23,21 @@ namespace Global.Shooting
 
         #endregion properties
 
+        #region protected variables
+
+        protected int bulletCountCurrent;
+
+        #endregion protected variables
+
+        #region private variables
+
+        private Coroutine coroutineShot;
+#pragma warning disable
+        private Action actionCallback;
+#pragma warning restore
+
+        #endregion private variables
+
         #region public void
 
         public virtual void Init()
@@ -30,12 +45,25 @@ namespace Global.Shooting
             weaponStats = Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(weaponType);
         }
 
-        protected abstract IEnumerator Reload();
-
-        public virtual IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
+        protected IEnumerator Reload()
         {
-            StartCoroutine(Shoot(mousePos, transformParent, callback: null));
-            yield return new WaitForSeconds(weaponStats.shootingRate);
+            yield return new WaitForSeconds(weaponStats.cooldownTime);
+            bulletCountCurrent = weaponStats.bulletCount;
+        }
+
+        public void Shoot(Vector2 mousePos, Transform transformParent)
+        {
+            if (coroutineShot == null)
+            {
+                coroutineShot = StartCoroutine(Shoot(mousePos, transformParent, () => actionCallback = null));
+            }
+        }
+
+        protected virtual IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
+        {
+            yield return null;
+            StopCoroutine(Shoot(mousePos, transformParent, () => actionCallback = null));
+            coroutineShot = null;
         }
 
         #endregion public void

@@ -40,12 +40,13 @@ namespace Global.Weapon
         {
             if (canAttack)
             {
+                var stats = Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType);
                 player = playerTriggerChecker.GetPlayer();
                 if (player != null)
                 {
-                    player.GetComponent<Global.Player.Player>().StartCoroutine("ObjectTriggered", Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType).damage);
+                    player.GetComponent<PlayerController>().DamagePlayer((int)stats.damage);
                 }
-                yield return new WaitForSeconds(Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType).attackRate);
+                yield return new WaitForSeconds(stats.attackRate);
             }
             Attack(enemyType);
         }

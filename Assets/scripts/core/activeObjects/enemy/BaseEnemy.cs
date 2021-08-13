@@ -31,20 +31,12 @@ namespace Global.ActiveObjects
 
         #region public void
 
-        public Transform ShowTransform()
-        {
-            return transformPlayer;
-        }
-
         public virtual void Init(EnemyType enemyType)
         {
             enemyStatsData = Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType);
         }
 
-        public virtual void ObjectTriggered(int damage) //GetDamage
-        {
-            StopCoroutine("ObjectTriggered");
-        }
+        public abstract void ObjectTriggered(int damage); //GetDamage
 
         public void Movement()
         {
@@ -82,7 +74,6 @@ namespace Global.ActiveObjects
 
         private IEnumerator Move()
         {
-            Debug.Log(transformPlayer);
             if (transformPlayer != null)
             {
                 while (movementEnable)

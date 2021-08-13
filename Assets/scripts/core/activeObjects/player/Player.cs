@@ -49,10 +49,10 @@ namespace Global.Player
             return false;
         }
 
-        public void ObjectTriggered(int damage)
+        public void GetDamage(int damage)
         {
             Debug.Log($"Im [ {name} ] triggered, I take {damage}");
-            GetDamage(damage);
+            CalculateDamage(damage);
             if (IsDead())
             {
                 Debug.Log("Player die");
@@ -68,7 +68,7 @@ namespace Global.Player
             hpValue = hpMaximum;
         }
 
-        private void GetDamage(int damage)
+        private void CalculateDamage(int damage)
         {
             var hpDecrease = damage - defence;
             if (hpDecrease < 0)

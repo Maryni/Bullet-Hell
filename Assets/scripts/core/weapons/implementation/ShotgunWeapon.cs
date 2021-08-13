@@ -14,7 +14,6 @@ namespace Global.Weapon
 #pragma warning disable
         [SerializeField] private int countBulletForShot = 4;
         [SerializeField] private float maxAngle = 70;
-        [SerializeField] private int bulletCountCurrent;
 #pragma warning restore
 
         #endregion Inspector variables
@@ -30,6 +29,7 @@ namespace Global.Weapon
         private void Start()
         {
             Init();
+            AddOrRemoveValueToInt();
             bulletCountCurrent = weaponStats.bulletCount;
         }
 
@@ -37,12 +37,13 @@ namespace Global.Weapon
 
         #region public void
 
-        public override IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
+        protected override IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
         {
             if (bulletCountCurrent <= 0)
             {
                 yield return Reload();
             }
+
             bulletCountCurrent -= countBulletForShot;
             float angleStep = maxAngle / (countBulletForShot - 1);
             float zParentRotation = gameObject.transform.parent.transform.rotation.eulerAngles.z;
@@ -75,16 +76,30 @@ namespace Global.Weapon
                 yield return null;
             }
             yield return new WaitForSeconds(weaponStats.shootingRate);
-
+            StartCoroutine(base.Shoot(mousePos, transformParent, callback));
             callback?.Invoke();
         }
 
-        protected override IEnumerator Reload()
+        #endregion public void
+
+        #region private void
+
+        private void AddOrRemoveValueToInt()
         {
-            yield return new WaitForSeconds(weaponStats.cooldownTime);
-            bulletCountCurrent = weaponStats.bulletCount;
+            if (weaponStats.bulletCount % countBulletForShot != 0)
+            {
+                if (weaponStats.bulletCount / countBulletForShot > countBulletForShot / 2) // if bulletCount (11) / countBulletForShot (4)  > countBulletForShot/2 (2), 11 / 4  (== 2.75) > 2
+                {
+                    weaponStats.bulletCount++;
+                }
+                else
+                {
+                    weaponStats.bulletCount--;
+                }
+                Start();
+            }
         }
 
-        #endregion public void
+        #endregion private void
     }
 }

@@ -10,6 +10,7 @@ namespace Global.Managers.Datas
         #region private variables
 
 #pragma warning disable
+        [SerializeField] private WeaponType startPlayerWeapon;
         [SerializeField] private SpawnItemData spawnItemData;
         [SerializeField] private RocketData rocketData;
 #pragma warning restore
@@ -20,8 +21,14 @@ namespace Global.Managers.Datas
 
         public SpawnItemData SpawnItemData => spawnItemData;
         public RocketData RocketData => rocketData;
+        public WeaponType StartPlayerWeapon => startPlayerWeapon;
 
         #endregion properties
+
+        public void SetStartPlayerWeapon(WeaponType weaponType)
+        {
+            startPlayerWeapon = weaponType;
+        }
     }
 
     [Serializable]

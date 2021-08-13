@@ -28,9 +28,9 @@ namespace Global.Game.Component
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Escape) && coroutineDecreaseToOne == null)
+            if (Input.GetKeyDown(KeyCode.Escape))
             {
-                coroutineDecreaseToOne = StartCoroutine(DecreaseValueTimeScale());
+                EnablePause();
             }
         }
 
@@ -52,6 +52,14 @@ namespace Global.Game.Component
 
         #region private void
 
+        private void EnablePause()
+        {
+            if (coroutineDecreaseToOne == null)
+            {
+                coroutineDecreaseToOne = StartCoroutine(DecreaseValueTimeScale());
+            }
+        }
+
         private IEnumerator DecreaseValueTimeScale(Action callback = null)
         {
             while (Time.timeScale > 0)
@@ -65,6 +73,7 @@ namespace Global.Game.Component
             }
 
             panelMenu.SetActive(true);
+            StopPauseCoroutine(DecreaseValueTimeScale(callback));
             callback?.Invoke();
         }
 
@@ -76,6 +85,12 @@ namespace Global.Game.Component
                 Time.timeScale += timeScaleStep;
                 yield return new WaitForSecondsRealtime(timeScaleRate);
             }
+        }
+
+        private void StopPauseCoroutine(IEnumerator coroutine)
+        {
+            StopCoroutine(coroutine);
+            coroutineDecreaseToOne = null;
         }
 
         #endregion private void

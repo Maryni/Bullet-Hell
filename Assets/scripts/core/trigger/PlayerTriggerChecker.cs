@@ -36,7 +36,7 @@ public class PlayerTriggerChecker : MonoBehaviour
                 if (player == null || player != collision.gameObject)
                 {
                     player = collision.gameObject;
-                    Debug.Log($"[ {collision.name} ] are triggered by me [ {name} ]");
+                    Debug.Log($"[ {collision.name} ] are triggered by me [ {gameObject.transform.parent.name} ]");
                 }
             }
         }

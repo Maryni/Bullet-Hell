@@ -57,7 +57,6 @@ namespace Global.ActiveObjects
 
         public override void ObjectTriggered(int damage)
         {
-            base.ObjectTriggered(damage);
             Debug.Log($"Im Enemy[ {name} ] triggered");
             EnemyStats.hpValueCurrent -= DamageTakenCalculator(damage);
             if (EnemyStats.hpValueCurrent <= 0)

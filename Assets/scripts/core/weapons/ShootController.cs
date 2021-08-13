@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Global.Shooting;
+using Global.Managers.Datas;
 
 namespace Global.Controllers
 {
@@ -30,22 +31,6 @@ namespace Global.Controllers
 
         #endregion properties
 
-        #region private void
-
-        private void GetReadyShootByWeapon()
-        {
-            if (Input.GetKey(KeyCode.Mouse0) && coroutineShoot == null)
-            {
-                coroutineShoot = StartCoroutine(baseWeapon.Shoot(mousePos, bulletPool, () => coroutineShoot = null));
-            }
-        }
-
-        private Vector2 Rotation(Transform transformObject)
-        {
-            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            return (mousePos - (Vector2)transformObject.position).normalized;
-        }
-
         #region Unity function
 
         private void Update()
@@ -55,6 +40,31 @@ namespace Global.Controllers
         }
 
         #endregion Unity function
+
+        #region public void
+
+        public void SetWeapon(BaseWeapon baseWeapon)
+        {
+            this.baseWeapon = baseWeapon;
+        }
+
+        #endregion public void
+
+        #region private void
+
+        private void GetReadyShootByWeapon()
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
+            {
+                baseWeapon.Shoot(mousePos, bulletPool);
+            }
+        }
+
+        private Vector2 Rotation(Transform transformObject)
+        {
+            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            return (mousePos - (Vector2)transformObject.position).normalized;
+        }
 
         #endregion private void
     }

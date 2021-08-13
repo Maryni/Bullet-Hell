@@ -26,8 +26,17 @@ namespace Global.Managers.Datas
     [CreateAssetMenu(fileName = "StaticData", menuName = "Data/StaticData")]
     public class StaticData : ScriptableObject
     {
+        #region Inspector variables
+
+#pragma warning disable
+
         [SerializeField] private WeaponStats[] weaponStats;
         [SerializeField] private EnemyStats[] enemyStats;
+#pragma warning restore
+
+        #endregion Inspector variables
+
+        #region public void
 
         public WeaponStats GetWeaponStatsByType(WeaponType weaponType)
         {
@@ -38,5 +47,7 @@ namespace Global.Managers.Datas
         {
             return enemyStats.FirstOrDefault(x => x.enemyType == enemyType);
         }
+
+        #endregion public void
     }
 }
