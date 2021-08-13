@@ -62,7 +62,7 @@ namespace Global.Controllers
 
         private Vector2 Rotation(Transform transformObject)
         {
-            mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
             return (mousePos - (Vector2)transformObject.position).normalized;
         }
 

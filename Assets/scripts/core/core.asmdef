@@ -1,7 +1,8 @@
 {
     "name": "core",
     "references": [
-        "GUID:a41a939cdd98a774b9fcdae1102a1280"
+        "GUID:a41a939cdd98a774b9fcdae1102a1280",
+        "GUID:4307f53044263cf4b835bd812fc161a4"
     ],
     "includePlatforms": [
         "Android",

@@ -11,8 +11,7 @@ namespace Global.Game.Component
 
 #pragma warning disable
         [SerializeField] private GameObject panelMenu;
-        [SerializeField] private float timeScaleStep;
-        [SerializeField] private float timeScaleRate;
+        [SerializeField] private float timeScaleSeconds;
 
 #pragma warning restore
 
@@ -21,10 +20,16 @@ namespace Global.Game.Component
         #region private variables
 
         private Coroutine coroutineDecreaseToOne;
+        private float maxTimeScale;
 
         #endregion private variables
 
         #region Unity functions
+
+        private void Start()
+        {
+            maxTimeScale = Time.timeScale;
+        }
 
         private void Update()
         {
@@ -62,14 +67,13 @@ namespace Global.Game.Component
 
         private IEnumerator DecreaseValueTimeScale(Action callback = null)
         {
+            var timeStep = maxTimeScale / timeScaleSeconds;
+            var timeRate = timeScaleSeconds * timeStep;
+
             while (Time.timeScale > 0)
             {
-                Time.timeScale -= timeScaleStep;
-                if (Time.timeScale > 0 && Time.timeScale < timeScaleStep)
-                {
-                    Time.timeScale = 0f;
-                }
-                yield return new WaitForSecondsRealtime(timeScaleRate);
+                Time.timeScale -= timeStep;
+                yield return new WaitForSecondsRealtime(timeRate);
             }
 
             panelMenu.SetActive(true);
@@ -79,11 +83,14 @@ namespace Global.Game.Component
 
         private IEnumerator IncreaseValueTimeScale()
         {
+            var timeStep = maxTimeScale / timeScaleSeconds;
+            var timeRate = timeScaleSeconds * timeStep;
+
             StopCoroutine(DecreaseValueTimeScale());
             while (Time.timeScale < 1)
             {
-                Time.timeScale += timeScaleStep;
-                yield return new WaitForSecondsRealtime(timeScaleRate);
+                Time.timeScale += timeStep;
+                yield return new WaitForSecondsRealtime(timeRate);
             }
         }
 

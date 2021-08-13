@@ -48,7 +48,7 @@ namespace Global.Managers.Datas
     [Serializable]
     public class BulletStats
     {
-        //TODO: move BulletStats to ScriptableObjects, add bulletStats to nessasaryWeapon
+        //TODO: move BulletStats to ScriptableObjects, add bulletStats to necessaryWeapon
         public int damage;
 
         public int speed;

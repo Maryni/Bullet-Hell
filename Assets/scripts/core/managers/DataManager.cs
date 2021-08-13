@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Global.Save;
 
 namespace Global.Managers.Datas
 {
@@ -22,8 +23,14 @@ namespace Global.Managers.Datas
 
         #endregion properties
 
+        public void SaveDynamicData()
+        {
+            SaveData.Save(dynamicData);
+        }
+
         protected override bool OnInit()
         {
+            dynamicData = SaveData.Load();
             return true;
         }
     }
