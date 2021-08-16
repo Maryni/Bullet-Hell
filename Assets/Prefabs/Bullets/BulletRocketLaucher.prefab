@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 4215741702178004208}
   - component: {fileID: 8892873256103770676}
   - component: {fileID: 3585294421716853759}
+  - component: {fileID: -1105267352120547432}
+  - component: {fileID: 1135176653995408082}
   - component: {fileID: 4434291374952679431}
   m_Layer: 0
   m_Name: BulletRocketLaucher
@@ -122,6 +124,34 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &-1105267352120547432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215741702178004210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa7872af94be1e4aaf35baa036fc88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagForTrigget2D: Enemy
+  haveToDisableWhoTrigger: 1
+--- !u!114 &1135176653995408082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215741702178004210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfa7872af94be1e4aaf35baa036fc88a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tagForTrigget2D: Enemy
+  haveToDisableWhoTrigger: 0
 --- !u!114 &4434291374952679431
 MonoBehaviour:
   m_ObjectHideFlags: 0

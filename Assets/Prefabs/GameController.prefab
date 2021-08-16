@@ -45,3 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countSpawnEnemy: 3
   timerSpawnEnemy: 3
+  camOffset: 5
+  randomMin: 10
+  randomMax: 30

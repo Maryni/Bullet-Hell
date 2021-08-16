@@ -17,15 +17,27 @@ namespace Global.Controllers
 
         [SerializeField] private int countSpawnEnemy;
         [SerializeField] private float timerSpawnEnemy;
+        [SerializeField] private float camOffset;
+        [SerializeField] private int randomMin;
+        [SerializeField] private int randomMax;
 
 #pragma warning restore
 
         #endregion Inspector variables
 
+        #region private variables
+
+        private UnityEngine.Camera cam;
+        private float height;
+        private float width;
+
+        #endregion private variables
+
         #region Unity functions
 
         private void Start()
         {
+            cam = UnityEngine.Camera.main;
             GetEnemy(countSpawnEnemy);
             StartCoroutine(SpawnEnemyByTimeByCount(timerSpawnEnemy, countSpawnEnemy));
         }
@@ -34,12 +46,26 @@ namespace Global.Controllers
 
         #region private void
 
+        private void GetWidthAndHeight(GameObject gameObjectSpawned)
+        {
+            int heightCorrector = 0;
+            while (heightCorrector == 0)
+            {
+                heightCorrector = Random.Range(-1, 2);
+            }
+            height = cam.orthographicSize + camOffset;
+            width = cam.orthographicSize * cam.aspect + camOffset;
+            gameObjectSpawned.transform.position = new Vector2(gameObjectSpawned.transform.position.x + Random.Range(-width, width),
+                (gameObjectSpawned.transform.position.y + height + Random.Range(randomMin, randomMax)) * heightCorrector);
+        }
+
         private IEnumerator SpawnEnemyByTimeByCount(float time, int countSpawnPerTime)
         {
             var tempEnemyPoolObject = Services.GetManager<PoolManager>().EnemyPool;
             for (int i = 0; i < countSpawnPerTime; i++)
             {
                 var tempObject = tempEnemyPoolObject.GetObject(tempEnemyPoolObject.GetRandomEnemyType());
+                GetWidthAndHeight(tempObject.gameObject);
                 tempObject.gameObject.SetActive(true);
                 tempObject.GetComponent<EnemyController>().ActivateEnemy();
             }
@@ -53,6 +79,7 @@ namespace Global.Controllers
             for (int i = 0; i < timesRepeat; i++)
             {
                 var tempObject = tempEnemyPoolObject.GetObject(tempEnemyPoolObject.GetRandomEnemyType());
+                GetWidthAndHeight(tempObject.gameObject);
                 tempObject.gameObject.SetActive(true);
             }
         }

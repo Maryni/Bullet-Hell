@@ -11,14 +11,14 @@ GameObject:
   - component: {fileID: 511368093821789572}
   - component: {fileID: 259163855027989737}
   - component: {fileID: 8016033398503209153}
+  - component: {fileID: 6734867676583822986}
   - component: {fileID: 1867770233355696824}
-  - component: {fileID: 7520880327365492212}
   - component: {fileID: 8928466754881152942}
   - component: {fileID: 9208896196697214584}
   - component: {fileID: 2069245332859280949}
   m_Layer: 0
   m_Name: EnemyMeleeLowSpeed
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,6 +110,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &6734867676583822986
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 210989136882216523}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 0772bddec28a8a242b0210e420d83138, type: 2}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.25, y: 1.25}
+    newSize: {x: 1.25, y: 1.25}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!61 &1867770233355696824
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -134,22 +160,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.25, y: 1.25}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &7520880327365492212
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210989136882216523}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfa7872af94be1e4aaf35baa036fc88a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tagForTrigget2D: Bullet
-  haveToDisableWhoTrigger: 0
 --- !u!114 &8928466754881152942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,11 +187,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformPlayer: {fileID: 0}
+  enemyMovement: {fileID: 8928466754881152942}
+  movementEnable: 1
+  rig2d: {fileID: 8016033398503209153}
   enemyType: 0
   rateMovement: 1
-  rateReset: 2
-  movementEnable: 1
-  resetEnable: 1
 --- !u!114 &2069245332859280949
 MonoBehaviour:
   m_ObjectHideFlags: 0
