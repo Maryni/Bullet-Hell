@@ -40,7 +40,7 @@ namespace Global.Bullet
         {
             yield return new WaitForSeconds(Services.GetManager<DataManager>().DynamicData.RocketData.timeToBlowUp);
             float tempRadius = circleCollider2D.radius;
-            circleCollider2D.radius = Services.GetManager<DataManager>().DynamicData.RocketData.radiutBlowUp;
+            circleCollider2D.radius = Services.GetManager<DataManager>().DynamicData.RocketData.radiusBlowUp;
             circleCollider2D.radius = tempRadius;
 
             gameObject.SetActive(false);

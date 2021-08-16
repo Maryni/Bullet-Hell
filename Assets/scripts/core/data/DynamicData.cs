@@ -4,6 +4,13 @@ using UnityEngine;
 
 namespace Global.Managers.Datas
 {
+    public enum VariableName
+    {
+        NoVariables,
+        RocketDataTimeToBlowUp,
+        RocketDataRadiusToBlowUp
+    }
+
     [Serializable]
     public class DynamicData
     {
@@ -13,6 +20,7 @@ namespace Global.Managers.Datas
         [SerializeField] private WeaponType startPlayerWeapon;
         [SerializeField] private SpawnItemData spawnItemData;
         [SerializeField] private RocketData rocketData;
+        [SerializeField] private Dictionary<VariableName, Action> values = new Dictionary<VariableName, Action>();
 #pragma warning restore
 
         #endregion private variables
@@ -25,10 +33,33 @@ namespace Global.Managers.Datas
 
         #endregion properties
 
+        #region public void
+
+        public void SetValueToData(VariableName variableName, string value)
+        {
+            values.Add(variableName, () => SetValue(value, variableName));
+            values[variableName]?.Invoke();
+            values.Clear();
+        }
+
         public void SetStartPlayerWeapon(WeaponType weaponType)
         {
             startPlayerWeapon = weaponType;
         }
+
+        public void SetValue(string value, VariableName variableName)
+        {
+            if (variableName == VariableName.RocketDataTimeToBlowUp)
+            {
+                rocketData.timeToBlowUp = int.Parse(value);
+            }
+            if (variableName == VariableName.RocketDataRadiusToBlowUp)
+            {
+                rocketData.radiusBlowUp = float.Parse(value);
+            }
+        }
+
+        #endregion public void
     }
 
     [Serializable]
@@ -42,7 +73,7 @@ namespace Global.Managers.Datas
     public class RocketData
     {
         public int timeToBlowUp;
-        public float radiutBlowUp;
+        public float radiusBlowUp;
     }
 
     [Serializable]

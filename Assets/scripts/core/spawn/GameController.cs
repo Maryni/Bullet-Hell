@@ -30,6 +30,7 @@ namespace Global.Controllers
         private UnityEngine.Camera cam;
         private float height;
         private float width;
+        private int[] arrTwoValues = new int[2] { -1, 1 };
 
         #endregion private variables
 
@@ -48,11 +49,7 @@ namespace Global.Controllers
 
         private void GetWidthAndHeight(GameObject gameObjectSpawned)
         {
-            int heightCorrector = 0;
-            while (heightCorrector == 0)
-            {
-                heightCorrector = Random.Range(-1, 2);
-            }
+            int heightCorrector = Random.Range(0, arrTwoValues.Length);
             height = cam.orthographicSize + camOffset;
             width = cam.orthographicSize * cam.aspect + camOffset;
             gameObjectSpawned.transform.position = new Vector2(gameObjectSpawned.transform.position.x + Random.Range(-width, width),
