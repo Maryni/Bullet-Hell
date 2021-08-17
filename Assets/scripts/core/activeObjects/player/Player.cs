@@ -15,7 +15,7 @@ namespace Global.Player
         [SerializeField] private int hpMaximum;
         [SerializeField] private int speed;
         [SerializeField] private int defence;
-        [SerializeField] private int hpValue;
+        [SerializeField] private float hpValue;
 
 #pragma warning restore
 
@@ -25,7 +25,7 @@ namespace Global.Player
 
         public int HP => hpMaximum;
         public float Speed => speed;
-        public int HPValue => hpValue;
+        public float HPValue => hpValue;
 
         #endregion properties
 
@@ -58,6 +58,15 @@ namespace Global.Player
                 Debug.Log("Player die");
             }
         }
+        public void GetDamage(float damage)
+        {
+            Debug.Log($"Im [ {name} ] triggered, I take {damage}");
+            CalculateDamage(damage);
+            if (IsDead())
+            {
+                Debug.Log("Player die");
+            }
+        }
 
         #endregion public void
 
@@ -69,6 +78,15 @@ namespace Global.Player
         }
 
         private void CalculateDamage(int damage)
+        {
+            var hpDecrease = damage - defence;
+            if (hpDecrease < 0)
+            {
+                hpDecrease = 0;
+            }
+            hpValue -= hpDecrease;
+        }
+        private void CalculateDamage(float damage)
         {
             var hpDecrease = damage - defence;
             if (hpDecrease < 0)

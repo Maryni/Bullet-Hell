@@ -1,33 +1,70 @@
-﻿using System.Collections;
+﻿using Global.ActiveObjects;
+using System.Collections;
 using System.Collections.Generic;
+using Global.Player;
 using UnityEngine;
+using Global.Bullet;
 
 namespace Global.Shooting.BulletSpace
 {
+    public enum TriggerType
+    {
+        Player,
+        Enemy
+    }
+
     public class BulletsTriggerChecker : MonoBehaviour
     {
         #region Inspector variables
 
 #pragma warning disable
-        [SerializeField] private string tagForTrigget2D;
-        [SerializeField] private bool haveToDisableWhoTrigger;
+        [SerializeField] private TriggerType triggerType;
+        [SerializeField] private bool useMeOrTriggerObject; //true - me, false - triggerObject
+        [SerializeField] private bool dealDamage;
+        [SerializeField] private bool mustDisable;
+        [SerializeField] private BaseBullet baseBullet;
 #pragma warning restore
 
         #endregion Inspector variables
 
         #region Unity function
 
+        private void OnValidate()
+        {
+            if (baseBullet == null)
+            {
+                baseBullet = GetComponent<BaseBullet>();
+            }
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == tagForTrigget2D)
+            if (collision.tag == triggerType.ToString())
             {
-                if (haveToDisableWhoTrigger)
+                if (dealDamage)
                 {
-                    collision.gameObject.SetActive(false);
+                    if (triggerType == TriggerType.Player)
+                    {
+                        collision.GetComponent<PlayerController>().DamagePlayer(baseBullet.BulletStats.damage);
+                    }
+                    if (triggerType == TriggerType.Enemy)
+                    {
+                        collision.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
+                    }
                 }
-                else
+                if (!useMeOrTriggerObject)
                 {
-                    gameObject.SetActive(false);
+                    if (mustDisable)
+                    {
+                        collision.gameObject.SetActive(false);
+                    }
+                }
+                if (useMeOrTriggerObject)
+                {
+                    if (mustDisable)
+                    {
+                        gameObject.SetActive(false);
+                    }
                 }
             }
         }

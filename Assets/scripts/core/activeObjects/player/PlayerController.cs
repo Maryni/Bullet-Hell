@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Global.Game.Component;
 
 namespace Global.Player
 {
@@ -17,6 +18,7 @@ namespace Global.Player
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private ShootController shootController;
         [SerializeField] private List<BaseWeapon> listWeapons;
+        [SerializeField] private SmoothPause smoothPause;
 #pragma warning restore
 
         #endregion Inspector variables
@@ -26,6 +28,7 @@ namespace Global.Player
         private void Start()
         {
             SetWeaponInPlayer(Services.GetManager<DataManager>().DynamicData.StartPlayerWeapon);
+            smoothPause = FindObjectOfType<SmoothPause>();
         }
 
         #endregion Unity functions
@@ -44,6 +47,19 @@ namespace Global.Player
         public void DamagePlayer(int damage)
         {
             player.GetDamage(damage);
+            if (IsPlayerIsDead())
+            {
+                smoothPause.StartPause();
+            }
+        }
+
+        public void DamagePlayer(float damage)
+        {
+            player.GetDamage(damage);
+            if (IsPlayerIsDead())
+            {
+                smoothPause.StartPause();
+            }
         }
 
         #endregion public void

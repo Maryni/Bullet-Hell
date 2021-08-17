@@ -49,15 +49,20 @@ namespace Global.Controllers
 
         private void GetWidthAndHeight(GameObject gameObjectSpawned)
         {
-            int heightCorrector = Random.Range(0, arrTwoValues.Length);
+            int valuetCorrectorWidth = Random.Range(0, arrTwoValues.Length);
+            int valueCorrectorHeight = Random.Range(0, arrTwoValues.Length);
+            valuetCorrectorWidth = arrTwoValues[valuetCorrectorWidth];
+            valueCorrectorHeight = arrTwoValues[valueCorrectorHeight];
             height = cam.orthographicSize + camOffset;
             width = cam.orthographicSize * cam.aspect + camOffset;
-            gameObjectSpawned.transform.position = new Vector2(gameObjectSpawned.transform.position.x + Random.Range(-width, width),
-                (gameObjectSpawned.transform.position.y + height + Random.Range(randomMin, randomMax)) * heightCorrector);
+            gameObjectSpawned.transform.position = new Vector2(
+                (gameObjectSpawned.transform.position.x + width + Random.Range(randomMin, randomMax)) * valuetCorrectorWidth,
+                (gameObjectSpawned.transform.position.y + height + Random.Range(randomMin, randomMax)) * valueCorrectorHeight);
         }
 
         private IEnumerator SpawnEnemyByTimeByCount(float time, int countSpawnPerTime)
         {
+            yield return new WaitForEndOfFrame();
             var tempEnemyPoolObject = Services.GetManager<PoolManager>().EnemyPool;
             for (int i = 0; i < countSpawnPerTime; i++)
             {

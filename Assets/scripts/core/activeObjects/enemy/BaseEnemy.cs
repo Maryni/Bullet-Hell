@@ -38,6 +38,8 @@ namespace Global.ActiveObjects
 
         public abstract void ObjectTriggered(int damage); //GetDamage
 
+        public abstract void ObjectTriggered(float damage); //GetDamage
+
         public void Movement()
         {
             StartCoroutine(Move());
@@ -54,6 +56,16 @@ namespace Global.ActiveObjects
         }
 
         protected int DamageTakenCalculator(int damage)
+        {
+            var hpDecrese = damage - EnemyStats.defence;
+            if (hpDecrese < 0)
+            {
+                hpDecrese = 0;
+            }
+            return hpDecrese;
+        }
+
+        protected float DamageTakenCalculator(float damage)
         {
             var hpDecrese = damage - EnemyStats.defence;
             if (hpDecrese < 0)

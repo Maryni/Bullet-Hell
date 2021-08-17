@@ -21,7 +21,7 @@ namespace Global.Weapon
 
         #region private variables
 
-        private bool canAttack;
+        [SerializeField] private bool canAttack;
 
         #endregion private variables
 
@@ -36,6 +36,11 @@ namespace Global.Weapon
 
         #region public void
 
+        public void EnableAttack()
+        {
+            canAttack = true;
+        }
+
         public IEnumerator Attack(EnemyType enemyType)
         {
             if (canAttack)
@@ -44,11 +49,12 @@ namespace Global.Weapon
                 player = playerTriggerChecker.GetPlayer();
                 if (player != null)
                 {
-                    player.GetComponent<PlayerController>().DamagePlayer((int)stats.damage);
+                    player.GetComponent<PlayerController>().DamagePlayer(stats.damage);
+                    player = null;
                 }
                 yield return new WaitForSeconds(stats.attackRate);
+                yield return Attack(enemyType);
             }
-            Attack(enemyType);
         }
 
         #endregion public void

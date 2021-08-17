@@ -10,7 +10,7 @@ namespace Global.Managers.Datas
         [SerializeField] public EnemyType enemyType;
         [SerializeField] public int hpMaximum;
         [SerializeField] public float speed;
-        [SerializeField] public int hpValueCurrent;
+        [SerializeField] public float hpValueCurrent;
         [SerializeField] public float damage;
         [SerializeField] public int defence;
         [SerializeField] public int intellegence;

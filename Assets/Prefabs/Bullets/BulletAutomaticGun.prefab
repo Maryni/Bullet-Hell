@@ -136,8 +136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa7872af94be1e4aaf35baa036fc88a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagForTrigget2D: Enemy
-  haveToDisableWhoTrigger: 1
+  triggerType: 1
+  useMeOrTriggerObject: 1
+  dealDamage: 0
+  mustDisable: 1
+  baseBullet: {fileID: 8963442829535694533}
 --- !u!114 &715926825923214075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,8 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa7872af94be1e4aaf35baa036fc88a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagForTrigget2D: Enemy
-  haveToDisableWhoTrigger: 0
+  triggerType: 1
+  useMeOrTriggerObject: 0
+  dealDamage: 1
+  mustDisable: 0
+  baseBullet: {fileID: 8963442829535694533}
 --- !u!114 &8963442829535694533
 MonoBehaviour:
   m_ObjectHideFlags: 0

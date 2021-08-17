@@ -43,6 +43,11 @@ namespace Global.Game.Component
 
         #region public void
 
+        public void StartPause()
+        {
+            EnablePause();
+        }
+
         public void ValueMoveFromZero()
         {
             StartCoroutine(IncreaseValueTimeScale());

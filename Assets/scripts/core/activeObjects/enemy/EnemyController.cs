@@ -26,9 +26,18 @@ namespace Global.ActiveObjects
 
         private void OnValidate()
         {
-            enemyTrigger = GetComponentInChildren<PlayerTriggerChecker>();
-            meleeEnemy = GetComponent<MeleeEnemy>();
-            meleeAttack = GetComponentInChildren<MeleeAttack>();
+            if (enemyTrigger == null)
+            {
+                enemyTrigger = GetComponentInChildren<PlayerTriggerChecker>();
+            }
+            if (meleeEnemy == null)
+            {
+                meleeEnemy = GetComponent<MeleeEnemy>();
+            }
+            if (meleeAttack == null)
+            {
+                meleeAttack = GetComponentInChildren<MeleeAttack>();
+            }
         }
 
         private void Start()
@@ -40,16 +49,27 @@ namespace Global.ActiveObjects
 
         #region public void
 
+        public void DamageEnemy(int damage)
+        {
+            meleeEnemy.ObjectTriggered(damage);
+        }
+
+        public void DamageEnemy(float damage)
+        {
+            meleeEnemy.ObjectTriggered(damage);
+        }
+
         public void ActivateEnemy()
         {
             meleeEnemy.Movement();
             EnableAttack();
-            StartCoroutine(meleeAttack.Attack(meleeEnemy.EnemyStats.enemyType));
         }
 
         public void EnableAttack()
         {
             enemyTrigger.EnableAttack();
+            enemyTrigger.AddEvent(() => meleeAttack.EnableAttack());
+            enemyTrigger.AddEvent(() => StartCoroutine(meleeAttack.Attack(meleeEnemy.EnemyStats.enemyType)));
         }
 
         #endregion public void

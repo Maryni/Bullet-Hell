@@ -1,7 +1,9 @@
 ﻿using Global.Player;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerTriggerChecker : MonoBehaviour
 {
@@ -11,6 +13,7 @@ public class PlayerTriggerChecker : MonoBehaviour
     [SerializeField] private string tagObject;
     [SerializeField] private bool canAttack;
     [SerializeField] private GameObject player;
+    private Action action;
 #pragma warning restore
 
     #endregion Inspector variables
@@ -22,6 +25,11 @@ public class PlayerTriggerChecker : MonoBehaviour
     public void DisableAttacl() => canAttack = false;
 
     public GameObject GetPlayer() => player;
+
+    public void AddEvent(Action action)
+    {
+        this.action += action;
+    }
 
     #endregion public void
 
@@ -37,6 +45,7 @@ public class PlayerTriggerChecker : MonoBehaviour
                 {
                     player = collision.gameObject;
                     Debug.Log($"[ {collision.name} ] are triggered by me [ {gameObject.transform.parent.name} ]");
+                    action?.Invoke();
                 }
             }
         }
