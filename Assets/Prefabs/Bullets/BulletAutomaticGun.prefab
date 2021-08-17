@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3173164810188786743}
   - component: {fileID: -4254422422004206584}
   - component: {fileID: 263929942174180297}
-  - component: {fileID: 4550174298546889052}
   - component: {fileID: 715926825923214075}
   - component: {fileID: 8963442829535694533}
   m_Layer: 0
@@ -124,23 +123,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4550174298546889052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3173164810188786737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfa7872af94be1e4aaf35baa036fc88a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  triggerType: 1
-  useMeOrTriggerObject: 1
-  dealDamage: 0
-  mustDisable: 1
-  baseBullet: {fileID: 8963442829535694533}
 --- !u!114 &715926825923214075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,9 +136,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   triggerType: 1
-  useMeOrTriggerObject: 0
+  useMeOrTriggerObject: 1
   dealDamage: 1
-  mustDisable: 0
+  mustDisable: 1
   baseBullet: {fileID: 8963442829535694533}
 --- !u!114 &8963442829535694533
 MonoBehaviour:
@@ -172,5 +154,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rig2D: {fileID: 3173164810188786743}
   bulletStats:
-    damage: 5
+    damage: 50
     speed: 2

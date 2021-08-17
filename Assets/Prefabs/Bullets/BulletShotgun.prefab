@@ -136,8 +136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa7872af94be1e4aaf35baa036fc88a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagForTrigget2D: Enemy
-  haveToDisableWhoTrigger: 1
+  triggerType: 0
+  useMeOrTriggerObject: 0
+  dealDamage: 0
+  mustDisable: 0
+  baseBullet: {fileID: 3670546892201671008}
 --- !u!114 &5434666243957452181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -150,8 +153,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfa7872af94be1e4aaf35baa036fc88a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tagForTrigget2D: Enemy
-  haveToDisableWhoTrigger: 0
+  triggerType: 0
+  useMeOrTriggerObject: 0
+  dealDamage: 0
+  mustDisable: 0
+  baseBullet: {fileID: 3670546892201671008}
 --- !u!114 &3670546892201671008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,5 +172,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rig2D: {fileID: 65897543454702670}
   bulletStats:
-    damage: 7
+    damage: 35
     speed: 1

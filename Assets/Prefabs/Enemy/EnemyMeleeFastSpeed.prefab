@@ -346,3 +346,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTriggerChecker: {fileID: 4228135872391124547}
   player: {fileID: 0}
+  canAttack: 0

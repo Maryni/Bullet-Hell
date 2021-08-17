@@ -37,6 +37,31 @@ namespace Global.Managers.Datas
 
         #region public void
 
+        public void DisableBullets()
+        {
+            for (int i = 0; i < poolAutomaticList.Count; i++)
+            {
+                if (poolAutomaticList[i].gameObject.activeInHierarchy)
+                {
+                    poolAutomaticList[i].gameObject.SetActive(false);
+                }
+            }
+            for (int i = 0; i < poolShotGunList.Count; i++)
+            {
+                if (poolShotGunList[i].gameObject.activeInHierarchy)
+                {
+                    poolShotGunList[i].gameObject.SetActive(false);
+                }
+            }
+            for (int i = 0; i < poolRocketList.Count; i++)
+            {
+                if (poolRocketList[i].gameObject.activeInHierarchy)
+                {
+                    poolRocketList[i].gameObject.SetActive(false);
+                }
+            }
+        }
+
         public BaseBullet GetObject(WeaponType weaponType)
         {
             List<BaseBullet> tempListBaseBullets = new List<BaseBullet>();

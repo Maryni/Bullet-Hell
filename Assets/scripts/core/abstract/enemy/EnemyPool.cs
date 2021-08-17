@@ -30,6 +30,17 @@ namespace Global.Managers.Datas
 
         #region public void
 
+        public void DisableEnemies()
+        {
+            for (int i = 0; i < listEnemies.Count; i++)
+            {
+                if (listEnemies[i].gameObject.activeInHierarchy)
+                {
+                    listEnemies[i].gameObject.SetActive(false);
+                }
+            }
+        }
+
         public BaseEnemy GetObject(EnemyType enemyType)
         {
             var findedObj = listEnemies.FirstOrDefault(x => x.EnemyStats.enemyType == enemyType && !x.gameObject.activeInHierarchy);

@@ -45,11 +45,8 @@ namespace Global.ActiveObjects
 
         private void Start()
         {
-            if (transformPlayer == null)
-            {
-                transformPlayer = FindObjectOfType<Player.Player>().transform;
-            }
-            EnemyStats.hpValueCurrent = EnemyStats.hpMaximum;
+            SetTransformPlayer();
+            ResetEnemyHP();
         }
 
         #endregion Unity functions
@@ -58,7 +55,6 @@ namespace Global.ActiveObjects
 
         public override void ObjectTriggered(int damage)
         {
-            Debug.Log($"Im Enemy[ {name} ] triggered, and damage = " + damage + "\t and hp = " + EnemyStats.hpValueCurrent);
             EnemyStats.hpValueCurrent -= DamageTakenCalculator(damage);
             if (EnemyStats.hpValueCurrent <= 0)
             {
@@ -68,7 +64,6 @@ namespace Global.ActiveObjects
 
         public override void ObjectTriggered(float damage)
         {
-            Debug.Log($"Im Enemy[ {name} ] triggered, and damage = " + damage + "\t and hp = " + EnemyStats.hpValueCurrent);
             EnemyStats.hpValueCurrent -= DamageTakenCalculator(damage);
             if (EnemyStats.hpValueCurrent <= 0)
             {

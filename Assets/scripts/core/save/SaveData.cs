@@ -8,34 +8,29 @@ namespace Global.Save
 {
     public static class SaveData
     {
-        public static string directory = "/SaveData/";
-        public static string fileName = "data.json";
+        public static string key = "SaveData";
+        public static string fileName = "data";
 
         public static void Save(DynamicData saveObject)
         {
-            string dir = Application.persistentDataPath + directory;
-            if (!Directory.Exists(dir))
-            {
-                Directory.CreateDirectory(dir);
-            }
             string json = JsonUtility.ToJson(saveObject);
-            File.WriteAllText(dir + fileName, json);
+            PlayerPrefs.SetString(key, json);
         }
 
         public static DynamicData Load()
         {
-            string fullPath = Application.persistentDataPath + directory + fileName;
             DynamicData dynamicData = new DynamicData();
-            if (File.Exists(fullPath))
+            string json = PlayerPrefs.GetString(key);
+
+            return JsonUtility.FromJson<DynamicData>(json);
+        }
+
+        public static void DefaultSave(DynamicData saveObject)
+        {
+            if (PlayerPrefs.GetString(key) == null || PlayerPrefs.GetString(key) == "")
             {
-                string json = File.ReadAllText(fullPath);
-                dynamicData = JsonUtility.FromJson<DynamicData>(json);
+                Save(saveObject);
             }
-            else
-            {
-                Debug.Log("File are not exist");
-            }
-            return dynamicData;
         }
     }
 }

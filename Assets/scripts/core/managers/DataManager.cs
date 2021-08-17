@@ -30,6 +30,7 @@ namespace Global.Managers.Datas
 
         protected override bool OnInit()
         {
+            SaveData.DefaultSave(dynamicData);
             dynamicData = SaveData.Load();
             return true;
         }

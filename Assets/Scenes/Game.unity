@@ -225,6 +225,28 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 3887262964389711088}
+        m_MethodName: DisableEnemies
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3887262964389711088}
+        m_MethodName: DisableBullets
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &218417449
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1051,6 +1073,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59daf0d26fddfc7448b43e03209cb94b, type: 3}
+--- !u!114 &3887262964389711088 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8400335556623273992, guid: 59daf0d26fddfc7448b43e03209cb94b,
+    type: 3}
+  m_PrefabInstance: {fileID: 3887262964389711087}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f748e12ed984b4418a8925c290eb516, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7362833743308865007
 PrefabInstance:
   m_ObjectHideFlags: 0

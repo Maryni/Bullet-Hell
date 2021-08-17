@@ -40,27 +40,24 @@ namespace Global.ActiveObjects
             }
         }
 
-        private void Start()
-        {
-            ActivateEnemy();
-        }
-
         #endregion Unity functions
 
         #region public void
+
+        public void SetPlayerTransform()
+        {
+            meleeEnemy.SetTransformPlayer();
+            meleeEnemy.ResetEnemyHP();
+        }
 
         public void DamageEnemy(int damage)
         {
             meleeEnemy.ObjectTriggered(damage);
         }
 
-        public void DamageEnemy(float damage)
-        {
-            meleeEnemy.ObjectTriggered(damage);
-        }
-
         public void ActivateEnemy()
         {
+            SetPlayerTransform();
             meleeEnemy.Movement();
             EnableAttack();
         }

@@ -39,19 +39,8 @@ namespace Global.Shooting.BulletSpace
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.tag == triggerType.ToString())
+            if (collision.tag == triggerType.ToString() && collision.isTrigger)
             {
-                if (dealDamage)
-                {
-                    if (triggerType == TriggerType.Player)
-                    {
-                        collision.GetComponent<PlayerController>().DamagePlayer(baseBullet.BulletStats.damage);
-                    }
-                    if (triggerType == TriggerType.Enemy)
-                    {
-                        collision.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
-                    }
-                }
                 if (!useMeOrTriggerObject)
                 {
                     if (mustDisable)
@@ -64,6 +53,17 @@ namespace Global.Shooting.BulletSpace
                     if (mustDisable)
                     {
                         gameObject.SetActive(false);
+                    }
+                }
+                if (dealDamage)
+                {
+                    if (triggerType == TriggerType.Player)
+                    {
+                        collision.GetComponent<PlayerController>().DamagePlayer(baseBullet.BulletStats.damage);
+                    }
+                    if (triggerType == TriggerType.Enemy)
+                    {
+                        collision.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
                     }
                 }
             }

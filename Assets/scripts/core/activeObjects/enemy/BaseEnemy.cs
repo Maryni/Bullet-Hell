@@ -31,6 +31,19 @@ namespace Global.ActiveObjects
 
         #region public void
 
+        public void SetTransformPlayer()
+        {
+            if (transformPlayer == null)
+            {
+                transformPlayer = FindObjectOfType<Player.Player>().transform;
+            }
+        }
+
+        public void ResetEnemyHP()
+        {
+            EnemyStats.hpValueCurrent = EnemyStats.hpMaximum;
+        }
+
         public virtual void Init(EnemyType enemyType)
         {
             enemyStatsData = Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType);
@@ -38,7 +51,7 @@ namespace Global.ActiveObjects
 
         public abstract void ObjectTriggered(int damage); //GetDamage
 
-        public abstract void ObjectTriggered(float damage); //GetDamage
+        public abstract void ObjectTriggered(float damage);
 
         public void Movement()
         {
@@ -51,8 +64,8 @@ namespace Global.ActiveObjects
 
         protected void Dead()
         {
-            transform.parent.gameObject.SetActive(false);
-            EnemyStats.hpValueCurrent = EnemyStats.hpMaximum;
+            gameObject.SetActive(false);
+            ResetEnemyHP();
         }
 
         protected int DamageTakenCalculator(int damage)

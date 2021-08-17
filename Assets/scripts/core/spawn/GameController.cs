@@ -39,11 +39,25 @@ namespace Global.Controllers
         private void Start()
         {
             cam = UnityEngine.Camera.main;
-            GetEnemy(countSpawnEnemy);
+            SpawnEnemy(countSpawnEnemy);
             StartCoroutine(SpawnEnemyByTimeByCount(timerSpawnEnemy, countSpawnEnemy));
         }
 
         #endregion Unity functions
+
+        #region public void
+
+        public void DisableEnemies()
+        {
+            Services.GetManager<PoolManager>().EnemyPool.DisableEnemies();
+        }
+
+        public void DisableBullets()
+        {
+            Services.GetManager<PoolManager>().BulletPool.DisableBullets();
+        }
+
+        #endregion public void
 
         #region private void
 
@@ -68,6 +82,7 @@ namespace Global.Controllers
             {
                 var tempObject = tempEnemyPoolObject.GetObject(tempEnemyPoolObject.GetRandomEnemyType());
                 GetWidthAndHeight(tempObject.gameObject);
+
                 tempObject.gameObject.SetActive(true);
                 tempObject.GetComponent<EnemyController>().ActivateEnemy();
             }
@@ -75,7 +90,7 @@ namespace Global.Controllers
             yield return SpawnEnemyByTimeByCount(time, countSpawnPerTime);
         }
 
-        private void GetEnemy(int timesRepeat)
+        private void SpawnEnemy(int timesRepeat)
         {
             var tempEnemyPoolObject = Services.GetManager<PoolManager>().EnemyPool;
             for (int i = 0; i < timesRepeat; i++)
@@ -83,6 +98,7 @@ namespace Global.Controllers
                 var tempObject = tempEnemyPoolObject.GetObject(tempEnemyPoolObject.GetRandomEnemyType());
                 GetWidthAndHeight(tempObject.gameObject);
                 tempObject.gameObject.SetActive(true);
+                tempObject.GetComponent<EnemyController>().ActivateEnemy();
             }
         }
 
