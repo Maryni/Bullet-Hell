@@ -62,6 +62,11 @@ namespace Global.Player
             }
         }
 
+        public void SetPlayerWeapon(WeaponType weaponType)
+        {
+            shootController.CurrentWeapon.SetWeaponType(weaponType);
+        }
+
         #endregion public void
 
         #region private void

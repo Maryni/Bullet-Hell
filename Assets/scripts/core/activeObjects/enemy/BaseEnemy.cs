@@ -13,6 +13,7 @@ namespace Global.ActiveObjects
         [SerializeField] protected EnemyMovement enemyMovement;
         [SerializeField] protected bool movementEnable = true;
         [SerializeField] protected Rigidbody2D rig2d;
+        [SerializeField] protected EnemyType enemyType;
 #pragma warning restore
 
         #endregion Inspector variables
@@ -26,6 +27,7 @@ namespace Global.ActiveObjects
         #region properties
 
         public EnemyStats EnemyStats => enemyStatsData;
+        public EnemyType EnemyType => enemyType;
 
         #endregion properties
 

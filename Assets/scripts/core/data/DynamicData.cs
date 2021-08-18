@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Global.Camera;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,9 @@ namespace Global.Managers.Datas
     {
         NoVariables,
         RocketDataTimeToBlowUp,
-        RocketDataRadiusToBlowUp
+        RocketDataRadiusToBlowUp,
+        SpawnItemDataTimeToSpawn,
+        SpawnItemDataTimeToHideWeaponAfterSpawn
     }
 
     [Serializable]
@@ -21,6 +24,7 @@ namespace Global.Managers.Datas
         [SerializeField] private SpawnItemData spawnItemData;
         [SerializeField] private RocketData rocketData;
         [SerializeField] private Dictionary<VariableName, Action> values = new Dictionary<VariableName, Action>();
+        [SerializeField] private GameCameraType cameraType;
 #pragma warning restore
 
         #endregion private variables
@@ -30,6 +34,7 @@ namespace Global.Managers.Datas
         public SpawnItemData SpawnItemData => spawnItemData;
         public RocketData RocketData => rocketData;
         public WeaponType StartPlayerWeapon => startPlayerWeapon;
+        public GameCameraType StartCameraType => cameraType;
 
         #endregion properties
 
@@ -47,6 +52,11 @@ namespace Global.Managers.Datas
             startPlayerWeapon = weaponType;
         }
 
+        public void SetStartCameraType(GameCameraType cameraType)
+        {
+            this.cameraType = cameraType;
+        }
+
         public void SetValue(string value, VariableName variableName)
         {
             if (variableName == VariableName.RocketDataTimeToBlowUp)
@@ -56,6 +66,14 @@ namespace Global.Managers.Datas
             if (variableName == VariableName.RocketDataRadiusToBlowUp)
             {
                 rocketData.radiusBlowUp = float.Parse(value);
+            }
+            if (variableName == VariableName.SpawnItemDataTimeToSpawn)
+            {
+                spawnItemData.spawnTime = int.Parse(value);
+            }
+            if (variableName == VariableName.SpawnItemDataTimeToHideWeaponAfterSpawn)
+            {
+                spawnItemData.destroyTime = int.Parse(value);
             }
         }
 

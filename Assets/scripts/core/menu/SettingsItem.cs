@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Global.Save;
+using Global.Camera;
 
 namespace Global.UI
 {
@@ -47,13 +48,19 @@ namespace Global.UI
 
         #region public void
 
+        public void SetCameraTypeByText()
+        {
+            GameCameraType cameraType = GameCameraType.DynamicCamera;
+            if (textUsed.text == GameCameraType.StaticCamera.ToString())
+            {
+                cameraType = GameCameraType.StaticCamera;
+            }
+            Services.GetManager<DataManager>().DynamicData.SetStartCameraType(cameraType);
+        }
+
         public void SetStartWeaponByText()
         {
             WeaponType weaponType = WeaponType.AutomaticGun;
-            if (textUsed.text == WeaponType.AutomaticGun.ToString())
-            {
-                weaponType = WeaponType.AutomaticGun;
-            }
             if (textUsed.text == WeaponType.Shotgun.ToString())
             {
                 weaponType = WeaponType.Shotgun;
@@ -65,6 +72,8 @@ namespace Global.UI
 
             Services.GetManager<DataManager>().DynamicData.SetStartPlayerWeapon(weaponType);
         }
+
+        #region void AddLessValue
 
         public void AddValueToText(bool textFieldUsedBool)
         {
@@ -122,6 +131,8 @@ namespace Global.UI
             }
         }
 
+        #endregion void AddLessValue
+
         public void SaveDataOnExit()
         {
             if (listFields.Count > 0)
@@ -151,6 +162,14 @@ namespace Global.UI
             {
                 valueFloat = float.Parse(textFieldUsed.text);
             }
+            if (variableName == VariableName.SpawnItemDataTimeToSpawn)
+            {
+                valueInt = int.Parse(textFieldUsed.text);
+            }
+            if (variableName == VariableName.SpawnItemDataTimeToHideWeaponAfterSpawn)
+            {
+                valueInt = int.Parse(textFieldUsed.text);
+            }
         }
 
         private void LoadValueFromData()
@@ -179,8 +198,32 @@ namespace Global.UI
                     textUsed.text = dataManager.DynamicData.RocketData.radiusBlowUp.ToString();
                 }
             }
+            if (variableName == VariableName.SpawnItemDataTimeToSpawn)
+            {
+                var dataManager = Services.GetManager<DataManager>();
+                if (textFieldUsed != null)
+                {
+                    textFieldUsed.text = dataManager.DynamicData.SpawnItemData.spawnTime.ToString();
+                }
+                if (textUsed != null)
+                {
+                    textUsed.text = dataManager.DynamicData.SpawnItemData.spawnTime.ToString();
+                }
+            }
+            if (variableName == VariableName.SpawnItemDataTimeToHideWeaponAfterSpawn)
+            {
+                var dataManager = Services.GetManager<DataManager>();
+                if (textFieldUsed != null)
+                {
+                    textFieldUsed.text = dataManager.DynamicData.SpawnItemData.destroyTime.ToString();
+                }
+                if (textUsed != null)
+                {
+                    textUsed.text = dataManager.DynamicData.SpawnItemData.destroyTime.ToString();
+                }
+            }
         }
-    }
 
-    #endregion private void
+        #endregion private void
+    }
 }

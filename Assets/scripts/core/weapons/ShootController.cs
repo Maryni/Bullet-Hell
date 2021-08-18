@@ -19,12 +19,6 @@ namespace Global.Controllers
 
         #endregion Inspector variables
 
-        #region private variables
-
-        private Coroutine coroutineShoot;
-
-        #endregion private variables
-
         #region properties
 
         public BaseWeapon CurrentWeapon => baseWeapon;
@@ -46,6 +40,10 @@ namespace Global.Controllers
         public void SetWeapon(BaseWeapon baseWeapon)
         {
             this.baseWeapon = baseWeapon;
+        }
+
+        public void SetWeaponType(WeaponType weaponType)
+        {
         }
 
         #endregion public void

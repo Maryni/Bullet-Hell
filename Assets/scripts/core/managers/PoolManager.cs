@@ -9,9 +9,11 @@ namespace Global.Managers
         [SerializeField] private BulletPool bulletPool;
 
         [SerializeField] private EnemyPool enemyPool;
+        [SerializeField] private WeaponPool weaponPool;
 
         public BulletPool BulletPool => bulletPool;
         public EnemyPool EnemyPool => enemyPool;
+        public WeaponPool WeaponPool => weaponPool;
 
         public override Type ManagerType => typeof(PoolManager);
 

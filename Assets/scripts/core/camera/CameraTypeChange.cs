@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Global.Managers.Datas;
 
 namespace Global.Camera
 {
-    public class CameraType : MonoBehaviour
+    public enum GameCameraType
+    {
+        StaticCamera,
+        DynamicCamera
+    }
+
+    public class CameraTypeChange : MonoBehaviour
     {
         #region Inspector variables
 
@@ -21,15 +28,24 @@ namespace Global.Camera
 
         private void Start()
         {
-            CameraTypeChange();
+            CameraTypeChanging();
         }
 
         #endregion Unity functions
 
         #region private void
 
-        private void CameraTypeChange()
+        private void CameraTypeChanging()
         {
+            var cameraType = Services.GetManager<DataManager>().DynamicData.StartCameraType;
+            if (cameraType == GameCameraType.DynamicCamera)
+            {
+                isStaticCamera = false;
+            }
+            if (cameraType == GameCameraType.StaticCamera)
+            {
+                isStaticCamera = true;
+            }
             if (!isStaticCamera)
             {
                 var composer = cameraObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();

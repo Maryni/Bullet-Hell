@@ -38,7 +38,10 @@ namespace Global.Controllers
 
         private void Start()
         {
-            cam = UnityEngine.Camera.main;
+            if (cam == null)
+            {
+                cam = UnityEngine.Camera.main;
+            }
             SpawnEnemy(countSpawnEnemy);
             StartCoroutine(SpawnEnemyByTimeByCount(timerSpawnEnemy, countSpawnEnemy));
         }
@@ -72,6 +75,10 @@ namespace Global.Controllers
             gameObjectSpawned.transform.position = new Vector2(
                 (gameObjectSpawned.transform.position.x + width + Random.Range(randomMin, randomMax)) * valuetCorrectorWidth,
                 (gameObjectSpawned.transform.position.y + height + Random.Range(randomMin, randomMax)) * valueCorrectorHeight);
+        }
+
+        private void SpawnWeapon(int timesRepeat)
+        {
         }
 
         private IEnumerator SpawnEnemyByTimeByCount(float time, int countSpawnPerTime)

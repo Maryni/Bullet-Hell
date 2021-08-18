@@ -46,7 +46,8 @@ namespace Global.Managers.Datas
             var findedObj = listEnemies.FirstOrDefault(x => x.EnemyStats.enemyType == enemyType && !x.gameObject.activeInHierarchy);
             if (findedObj == null)
             {
-                var newEnemy = Instantiate(listEnemyPrefabs.FirstOrDefault(x => x.EnemyStats.enemyType == enemyType), enemyPool);
+                var enemy = listEnemyPrefabs.FirstOrDefault(x => x.EnemyType == enemyType);
+                var newEnemy = Instantiate(enemy, enemyPool);
                 listEnemies.Add(newEnemy);
                 return newEnemy;
             }
@@ -63,7 +64,7 @@ namespace Global.Managers.Datas
         {
             for (int i = 0; i < listEnemyPrefabs.Count; i++)
             {
-                InitEnemyInPool(listEnemies, listEnemyPrefabs[i], enemyPool);
+                InitEnemyInPool(listEnemies, listEnemyPrefabs[i].GetComponent<BaseEnemy>(), enemyPool);
             }
         }
 

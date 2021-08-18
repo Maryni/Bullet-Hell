@@ -45,12 +45,6 @@ namespace Global.Shooting
             weaponStats = Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(weaponType);
         }
 
-        protected IEnumerator Reload()
-        {
-            yield return new WaitForSeconds(weaponStats.cooldownTime);
-            bulletCountCurrent = weaponStats.bulletCount;
-        }
-
         public void Shoot(Vector2 mousePos, Transform transformParent)
         {
             if (coroutineShot == null)
@@ -59,6 +53,15 @@ namespace Global.Shooting
             }
         }
 
+        public void SetWeaponType(WeaponType weaponType)
+        {
+            this.weaponType = weaponType;
+        }
+
+        #endregion public void
+
+        #region protected void
+
         protected virtual IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
         {
             yield return null;
@@ -66,6 +69,12 @@ namespace Global.Shooting
             coroutineShot = null;
         }
 
-        #endregion public void
+        protected IEnumerator Reload()
+        {
+            yield return new WaitForSeconds(weaponStats.cooldownTime);
+            bulletCountCurrent = weaponStats.bulletCount;
+        }
+
+        #endregion protected void
     }
 }

@@ -11,18 +11,11 @@ namespace Global.ActiveObjects
         #region Inspector variables
 
 #pragma warning disable
-        [SerializeField] protected EnemyType enemyType;
         [SerializeField] private float rateMovement;
 
 #pragma warning restore
 
         #endregion Inspector variables
-
-        #region properties
-
-        public EnemyType EnemyType => enemyType;
-
-        #endregion properties
 
         #region Unity functions
 
