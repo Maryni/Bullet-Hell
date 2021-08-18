@@ -8,7 +8,8 @@ namespace Global.Shooting.BulletSpace
     public enum TriggerType
     {
         Player,
-        Enemy
+        Enemy,
+        Bullet
     }
 
     public class BulletsTriggerChecker : MonoBehaviour

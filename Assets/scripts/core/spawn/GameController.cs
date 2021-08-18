@@ -1,7 +1,7 @@
 ﻿using Global.ActiveObjects;
 using Global.Managers;
 using Global.Managers.Datas;
-using Global.Weapon;
+using Global.Terrain;
 using System.Collections;
 using UnityEngine;
 
@@ -14,12 +14,10 @@ namespace Global.Controllers
         //Add spawning random when camera not see enemy
 
 #pragma warning disable
-
+        [SerializeField] private GameObject plane;
         [SerializeField] private int countSpawnEnemy;
         [SerializeField] private float timerSpawnEnemy;
         [SerializeField] private float camOffset;
-        [SerializeField] private int randomMin;
-        [SerializeField] private int randomMax;
 
 #pragma warning restore
 
@@ -43,6 +41,10 @@ namespace Global.Controllers
             if (cam == null)
             {
                 cam = UnityEngine.Camera.main;
+            }
+            if (plane == null)
+            {
+                plane = FindObjectOfType<TerrainUsing>().gameObject;
             }
             SetTimersFromData();
             StartCoroutine(SpawnEnemyByTimeByCount(timerSpawnEnemy, countSpawnEnemy));
@@ -83,8 +85,8 @@ namespace Global.Controllers
             height = cam.orthographicSize + camOffset;
             width = cam.orthographicSize * cam.aspect + camOffset;
             gameObjectSpawned.transform.position = new Vector2(
-                (gameObjectSpawned.transform.position.x + width + Random.Range(randomMin, randomMax)) * valuetCorrectorWidth,
-                (gameObjectSpawned.transform.position.y + height + Random.Range(randomMin, randomMax)) * valueCorrectorHeight);
+                (Random.Range(width, plane.GetComponent<Collider2D>().bounds.size.x / 2)) * valuetCorrectorWidth,
+                (Random.Range(height, plane.GetComponent<Collider2D>().bounds.size.y / 2)) * valueCorrectorHeight);
         }
 
         private void GetWidthAndHeightForSpawnInCameraView(GameObject gameObject)
@@ -95,8 +97,7 @@ namespace Global.Controllers
             float spawnX = Random.Range
                 (cam.ScreenToWorldPoint(new Vector2(0, 0)).x,
                 cam.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
-            Vector2 spawnPoint = new Vector2(spawnX, spawnY);
-            gameObject.transform.position = spawnPoint;
+            gameObject.transform.position = new Vector2(spawnX, spawnY);
         }
 
         private IEnumerator SpawnWeaponByTime(int timesRepeat)
