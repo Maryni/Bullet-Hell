@@ -33,6 +33,7 @@ namespace Global.UI
 
         private int valueInt;
         private float valueFloat;
+        private char[] arrayNumbers = new char[10] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
         #endregion private variables
 
@@ -156,20 +157,39 @@ namespace Global.UI
         {
             if (variableName == VariableName.RocketDataTimeToBlowUp)
             {
-                valueInt = int.Parse(textFieldUsed.text);
+                valueInt = int.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
             }
             if (variableName == VariableName.RocketDataRadiusToBlowUp)
             {
-                valueFloat = float.Parse(textFieldUsed.text);
+                valueFloat = float.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
             }
             if (variableName == VariableName.SpawnItemDataTimeToSpawn)
             {
-                valueInt = int.Parse(textFieldUsed.text);
+                valueInt = int.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
             }
             if (variableName == VariableName.SpawnItemDataTimeToHideWeaponAfterSpawn)
             {
-                valueInt = int.Parse(textFieldUsed.text);
+                valueInt = int.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
             }
+        }
+
+        private string ValueCheckerOnOnlyNumbers(string text)
+        {
+            string textValue = "";
+            var textChar = text.ToCharArray();
+
+            for (int i = 0; i < textChar.Length; i++)
+            {
+                for (int j = 0; j < arrayNumbers.Length; j++)
+                {
+                    if (textChar[i] == arrayNumbers[j] || textChar[i] == '.' || textChar[i] == ',')
+                    {
+                        textValue += textChar[i];
+                        break;
+                    }
+                }
+            }
+            return textValue;
         }
 
         private void LoadValueFromData()
