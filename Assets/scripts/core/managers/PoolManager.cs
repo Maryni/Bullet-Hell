@@ -7,7 +7,6 @@ namespace Global.Managers
     public class PoolManager : BaseManager
     {
         [SerializeField] private BulletPool bulletPool;
-
         [SerializeField] private EnemyPool enemyPool;
         [SerializeField] private WeaponPool weaponPool;
 

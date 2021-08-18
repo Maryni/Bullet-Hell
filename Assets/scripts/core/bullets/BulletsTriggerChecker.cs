@@ -1,6 +1,4 @@
 ﻿using Global.ActiveObjects;
-using System.Collections;
-using System.Collections.Generic;
 using Global.Player;
 using UnityEngine;
 using Global.Bullet;

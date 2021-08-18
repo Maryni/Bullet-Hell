@@ -1,8 +1,8 @@
 ﻿using Global.ActiveObjects;
 using Global.Managers;
 using Global.Managers.Datas;
+using Global.Weapon;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Global.Controllers
@@ -31,6 +31,8 @@ namespace Global.Controllers
         private float height;
         private float width;
         private int[] arrTwoValues = new int[2] { -1, 1 };
+        private int timerSpawnWeapon;
+        private int timerDispawnWeapon;
 
         #endregion private variables
 
@@ -42,8 +44,9 @@ namespace Global.Controllers
             {
                 cam = UnityEngine.Camera.main;
             }
-            SpawnEnemy(countSpawnEnemy);
+            SetTimersFromData();
             StartCoroutine(SpawnEnemyByTimeByCount(timerSpawnEnemy, countSpawnEnemy));
+            StartCoroutine(SpawnWeaponByTime(timerSpawnWeapon));
         }
 
         #endregion Unity functions
@@ -64,7 +67,14 @@ namespace Global.Controllers
 
         #region private void
 
-        private void GetWidthAndHeight(GameObject gameObjectSpawned)
+        private void SetTimersFromData()
+        {
+            var data = Services.GetManager<DataManager>();
+            timerSpawnWeapon = data.DynamicData.SpawnItemData.spawnTime;
+            timerDispawnWeapon = data.DynamicData.SpawnItemData.destroyTime;
+        }
+
+        private void GetWidthAndHeightForSpawnWithoutCameraView(GameObject gameObjectSpawned)
         {
             int valuetCorrectorWidth = Random.Range(0, arrTwoValues.Length);
             int valueCorrectorHeight = Random.Range(0, arrTwoValues.Length);
@@ -77,8 +87,28 @@ namespace Global.Controllers
                 (gameObjectSpawned.transform.position.y + height + Random.Range(randomMin, randomMax)) * valueCorrectorHeight);
         }
 
-        private void SpawnWeapon(int timesRepeat)
+        private void GetWidthAndHeightForSpawnInCameraView(GameObject gameObject)
         {
+            float spawnY = Random.Range
+                (cam.ScreenToWorldPoint(new Vector2(0, 0)).y,
+                cam.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
+            float spawnX = Random.Range
+                (cam.ScreenToWorldPoint(new Vector2(0, 0)).x,
+                cam.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
+            Vector2 spawnPoint = new Vector2(spawnX, spawnY);
+            gameObject.transform.position = spawnPoint;
+        }
+
+        private IEnumerator SpawnWeaponByTime(int timesRepeat)
+        {
+            yield return new WaitForEndOfFrame();
+            var tempWeaponPool = Services.GetManager<PoolManager>().WeaponPool;
+            var tempObject = tempWeaponPool.GetObject();
+            tempObject.gameObject.SetActive(true);
+            GetWidthAndHeightForSpawnInCameraView(tempObject.gameObject);
+            StartCoroutine(tempObject.DisableObjectByTime(timerDispawnWeapon));
+            yield return new WaitForSeconds(timesRepeat);
+            yield return SpawnWeaponByTime(timesRepeat);
         }
 
         private IEnumerator SpawnEnemyByTimeByCount(float time, int countSpawnPerTime)
@@ -88,25 +118,12 @@ namespace Global.Controllers
             for (int i = 0; i < countSpawnPerTime; i++)
             {
                 var tempObject = tempEnemyPoolObject.GetObject(tempEnemyPoolObject.GetRandomEnemyType());
-                GetWidthAndHeight(tempObject.gameObject);
-
+                GetWidthAndHeightForSpawnWithoutCameraView(tempObject.gameObject);
                 tempObject.gameObject.SetActive(true);
                 tempObject.GetComponent<EnemyController>().ActivateEnemy();
             }
             yield return new WaitForSeconds(time);
             yield return SpawnEnemyByTimeByCount(time, countSpawnPerTime);
-        }
-
-        private void SpawnEnemy(int timesRepeat)
-        {
-            var tempEnemyPoolObject = Services.GetManager<PoolManager>().EnemyPool;
-            for (int i = 0; i < timesRepeat; i++)
-            {
-                var tempObject = tempEnemyPoolObject.GetObject(tempEnemyPoolObject.GetRandomEnemyType());
-                GetWidthAndHeight(tempObject.gameObject);
-                tempObject.gameObject.SetActive(true);
-                tempObject.GetComponent<EnemyController>().ActivateEnemy();
-            }
         }
 
         #endregion private void

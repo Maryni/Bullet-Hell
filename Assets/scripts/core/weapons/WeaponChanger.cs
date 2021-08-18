@@ -1,9 +1,8 @@
-﻿using Global.Managers.Datas;
+﻿using Global.Managers;
+using Global.Managers.Datas;
 using Global.Player;
 using Global.Shooting.BulletSpace;
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Global.Weapon
@@ -16,7 +15,6 @@ namespace Global.Weapon
         [SerializeField] private Sprite sprite;
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private WeaponType weaponType;
-        [SerializeField] private bool randomWeapon;
         [SerializeField] private GameObject player;
 #pragma warning restore
 
@@ -36,10 +34,6 @@ namespace Global.Weapon
             {
                 spriteRenderer.sprite = sprite;
             }
-            if (randomWeapon)
-            {
-                weaponType = (WeaponType)UnityEngine.Random.Range(0, Enum.GetValues(typeof(WeaponType)).Length);
-            }
             if (player == null)
             {
                 player = FindObjectOfType<PlayerController>().gameObject;
@@ -51,6 +45,7 @@ namespace Global.Weapon
             if (collision.tag == TriggerType.Player.ToString() && collision.isTrigger)
             {
                 SetPlayerWeaponByWeapon(weaponType);
+                gameObject.SetActive(false);
             }
         }
 
@@ -58,9 +53,20 @@ namespace Global.Weapon
 
         #region public void
 
+        public void SetWeaponRandom()
+        {
+            weaponType = Services.GetManager<PoolManager>().WeaponPool.GetRandomWeaponType();
+        }
+
         public void SetPlayerWeaponByWeapon(WeaponType weaponType)
         {
-            player.GetComponent<PlayerController>().SetPlayerWeapon(weaponType);
+            player.GetComponent<PlayerController>().SetWeaponInPlayer(weaponType);
+        }
+
+        public IEnumerator DisableObjectByTime(int time)
+        {
+            yield return new WaitForSeconds(time);
+            gameObject.SetActive(false);
         }
 
         #endregion public void

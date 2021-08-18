@@ -1,6 +1,4 @@
 ﻿using Global.ActiveObjects;
-using Global.Managers.Datas;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;

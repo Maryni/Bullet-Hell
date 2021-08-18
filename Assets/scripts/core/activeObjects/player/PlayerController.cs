@@ -62,21 +62,12 @@ namespace Global.Player
             }
         }
 
-        public void SetPlayerWeapon(WeaponType weaponType)
-        {
-            shootController.CurrentWeapon.SetWeaponType(weaponType);
-        }
-
-        #endregion public void
-
-        #region private void
-
-        private void SetWeaponInPlayer(WeaponType weaponType)
+        public void SetWeaponInPlayer(WeaponType weaponType)
         {
             var weaponScript = listWeapons.FirstOrDefault(x => x.WeaponType == weaponType);
             shootController.SetWeapon(weaponScript);
         }
 
-        #endregion private void
+        #endregion public void
     }
 }

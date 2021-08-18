@@ -42,10 +42,6 @@ namespace Global.Controllers
             this.baseWeapon = baseWeapon;
         }
 
-        public void SetWeaponType(WeaponType weaponType)
-        {
-        }
-
         #endregion public void
 
         #region private void
