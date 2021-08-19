@@ -40,6 +40,13 @@ namespace Global.Player
 
         #region public void
 
+        public void SetPlayerStatFromData(int hp, int speed, int defence)
+        {
+            hpMaximum = hp;
+            this.defence = defence;
+            this.speed = speed;
+        }
+
         public bool IsDead()
         {
             if (hpValue < 0)
@@ -58,6 +65,7 @@ namespace Global.Player
                 Debug.Log("Player die");
             }
         }
+
         public void GetDamage(float damage)
         {
             Debug.Log($"Im [ {name} ] triggered, I take {damage}");
@@ -86,6 +94,7 @@ namespace Global.Player
             }
             hpValue -= hpDecrease;
         }
+
         private void CalculateDamage(float damage)
         {
             var hpDecrease = damage - defence;

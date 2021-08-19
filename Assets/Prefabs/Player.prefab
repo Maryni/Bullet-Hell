@@ -131,6 +131,7 @@ MonoBehaviour:
   cannonTransform: {fileID: 3691523426021728076}
   bulletPool: {fileID: 585559015181989958}
   mousePos: {x: 0, y: 0}
+  playerController: {fileID: 3789468437333692138}
 --- !u!114 &3679002933434292781
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -387,3 +388,5 @@ MonoBehaviour:
   - {fileID: 3679002933434292781}
   - {fileID: 2468213343802390218}
   - {fileID: 3595048804069863770}
+  smoothPause: {fileID: 0}
+  loadScene: {fileID: 0}

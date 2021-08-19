@@ -11,7 +11,8 @@ namespace Global.Managers.Datas
         RocketDataTimeToBlowUp,
         RocketDataRadiusToBlowUp,
         SpawnItemDataTimeToSpawn,
-        SpawnItemDataTimeToHideWeaponAfterSpawn
+        SpawnItemDataTimeToHideWeaponAfterSpawn,
+        PlayerSpeed
     }
 
     [Serializable]
@@ -23,6 +24,7 @@ namespace Global.Managers.Datas
         [SerializeField] private WeaponType startPlayerWeapon;
         [SerializeField] private SpawnItemData spawnItemData;
         [SerializeField] private RocketData rocketData;
+        [SerializeField] private PlayerData playerData;
         [SerializeField] private Dictionary<VariableName, Action> values = new Dictionary<VariableName, Action>();
         [SerializeField] private GameCameraType cameraType;
 #pragma warning restore
@@ -33,6 +35,7 @@ namespace Global.Managers.Datas
 
         public SpawnItemData SpawnItemData => spawnItemData;
         public RocketData RocketData => rocketData;
+        public PlayerData PlayerData => playerData;
         public WeaponType StartPlayerWeapon => startPlayerWeapon;
         public GameCameraType StartCameraType => cameraType;
 
@@ -75,6 +78,10 @@ namespace Global.Managers.Datas
             {
                 spawnItemData.destroyTime = int.Parse(value);
             }
+            if (variableName == VariableName.PlayerSpeed)
+            {
+                playerData.speed = int.Parse(value);
+            }
         }
 
         #endregion public void
@@ -101,5 +108,13 @@ namespace Global.Managers.Datas
         public int damage;
 
         public int speed;
+    }
+
+    [Serializable]
+    public class PlayerData
+    {
+        public int hp;
+        public int speed;
+        public int defence;
     }
 }

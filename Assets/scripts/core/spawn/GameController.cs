@@ -55,19 +55,41 @@ namespace Global.Controllers
 
         #region public void
 
-        public void DisableEnemies()
+        public void DisableSpawningEverything()
         {
-            Services.GetManager<PoolManager>().EnemyPool.DisableEnemies();
+            DisableSpawningEnemy();
+            DisableSpawningGun();
         }
 
-        public void DisableBullets()
+        public void DisableSpawnedItems()
         {
-            Services.GetManager<PoolManager>().BulletPool.DisableBullets();
+            DisableEnemies();
+            DisableBullets();
         }
 
         #endregion public void
 
         #region private void
+
+        private void DisableSpawningEnemy()
+        {
+            StopCoroutine(SpawnEnemyByTimeByCount(timerSpawnEnemy, countSpawnEnemy));
+        }
+
+        private void DisableSpawningGun()
+        {
+            StopCoroutine(SpawnWeaponByTime(timerSpawnWeapon));
+        }
+
+        private void DisableEnemies()
+        {
+            Services.GetManager<PoolManager>().EnemyPool.DisableEnemies();
+        }
+
+        private void DisableBullets()
+        {
+            Services.GetManager<PoolManager>().BulletPool.DisableBullets();
+        }
 
         private void SetTimersFromData()
         {

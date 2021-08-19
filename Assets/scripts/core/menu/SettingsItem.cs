@@ -153,7 +153,7 @@ namespace Global.UI
 
         #region private void
 
-        private void SetValueFromText()
+        public void SetValueFromText()
         {
             if (variableName == VariableName.RocketDataTimeToBlowUp)
             {
@@ -168,6 +168,10 @@ namespace Global.UI
                 valueInt = int.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
             }
             if (variableName == VariableName.SpawnItemDataTimeToHideWeaponAfterSpawn)
+            {
+                valueInt = int.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
+            }
+            if (variableName == VariableName.PlayerSpeed)
             {
                 valueInt = int.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
             }
@@ -240,6 +244,18 @@ namespace Global.UI
                 if (textUsed != null)
                 {
                     textUsed.text = dataManager.DynamicData.SpawnItemData.destroyTime.ToString();
+                }
+            }
+            if (variableName == VariableName.PlayerSpeed)
+            {
+                var dataManager = Services.GetManager<DataManager>();
+                if (textFieldUsed != null)
+                {
+                    textFieldUsed.text = dataManager.DynamicData.PlayerData.speed.ToString();
+                }
+                if (textUsed != null)
+                {
+                    textUsed.text = dataManager.DynamicData.PlayerData.speed.ToString();
                 }
             }
         }

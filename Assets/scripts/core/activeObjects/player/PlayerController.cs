@@ -1,11 +1,11 @@
 ﻿using Global.Controllers;
 using Global.Managers.Datas;
 using Global.Shooting;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Global.Game.Component;
+using Tools;
 
 namespace Global.Player
 {
@@ -50,6 +50,7 @@ namespace Global.Player
             if (IsPlayerIsDead())
             {
                 smoothPause.StartPause();
+                SceneLoader.LoadScene(1);
             }
         }
 
@@ -59,7 +60,17 @@ namespace Global.Player
             if (IsPlayerIsDead())
             {
                 smoothPause.StartPause();
+                SceneLoader.LoadScene(1);
+                var controller = FindObjectOfType<GameController>();
+                controller.DisableSpawnedItems();
+                controller.DisableSpawningEverything();
             }
+        }
+
+        public void SetPlayerStatsFromData()
+        {
+            var data = Services.GetManager<DataManager>().DynamicData.PlayerData;
+            player.SetPlayerStatFromData(data.hp, data.speed, data.defence);
         }
 
         public void SetWeaponInPlayer(WeaponType weaponType)

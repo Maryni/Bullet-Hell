@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Global.Shooting;
 using Global.Managers.Datas;
+using Global.Player;
 
 namespace Global.Controllers
 {
@@ -14,6 +15,7 @@ namespace Global.Controllers
         [SerializeField] private Transform cannonTransform;
         [SerializeField] private Transform bulletPool;
         [SerializeField] private Vector2 mousePos;
+        [SerializeField] private PlayerController playerController;
 
 #pragma warning restore
 
@@ -26,6 +28,14 @@ namespace Global.Controllers
         #endregion properties
 
         #region Unity function
+
+        private void OnValidate()
+        {
+            if (playerController == null)
+            {
+                playerController = GetComponent<PlayerController>();
+            }
+        }
 
         private void Update()
         {
@@ -48,9 +58,12 @@ namespace Global.Controllers
 
         private void GetReadyShootByWeapon()
         {
-            if (Input.GetKey(KeyCode.Mouse0))
+            if (!playerController.IsPlayerIsDead())
             {
-                baseWeapon.Shoot(mousePos, bulletPool);
+                if (Input.GetKey(KeyCode.Mouse0))
+                {
+                    baseWeapon.Shoot(mousePos, bulletPool);
+                }
             }
         }
 
