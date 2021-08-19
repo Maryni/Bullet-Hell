@@ -149,11 +149,37 @@ namespace Global.UI
             }
         }
 
+        public void SetTextFromValue()
+        {
+            if (textUsed != null)
+            {
+                if (valueFloat != 0)
+                {
+                    textUsed.text = valueFloat.ToString();
+                }
+                if (valueInt != 0)
+                {
+                    textUsed.text = valueInt.ToString();
+                }
+            }
+            if (textFieldUsed != null)
+            {
+                if (valueFloat != 0)
+                {
+                    textFieldUsed.text = valueFloat.ToString();
+                }
+                if (valueInt != 0)
+                {
+                    textFieldUsed.text = valueInt.ToString();
+                }
+            }
+        }
+
         #endregion public void
 
         #region private void
 
-        public void SetValueFromText()
+        private void SetValueFromText()
         {
             if (variableName == VariableName.RocketDataTimeToBlowUp)
             {
@@ -193,6 +219,11 @@ namespace Global.UI
                     }
                 }
             }
+            if (textValue == "")
+            {
+                textValue = "0";
+            }
+
             return textValue;
         }
 
