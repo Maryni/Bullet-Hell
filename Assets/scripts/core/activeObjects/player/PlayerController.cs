@@ -35,6 +35,11 @@ namespace Global.Player
 
         #region public void
 
+        public WeaponType GetWeaponTypeByPlayer()
+        {
+            return shootController.CurrentWeapon.WeaponType;
+        }
+
         public bool IsPlayerIsDead()
         {
             if (player.IsDead())

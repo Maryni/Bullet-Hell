@@ -1,7 +1,6 @@
 ﻿using Global.ActiveObjects;
 using Global.Managers;
 using Global.Managers.Datas;
-using Global.Terrain;
 using System.Collections;
 using UnityEngine;
 
@@ -40,11 +39,7 @@ namespace Global.Controllers
         {
             if (cam == null)
             {
-                cam = UnityEngine.Camera.main;
-            }
-            if (plane == null)
-            {
-                plane = FindObjectOfType<TerrainUsing>().gameObject;
+                cam = UnityEngine.Camera.allCameras[0];
             }
             SetTimersFromData();
             StartCoroutine(SpawnEnemyByTimeByCount(timerSpawnEnemy, countSpawnEnemy));
@@ -128,6 +123,7 @@ namespace Global.Controllers
             var tempWeaponPool = Services.GetManager<PoolManager>().WeaponPool;
             var tempObject = tempWeaponPool.GetObject();
             tempObject.gameObject.SetActive(true);
+            tempObject.SetWeaponRandom();
             GetWidthAndHeightForSpawnInCameraView(tempObject.gameObject);
             StartCoroutine(tempObject.DisableObjectByTime(timerDispawnWeapon));
             yield return new WaitForSeconds(timesRepeat);

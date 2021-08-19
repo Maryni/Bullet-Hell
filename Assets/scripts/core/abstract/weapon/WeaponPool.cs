@@ -1,4 +1,5 @@
-﻿using Global.Weapon;
+﻿using Global.Player;
+using Global.Weapon;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -30,9 +31,27 @@ namespace Global.Managers.Datas
 
         #region public void
 
-        public WeaponType GetRandomWeaponType() => (WeaponType)UnityEngine.Random.Range(0, GetWeaponTypeLength());
+        public WeaponType GetWeaponTypeRandomWithoutPlayerWeapon()
+        {
+            var currentType = FindObjectOfType<PlayerController>().GetWeaponTypeByPlayer();
+            List<WeaponType> weaponTypes = new List<WeaponType>();
+            for (int i = 0; i < Enum.GetValues(typeof(WeaponType)).Length; i++)
+            {
+                weaponTypes.Add((WeaponType)Enum.GetValues(typeof(WeaponType)).GetValue(i));
+            }
+            weaponTypes.Remove(currentType);
+            return weaponTypes[UnityEngine.Random.Range(0, weaponTypes.Count)];
+        }
 
-        public int GetWeaponTypeLength() => Enum.GetValues(typeof(WeaponType)).Length;
+        public WeaponType GetRandomWeaponType()
+        {
+            return (WeaponType)UnityEngine.Random.Range(0, GetWeaponTypeLength());
+        }
+
+        public int GetWeaponTypeLength()
+        {
+            return Enum.GetValues(typeof(WeaponType)).Length;
+        }
 
         public void DisableWeapons()
         {
@@ -72,7 +91,6 @@ namespace Global.Managers.Datas
             {
                 var tempObject = Instantiate(weaponPrefab, parentTransform);
                 pool.Add(tempObject);
-                tempObject.SetWeaponRandom();
                 tempObject.gameObject.SetActive(false);
             }
         }

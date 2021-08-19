@@ -317,7 +317,6 @@ GameObject:
   - component: {fileID: 7362833743574595813}
   - component: {fileID: 7362833743574595814}
   - component: {fileID: 6718144802140681510}
-  - component: {fileID: 4027474245520454253}
   m_Layer: 0
   m_Name: Terrain
   m_TagString: Untagged
@@ -419,18 +418,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.12, y: 0.12}
   m_EdgeRadius: 0
---- !u!114 &4027474245520454253
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7362833743574595815}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ece790c742869442b90cfec329d1b8c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7362833743972364514
 GameObject:
   m_ObjectHideFlags: 0

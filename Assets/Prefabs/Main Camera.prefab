@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 2710647290243728074}
   - component: {fileID: 5692389603394765808}
   - component: {fileID: 2174627653943971581}
-  - component: {fileID: 2767921774079328066}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -103,7 +102,7 @@ MonoBehaviour:
   - m_Script
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
-  m_Priority: 10
+  m_Priority: 11
   m_StandbyUpdate: 2
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
@@ -156,20 +155,6 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2767921774079328066
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2710647290243728075}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 562b7f4ddf62fad41b9478087b0e346e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cameraObject: {fileID: 2710647290243728075}
-  isStaticCamera: 0
 --- !u!1 &5677067231966910406
 GameObject:
   m_ObjectHideFlags: 0

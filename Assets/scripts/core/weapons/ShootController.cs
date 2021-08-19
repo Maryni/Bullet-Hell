@@ -39,8 +39,11 @@ namespace Global.Controllers
 
         private void Update()
         {
-            cannonTransform.up = Rotation(cannonTransform);
-            GetReadyShootByWeapon();
+            if (Time.timeScale == 1f)
+            {
+                cannonTransform.up = Rotation(cannonTransform);
+                GetReadyShootByWeapon();
+            }
         }
 
         #endregion Unity function
@@ -69,7 +72,7 @@ namespace Global.Controllers
 
         private Vector2 Rotation(Transform transformObject)
         {
-            mousePos = UnityEngine.Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            mousePos = UnityEngine.Camera.allCameras[0].ScreenToWorldPoint(Input.mousePosition);
             return (mousePos - (Vector2)transformObject.position).normalized;
         }
 

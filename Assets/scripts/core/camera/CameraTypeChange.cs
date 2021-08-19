@@ -19,7 +19,9 @@ namespace Global.Camera
 #pragma warning disable
         [SerializeField] private GameObject cameraObject;
         [SerializeField] private bool isStaticCamera;
-        [SerializeField] private float[,] listValue = new float[2, 2] { { 0.4f, 0.5f }, { 0.2f, 0.25f } };
+        [SerializeField] private float deadZoneHeight;
+        [SerializeField] private float deadZoneWidth;
+        [SerializeField] private GameObject cameraObjectStatic;
 #pragma warning restore
 
         #endregion Inspector variables
@@ -48,15 +50,16 @@ namespace Global.Camera
             }
             if (!isStaticCamera)
             {
+                cameraObjectStatic.SetActive(false);
+                cameraObject.SetActive(true);
                 var composer = cameraObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
-                composer.m_DeadZoneHeight = listValue[0, 0];
-                composer.m_DeadZoneWidth = listValue[0, 1];
+                composer.m_DeadZoneHeight = deadZoneHeight;
+                composer.m_DeadZoneWidth = deadZoneWidth;
             }
             else
             {
-                var composer = cameraObject.GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
-                composer.m_DeadZoneHeight = listValue[1, 0];
-                composer.m_DeadZoneWidth = listValue[1, 1];
+                cameraObjectStatic.SetActive(true);
+                cameraObject.SetActive(false);
             }
         }
 

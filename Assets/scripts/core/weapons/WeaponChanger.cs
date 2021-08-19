@@ -55,7 +55,7 @@ namespace Global.Weapon
 
         public void SetWeaponRandom()
         {
-            weaponType = Services.GetManager<PoolManager>().WeaponPool.GetRandomWeaponType();
+            weaponType = Services.GetManager<PoolManager>().WeaponPool.GetWeaponTypeRandomWithoutPlayerWeapon();
         }
 
         public void SetPlayerWeaponByWeapon(WeaponType weaponType)
