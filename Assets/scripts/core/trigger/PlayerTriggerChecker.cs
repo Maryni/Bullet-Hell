@@ -58,8 +58,9 @@ public class PlayerTriggerChecker : MonoBehaviour
         {
             if (tagObject == "Player")
             {
-                FindObjectOfType<EnemyController>().DisableAttack();
+                gameObject.GetComponentInParent<EnemyController>().DisableAttack();
                 action?.Invoke();
+                Debug.Log("#1 ");
             }
         }
     }
