@@ -59,6 +59,7 @@ namespace Global.Player
                 var controller = FindObjectOfType<GameController>();
                 controller.DisableSpawnedItems();
                 controller.DisableSpawningEverything();
+                smoothPause.ResetTimeScale();
             }
         }
 
@@ -72,6 +73,7 @@ namespace Global.Player
                 var controller = FindObjectOfType<GameController>();
                 controller.DisableSpawnedItems();
                 controller.DisableSpawningEverything();
+                smoothPause.ResetTimeScale();
             }
         }
 

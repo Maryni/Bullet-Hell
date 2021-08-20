@@ -58,7 +58,7 @@ namespace Global.Player
 
         public void GetDamage(int damage)
         {
-            Debug.Log($"Im [ {name} ] triggered, I take {damage}");
+            Debug.Log($"Im [ {name} ] triggered, I take {damage} damage");
             CalculateDamage(damage);
             if (IsDead())
             {
@@ -68,7 +68,7 @@ namespace Global.Player
 
         public void GetDamage(float damage)
         {
-            Debug.Log($"Im [ {name} ] triggered, I take {damage}");
+            Debug.Log($"Im [ {name} ] triggered, I take {damage} damage");
             CalculateDamage(damage);
             if (IsDead())
             {

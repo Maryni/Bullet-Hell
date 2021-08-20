@@ -1,4 +1,5 @@
-﻿using Global.Player;
+﻿using Global.ActiveObjects;
+using Global.Player;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -22,7 +23,7 @@ public class PlayerTriggerChecker : MonoBehaviour
 
     public void EnableAttack() => canAttack = true;
 
-    public void DisableAttacl() => canAttack = false;
+    public void DisableAttack() => canAttack = false;
 
     public GameObject GetPlayer() => player;
 
@@ -47,6 +48,18 @@ public class PlayerTriggerChecker : MonoBehaviour
                     Debug.Log($"[ {collision.name} ] are triggered by me [ {gameObject.transform.parent.name} ]");
                     action?.Invoke();
                 }
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.tag == tagObject)
+        {
+            if (tagObject == "Player")
+            {
+                FindObjectOfType<EnemyController>().DisableAttack();
+                action?.Invoke();
             }
         }
     }

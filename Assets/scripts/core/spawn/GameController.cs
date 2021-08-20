@@ -108,12 +108,103 @@ namespace Global.Controllers
 
         private void GetWidthAndHeightForSpawnInCameraView(GameObject gameObject)
         {
-            float spawnY = Random.Range
-                (cam.ScreenToWorldPoint(new Vector2(0, 0)).y,
-                cam.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
-            float spawnX = Random.Range
-                (cam.ScreenToWorldPoint(new Vector2(0, 0)).x,
-                cam.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
+            float minX, minY, maxX, maxY;
+            minX = -plane.GetComponent<Collider2D>().bounds.size.x / 2;
+            maxX = -minX;
+            minY = -plane.GetComponent<Collider2D>().bounds.size.y / 2;
+            maxY = -minY;
+            float spawnX, spawnY;
+            float camHeight = Random.Range(cam.ScreenToWorldPoint(new Vector2(0, 0)).y, cam.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
+            float camWidth = Random.Range(cam.ScreenToWorldPoint(new Vector2(0, 0)).x, cam.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
+            float pointRangeXMin = 0, pointRangeXMax = 0, pointRangeYMin = 0, pointRangeYMax = 0, pointXDefault = 0, pointYDefault = 0;
+            if (camHeight > maxY)
+            {
+                pointRangeYMax = maxY;
+            }
+            else if (camHeight < minY)
+            {
+                pointRangeYMin = minY;
+            }
+            else
+            {
+                pointYDefault = camHeight;
+            }
+
+            if (camWidth > maxX)
+            {
+                pointRangeXMax = maxX;
+            }
+            else if (camWidth < minX)
+            {
+                pointRangeXMin = minX;
+            }
+            else
+            {
+                pointXDefault = camWidth;
+            }
+
+            if (pointRangeXMin == 0)
+            {
+                if (pointRangeXMax == 0)
+                {
+                    spawnX = Random.Range
+                (camWidth,
+                pointXDefault);
+                }
+                else
+                {
+                    spawnX = Random.Range
+                (camWidth,
+                pointRangeXMax);
+                }
+            }
+            else
+            {
+                if (pointRangeXMax == 0)
+                {
+                    spawnX = Random.Range
+                (pointRangeXMin,
+                pointXDefault);
+                }
+                else
+                {
+                    spawnX = Random.Range
+                (pointRangeXMin,
+                pointRangeXMax);
+                }
+            }
+
+            if (pointRangeYMin == 0)
+            {
+                if (pointRangeYMax == 0)
+                {
+                    spawnY = Random.Range
+                (camHeight,
+                pointYDefault);
+                }
+                else
+                {
+                    spawnY = Random.Range
+                (camHeight,
+                pointRangeYMax);
+                }
+            }
+            else
+            {
+                if (pointRangeYMax == 0)
+                {
+                    spawnY = Random.Range
+                (pointRangeYMin,
+                pointYDefault);
+                }
+                else
+                {
+                    spawnY = Random.Range
+                (pointRangeYMin,
+                pointRangeYMax);
+                }
+            }
+
             gameObject.transform.position = new Vector2(spawnX, spawnY);
         }
 

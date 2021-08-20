@@ -69,6 +69,12 @@ namespace Global.ActiveObjects
             enemyTrigger.AddEvent(() => StartCoroutine(meleeAttack.Attack(meleeEnemy.EnemyStats.enemyType)));
         }
 
+        public void DisableAttack()
+        {
+            enemyTrigger.DisableAttack();
+            enemyTrigger.AddEvent(() => meleeAttack.DisableAttack());
+        }
+
         #endregion public void
     }
 }

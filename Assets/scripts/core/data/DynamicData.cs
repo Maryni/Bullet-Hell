@@ -12,7 +12,9 @@ namespace Global.Managers.Datas
         RocketDataRadiusToBlowUp,
         SpawnItemDataTimeToSpawn,
         SpawnItemDataTimeToHideWeaponAfterSpawn,
-        PlayerSpeed
+        PlayerSpeed,
+        StartWeaponType,
+        StartCameraType
     }
 
     [Serializable]

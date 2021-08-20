@@ -56,10 +56,10 @@ namespace Global.Camera
                 composer.m_DeadZoneHeight = deadZoneHeight;
                 composer.m_DeadZoneWidth = deadZoneWidth;
             }
-            else
+            if (isStaticCamera)
             {
-                cameraObjectStatic.SetActive(true);
                 cameraObject.SetActive(false);
+                cameraObjectStatic.SetActive(true);
             }
         }
 

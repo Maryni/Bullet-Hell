@@ -68,6 +68,16 @@ namespace Global.Shooting.BulletSpace
             }
         }
 
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.tag == triggerType.ToString())
+            {
+                if (triggerType == TriggerType.Player)
+                {
+                }
+            }
+        }
+
         #endregion Unity function
     }
 }

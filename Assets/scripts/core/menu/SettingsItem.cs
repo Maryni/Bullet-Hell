@@ -289,6 +289,44 @@ namespace Global.UI
                     textUsed.text = dataManager.DynamicData.PlayerData.speed.ToString();
                 }
             }
+            if (variableName == VariableName.StartWeaponType)
+            {
+                if (textUsed != null)
+                {
+                    var dataManager = Services.GetManager<DataManager>();
+                    var dropDown = textUsed.gameObject.GetComponentInParent<Dropdown>();
+                    for (int i = 0; i < dropDown.options.Count; i++)
+                    {
+                        if (dropDown.options[i].text == dataManager.DynamicData.StartPlayerWeapon.ToString())
+                        {
+                            dropDown.value = i;
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogError("textUsed for this VariableName not have reference");
+                }
+            }
+            if (variableName == VariableName.StartCameraType)
+            {
+                if (textUsed != null)
+                {
+                    var dataManager = Services.GetManager<DataManager>();
+                    var dropDown = textUsed.gameObject.GetComponentInParent<Dropdown>();
+                    for (int i = 0; i < dropDown.options.Count; i++)
+                    {
+                        if (dropDown.options[i].text == dataManager.DynamicData.StartCameraType.ToString())
+                        {
+                            dropDown.value = i;
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogError("textUsed for this VariableName not have reference");
+                }
+            }
         }
 
         #endregion private void

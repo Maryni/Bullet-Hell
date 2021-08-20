@@ -77,8 +77,16 @@ namespace Global.Game.Component
 
             while (Time.timeScale > 0)
             {
-                Time.timeScale -= timeStep;
-                yield return new WaitForSecondsRealtime(timeRate);
+                if (timeStep == 1)
+                {
+                    yield return new WaitForSecondsRealtime(timeRate);
+                    Time.timeScale -= timeStep;
+                }
+                if (timeStep != 1)
+                {
+                    Time.timeScale -= timeStep;
+                    yield return new WaitForSecondsRealtime(timeRate);
+                }
             }
 
             panelMenu.SetActive(true);

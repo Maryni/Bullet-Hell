@@ -41,6 +41,11 @@ namespace Global.Weapon
             canAttack = true;
         }
 
+        public void DisableAttack()
+        {
+            canAttack = false;
+        }
+
         public IEnumerator Attack(EnemyType enemyType)
         {
             if (canAttack)
