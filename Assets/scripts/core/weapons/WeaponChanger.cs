@@ -60,6 +60,8 @@ namespace Global.Weapon
 
         public void SetPlayerWeaponByWeapon(WeaponType weaponType)
         {
+            //зачем ты ищешь плеерконтроллер
+            //(переходи в сет веапон)
             player.GetComponent<PlayerController>().SetWeaponInPlayer(weaponType);
         }
 

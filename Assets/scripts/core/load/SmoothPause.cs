@@ -70,42 +70,46 @@ namespace Global.Game.Component
             }
         }
 
-        private IEnumerator DecreaseValueTimeScale(Action callback = null)
-        {
-            var timeStep = maxTimeScale / timeScaleSeconds;
-            var timeRate = timeScaleSeconds * timeStep;
+        //Я говорил седлай плавный переход, у тебя же оно работает по промежутку времени
+        //и ждет тот же промежуток
+        //Подсказка: используй вайл и Time.deltaTime;
 
-            while (Time.timeScale > 0)
-            {
-                if (timeStep == 1)
-                {
-                    yield return new WaitForSecondsRealtime(timeRate);
-                    Time.timeScale -= timeStep;
-                }
-                if (timeStep != 1)
-                {
-                    Time.timeScale -= timeStep;
-                    yield return new WaitForSecondsRealtime(timeRate);
-                }
-            }
-
-            panelMenu.SetActive(true);
-            StopPauseCoroutine(DecreaseValueTimeScale(callback));
-            callback?.Invoke();
-        }
-
-        private IEnumerator IncreaseValueTimeScale()
-        {
-            var timeStep = maxTimeScale / timeScaleSeconds;
-            var timeRate = timeScaleSeconds * timeStep;
-
-            StopCoroutine(DecreaseValueTimeScale());
-            while (Time.timeScale < 1)
-            {
-                Time.timeScale += timeStep;
-                yield return new WaitForSecondsRealtime(timeRate);
-            }
-        }
+        // private IEnumerator DecreaseValueTimeScale(Action callback = null)
+        // {
+        //     var timeStep = maxTimeScale / timeScaleSeconds;
+        //     var timeRate = timeScaleSeconds * timeStep;
+        //
+        //     while (Time.timeScale > 0)
+        //     {
+        //         if (timeStep == 1)
+        //         {
+        //             yield return new WaitForSecondsRealtime(timeRate);
+        //             Time.timeScale -= timeStep;
+        //         }
+        //         if (timeStep != 1)
+        //         {
+        //             Time.timeScale -= timeStep;
+        //             yield return new WaitForSecondsRealtime(timeRate);
+        //         }
+        //     }
+        //
+        //     panelMenu.SetActive(true);
+        //     StopPauseCoroutine(DecreaseValueTimeScale(callback));
+        //     callback?.Invoke();
+        // }
+        //
+        // private IEnumerator IncreaseValueTimeScale()
+        // {
+        //     var timeStep = maxTimeScale / timeScaleSeconds;
+        //     var timeRate = timeScaleSeconds * timeStep;
+        //
+        //     StopCoroutine(DecreaseValueTimeScale());
+        //     while (Time.timeScale < 1)
+        //     {
+        //         Time.timeScale += timeStep;
+        //         yield return new WaitForSecondsRealtime(timeRate);
+        //     }
+        // }
 
         private void StopPauseCoroutine(IEnumerator coroutine)
         {

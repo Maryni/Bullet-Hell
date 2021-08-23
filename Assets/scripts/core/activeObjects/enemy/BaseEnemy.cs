@@ -51,9 +51,9 @@ namespace Global.ActiveObjects
             enemyStatsData = Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType);
         }
 
-        public abstract void ObjectTriggered(int damage); //GetDamage
+        public abstract void ObjectTriggered(int damage); //измени нейминг
 
-        public abstract void ObjectTriggered(float damage);
+        public abstract void ObjectTriggered(float damage); //лучше сделай только через флоат
 
         public void Movement()
         {
@@ -67,12 +67,13 @@ namespace Global.ActiveObjects
         protected void Dead()
         {
             gameObject.SetActive(false);
-            ResetEnemyHP();
+            ResetEnemyHP(); //зачем ты ресетишь хп, когда энеми помер? Тебе нужно это делать при иницализации
+                            //если бы мы умирали и сразу получали хп - мы бы жили вечно :)
         }
 
         protected int DamageTakenCalculator(int damage)
         {
-            var hpDecrese = damage - EnemyStats.defence;
+            var hpDecrese = damage - EnemyStats.defence; //нейминг
             if (hpDecrese < 0)
             {
                 hpDecrese = 0;
@@ -82,7 +83,7 @@ namespace Global.ActiveObjects
 
         protected float DamageTakenCalculator(float damage)
         {
-            var hpDecrese = damage - EnemyStats.defence;
+            var hpDecrese = damage - EnemyStats.defence; //нейминг
             if (hpDecrese < 0)
             {
                 hpDecrese = 0;
@@ -99,6 +100,7 @@ namespace Global.ActiveObjects
 
         #region private void
 
+        //у тебя есть скрипт ЕнемиМувмент, почему бейс енеми знает о движении?
         private IEnumerator Move()
         {
             if (transformPlayer != null)

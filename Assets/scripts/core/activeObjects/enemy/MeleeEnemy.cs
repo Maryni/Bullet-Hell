@@ -8,7 +8,7 @@ namespace Global.ActiveObjects
         #region Inspector variables
 
 #pragma warning disable
-        [SerializeField] private float rateMovement;
+        [SerializeField] private float rateMovement; //что это и зачем оно здесь делает, если ты его нигде не используешь?
 
 #pragma warning restore
 

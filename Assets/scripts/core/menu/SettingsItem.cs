@@ -181,7 +181,10 @@ namespace Global.UI
 
         private void SetValueFromText()
         {
-            if (variableName == VariableName.RocketDataTimeToBlowUp)
+            //Переписывай, Миша
+            //код повтораяется кучу раз
+
+            /*if (variableName == VariableName.RocketDataTimeToBlowUp)
             {
                 valueInt = int.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
             }
@@ -200,9 +203,10 @@ namespace Global.UI
             if (variableName == VariableName.PlayerSpeed)
             {
                 valueInt = int.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
-            }
+            }*/
         }
 
+        //Удаляй, если не используешь
         private string ValueCheckerOnOnlyNumbers(string text)
         {
             string textValue = "";
@@ -229,7 +233,10 @@ namespace Global.UI
 
         private void LoadValueFromData()
         {
-            if (variableName == VariableName.RocketDataTimeToBlowUp)
+            //Переписывай, Миша
+            //код повтораяется кучу раз
+
+            /*if (variableName == VariableName.RocketDataTimeToBlowUp)
             {
                 var dataManager = Services.GetManager<DataManager>();
                 if (textFieldUsed != null)
@@ -326,7 +333,7 @@ namespace Global.UI
                 {
                     Debug.LogError("textUsed for this VariableName not have reference");
                 }
-            }
+            }*/
         }
 
         #endregion private void
