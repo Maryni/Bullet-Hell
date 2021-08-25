@@ -46,7 +46,6 @@ namespace Global.ActiveObjects
         public void SetPlayerTransform()
         {
             meleeEnemy.SetTransformPlayer();
-            meleeEnemy.ResetEnemyHP();
         }
 
         public void DamageEnemy(int damage)

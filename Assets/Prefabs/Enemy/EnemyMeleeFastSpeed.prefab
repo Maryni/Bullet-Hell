@@ -187,11 +187,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transformPlayer: {fileID: 0}
-  enemyMovement: {fileID: 8928466754881152942}
   movementEnable: 1
   rig2d: {fileID: 8016033398503209153}
   enemyType: 2
-  rateMovement: 1
 --- !u!114 &2069245332859280949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,6 +205,7 @@ MonoBehaviour:
   meleeEnemy: {fileID: 9208896196697214584}
   enemyTrigger: {fileID: 4228135872391124547}
   meleeAttack: {fileID: 799584758735322575}
+  enemyMovement: {fileID: 8928466754881152942}
 --- !u!1 &8285328062948695419
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,7 +8,7 @@ namespace Global.ActiveObjects
     {
         #region private variables
 
-        private bool movementEnable;
+        private bool movementEnable = true;
 
         #endregion private variables
 

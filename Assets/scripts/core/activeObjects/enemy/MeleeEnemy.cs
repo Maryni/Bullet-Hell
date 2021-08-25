@@ -18,16 +18,11 @@ namespace Global.ActiveObjects
             {
                 rig2d = GetComponent<Rigidbody2D>();
             }
-            if (enemyMovement == null)
-            {
-                enemyMovement = GetComponent<EnemyMovement>();
-            }
         }
 
         private void Start()
         {
             SetTransformPlayer();
-            ResetEnemyHP();
         }
 
         #endregion Unity functions

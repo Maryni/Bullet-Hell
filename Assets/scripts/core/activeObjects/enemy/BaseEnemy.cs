@@ -10,8 +10,6 @@ namespace Global.ActiveObjects
 
 #pragma warning disable
         [SerializeField] protected Transform transformPlayer;
-        [SerializeField] protected EnemyMovement enemyMovement;
-        [SerializeField] protected bool movementEnable = true;
         [SerializeField] protected Rigidbody2D rig2d;
         [SerializeField] protected EnemyType enemyType;
 #pragma warning restore

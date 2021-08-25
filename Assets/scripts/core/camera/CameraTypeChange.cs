@@ -30,6 +30,7 @@ namespace Global.Camera
 
         private void Start()
         {
+            SetStateCamera();
             CameraTypeChanging();
         }
 
@@ -37,7 +38,7 @@ namespace Global.Camera
 
         #region private void
 
-        private void CameraTypeChanging()
+        private void SetStateCamera()
         {
             var cameraType = Services.GetManager<DataManager>().DynamicData.StartCameraType;
             if (cameraType == GameCameraType.DynamicCamera)
@@ -48,6 +49,10 @@ namespace Global.Camera
             {
                 isStaticCamera = true;
             }
+        }
+
+        private void CameraTypeChanging()
+        {
             if (!isStaticCamera)
             {
                 cameraObjectStatic.SetActive(false);

@@ -20,6 +20,7 @@ namespace Global.Game.Component
         #region private variables
 
         private Coroutine coroutineDecreaseToOne;
+        private float minTimeScale = 0f;
         private float maxTimeScale;
 
         #endregion private variables
@@ -50,7 +51,7 @@ namespace Global.Game.Component
 
         public void ValueMoveFromZero()
         {
-            StartCoroutine(IncreaseValueTimeScale());
+            StartCoroutine(IncreaseValueTimeScale(minTimeScale, maxTimeScale, timeScaleSeconds));
         }
 
         public void ResetTimeScale()
@@ -66,46 +67,45 @@ namespace Global.Game.Component
         {
             if (coroutineDecreaseToOne == null)
             {
-                coroutineDecreaseToOne = StartCoroutine(DecreaseValueTimeScale());
+                coroutineDecreaseToOne = StartCoroutine(DecreaseValueTimeScale(maxTimeScale, minTimeScale, timeScaleSeconds));
             }
         }
 
         //SetPause like Time.scaleTime -= renderTime (timer when cpu rendering frame)
-        private IEnumerator DecreaseValueTimeScale(Action callback = null)
+        private IEnumerator DecreaseValueTimeScale(float start, float end, float time, Action callback = null)
         {
-            var timeStep = maxTimeScale / timeScaleSeconds;
-            var timeRate = timeScaleSeconds * timeStep;
+            float lastTime = Time.realtimeSinceStartup;
+            float timer = 0.0f;
 
-            while (Time.timeScale > 0)
+            while (timer < time)
             {
-                if (timeStep == 1)
-                {
-                    yield return new WaitForSecondsRealtime(timeRate);
-                    Time.timeScale -= timeStep;
-                }
-                if (timeStep != 1)
-                {
-                    Time.timeScale -= timeStep;
-                    yield return new WaitForSecondsRealtime(timeRate);
-                }
+                Time.timeScale = Mathf.Lerp(start, end, timer / time);
+                timer += (Time.realtimeSinceStartup - lastTime);
+                lastTime = Time.realtimeSinceStartup;
+                yield return null;
             }
 
+            Time.timeScale = end;
+
             panelMenu.SetActive(true);
-            StopPauseCoroutine(DecreaseValueTimeScale(callback));
+            StopPauseCoroutine(DecreaseValueTimeScale(start, end, time, callback));
             callback?.Invoke();
         }
 
-        private IEnumerator IncreaseValueTimeScale()
+        private IEnumerator IncreaseValueTimeScale(float start, float end, float time)
         {
-            var timeStep = maxTimeScale / timeScaleSeconds;
-            var timeRate = timeScaleSeconds * timeStep;
+            float lastTime = Time.realtimeSinceStartup;
+            float timer = 0.0f;
 
-            StopCoroutine(DecreaseValueTimeScale());
-            while (Time.timeScale < 1)
+            while (timer < time)
             {
-                Time.timeScale += timeStep;
-                yield return new WaitForSecondsRealtime(timeRate);
+                Time.timeScale = Mathf.Lerp(start, end, timer / time);
+                timer += (Time.realtimeSinceStartup - lastTime);
+                lastTime = Time.realtimeSinceStartup;
+                yield return null;
             }
+
+            Time.timeScale = end;
         }
 
         private void StopPauseCoroutine(IEnumerator coroutine)
