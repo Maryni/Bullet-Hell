@@ -18,10 +18,16 @@ namespace Global.Player
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private ShootController shootController;
         [SerializeField] private List<BaseWeapon> listWeapons;
-        [SerializeField] private SmoothPause smoothPause;
+
 #pragma warning restore
 
         #endregion Inspector variables
+
+        #region private variables
+
+        private SmoothPause smoothPause;
+
+        #endregion private variables
 
         #region Unity functions
 
@@ -29,6 +35,7 @@ namespace Global.Player
         {
             SetWeaponInPlayer(Services.GetManager<DataManager>().DynamicData.StartPlayerWeapon);
             smoothPause = FindObjectOfType<SmoothPause>();
+            player.RestoreHPToMaxHP();
         }
 
         #endregion Unity functions
@@ -42,7 +49,7 @@ namespace Global.Player
 
         public bool IsPlayerIsDead()
         {
-            if (player.IsDead())
+            if (player.HPValue <= 0)
             {
                 return true;
             }
@@ -51,7 +58,7 @@ namespace Global.Player
 
         public void DamagePlayer(int damage)
         {
-            player.GetDamage(damage);
+            player.DecreaseHp(CalculateDamage(damage));
             if (IsPlayerIsDead())
             {
                 smoothPause.StartPause();
@@ -65,7 +72,7 @@ namespace Global.Player
 
         public void DamagePlayer(float damage)
         {
-            player.GetDamage(damage);
+            player.DecreaseHp(CalculateDamage(damage));
             if (IsPlayerIsDead())
             {
                 smoothPause.StartPause();
@@ -90,5 +97,29 @@ namespace Global.Player
         }
 
         #endregion public void
+
+        #region private void
+
+        private int CalculateDamage(int damage)
+        {
+            var hpDecrease = damage - player.Defence;
+            if (hpDecrease < 0)
+            {
+                hpDecrease = 0;
+            }
+            return hpDecrease;
+        }
+
+        private float CalculateDamage(float damage)
+        {
+            var hpDecrease = damage - player.Defence;
+            if (hpDecrease < 0)
+            {
+                hpDecrease = 0;
+            }
+            return hpDecrease;
+        }
+
+        #endregion private void
     }
 }

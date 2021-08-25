@@ -23,22 +23,24 @@ namespace Global.Player
 
         #region properties
 
-        public int HP => hpMaximum;
+        public int HPMaximum => hpMaximum;
         public float Speed => speed;
         public float HPValue => hpValue;
+        public int Defence => defence;
 
         #endregion properties
 
-        #region Unity functions
+        #region public void
 
-        private void Start()
+        public void DecreaseHp(int hp)
         {
-            RestoreHPToMaxHP();
+            hpValue -= hp;
         }
 
-        #endregion Unity functions
-
-        #region public void
+        public void DecreaseHp(float hp)
+        {
+            hpValue -= hp;
+        }
 
         public void SetPlayerStatFromData(int hp, int speed, int defence)
         {
@@ -47,64 +49,11 @@ namespace Global.Player
             this.speed = speed;
         }
 
-        public bool IsDead()
-        {
-            if (hpValue < 0)
-            {
-                return true;
-            }
-            return false;
-        }
-
-        public void GetDamage(int damage)
-        {
-            Debug.Log($"Im [ {name} ] triggered, I take {damage} damage");
-            CalculateDamage(damage);
-            if (IsDead())
-            {
-                Debug.Log("Player die");
-            }
-        }
-
-        public void GetDamage(float damage)
-        {
-            Debug.Log($"Im [ {name} ] triggered, I take {damage} damage");
-            CalculateDamage(damage);
-            if (IsDead())
-            {
-                Debug.Log("Player die");
-            }
-        }
-
-        #endregion public void
-
-        #region private void
-
-        private void RestoreHPToMaxHP()
+        public void RestoreHPToMaxHP()
         {
             hpValue = hpMaximum;
         }
 
-        private void CalculateDamage(int damage)
-        {
-            var hpDecrease = damage - defence;
-            if (hpDecrease < 0)
-            {
-                hpDecrease = 0;
-            }
-            hpValue -= hpDecrease;
-        }
-
-        private void CalculateDamage(float damage)
-        {
-            var hpDecrease = damage - defence;
-            if (hpDecrease < 0)
-            {
-                hpDecrease = 0;
-            }
-            hpValue -= hpDecrease;
-        }
-
-        #endregion private void
+        #endregion public void
     }
 }

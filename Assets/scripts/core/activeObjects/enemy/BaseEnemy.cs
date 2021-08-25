@@ -64,22 +64,22 @@ namespace Global.ActiveObjects
 
         protected int DamageTakenCalculator(int damage)
         {
-            var hpDecrese = damage - EnemyStats.defence;
-            if (hpDecrese < 0)
+            var hpDecrease = damage - EnemyStats.defence;
+            if (hpDecrease < 0)
             {
-                hpDecrese = 0;
+                hpDecrease = 0;
             }
-            return hpDecrese;
+            return hpDecrease;
         }
 
         protected float DamageTakenCalculator(float damage)
         {
-            var hpDecrese = damage - EnemyStats.defence;
-            if (hpDecrese < 0)
+            var hpDecrease = damage - EnemyStats.defence;
+            if (hpDecrease < 0)
             {
-                hpDecrese = 0;
+                hpDecrease = 0;
             }
-            return hpDecrese;
+            return hpDecrease;
         }
 
         #endregion protected void

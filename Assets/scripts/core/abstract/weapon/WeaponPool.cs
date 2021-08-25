@@ -13,9 +13,10 @@ namespace Global.Managers.Datas
         #region Inspector variables
 
 #pragma warning disable
-        [SerializeField] private WeaponChanger gameObjectPrefab;
+        [SerializeField] private WeaponChanger weaponSpawningPrefab;
         [SerializeField] private List<WeaponChanger> listWeapons;
         [SerializeField] private Transform transformObjectToSpawn;
+        [SerializeField] private int countSpawn;
 #pragma warning restore
 
         #endregion Inspector variables
@@ -31,7 +32,7 @@ namespace Global.Managers.Datas
 
         #region public void
 
-        public WeaponType GetWeaponTypeRandomWithoutPlayerWeapon()
+        public WeaponType GetWeaponTypeExclusivePlayerWeapon()
         {
             var currentType = FindObjectOfType<PlayerController>().GetWeaponTypeByPlayer();
             List<WeaponType> weaponTypes = new List<WeaponType>();
@@ -43,7 +44,7 @@ namespace Global.Managers.Datas
             return weaponTypes[UnityEngine.Random.Range(0, weaponTypes.Count)];
         }
 
-        public WeaponType GetRandomWeaponType()
+        public WeaponType GetAllRandomWeaponType()
         {
             return (WeaponType)UnityEngine.Random.Range(0, GetWeaponTypeLength());
         }
@@ -69,7 +70,7 @@ namespace Global.Managers.Datas
             var findedObj = listWeapons.FirstOrDefault(x => !x.gameObject.activeInHierarchy);
             if (findedObj == null)
             {
-                var newObj = Instantiate(gameObjectPrefab, transformObjectToSpawn);
+                var newObj = Instantiate(weaponSpawningPrefab, transformObjectToSpawn);
                 listWeapons.Add(newObj);
                 return newObj;
             }
@@ -82,12 +83,12 @@ namespace Global.Managers.Datas
 
         private void Init()
         {
-            InitWeaponInPool(listWeapons, gameObjectPrefab, transformObjectToSpawn);
+            InitWeaponInPool(listWeapons, weaponSpawningPrefab, transformObjectToSpawn);
         }
 
         private void InitWeaponInPool(List<WeaponChanger> pool, WeaponChanger weaponPrefab, Transform parentTransform)
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < countSpawn; i++)
             {
                 var tempObject = Instantiate(weaponPrefab, parentTransform);
                 pool.Add(tempObject);

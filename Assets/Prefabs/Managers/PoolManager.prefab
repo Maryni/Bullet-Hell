@@ -43,10 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f77500089bea614ebdca432c9da16d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObjectPrefab: {fileID: 3922149376728849534, guid: 4d493d520217c96479ae34cfd82cf289,
+  weaponSpawningPrefab: {fileID: 3922149376728849534, guid: 4d493d520217c96479ae34cfd82cf289,
     type: 3}
   listWeapons: []
   transformObjectToSpawn: {fileID: 64000626627852203}
+  countSpawn: 10
 --- !u!1 &1343895943043432504
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,12 +255,10 @@ MonoBehaviour:
   poolAutomaticList: []
   poolShotGunList: []
   poolRocketList: []
-  automaticalBulletPrefab: {fileID: 8963442829535694533, guid: ba662eb5ac8f35e458b2ddf92f43706e,
-    type: 3}
+  automaticBulletPrefab: {fileID: 0}
   shotgunBulletPrefab: {fileID: 3670546892201671008, guid: efccb17e12f14f448822c54ecbf00cf2,
     type: 3}
-  rocketLaucherBulletPrefab: {fileID: 4434291374952679431, guid: 14e0a9af979b9354e954ad51d12a0a22,
-    type: 3}
+  rocketBulletPrefab: {fileID: 0}
   transformAutomatic: {fileID: 2384044451755290328}
   transformShotgun: {fileID: 4323250419504820783}
   transformRocket: {fileID: 5539395963896257698}

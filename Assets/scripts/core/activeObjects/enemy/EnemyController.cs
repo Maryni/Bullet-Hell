@@ -70,8 +70,8 @@ namespace Global.ActiveObjects
 
         public void DisableAttack()
         {
-            enemyTrigger.DisableAttack();
             enemyTrigger.AddEvent(() => meleeAttack.DisableAttack());
+            enemyTrigger.DisableAttack();
         }
 
         #endregion public void

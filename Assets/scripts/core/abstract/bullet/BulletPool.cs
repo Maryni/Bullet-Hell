@@ -16,9 +16,9 @@ namespace Global.Managers.Datas
         [SerializeField] private List<BaseBullet> poolAutomaticList;
         [SerializeField] private List<BaseBullet> poolShotGunList;
         [SerializeField] private List<BaseBullet> poolRocketList;
-        [SerializeField] private AutomaticalBullet automaticalBulletPrefab;
+        [SerializeField] private AutomaticalBullet automaticBulletPrefab;
         [SerializeField] private ShotgunBullet shotgunBulletPrefab;
-        [SerializeField] private RocketLaucherBullet rocketLaucherBulletPrefab;
+        [SerializeField] private RocketLaucherBullet rocketBulletPrefab;
         [SerializeField] private Transform transformAutomatic;
         [SerializeField] private Transform transformShotgun;
         [SerializeField] private Transform transformRocket;
@@ -100,9 +100,9 @@ namespace Global.Managers.Datas
 
         private void Init()
         {
-            InitPoolByBullet(poolAutomaticList, automaticalBulletPrefab, transformAutomatic);
+            InitPoolByBullet(poolAutomaticList, automaticBulletPrefab, transformAutomatic);
             InitPoolByBullet(poolShotGunList, shotgunBulletPrefab, transformShotgun);
-            InitPoolByBullet(poolRocketList, rocketLaucherBulletPrefab, transformRocket);
+            InitPoolByBullet(poolRocketList, rocketBulletPrefab, transformRocket);
         }
 
         private void InitPoolByBullet(List<BaseBullet> pool, BaseBullet bulletPrefab, Transform parentTransform)
