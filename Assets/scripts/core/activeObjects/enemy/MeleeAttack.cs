@@ -1,8 +1,7 @@
 ﻿using Global.Managers.Datas;
 using Global.Player;
-using Global.Shooting;
+using Global.Trigger;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Global.Weapon

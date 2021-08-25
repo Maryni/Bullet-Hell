@@ -13,7 +13,7 @@ namespace Global.Managers.Datas
         [SerializeField] public float hpValueCurrent;
         [SerializeField] public float damage;
         [SerializeField] public int defence;
-        [SerializeField] public int intellegence;
+        [SerializeField] public int intelligence;
         [SerializeField] public float attackRate;
     }
 }

@@ -1,7 +1,5 @@
-﻿using Global.Managers.Datas;
+﻿using Global.Trigger;
 using Global.Weapon;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Global.ActiveObjects
@@ -13,6 +11,7 @@ namespace Global.ActiveObjects
         [SerializeField] private BaseEnemy meleeEnemy;
         [SerializeField] private PlayerTriggerChecker enemyTrigger;
         [SerializeField] private MeleeAttack meleeAttack;
+        [SerializeField] private EnemyMovement enemyMovement;
 
         #endregion Inspector variables
 
@@ -52,13 +51,14 @@ namespace Global.ActiveObjects
 
         public void DamageEnemy(int damage)
         {
-            meleeEnemy.ObjectTriggered(damage);
+            meleeEnemy.GetDamage(damage);
         }
 
         public void ActivateEnemy()
         {
             SetPlayerTransform();
-            meleeEnemy.Movement();
+            meleeEnemy.ResetEnemyHP();
+            enemyMovement.Move(meleeEnemy.TransformPlayer, meleeEnemy.Rig2D, meleeEnemy.EnemyStats.speed);
             EnableAttack();
         }
 

@@ -1943,7 +1943,7 @@ MonoBehaviour:
   variableName: 3
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 1598533870305189861}
-  valueToFloat: 0
+  valueToFloat: 1
   listFields: []
 --- !u!1 &2528744507499814594
 GameObject:
@@ -2568,7 +2568,7 @@ MonoBehaviour:
   variableName: 5
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 9177549538624906461}
-  valueToFloat: 0
+  valueToFloat: 1
   listFields: []
 --- !u!1 &3390309187837375812
 GameObject:
@@ -3566,7 +3566,7 @@ MonoBehaviour:
   variableName: 4
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 4122594922652063251}
-  valueToFloat: 0
+  valueToFloat: 1
   listFields: []
 --- !u!1 &4888998883778159709
 GameObject:
@@ -3853,7 +3853,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 180, y: -440}
+  m_SizeDelta: {x: 180, y: 120.384766}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &3588340750974831668
 MonoBehaviour:
@@ -4578,6 +4578,7 @@ GameObject:
   - component: {fileID: 5129890662995596319}
   - component: {fileID: 5129890662995596769}
   - component: {fileID: 5129890662995596768}
+  - component: {fileID: 4108669570417743676}
   m_Layer: 5
   m_Name: Panel_Settings
   m_TagString: Untagged
@@ -4643,6 +4644,25 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4108669570417743676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5129890662995596318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d200422db1200cd4486f81f370d5ea4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startWeapon: {fileID: 4236191677354623524}
+  cameraType: {fileID: 7840526751783479269}
+  rocketTimerBlowUp: {fileID: 7623827199293415914}
+  rocketRadiusBlowUp: {fileID: 6424932393020689030}
+  timerToSpawnItem: {fileID: 1598533870305189861}
+  timerToDisableItems: {fileID: 4122594922652063251}
+  playerSpeed: {fileID: 9177549538624906461}
 --- !u!1 &5129890663041356757
 GameObject:
   m_ObjectHideFlags: 0
@@ -4776,7 +4796,7 @@ MonoBehaviour:
   variableName: 1
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 7623827199293415914}
-  valueToFloat: 0
+  valueToFloat: 1
   listFields: []
 --- !u!1 &5293847274261050843
 GameObject:

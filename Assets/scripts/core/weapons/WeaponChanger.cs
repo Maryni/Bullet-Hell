@@ -40,6 +40,7 @@ namespace Global.Weapon
             }
         }
 
+        //get collision with player and say GameController change playerWeapon by my weapon
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.tag == TriggerType.Player.ToString() && collision.isTrigger)

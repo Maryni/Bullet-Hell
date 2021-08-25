@@ -52,7 +52,10 @@ namespace Global.Managers.Datas
             return findedObj;
         }
 
-        public EnemyType GetRandomEnemyType() => (EnemyType)UnityEngine.Random.Range(0, 3);
+        public EnemyType GetRandomEnemyType()
+        {
+            return (EnemyType)UnityEngine.Random.Range(0, 3);
+        }
 
         #endregion public void
 

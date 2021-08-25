@@ -41,7 +41,6 @@ namespace Global.UI
 
         private void Start()
         {
-            LoadValueFromData();
             SetValueFromText();
         }
 
@@ -76,58 +75,56 @@ namespace Global.UI
 
         #region void AddLessValue
 
-        public void AddValueToText(bool textFieldUsedBool)
+        public void AddValueToText(bool usedLikeFloat)
         {
-            if (textFieldUsedBool)
+            if (usedLikeFloat)
+            {
+                valueFloat += valueToFloat;
+                textFieldUsed.text = valueFloat.ToString();
+            }
+            else
             {
                 valueInt++;
                 textFieldUsed.text = valueInt.ToString();
-            }
-            if (!textFieldUsedBool)
-            {
-                valueInt++;
-                textUsed.text = valueInt.ToString();
             }
         }
 
-        public void LessValueFromText(bool textFieldUsedBool)
+        public void LessValueFromText(bool usedLikeFloat)
         {
-            if (textFieldUsedBool)
+            if (usedLikeFloat)
+            {
+                valueFloat -= valueToFloat;
+                textFieldUsed.text = valueFloat.ToString();
+            }
+            else
             {
                 valueInt--;
                 textFieldUsed.text = valueInt.ToString();
-            }
-            if (!textFieldUsedBool)
-            {
-                valueInt--;
-                textUsed.text = valueInt.ToString();
             }
         }
 
         public void AddValueToTextByFloat(bool textFieldUsedBool)
         {
+            valueFloat += valueToFloat;
             if (textFieldUsedBool)
             {
-                valueFloat += valueToFloat;
                 textFieldUsed.text = valueFloat.ToString();
             }
-            if (!textFieldUsedBool)
+            else
             {
-                valueFloat += valueToFloat;
                 textUsed.text = valueFloat.ToString();
             }
         }
 
         public void LessValueFromTextByFloat(bool textFieldUsedBool)
         {
+            valueFloat -= valueToFloat;
             if (textFieldUsedBool)
             {
-                valueFloat -= valueToFloat;
                 textFieldUsed.text = valueFloat.ToString();
             }
-            if (!textFieldUsedBool)
+            else
             {
-                valueFloat -= valueToFloat;
                 textUsed.text = valueFloat.ToString();
             }
         }
@@ -144,7 +141,6 @@ namespace Global.UI
                     dataManager.DynamicData.SetValueToData(listFields[i].transform.parent.GetComponent<SettingsItem>().VariableName,
                         listFields[i].transform.parent.GetComponent<SettingsItem>().textFieldUsed.text);
                 }
-
                 dataManager.SaveDynamicData();
             }
         }
@@ -181,25 +177,9 @@ namespace Global.UI
 
         private void SetValueFromText()
         {
-            if (variableName == VariableName.RocketDataTimeToBlowUp)
-            {
-                valueInt = int.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
-            }
-            if (variableName == VariableName.RocketDataRadiusToBlowUp)
+            if (textFieldUsed != null)
             {
                 valueFloat = float.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
-            }
-            if (variableName == VariableName.SpawnItemDataTimeToSpawn)
-            {
-                valueInt = int.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
-            }
-            if (variableName == VariableName.SpawnItemDataTimeToHideWeaponAfterSpawn)
-            {
-                valueInt = int.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
-            }
-            if (variableName == VariableName.PlayerSpeed)
-            {
-                valueInt = int.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
             }
         }
 
@@ -225,108 +205,6 @@ namespace Global.UI
             }
 
             return textValue;
-        }
-
-        private void LoadValueFromData()
-        {
-            if (variableName == VariableName.RocketDataTimeToBlowUp)
-            {
-                var dataManager = Services.GetManager<DataManager>();
-                if (textFieldUsed != null)
-                {
-                    textFieldUsed.text = dataManager.DynamicData.RocketData.timeToBlowUp.ToString();
-                }
-                if (textUsed != null)
-                {
-                    textUsed.text = dataManager.DynamicData.RocketData.timeToBlowUp.ToString();
-                }
-            }
-            if (variableName == VariableName.RocketDataRadiusToBlowUp)
-            {
-                var dataManager = Services.GetManager<DataManager>();
-                if (textFieldUsed != null)
-                {
-                    textFieldUsed.text = dataManager.DynamicData.RocketData.radiusBlowUp.ToString();
-                }
-                if (textUsed != null)
-                {
-                    textUsed.text = dataManager.DynamicData.RocketData.radiusBlowUp.ToString();
-                }
-            }
-            if (variableName == VariableName.SpawnItemDataTimeToSpawn)
-            {
-                var dataManager = Services.GetManager<DataManager>();
-                if (textFieldUsed != null)
-                {
-                    textFieldUsed.text = dataManager.DynamicData.SpawnItemData.spawnTime.ToString();
-                }
-                if (textUsed != null)
-                {
-                    textUsed.text = dataManager.DynamicData.SpawnItemData.spawnTime.ToString();
-                }
-            }
-            if (variableName == VariableName.SpawnItemDataTimeToHideWeaponAfterSpawn)
-            {
-                var dataManager = Services.GetManager<DataManager>();
-                if (textFieldUsed != null)
-                {
-                    textFieldUsed.text = dataManager.DynamicData.SpawnItemData.destroyTime.ToString();
-                }
-                if (textUsed != null)
-                {
-                    textUsed.text = dataManager.DynamicData.SpawnItemData.destroyTime.ToString();
-                }
-            }
-            if (variableName == VariableName.PlayerSpeed)
-            {
-                var dataManager = Services.GetManager<DataManager>();
-                if (textFieldUsed != null)
-                {
-                    textFieldUsed.text = dataManager.DynamicData.PlayerData.speed.ToString();
-                }
-                if (textUsed != null)
-                {
-                    textUsed.text = dataManager.DynamicData.PlayerData.speed.ToString();
-                }
-            }
-            if (variableName == VariableName.StartWeaponType)
-            {
-                if (textUsed != null)
-                {
-                    var dataManager = Services.GetManager<DataManager>();
-                    var dropDown = textUsed.gameObject.GetComponentInParent<Dropdown>();
-                    for (int i = 0; i < dropDown.options.Count; i++)
-                    {
-                        if (dropDown.options[i].text == dataManager.DynamicData.StartPlayerWeapon.ToString())
-                        {
-                            dropDown.value = i;
-                        }
-                    }
-                }
-                else
-                {
-                    Debug.LogError("textUsed for this VariableName not have reference");
-                }
-            }
-            if (variableName == VariableName.StartCameraType)
-            {
-                if (textUsed != null)
-                {
-                    var dataManager = Services.GetManager<DataManager>();
-                    var dropDown = textUsed.gameObject.GetComponentInParent<Dropdown>();
-                    for (int i = 0; i < dropDown.options.Count; i++)
-                    {
-                        if (dropDown.options[i].text == dataManager.DynamicData.StartCameraType.ToString())
-                        {
-                            dropDown.value = i;
-                        }
-                    }
-                }
-                else
-                {
-                    Debug.LogError("textUsed for this VariableName not have reference");
-                }
-            }
         }
 
         #endregion private void

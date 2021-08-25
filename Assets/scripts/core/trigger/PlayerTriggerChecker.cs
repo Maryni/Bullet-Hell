@@ -1,68 +1,78 @@
 ﻿using Global.ActiveObjects;
-using Global.Player;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class PlayerTriggerChecker : MonoBehaviour
+namespace Global.Trigger
 {
-    #region Inspector variables
+    public class PlayerTriggerChecker : MonoBehaviour
+    {
+        #region Inspector variables
 
 #pragma warning disable
-    [SerializeField] private string tagObject;
-    [SerializeField] private bool canAttack;
-    [SerializeField] private GameObject player;
-    private Action action;
+        [SerializeField] private string tagObject;
+        [SerializeField] private bool canAttack;
+        [SerializeField] private GameObject player;
 #pragma warning restore
 
-    #endregion Inspector variables
+        #endregion Inspector variables
 
-    #region public void
+        #region private variables
 
-    public void EnableAttack() => canAttack = true;
+        private Action action;
 
-    public void DisableAttack() => canAttack = false;
+        #endregion private variables
 
-    public GameObject GetPlayer() => player;
+        #region public void
 
-    public void AddEvent(Action action)
-    {
-        this.action += action;
-    }
-
-    #endregion public void
-
-    #region Unity functions
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.tag == tagObject)
+        public void EnableAttack()
         {
-            if (tagObject == "Player" && canAttack)
+            canAttack = true;
+        }
+
+        public void DisableAttack()
+        {
+            canAttack = false;
+        }
+
+        public GameObject GetPlayer() => player;
+
+        public void AddEvent(Action action)
+        {
+            this.action += action;
+        }
+
+        #endregion public void
+
+        #region Unity functions
+
+        private void OnTriggerStay2D(Collider2D collision)
+        {
+            if (collision.tag == tagObject)
             {
-                if (player == null || player != collision.gameObject)
+                if (tagObject == "Player" && canAttack)
                 {
-                    player = collision.gameObject;
-                    Debug.Log($"[ {collision.name} ] are triggered by me [ {gameObject.transform.parent.name} ]");
+                    if (player == null || player != collision.gameObject)
+                    {
+                        player = collision.gameObject;
+                        Debug.Log($"[ {collision.name} ] are triggered by me [ {gameObject.transform.parent.name} ]");
+                        action?.Invoke();
+                    }
+                }
+            }
+        }
+
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.tag == tagObject)
+            {
+                if (tagObject == "Player")
+                {
+                    gameObject.GetComponentInParent<EnemyController>().DisableAttack();
                     action?.Invoke();
                 }
             }
         }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.tag == tagObject)
-        {
-            if (tagObject == "Player")
-            {
-                gameObject.GetComponentInParent<EnemyController>().DisableAttack();
-                action?.Invoke();
-            }
-        }
+        #endregion Unity functions
     }
-
-    #endregion Unity functions
 }

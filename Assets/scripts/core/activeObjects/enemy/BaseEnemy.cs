@@ -28,6 +28,8 @@ namespace Global.ActiveObjects
 
         public EnemyStats EnemyStats => enemyStatsData;
         public EnemyType EnemyType => enemyType;
+        public Transform TransformPlayer => transformPlayer;
+        public Rigidbody2D Rig2D => rig2d;
 
         #endregion properties
 
@@ -51,14 +53,7 @@ namespace Global.ActiveObjects
             enemyStatsData = Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType);
         }
 
-        public abstract void ObjectTriggered(int damage); //GetDamage
-
-        public abstract void ObjectTriggered(float damage);
-
-        public void Movement()
-        {
-            StartCoroutine(Move());
-        }
+        public abstract void GetDamage(float damage);
 
         #endregion public void
 
@@ -67,7 +62,6 @@ namespace Global.ActiveObjects
         protected void Dead()
         {
             gameObject.SetActive(false);
-            ResetEnemyHP();
         }
 
         protected int DamageTakenCalculator(int damage)
@@ -90,29 +84,6 @@ namespace Global.ActiveObjects
             return hpDecrese;
         }
 
-        protected Vector2 Rotation(Transform transformObject)
-        {
-            return ((Vector2)transformPlayer.position - (Vector2)transformObject.position).normalized;
-        }
-
         #endregion protected void
-
-        #region private void
-
-        private IEnumerator Move()
-        {
-            if (transformPlayer != null)
-            {
-                while (movementEnable)
-                {
-                    transform.up = Rotation(transform);
-                    enemyMovement.Movement(transformPlayer, rig2d, EnemyStats.speed);
-
-                    yield return null;
-                }
-            }
-        }
-
-        #endregion private void
     }
 }

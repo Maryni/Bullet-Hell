@@ -70,6 +70,7 @@ namespace Global.Game.Component
             }
         }
 
+        //SetPause like Time.scaleTime -= renderTime (timer when cpu rendering frame)
         private IEnumerator DecreaseValueTimeScale(Action callback = null)
         {
             var timeStep = maxTimeScale / timeScaleSeconds;

@@ -5,15 +5,6 @@ namespace Global.ActiveObjects
 {
     public class MeleeEnemy : BaseEnemy
     {
-        #region Inspector variables
-
-#pragma warning disable
-        [SerializeField] private float rateMovement;
-
-#pragma warning restore
-
-        #endregion Inspector variables
-
         #region Unity functions
 
         private void Awake()
@@ -43,16 +34,7 @@ namespace Global.ActiveObjects
 
         #region public void
 
-        public override void ObjectTriggered(int damage)
-        {
-            EnemyStats.hpValueCurrent -= DamageTakenCalculator(damage);
-            if (EnemyStats.hpValueCurrent <= 0)
-            {
-                Dead();
-            }
-        }
-
-        public override void ObjectTriggered(float damage)
+        public override void GetDamage(float damage)
         {
             EnemyStats.hpValueCurrent -= DamageTakenCalculator(damage);
             if (EnemyStats.hpValueCurrent <= 0)
