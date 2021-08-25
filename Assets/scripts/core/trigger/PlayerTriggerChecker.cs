@@ -60,7 +60,6 @@ public class PlayerTriggerChecker : MonoBehaviour
             {
                 gameObject.GetComponentInParent<EnemyController>().DisableAttack();
                 action?.Invoke();
-                Debug.Log("#1 ");
             }
         }
     }
