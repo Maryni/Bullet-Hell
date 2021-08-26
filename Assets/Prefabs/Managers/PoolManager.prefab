@@ -255,10 +255,12 @@ MonoBehaviour:
   poolAutomaticList: []
   poolShotGunList: []
   poolRocketList: []
-  automaticBulletPrefab: {fileID: 0}
+  automaticBulletPrefab: {fileID: 8963442829535694533, guid: ba662eb5ac8f35e458b2ddf92f43706e,
+    type: 3}
   shotgunBulletPrefab: {fileID: 3670546892201671008, guid: efccb17e12f14f448822c54ecbf00cf2,
     type: 3}
-  rocketBulletPrefab: {fileID: 0}
+  rocketBulletPrefab: {fileID: 4434291374952679431, guid: 14e0a9af979b9354e954ad51d12a0a22,
+    type: 3}
   transformAutomatic: {fileID: 2384044451755290328}
   transformShotgun: {fileID: 4323250419504820783}
   transformRocket: {fileID: 5539395963896257698}

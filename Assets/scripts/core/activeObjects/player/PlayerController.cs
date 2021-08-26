@@ -1,7 +1,5 @@
 ﻿using Global.Controllers;
 using Global.Managers.Datas;
-using Global.Shooting;
-using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Global.Game.Component;
@@ -17,8 +15,6 @@ namespace Global.Player
         [SerializeField] private Player player;
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private ShootController shootController;
-        [SerializeField] private List<BaseWeapon> listWeapons;
-
 #pragma warning restore
 
         #endregion Inspector variables
@@ -33,7 +29,7 @@ namespace Global.Player
 
         private void Start()
         {
-            SetWeaponInPlayer(Services.GetManager<DataManager>().DynamicData.StartPlayerWeapon);
+            shootController.SetWeapon(Services.GetManager<DataManager>().DynamicData.StartPlayerWeapon);
             smoothPause = FindObjectOfType<SmoothPause>();
             player.RestoreHPToMaxHP();
         }
@@ -88,12 +84,6 @@ namespace Global.Player
         {
             var data = Services.GetManager<DataManager>().DynamicData.PlayerData;
             player.SetPlayerStatFromData(data.hp, data.speed, data.defence);
-        }
-
-        public void SetWeaponInPlayer(WeaponType weaponType)
-        {
-            var weaponScript = listWeapons.FirstOrDefault(x => x.WeaponType == weaponType);
-            shootController.SetWeapon(weaponScript);
         }
 
         #endregion public void

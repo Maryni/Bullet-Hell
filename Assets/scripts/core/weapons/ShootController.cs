@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using Global.Shooting;
-using Global.Managers.Datas;
 using Global.Player;
+using System.Collections.Generic;
+using Global.Managers.Datas;
+using System.Linq;
 
 namespace Global.Controllers
 {
@@ -16,6 +18,7 @@ namespace Global.Controllers
         [SerializeField] private Transform bulletPool;
         [SerializeField] private Vector2 mousePos;
         [SerializeField] private PlayerController playerController;
+        [SerializeField] private List<BaseWeapon> listWeapons;
 
 #pragma warning restore
 
@@ -50,9 +53,10 @@ namespace Global.Controllers
 
         #region public void
 
-        public void SetWeapon(BaseWeapon baseWeapon)
+        public void SetWeapon(WeaponType weaponType)
         {
-            this.baseWeapon = baseWeapon;
+            var weaponScript = listWeapons.FirstOrDefault(x => x.WeaponType == weaponType);
+            this.baseWeapon = weaponScript;
         }
 
         #endregion public void

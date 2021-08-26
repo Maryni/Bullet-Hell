@@ -1,4 +1,5 @@
-﻿using Global.Managers;
+﻿using Global.Controllers;
+using Global.Managers;
 using Global.Managers.Datas;
 using Global.Player;
 using Global.Shooting.BulletSpace;
@@ -61,7 +62,7 @@ namespace Global.Weapon
 
         public void SetPlayerWeaponByWeapon(WeaponType weaponType)
         {
-            player.GetComponent<PlayerController>().SetWeaponInPlayer(weaponType);
+            player.GetComponentInChildren<ShootController>().SetWeapon(weaponType);
         }
 
         public IEnumerator DisableObjectByTime(int time)
