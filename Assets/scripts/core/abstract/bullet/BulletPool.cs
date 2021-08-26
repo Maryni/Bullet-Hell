@@ -87,7 +87,7 @@ namespace Global.Managers.Datas
             var findedObj = tempListBaseBullets.FirstOrDefault(x => !x.gameObject.activeInHierarchy);
             if (findedObj == null)
             {
-                var newBullet = Instantiate(tempListBaseBullets[0].GetComponent<BaseBullet>(), tempTransformPool);
+                var newBullet = Instantiate(tempListBaseBullets[0], tempTransformPool);
                 tempListBaseBullets.Add(newBullet);
                 return newBullet;
             }
