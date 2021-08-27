@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using System.Linq;
+﻿using System.Linq;
 using UnityEngine;
 
 namespace Global.Managers.Datas
@@ -11,6 +8,13 @@ namespace Global.Managers.Datas
         AutomaticGun,
         Shotgun,
         RocketLaucher
+    }
+
+    public enum BulletType
+    {
+        AutomaticBullet,
+        ShotgunBullet,
+        RocketLaucherBullet
     }
 
     public enum EnemyType
@@ -32,6 +36,7 @@ namespace Global.Managers.Datas
 
         [SerializeField] private WeaponStats[] weaponStats;
         [SerializeField] private EnemyStats[] enemyStats;
+        [SerializeField] private BulletStats[] bulletStats;
 #pragma warning restore
 
         #endregion Inspector variables
@@ -46,6 +51,11 @@ namespace Global.Managers.Datas
         public EnemyStats GetEnemyStatsByType(EnemyType enemyType)
         {
             return enemyStats.FirstOrDefault(x => x.enemyType == enemyType);
+        }
+
+        public BulletStats GetBulletStatsByType(BulletType bulletType)
+        {
+            return bulletStats.FirstOrDefault(x => x.bulletType == bulletType);
         }
 
         #endregion public void

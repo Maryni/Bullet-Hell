@@ -20,3 +20,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8a5460b7382e59049bc71b511864dfc9, type: 2}
   - {fileID: 11400000, guid: 13f6cfefcfad5a94ca6fa886426c65f9, type: 2}
   - {fileID: 11400000, guid: 682467dff81de81479d59afcf6013875, type: 2}
+  bulletStats:
+  - {fileID: 11400000, guid: f69459a68ade3ad4e89ba92d3410b3ea, type: 2}
+  - {fileID: 11400000, guid: 19bba6a1cb1fd2640be7d2c52c838cf9, type: 2}
+  - {fileID: 11400000, guid: 333129b7f7d8ecc4ebe3e01ce878bb4d, type: 2}

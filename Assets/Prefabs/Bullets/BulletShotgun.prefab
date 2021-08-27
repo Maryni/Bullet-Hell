@@ -153,6 +153,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rig2D: {fileID: 65897543454702670}
-  bulletStats:
-    damage: 35
-    speed: 1
+  bulletStats: {fileID: 11400000, guid: 19bba6a1cb1fd2640be7d2c52c838cf9, type: 2}

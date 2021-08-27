@@ -51,4 +51,20 @@ MonoBehaviour:
     rocketData:
       timeToBlowUp: 3
       radiusBlowUp: 2
+    playerData:
+      hp: 100
+      speed: 0
+      defence: 0
+    bulletsData:
+      bulletStats:
+      - {fileID: 11400000, guid: f69459a68ade3ad4e89ba92d3410b3ea, type: 2}
+      - {fileID: 11400000, guid: 19bba6a1cb1fd2640be7d2c52c838cf9, type: 2}
+      - {fileID: 11400000, guid: 333129b7f7d8ecc4ebe3e01ce878bb4d, type: 2}
+      automaticBulletStats: {fileID: 11400000, guid: f69459a68ade3ad4e89ba92d3410b3ea,
+        type: 2}
+      shotgunBulletStats: {fileID: 11400000, guid: 19bba6a1cb1fd2640be7d2c52c838cf9,
+        type: 2}
+      rocketLaucherBulletStats: {fileID: 11400000, guid: 333129b7f7d8ecc4ebe3e01ce878bb4d,
+        type: 2}
+    cameraType: 1
   staticData: {fileID: 11400000, guid: d954cc5a7cd76f94d9809cafd4e20c92, type: 2}
