@@ -1,7 +1,4 @@
-﻿using Global.Bullet;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Global.Bullet
 {

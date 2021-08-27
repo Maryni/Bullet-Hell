@@ -8,8 +8,23 @@ namespace Global.Managers.Datas
     public enum VariableName
     {
         NoVariables,
-        RocketDataTimeToBlowUp,
-        RocketDataRadiusToBlowUp,
+        AutomaticGunCountBullets,
+        AutomaticGunCooldownTime,
+        AutomaticGunShootingRate,
+        AutomaticBulletDamage,
+        AutomaticBulletSpeed,
+        ShotGunCountBullets,
+        ShotGunCooldownTime,
+        ShotGunShootingRate,
+        ShotGunBulletDamage,
+        ShotGunBulletSpeed,
+        RocketLaucherCountBullets,
+        RocketLaucherCooldownTime,
+        RocketLaucherShootingRate,
+        RocketLaucherBulletDamage,
+        RocketLaucherBulletSpeed,
+        RocketLaucherBulleTimeToBlowUp,
+        RocketLaucherBulleRadiusToBlowUp,
         SpawnItemDataTimeToSpawn,
         SpawnItemDataTimeToHideWeaponAfterSpawn,
         PlayerSpeed,
@@ -64,11 +79,14 @@ namespace Global.Managers.Datas
 
         public void SetValue(string value, VariableName variableName)
         {
-            if (variableName == VariableName.RocketDataTimeToBlowUp)
+            if (variableName == VariableName.AutomaticGunCountBullets)
+            {
+            }
+            if (variableName == VariableName.RocketLaucherBulleTimeToBlowUp)
             {
                 rocketData.timeToBlowUp = int.Parse(value);
             }
-            if (variableName == VariableName.RocketDataRadiusToBlowUp)
+            if (variableName == VariableName.RocketLaucherBulleRadiusToBlowUp)
             {
                 rocketData.radiusBlowUp = float.Parse(value);
             }

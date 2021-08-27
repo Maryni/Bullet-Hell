@@ -18,7 +18,6 @@ namespace Global.UI
         [SerializeField] private InputField textFieldUsed;
         [SerializeField] private float valueToFloat;
         [SerializeField] private List<InputField> listFields;
-
 #pragma warning restore
 
         #endregion Inspector variables
@@ -100,32 +99,6 @@ namespace Global.UI
             {
                 valueInt--;
                 textFieldUsed.text = valueInt.ToString();
-            }
-        }
-
-        public void AddValueToTextByFloat(bool textFieldUsedBool)
-        {
-            valueFloat += valueToFloat;
-            if (textFieldUsedBool)
-            {
-                textFieldUsed.text = valueFloat.ToString();
-            }
-            else
-            {
-                textUsed.text = valueFloat.ToString();
-            }
-        }
-
-        public void LessValueFromTextByFloat(bool textFieldUsedBool)
-        {
-            valueFloat -= valueToFloat;
-            if (textFieldUsedBool)
-            {
-                textFieldUsed.text = valueFloat.ToString();
-            }
-            else
-            {
-                textUsed.text = valueFloat.ToString();
             }
         }
 

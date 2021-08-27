@@ -45,7 +45,7 @@ namespace Global.Bullet
 
             gameObject.SetActive(false);
 
-            yield return 0;
+            yield break;
         }
 
         #endregion private void
