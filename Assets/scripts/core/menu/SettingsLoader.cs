@@ -1,9 +1,8 @@
 ﻿using Global.Bullet;
 using Global.Managers.Datas;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Cinemachine;
 
 namespace Global.UI
 {
@@ -61,6 +60,9 @@ namespace Global.UI
         [Header("Player"), SerializeField]
         private InputField playerSpeed;
 
+        [Header("Camera"), SerializeField]
+        private InputField cameraDistance;
+
 #pragma warning restore
 
         #endregion Inspector variables
@@ -95,6 +97,7 @@ namespace Global.UI
             LoadSettings(playerSpeed, data.PlayerData.speed.ToString());
             LoadSettings(startWeapon, data.StartPlayerWeapon.ToString());
             LoadSettings(cameraType, data.StartCameraType.ToString());
+            LoadSettings(cameraDistance, data.CameraData.cameraDistance.ToString());
         }
 
         #endregion Unity functions

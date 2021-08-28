@@ -31,6 +31,7 @@ namespace Global.Camera
         private void Start()
         {
             SetStateCamera();
+            SetCameraDistance();
             CameraTypeChanging();
         }
 
@@ -48,6 +49,25 @@ namespace Global.Camera
             if (cameraType == GameCameraType.StaticCamera)
             {
                 isStaticCamera = true;
+            }
+        }
+
+        private void SetCameraDistance()
+        {
+            var data = Services.GetManager<DataManager>().DynamicData;
+            if (data.CameraData.cameraDistance > 0)
+            {
+                cameraObject.GetComponent<CinemachineVirtualCamera>()
+                    .m_Lens.OrthographicSize =
+                    data.CameraData.cameraDistance;
+                cameraObjectStatic.GetComponent<CinemachineVirtualCamera>()
+                    .m_Lens.OrthographicSize =
+                    data.CameraData.cameraDistance;
+            }
+            else
+            {
+                cameraObject.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 10;
+                cameraObjectStatic.GetComponent<CinemachineVirtualCamera>().m_Lens.OrthographicSize = 10;
             }
         }
 

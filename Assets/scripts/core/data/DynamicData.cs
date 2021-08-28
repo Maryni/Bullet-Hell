@@ -29,7 +29,8 @@ namespace Global.Managers.Datas
         SpawnItemDataTimeToHideWeaponAfterSpawn,
         PlayerSpeed,
         StartWeaponType,
-        StartCameraType
+        StartCameraType,
+        CameraDistance
     }
 
     [Serializable]
@@ -44,6 +45,7 @@ namespace Global.Managers.Datas
         [SerializeField] private PlayerData playerData;
         [SerializeField] private Dictionary<VariableName, Action> values = new Dictionary<VariableName, Action>();
         [SerializeField] private GameCameraType cameraType;
+        [SerializeField] private CameraData cameraData;
 #pragma warning restore
 
         #endregion private variables
@@ -53,6 +55,7 @@ namespace Global.Managers.Datas
         public SpawnItemData SpawnItemData => spawnItemData;
         public RocketData RocketData => rocketData;
         public PlayerData PlayerData => playerData;
+        public CameraData CameraData => cameraData;
         public WeaponType StartPlayerWeapon => startPlayerWeapon;
         public GameCameraType StartCameraType => cameraType;
 
@@ -160,9 +163,19 @@ namespace Global.Managers.Datas
             {
                 playerData.speed = int.Parse(value);
             }
+            if (variableName == VariableName.CameraDistance)
+            {
+                cameraData.cameraDistance = float.Parse(value);
+            }
         }
 
         #endregion public void
+    }
+
+    [Serializable]
+    public class CameraData
+    {
+        public float cameraDistance;
     }
 
     [Serializable]
