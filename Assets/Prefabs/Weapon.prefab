@@ -121,6 +121,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49a51f7bc25a4ce47b6db8b6345d854c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  automatic: {fileID: -3476979527478288156, guid: 969235604f80e2043bd7f4c8ed029a0d,
+    type: 3}
+  shotgun: {fileID: -8066788865452727643, guid: 969235604f80e2043bd7f4c8ed029a0d,
+    type: 3}
+  rocketLaucher: {fileID: -1169459152763573295, guid: 969235604f80e2043bd7f4c8ed029a0d,
+    type: 3}
   sprite: {fileID: 0}
   spriteRenderer: {fileID: 4568815427911689467}
   weaponType: 0

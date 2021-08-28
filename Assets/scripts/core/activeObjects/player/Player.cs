@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using Global.Interfaces;
-using Global.Managers.Datas;
+﻿using UnityEngine;
 
 namespace Global.Player
 {

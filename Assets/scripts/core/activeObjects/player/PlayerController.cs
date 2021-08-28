@@ -58,11 +58,12 @@ namespace Global.Player
             if (IsPlayerIsDead())
             {
                 smoothPause.StartPause();
-                SceneLoader.LoadScene(1);
+
                 var controller = FindObjectOfType<GameController>();
                 controller.DisableSpawnedItems();
                 controller.DisableSpawningEverything();
                 smoothPause.ResetTimeScale();
+                SceneLoader.LoadScene(1);
             }
         }
 
@@ -72,11 +73,12 @@ namespace Global.Player
             if (IsPlayerIsDead())
             {
                 smoothPause.StartPause();
-                SceneLoader.LoadScene(1);
+
                 var controller = FindObjectOfType<GameController>();
                 controller.DisableSpawnedItems();
                 controller.DisableSpawningEverything();
                 smoothPause.ResetTimeScale();
+                SceneLoader.LoadScene(1);
             }
         }
 

@@ -67,8 +67,11 @@ namespace Global.Trigger
             {
                 if (tagObject == "Player")
                 {
-                    gameObject.GetComponentInParent<EnemyController>().DisableAttack();
-                    action?.Invoke();
+                    if (gameObject.activeSelf)
+                    {
+                        gameObject.GetComponentInParent<EnemyController>().DisableAttack();
+                        action?.Invoke();
+                    }
                 }
             }
         }

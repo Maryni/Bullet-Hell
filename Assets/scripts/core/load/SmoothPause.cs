@@ -56,6 +56,7 @@ namespace Global.Game.Component
 
         public void ResetTimeScale()
         {
+            StopAllCoroutines();
             Time.timeScale = 1f;
         }
 
@@ -71,7 +72,6 @@ namespace Global.Game.Component
             }
         }
 
-        //SetPause like Time.scaleTime -= renderTime (timer when cpu rendering frame)
         private IEnumerator DecreaseValueTimeScale(float start, float end, float time, Action callback = null)
         {
             float lastTime = Time.realtimeSinceStartup;

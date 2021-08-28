@@ -13,6 +13,9 @@ namespace Global.Weapon
         #region Inspector variables
 
 #pragma warning disable
+        [SerializeField] private Sprite automatic;
+        [SerializeField] private Sprite shotgun;
+        [SerializeField] private Sprite rocketLaucher;
         [SerializeField] private Sprite sprite;
         [SerializeField] private SpriteRenderer spriteRenderer;
         [SerializeField] private WeaponType weaponType;
@@ -31,10 +34,6 @@ namespace Global.Weapon
 
         private void Start()
         {
-            if (sprite != null)
-            {
-                spriteRenderer.sprite = sprite;
-            }
             if (player == null)
             {
                 player = FindObjectOfType<PlayerController>().gameObject;
@@ -54,6 +53,23 @@ namespace Global.Weapon
         #endregion Unity functions
 
         #region public void
+
+        public void SetSprite()
+        {
+            if (weaponType == WeaponType.AutomaticGun)
+            {
+                sprite = automatic;
+            }
+            if (weaponType == WeaponType.Shotgun)
+            {
+                sprite = shotgun;
+            }
+            if (weaponType == WeaponType.RocketLaucher)
+            {
+                sprite = rocketLaucher;
+            }
+            spriteRenderer.sprite = sprite;
+        }
 
         public void SetWeaponRandom()
         {
