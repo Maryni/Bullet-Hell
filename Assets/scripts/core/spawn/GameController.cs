@@ -54,12 +54,14 @@ namespace Global.Controllers
         {
             DisableSpawningEnemy();
             DisableSpawningGun();
+            StopAllCoroutines();
         }
 
         public void DisableSpawnedItems()
         {
             DisableEnemies();
             DisableBullets();
+            DisableWeapons();
         }
 
         #endregion public void
@@ -84,6 +86,11 @@ namespace Global.Controllers
         private void DisableBullets()
         {
             Services.GetManager<PoolManager>().BulletPool.DisableBullets();
+        }
+
+        private void DisableWeapons()
+        {
+            Services.GetManager<PoolManager>().WeaponPool.DisableWeapons();
         }
 
         private void SetTimersFromData()
@@ -121,6 +128,7 @@ namespace Global.Controllers
             var tempWeaponPool = Services.GetManager<PoolManager>().WeaponPool;
             var tempObject = tempWeaponPool.GetObject();
             tempObject.gameObject.SetActive(true);
+            tempObject.CheckAndSetPlayerTransform();
             tempObject.SetWeaponRandom();
             tempObject.SetSprite();
             GetWidthAndHeightForSpawnInCameraView(tempObject.gameObject);

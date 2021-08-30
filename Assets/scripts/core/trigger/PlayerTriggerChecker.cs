@@ -41,6 +41,11 @@ namespace Global.Trigger
             this.action += action;
         }
 
+        public void RestoreEvents()
+        {
+            action = null;
+        }
+
         #endregion public void
 
         #region Unity functions
@@ -55,7 +60,11 @@ namespace Global.Trigger
                     {
                         player = collision.gameObject;
                         Debug.Log($"[ {collision.name} ] are triggered by me [ {gameObject.transform.parent.name} ]");
-                        action?.Invoke();
+
+                        if (gameObject.activeInHierarchy)
+                        {
+                            action?.Invoke();
+                        }
                     }
                 }
             }
@@ -67,7 +76,7 @@ namespace Global.Trigger
             {
                 if (tagObject == "Player")
                 {
-                    if (gameObject.activeSelf)
+                    if (gameObject.transform.parent.gameObject.activeSelf)
                     {
                         gameObject.GetComponentInParent<EnemyController>().DisableAttack();
                         action?.Invoke();

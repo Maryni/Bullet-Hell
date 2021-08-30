@@ -62,7 +62,16 @@ namespace Global.Shooting.BulletSpace
                     }
                     if (triggerType == TriggerType.Enemy)
                     {
-                        collision.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
+                        if (baseBullet.BulletStats.bulletType == Managers.Datas.BulletType.RocketLaucherBullet)
+                        {
+                            ((RocketLaucherBullet)baseBullet).ExplosiveRadiusUp();
+                            collision.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
+                            ((RocketLaucherBullet)baseBullet).ExplosiveRadiusDown();
+                        }
+                        else
+                        {
+                            collision.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
+                        }
                     }
                 }
             }

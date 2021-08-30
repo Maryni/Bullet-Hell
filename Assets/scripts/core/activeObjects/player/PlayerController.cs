@@ -60,8 +60,9 @@ namespace Global.Player
                 smoothPause.StartPause();
 
                 var controller = FindObjectOfType<GameController>();
-                controller.DisableSpawnedItems();
                 controller.DisableSpawningEverything();
+                controller.DisableSpawnedItems();
+
                 smoothPause.ResetTimeScale();
                 SceneLoader.LoadScene(1);
             }
@@ -75,8 +76,9 @@ namespace Global.Player
                 smoothPause.StartPause();
 
                 var controller = FindObjectOfType<GameController>();
-                controller.DisableSpawnedItems();
                 controller.DisableSpawningEverything();
+                controller.DisableSpawnedItems();
+
                 smoothPause.ResetTimeScale();
                 SceneLoader.LoadScene(1);
             }

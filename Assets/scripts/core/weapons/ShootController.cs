@@ -42,7 +42,7 @@ namespace Global.Controllers
 
         private void Update()
         {
-            if (Time.timeScale == 1f)
+            if (Time.timeScale > 0f)
             {
                 cannonTransform.up = Rotation(cannonTransform);
                 GetReadyShootByWeapon();
@@ -57,6 +57,7 @@ namespace Global.Controllers
         {
             var weaponScript = listWeapons.FirstOrDefault(x => x.WeaponType == weaponType);
             this.baseWeapon = weaponScript;
+            baseWeapon.StopAllCoroutines();
         }
 
         #endregion public void

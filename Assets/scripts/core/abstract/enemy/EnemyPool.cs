@@ -35,6 +35,7 @@ namespace Global.Managers.Datas
                 if (listEnemies[i].gameObject.activeInHierarchy)
                 {
                     listEnemies[i].gameObject.SetActive(false);
+                    //listEnemies[i].gameObject.transform.parent.gameObject.SetActive(false);
                 }
             }
         }

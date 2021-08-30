@@ -13,14 +13,14 @@ namespace Global.Weapon
 #pragma warning disable
         [SerializeField] private PlayerTriggerChecker playerTriggerChecker;
         [SerializeField] private GameObject player;
-
+        [SerializeField] private bool canAttack;
 #pragma warning restore
 
         #endregion Inspector variables
 
         #region private variables
 
-        [SerializeField] private bool canAttack;
+        private Coroutine coroutine;
 
         #endregion private variables
 
@@ -28,7 +28,10 @@ namespace Global.Weapon
 
         private void OnValidate()
         {
-            playerTriggerChecker = GetComponent<PlayerTriggerChecker>();
+            if (playerTriggerChecker == null)
+            {
+                playerTriggerChecker = GetComponent<PlayerTriggerChecker>();
+            }
         }
 
         #endregion Unity function
@@ -43,9 +46,22 @@ namespace Global.Weapon
         public void DisableAttack()
         {
             canAttack = false;
+            StopCoroutineAttack();
         }
 
-        public IEnumerator Attack(EnemyType enemyType)
+        public void Attack(EnemyType enemyType)
+        {
+            if (gameObject.transform.parent.gameObject.activeInHierarchy && coroutine == null)
+            {
+                coroutine = StartCoroutine(Attacking(enemyType));
+            }
+        }
+
+        #endregion public void
+
+        #region private void
+
+        private IEnumerator Attacking(EnemyType enemyType)
         {
             if (canAttack)
             {
@@ -57,10 +73,19 @@ namespace Global.Weapon
                     player = null;
                 }
                 yield return new WaitForSeconds(stats.attackRate);
-                yield return Attack(enemyType);
+                yield return Attacking(enemyType);
             }
         }
 
-        #endregion public void
+        private void StopCoroutineAttack()
+        {
+            if (coroutine != null)
+            {
+                StopCoroutine(coroutine);
+                coroutine = null;
+            }
+        }
+
+        #endregion private void
     }
 }

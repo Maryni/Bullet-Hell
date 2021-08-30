@@ -161,7 +161,7 @@ namespace Global.Managers.Datas
             }
             if (variableName == VariableName.PlayerSpeed)
             {
-                playerData.speed = int.Parse(value);
+                playerData.speed = float.Parse(value);
             }
             if (variableName == VariableName.CameraDistance)
             {
@@ -196,7 +196,7 @@ namespace Global.Managers.Datas
     public class PlayerData
     {
         public int hp;
-        public int speed;
+        public float speed;
         public int defence;
     }
 }

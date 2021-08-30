@@ -32,14 +32,6 @@ namespace Global.Weapon
 
         #region Unity functions
 
-        private void Start()
-        {
-            if (player == null)
-            {
-                player = FindObjectOfType<PlayerController>().gameObject;
-            }
-        }
-
         //get collision with player and say GameController change playerWeapon by my weapon
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -69,6 +61,14 @@ namespace Global.Weapon
                 sprite = rocketLaucher;
             }
             spriteRenderer.sprite = sprite;
+        }
+
+        public void CheckAndSetPlayerTransform()
+        {
+            if (player == null)
+            {
+                player = FindObjectOfType<PlayerController>().gameObject;
+            }
         }
 
         public void SetWeaponRandom()

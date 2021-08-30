@@ -9,7 +9,7 @@ namespace Global.Player
 #pragma warning disable
 
         [SerializeField] private int hpMaximum;
-        [SerializeField] private int speed;
+        [SerializeField] private float speed;
         [SerializeField] private int defence;
         [SerializeField] private float hpValue;
 
@@ -38,7 +38,7 @@ namespace Global.Player
             hpValue -= hp;
         }
 
-        public void SetPlayerStatFromData(int hp, int speed, int defence)
+        public void SetPlayerStatFromData(int hp, float speed, int defence)
         {
             hpMaximum = hp;
             this.defence = defence;

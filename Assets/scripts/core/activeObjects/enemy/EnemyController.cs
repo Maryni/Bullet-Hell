@@ -63,15 +63,21 @@ namespace Global.ActiveObjects
 
         public void EnableAttack()
         {
-            enemyTrigger.EnableAttack();
-            enemyTrigger.AddEvent(() => meleeAttack.EnableAttack());
-            enemyTrigger.AddEvent(() => StartCoroutine(meleeAttack.Attack(meleeEnemy.EnemyStats.enemyType)));
+            if (meleeEnemy.gameObject.activeInHierarchy)
+            {
+                enemyTrigger.EnableAttack();
+                enemyTrigger.AddEvent(() => meleeAttack.EnableAttack());
+                enemyTrigger.AddEvent(() => meleeAttack.Attack(meleeEnemy.EnemyStats.enemyType));
+            }
         }
 
         public void DisableAttack()
         {
-            enemyTrigger.AddEvent(() => meleeAttack.DisableAttack());
+            StopAllCoroutines();
+            enemyTrigger.RestoreEvents();
+            enemyTrigger.AddEvent(() => StopAllCoroutines());
             enemyTrigger.DisableAttack();
+            enemyTrigger.AddEvent(() => meleeAttack.DisableAttack());
         }
 
         #endregion public void

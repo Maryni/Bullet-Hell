@@ -15,6 +15,12 @@ namespace Global.Bullet
 
         #endregion Inspector variables
 
+        #region private variables
+
+        private float currentRadius;
+
+        #endregion private variables
+
         #region Unity functions
 
         private void OnValidate()
@@ -25,6 +31,18 @@ namespace Global.Bullet
         #endregion Unity functions
 
         #region public void
+
+        public void ExplosiveRadiusUp()
+        {
+            currentRadius = circleCollider2D.radius;
+            circleCollider2D.radius = Services.GetManager<DataManager>().DynamicData.RocketData.radiusBlowUp;
+        }
+
+        public void ExplosiveRadiusDown()
+        {
+            circleCollider2D.radius = currentRadius;
+            gameObject.SetActive(false);
+        }
 
         public override void Move()
         {

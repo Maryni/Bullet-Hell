@@ -138,7 +138,7 @@ MonoBehaviour:
   triggerType: 1
   useMeOrTriggerObject: 1
   dealDamage: 1
-  mustDisable: 1
+  mustDisable: 0
   baseBullet: {fileID: 4434291374952679431}
 --- !u!114 &4434291374952679431
 MonoBehaviour:

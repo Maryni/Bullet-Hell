@@ -12806,7 +12806,7 @@ MonoBehaviour:
   variableName: 13
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 591888131405409404}
-  valueToFloat: 1
+  valueToFloat: 0.1
   listFields: []
 --- !u!1 &4843538196803018721
 GameObject:
@@ -24175,5 +24175,5 @@ MonoBehaviour:
   variableName: 8
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 4774179926592667731}
-  valueToFloat: 1
+  valueToFloat: 0.1
   listFields: []
