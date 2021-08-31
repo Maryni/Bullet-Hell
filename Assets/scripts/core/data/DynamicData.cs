@@ -24,7 +24,9 @@ namespace Global.Managers.Datas
         RocketLaucherCooldownTime,
         RocketLaucherShootingRate,
         RocketLaucherBulletDamage,
-        RocketLaucherBulletSpeed,
+        RocketLaucherBulletMinSpeed,
+        RocketLaucherBulletMaxSpeed,
+        RocketLaucherBulletAccelerationTime,
         RocketLaucherBulleTimeToBlowUp,
         RocketLaucherBulleRadiusToBlowUp,
         SpawnItemDataTimeToSpawn,
@@ -154,9 +156,17 @@ namespace Global.Managers.Datas
             {
                 data.StaticData.GetBulletStatsByType(BulletType.RocketLaucherBullet).damage = int.Parse(value);
             }
-            if (variableName == VariableName.RocketLaucherBulletSpeed)
+            if (variableName == VariableName.RocketLaucherBulletMinSpeed)
             {
-                data.StaticData.GetBulletStatsByType(BulletType.RocketLaucherBullet).speed = float.Parse(value);
+                rocketData.minSpeed = float.Parse(value);
+            }
+            if (variableName == VariableName.RocketLaucherBulletMaxSpeed)
+            {
+                rocketData.maxSpeed = float.Parse(value);
+            }
+            if (variableName == VariableName.RocketLaucherBulletAccelerationTime)
+            {
+                rocketData.timeAcceleration = float.Parse(value);
             }
             if (variableName == VariableName.RocketLaucherBulleTimeToBlowUp)
             {
@@ -209,6 +219,9 @@ namespace Global.Managers.Datas
     {
         public int timeToBlowUp;
         public float radiusBlowUp;
+        public float minSpeed;
+        public float maxSpeed;
+        public float timeAcceleration;
     }
 
     [Serializable]

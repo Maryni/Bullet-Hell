@@ -48,6 +48,7 @@ namespace Global.Bullet
         {
             Rig2D.AddForce(transform.up * BulletStats.speed, ForceMode2D.Impulse);
             StartCoroutine(ExplosiveByTime());
+            StartCoroutine(IncreaseSpeed());
         }
 
         #endregion public void
@@ -64,6 +65,22 @@ namespace Global.Bullet
             gameObject.SetActive(false);
 
             yield break;
+        }
+
+        private IEnumerator IncreaseSpeed()
+        {
+            var data = Services.GetManager<DataManager>().DynamicData.RocketData;
+            float startSpeed = data.minSpeed;
+            float finishSpeed = data.maxSpeed;
+            float currentSpeed = startSpeed;
+            float step = (data.maxSpeed - data.minSpeed) / data.timeAcceleration;
+            while (currentSpeed <= finishSpeed)
+            {
+                Rig2D.velocity = Vector2.zero;
+                Rig2D.AddForce(transform.up * currentSpeed, ForceMode2D.Impulse);
+                currentSpeed += step;
+                yield return null;
+            }
         }
 
         #endregion private void

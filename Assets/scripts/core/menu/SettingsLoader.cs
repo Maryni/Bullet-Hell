@@ -50,7 +50,9 @@ namespace Global.UI
         [SerializeField] private InputField rocketLaucherCooldownTime;
         [SerializeField] private InputField rocketLaucherShootingRate;
         [SerializeField] private InputField rocketLaucherBulletDamage;
-        [SerializeField] private InputField rocketLaucherBulletSpeed;
+        [SerializeField] private InputField rocketLaucherBulletMinSpeed;
+        [SerializeField] private InputField rocketLaucherBulletMaxSpeed;
+        [SerializeField] private InputField rocketLaucherBulletTimeAcceleration;
         [SerializeField] private InputField rocketTimerBlowUp;
         [SerializeField] private InputField rocketRadiusBlowUp;
 
@@ -95,7 +97,10 @@ namespace Global.UI
             LoadSettings(rocketLaucherCooldownTime, rocketLaucherStatsFile.cooldownTime.ToString());
             LoadSettings(rocketLaucherShootingRate, rocketLaucherStatsFile.shootingRate.ToString());
             LoadSettings(rocketLaucherBulletDamage, rocketLaucherBulletGameObject.GetComponent<RocketLaucherBullet>().BulletStats.damage.ToString());
-            LoadSettings(rocketLaucherBulletSpeed, rocketLaucherBulletGameObject.GetComponent<RocketLaucherBullet>().BulletStats.speed.ToString());
+            LoadSettings(rocketLaucherBulletMinSpeed, rocketLaucherBulletGameObject.GetComponent<RocketLaucherBullet>().BulletStats.speed.ToString());
+            LoadSettings(rocketLaucherBulletMaxSpeed, data.RocketData.maxSpeed.ToString());
+            LoadSettings(rocketLaucherBulletTimeAcceleration, data.RocketData.timeAcceleration.ToString());
+
             LoadSettings(rocketTimerBlowUp, data.RocketData.timeToBlowUp.ToString());
             LoadSettings(rocketRadiusBlowUp, data.RocketData.radiusBlowUp.ToString());
 

@@ -34,6 +34,14 @@ namespace Global.Bullet
             }
         }
 
+        private void Start()
+        {
+            if (BulletStats.bulletType == BulletType.RocketLaucherBullet)
+            {
+                bulletStats.speed = Services.GetManager<DataManager>().DynamicData.RocketData.minSpeed;
+            }
+        }
+
         #endregion Unity functions
 
         #region public void
