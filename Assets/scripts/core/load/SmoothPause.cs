@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Global.Managers.Datas;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -29,6 +30,7 @@ namespace Global.Game.Component
 
         private void Start()
         {
+            SetValueFromData();
             maxTimeScale = Time.timeScale;
         }
 
@@ -63,6 +65,12 @@ namespace Global.Game.Component
         #endregion public void
 
         #region private void
+
+        private void SetValueFromData()
+        {
+            var data = Services.GetManager<DataManager>().DynamicData;
+            timeScaleSeconds = data.PauseData.pauseTime;
+        }
 
         private void EnablePause()
         {

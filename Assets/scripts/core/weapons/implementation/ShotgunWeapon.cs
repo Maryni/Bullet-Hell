@@ -1,5 +1,6 @@
 ﻿using Global.Bullet;
 using Global.Managers;
+using Global.Managers.Datas;
 using Global.Shooting;
 using System;
 using System.Collections;
@@ -29,6 +30,7 @@ namespace Global.Weapon
         private void Start()
         {
             Init();
+            SetValueFromData();
             AddOrRemoveValueToInt();
             bulletCountCurrent = weaponStats.bulletCount;
         }
@@ -98,6 +100,13 @@ namespace Global.Weapon
                 }
                 Start();
             }
+        }
+
+        private void SetValueFromData()
+        {
+            var data = Services.GetManager<DataManager>().DynamicData;
+            countBulletForShot = data.ShotgunData.countBulletsInOnceShoot;
+            angleBullet = data.ShotgunData.angleBullets;
         }
 
         #endregion private void

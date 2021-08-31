@@ -15,6 +15,7 @@ namespace Global.Player
         [SerializeField] private Player player;
         [SerializeField] private PlayerMovement playerMovement;
         [SerializeField] private ShootController shootController;
+        [SerializeField] private GameObject losePanel;
 #pragma warning restore
 
         #endregion Inspector variables
@@ -62,9 +63,7 @@ namespace Global.Player
                 var controller = FindObjectOfType<GameController>();
                 controller.DisableSpawningEverything();
                 controller.DisableSpawnedItems();
-
-                smoothPause.ResetTimeScale();
-                SceneLoader.LoadScene(1);
+                losePanel.SetActive(true);
             }
         }
 
@@ -78,9 +77,7 @@ namespace Global.Player
                 var controller = FindObjectOfType<GameController>();
                 controller.DisableSpawningEverything();
                 controller.DisableSpawnedItems();
-
-                smoothPause.ResetTimeScale();
-                SceneLoader.LoadScene(1);
+                losePanel.SetActive(true);
             }
         }
 

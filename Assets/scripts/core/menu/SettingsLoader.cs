@@ -41,6 +41,8 @@ namespace Global.UI
         [SerializeField] private InputField shotgunShootingRate;
         [SerializeField] private InputField shotgunBulletDamage;
         [SerializeField] private InputField shotgunBulletSpeed;
+        [SerializeField] private InputField shotgunAngleBullet;
+        [SerializeField] private InputField shotgunCountBulletsPerShoot;
 
         [Header("RocketLaucher"), SerializeField]
         private InputField rocketLaucherCountBullets;
@@ -63,6 +65,9 @@ namespace Global.UI
         [Header("Camera"), SerializeField]
         private InputField cameraDistance;
 
+        [Header("Pause"), SerializeField]
+        private InputField pauseTime;
+
 #pragma warning restore
 
         #endregion Inspector variables
@@ -81,6 +86,8 @@ namespace Global.UI
             LoadSettings(shotgunCountBullets, shotgunStatsFile.bulletCount.ToString());
             LoadSettings(shotgunCooldownTime, shotgunStatsFile.cooldownTime.ToString());
             LoadSettings(shotgunShootingRate, shotgunStatsFile.shootingRate.ToString());
+            LoadSettings(shotgunAngleBullet, data.ShotgunData.angleBullets.ToString());
+            LoadSettings(shotgunCountBulletsPerShoot, data.ShotgunData.countBulletsInOnceShoot.ToString());
             LoadSettings(shotgunBulletDamage, shotgunBulletGameObject.GetComponent<ShotgunBullet>().BulletStats.damage.ToString());
             LoadSettings(shotgunBulletSpeed, shotgunBulletGameObject.GetComponent<ShotgunBullet>().BulletStats.speed.ToString());
 
@@ -98,6 +105,7 @@ namespace Global.UI
             LoadSettings(startWeapon, data.StartPlayerWeapon.ToString());
             LoadSettings(cameraType, data.StartCameraType.ToString());
             LoadSettings(cameraDistance, data.CameraData.cameraDistance.ToString());
+            LoadSettings(pauseTime, data.PauseData.pauseTime.ToString());
         }
 
         #endregion Unity functions

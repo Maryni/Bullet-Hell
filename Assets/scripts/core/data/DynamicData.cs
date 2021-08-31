@@ -16,6 +16,8 @@ namespace Global.Managers.Datas
         ShotGunCountBullets,
         ShotGunCooldownTime,
         ShotGunShootingRate,
+        ShotGunAngleBullet,
+        ShotGunCountBulletsPerShoot,
         ShotGunBulletDamage,
         ShotGunBulletSpeed,
         RocketLaucherCountBullets,
@@ -30,7 +32,8 @@ namespace Global.Managers.Datas
         PlayerSpeed,
         StartWeaponType,
         StartCameraType,
-        CameraDistance
+        CameraDistance,
+        PauseTime
     }
 
     [Serializable]
@@ -43,6 +46,8 @@ namespace Global.Managers.Datas
         [SerializeField] private SpawnItemData spawnItemData;
         [SerializeField] private RocketData rocketData;
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private ShotgunData shotgunData;
+        [SerializeField] private PauseData pauseData;
         [SerializeField] private Dictionary<VariableName, Action> values = new Dictionary<VariableName, Action>();
         [SerializeField] private GameCameraType cameraType;
         [SerializeField] private CameraData cameraData;
@@ -56,6 +61,8 @@ namespace Global.Managers.Datas
         public RocketData RocketData => rocketData;
         public PlayerData PlayerData => playerData;
         public CameraData CameraData => cameraData;
+        public ShotgunData ShotgunData => shotgunData;
+        public PauseData PauseData => pauseData;
         public WeaponType StartPlayerWeapon => startPlayerWeapon;
         public GameCameraType StartCameraType => cameraType;
 
@@ -115,6 +122,14 @@ namespace Global.Managers.Datas
             {
                 data.StaticData.GetWeaponStatsByType(WeaponType.Shotgun).shootingRate = float.Parse(value);
             }
+            if (variableName == VariableName.ShotGunAngleBullet)
+            {
+                data.DynamicData.ShotgunData.angleBullets = float.Parse(value);
+            }
+            if (variableName == VariableName.ShotGunCountBulletsPerShoot)
+            {
+                data.DynamicData.ShotgunData.countBulletsInOnceShoot = int.Parse(value);
+            }
             if (variableName == VariableName.ShotGunBulletDamage)
             {
                 data.StaticData.GetBulletStatsByType(BulletType.ShotgunBullet).damage = int.Parse(value);
@@ -167,6 +182,10 @@ namespace Global.Managers.Datas
             {
                 cameraData.cameraDistance = float.Parse(value);
             }
+            if (variableName == VariableName.PauseTime)
+            {
+                pauseData.pauseTime = float.Parse(value);
+            }
         }
 
         #endregion public void
@@ -193,10 +212,23 @@ namespace Global.Managers.Datas
     }
 
     [Serializable]
+    public class ShotgunData
+    {
+        public float angleBullets;
+        public int countBulletsInOnceShoot;
+    }
+
+    [Serializable]
     public class PlayerData
     {
         public int hp;
         public float speed;
         public int defence;
+    }
+
+    [Serializable]
+    public class PauseData
+    {
+        public float pauseTime;
     }
 }
