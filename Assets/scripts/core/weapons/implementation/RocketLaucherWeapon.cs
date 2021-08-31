@@ -23,11 +23,6 @@ namespace Global.Weapon
 
         protected override IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
         {
-            if (bulletCountCurrent == 0)
-            {
-                yield return Reload();
-            }
-
             bulletCountCurrent--;
             float zParentRotation = gameObject.transform.parent.transform.rotation.eulerAngles.z;
             var bullet = (RocketLaucherBullet)Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
@@ -36,6 +31,10 @@ namespace Global.Weapon
             bullet.Rotate(zParentRotation);
             bullet.Move();
             yield return new WaitForSeconds(weaponStats.shootingRate);
+            if (bulletCountCurrent == 0)
+            {
+                yield return Reload();
+            }
             StartCoroutine(base.Shoot(mousePos, transformParent, callback));
             callback?.Invoke();
         }

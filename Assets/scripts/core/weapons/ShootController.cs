@@ -58,6 +58,7 @@ namespace Global.Controllers
             var weaponScript = listWeapons.FirstOrDefault(x => x.WeaponType == weaponType);
             this.baseWeapon = weaponScript;
             baseWeapon.StopAllCoroutines();
+            baseWeapon.ReserCoroutine();
         }
 
         #endregion public void

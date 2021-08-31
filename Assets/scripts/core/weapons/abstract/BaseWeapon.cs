@@ -58,6 +58,11 @@ namespace Global.Shooting
             this.weaponType = weaponType;
         }
 
+        public void ReserCoroutine()
+        {
+            coroutineShot = null;
+        }
+
         #endregion public void
 
         #region protected void
