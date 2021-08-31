@@ -58,12 +58,10 @@ namespace Global.Player
             player.DecreaseHp(CalculateDamage(damage));
             if (IsPlayerIsDead())
             {
-                smoothPause.StartPause();
-
+                smoothPause.StartPauseWhenDead();
                 var controller = FindObjectOfType<GameController>();
                 controller.DisableSpawningEverything();
                 controller.DisableSpawnedItems();
-                losePanel.SetActive(true);
             }
         }
 
@@ -72,12 +70,10 @@ namespace Global.Player
             player.DecreaseHp(CalculateDamage(damage));
             if (IsPlayerIsDead())
             {
-                smoothPause.StartPause();
-
+                smoothPause.StartPauseWhenDead();
                 var controller = FindObjectOfType<GameController>();
                 controller.DisableSpawningEverything();
                 controller.DisableSpawnedItems();
-                losePanel.SetActive(true);
             }
         }
 

@@ -12,6 +12,7 @@ namespace Global.Game.Component
 
 #pragma warning disable
         [SerializeField] private GameObject panelMenu;
+        [SerializeField] private GameObject losePanel;
         [SerializeField] private float timeScaleSeconds;
 
 #pragma warning restore
@@ -46,6 +47,11 @@ namespace Global.Game.Component
 
         #region public void
 
+        public void StartPauseWhenDead()
+        {
+            EnableDiePanel();
+        }
+
         public void StartPause()
         {
             EnablePause();
@@ -76,11 +82,19 @@ namespace Global.Game.Component
         {
             if (coroutineDecreaseToOne == null)
             {
-                coroutineDecreaseToOne = StartCoroutine(DecreaseValueTimeScale(maxTimeScale, minTimeScale, timeScaleSeconds));
+                coroutineDecreaseToOne = StartCoroutine(DecreaseValueTimeScale(maxTimeScale, minTimeScale, timeScaleSeconds, false));
             }
         }
 
-        private IEnumerator DecreaseValueTimeScale(float start, float end, float time, Action callback = null)
+        private void EnableDiePanel()
+        {
+            if (coroutineDecreaseToOne == null)
+            {
+                coroutineDecreaseToOne = StartCoroutine(DecreaseValueTimeScale(maxTimeScale, minTimeScale, timeScaleSeconds, true));
+            }
+        }
+
+        private IEnumerator DecreaseValueTimeScale(float start, float end, float time, bool isDie, Action callback = null)
         {
             float lastTime = Time.realtimeSinceStartup;
             float timer = 0.0f;
@@ -94,9 +108,16 @@ namespace Global.Game.Component
             }
 
             Time.timeScale = end;
+            if (isDie)
+            {
+                losePanel.SetActive(true);
+            }
+            else
+            {
+                panelMenu.SetActive(true);
+            }
 
-            panelMenu.SetActive(true);
-            StopPauseCoroutine(DecreaseValueTimeScale(start, end, time, callback));
+            StopPauseCoroutine(DecreaseValueTimeScale(start, end, time, isDie, callback));
             callback?.Invoke();
         }
 

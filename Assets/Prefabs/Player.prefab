@@ -388,3 +388,4 @@ MonoBehaviour:
   player: {fileID: 3691523426021728078}
   playerMovement: {fileID: 3691523426021728077}
   shootController: {fileID: 3691523425123133484}
+  losePanel: {fileID: 0}
