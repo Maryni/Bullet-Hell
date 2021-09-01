@@ -72,6 +72,7 @@ namespace Global.Managers.Datas
 
         #region public void
 
+        //rewrite to few many functions
         public void SetValueToData(VariableName variableName, string value)
         {
             values.Add(variableName, () => SetValue(value, variableName));

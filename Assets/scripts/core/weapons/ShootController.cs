@@ -4,6 +4,7 @@ using Global.Player;
 using System.Collections.Generic;
 using Global.Managers.Datas;
 using System.Linq;
+using System;
 
 namespace Global.Controllers
 {
@@ -30,6 +31,13 @@ namespace Global.Controllers
 
         #endregion properties
 
+        #region private variables
+
+        private Action actionMaximumBulletsChange;
+        private Action actionCurrentBulletsChange;
+
+        #endregion private variables
+
         #region Unity function
 
         private void OnValidate()
@@ -53,12 +61,24 @@ namespace Global.Controllers
 
         #region public void
 
+        public void AddEventToMaximumBulletsChange(Action action)
+        {
+            actionMaximumBulletsChange += action;
+        }
+
+        public void AddEventToCurrentBulletsChange(Action action)
+        {
+            actionCurrentBulletsChange += action;
+        }
+
         public void SetWeapon(WeaponType weaponType)
         {
             var weaponScript = listWeapons.FirstOrDefault(x => x.WeaponType == weaponType);
             this.baseWeapon = weaponScript;
             baseWeapon.StopAllCoroutines();
             baseWeapon.ReserCoroutine();
+            actionMaximumBulletsChange?.Invoke();
+            actionCurrentBulletsChange?.Invoke();
         }
 
         #endregion public void
@@ -72,6 +92,7 @@ namespace Global.Controllers
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
                     baseWeapon.Shoot(mousePos, bulletPool);
+                    actionCurrentBulletsChange?.Invoke();
                 }
             }
         }

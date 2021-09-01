@@ -1,5 +1,6 @@
 ﻿using Global.Trigger;
 using Global.Weapon;
+using System;
 using UnityEngine;
 
 namespace Global.ActiveObjects
@@ -12,6 +13,7 @@ namespace Global.ActiveObjects
         [SerializeField] private PlayerTriggerChecker enemyTrigger;
         [SerializeField] private MeleeAttack meleeAttack;
         [SerializeField] private EnemyMovement enemyMovement;
+        [SerializeField] private ScoreItem scoreItem;
 
         #endregion Inspector variables
 
@@ -37,11 +39,20 @@ namespace Global.ActiveObjects
             {
                 meleeAttack = GetComponentInChildren<MeleeAttack>();
             }
+            if (scoreItem == null)
+            {
+                scoreItem = GetComponent<ScoreItem>();
+            }
         }
 
         #endregion Unity functions
 
         #region public void
+
+        public void AddEventToEnemy(Action action)
+        {
+            meleeEnemy.AddEventOnDie(action);
+        }
 
         public void SetPlayerTransform()
         {
@@ -59,6 +70,7 @@ namespace Global.ActiveObjects
             meleeEnemy.ResetEnemyHP();
             enemyMovement.Move(meleeEnemy.TransformPlayer, meleeEnemy.Rig2D, meleeEnemy.EnemyStats.speed);
             EnableAttack();
+            scoreItem.FindAndSetHUDController();
         }
 
         public void EnableAttack()

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Global.Managers.Datas;
+using System;
 
 namespace Global.ActiveObjects
 {
@@ -19,6 +20,7 @@ namespace Global.ActiveObjects
         #region private variables
 
         private EnemyStats enemyStatsData;
+        private Action actionOnDie;
 
         #endregion private variables
 
@@ -32,6 +34,11 @@ namespace Global.ActiveObjects
         #endregion properties
 
         #region public void
+
+        public void AddEventOnDie(Action action)
+        {
+            actionOnDie += action;
+        }
 
         public void SetTransformPlayer()
         {
@@ -60,6 +67,7 @@ namespace Global.ActiveObjects
         protected void Dead()
         {
             gameObject.SetActive(false);
+            actionOnDie?.Invoke();
         }
 
         protected int DamageTakenCalculator(int damage)

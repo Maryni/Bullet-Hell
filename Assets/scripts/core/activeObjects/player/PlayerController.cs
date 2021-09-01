@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using Global.Game.Component;
 using Tools;
+using System;
 
 namespace Global.Player
 {
@@ -20,9 +21,16 @@ namespace Global.Player
 
         #endregion Inspector variables
 
+        #region properties
+
+        public ShootController ShootController => shootController;
+
+        #endregion properties
+
         #region private variables
 
         private SmoothPause smoothPause;
+        private Action action;
 
         #endregion private variables
 
@@ -39,9 +47,34 @@ namespace Global.Player
 
         #region public void
 
+        public void AddEvent(Action action)
+        {
+            this.action += action;
+        }
+
         public WeaponType GetWeaponTypeByPlayer()
         {
             return shootController.CurrentWeapon.WeaponType;
+        }
+
+        public int GetCountMaxBulletsByCurrentWeapon()
+        {
+            return shootController.CurrentWeapon.WeaponStats.bulletCount;
+        }
+
+        public int GetCountCurrentBulletsByCurrentWeapon()
+        {
+            return shootController.CurrentWeapon.BulletCountCurrent;
+        }
+
+        public float GetHpPlayerCurrent()
+        {
+            return player.HPValue;
+        }
+
+        public int GetHpPlayerMaximum()
+        {
+            return player.HPMaximum;
         }
 
         public bool IsPlayerIsDead()
@@ -63,6 +96,7 @@ namespace Global.Player
                 controller.DisableSpawningEverything();
                 controller.DisableSpawnedItems();
             }
+            action?.Invoke();
         }
 
         public void DamagePlayer(float damage)
@@ -75,6 +109,7 @@ namespace Global.Player
                 controller.DisableSpawningEverything();
                 controller.DisableSpawnedItems();
             }
+            action?.Invoke();
         }
 
         public void SetPlayerStatsFromData()

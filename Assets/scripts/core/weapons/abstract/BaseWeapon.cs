@@ -20,6 +20,7 @@ namespace Global.Shooting
 
         public WeaponType WeaponType => weaponType;
         public WeaponStats WeaponStats => weaponStats;
+        public int BulletCountCurrent => bulletCountCurrent;
 
         #endregion properties
 
