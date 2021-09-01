@@ -32,6 +32,7 @@ namespace Global.Managers.Datas
         {
             SaveData.DefaultSave(dynamicData);
             dynamicData = SaveData.Load();
+            dynamicData.SetActionsToDictionary();
             return true;
         }
     }
