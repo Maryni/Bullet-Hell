@@ -31,11 +31,19 @@ namespace Global.Player
         public void DecreaseHp(int hp)
         {
             hpValue -= hp;
+            if (hpValue < 0)
+            {
+                hpValue = 0;
+            }
         }
 
         public void DecreaseHp(float hp)
         {
             hpValue -= hp;
+            if (hpValue < 0)
+            {
+                hpValue = 0;
+            }
         }
 
         public void SetPlayerStatFromData(int hp, float speed, int defence)

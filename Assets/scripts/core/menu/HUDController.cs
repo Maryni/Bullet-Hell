@@ -63,11 +63,9 @@ namespace Global.Controllers
             float value = minAlpha;
             float range = maxAlpha - minAlpha;
             float step = range / timeGlowing;
-            Debug.Log($"timeGlowing = {timeGlowing}");
             value = ((Color32)texts[0].color).a;
             while (value < maxAlpha)
             {
-                Debug.Log("#1" + value);
                 value += (step * Time.deltaTime);
                 for (int i = 0; i < texts.Length; i++)
                 {
@@ -80,7 +78,6 @@ namespace Global.Controllers
             }
             while (value > minAlpha)
             {
-                Debug.Log("#2" + value);
                 value -= (step * Time.deltaTime);
                 for (int i = 0; i < texts.Length; i++)
                 {

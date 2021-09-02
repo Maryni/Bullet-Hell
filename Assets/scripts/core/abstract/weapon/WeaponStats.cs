@@ -11,5 +11,10 @@ namespace Global.Managers.Datas
         public int bulletCount;
         public float cooldownTime;
         public float shootingRate;
+
+        private void OnDisable()
+        {
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
     }
 }

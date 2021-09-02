@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 010910adb1995a149b0425eff44210bf, type: 3}
   m_Name: AutomaticBullet
   m_EditorClassIdentifier: 
+  bulletType: 0
   damage: 50
   speed: 2.5

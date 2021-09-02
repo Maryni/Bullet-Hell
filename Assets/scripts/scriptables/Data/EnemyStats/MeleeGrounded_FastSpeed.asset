@@ -18,5 +18,5 @@ MonoBehaviour:
   hpValueCurrent: 100
   damage: 15
   defence: 0
-  intellegence: 2
+  intelligence: 0
   attackRate: 2

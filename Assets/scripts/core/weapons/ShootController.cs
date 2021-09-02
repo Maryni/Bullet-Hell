@@ -69,6 +69,7 @@ namespace Global.Controllers
         public void AddEventToCurrentBulletsChange(Action action)
         {
             actionCurrentBulletsChange += action;
+            baseWeapon.AddEventToBulletChange(action);
         }
 
         public void SetWeapon(WeaponType weaponType)

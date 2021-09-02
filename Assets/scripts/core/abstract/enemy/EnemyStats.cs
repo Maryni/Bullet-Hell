@@ -15,5 +15,10 @@ namespace Global.Managers.Datas
         [SerializeField] public int defence;
         [SerializeField] public int intelligence;
         [SerializeField] public float attackRate;
+
+        private void OnDisable()
+        {
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
     }
 }

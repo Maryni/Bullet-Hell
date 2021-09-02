@@ -163,8 +163,12 @@ namespace Global.UI
             {
                 for (int j = 0; j < arrayNumbers.Length; j++)
                 {
-                    if (textChar[i] == arrayNumbers[j] || textChar[i] == '.' || textChar[i] == ',')
+                    if (textChar[i] == arrayNumbers[j] || textChar[i] == '.' || textChar[i] == ',' || textChar[i] == '.')
                     {
+                        if (textChar[i] == '.')
+                        {
+                            textChar[i] = ',';
+                        }
                         textValue += textChar[i];
                         break;
                     }

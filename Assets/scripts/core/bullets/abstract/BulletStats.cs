@@ -10,5 +10,10 @@ namespace Global.Managers.Datas
         public BulletType bulletType;
         public int damage;
         public float speed;
+
+        private void OnDisable()
+        {
+            UnityEditor.EditorUtility.SetDirty(this);
+        }
     }
 }

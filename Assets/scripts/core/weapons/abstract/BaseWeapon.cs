@@ -33,6 +33,7 @@ namespace Global.Shooting
         #region private variables
 
         private Coroutine coroutineShot;
+        private Action actionBulletsChange;
 #pragma warning disable
         private Action actionCallback;
 #pragma warning restore
@@ -40,6 +41,11 @@ namespace Global.Shooting
         #endregion private variables
 
         #region public void
+
+        public void AddEventToBulletChange(Action action)
+        {
+            actionBulletsChange += action;
+        }
 
         public virtual void Init()
         {
@@ -79,6 +85,7 @@ namespace Global.Shooting
         {
             yield return new WaitForSeconds(weaponStats.cooldownTime);
             bulletCountCurrent = weaponStats.bulletCount;
+            actionBulletsChange?.Invoke();
         }
 
         #endregion protected void
