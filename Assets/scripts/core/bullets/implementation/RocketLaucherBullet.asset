@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RocketLaucherBullet
   m_EditorClassIdentifier: 
   bulletType: 2
-  damage: 75
+  damage: 125
   speed: 1.5

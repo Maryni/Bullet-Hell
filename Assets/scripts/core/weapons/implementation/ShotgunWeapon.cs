@@ -31,7 +31,6 @@ namespace Global.Weapon
         {
             Init();
             SetValueFromData();
-            AddOrRemoveValueToInt();
             bulletCountCurrent = weaponStats.bulletCount;
         }
 
@@ -41,7 +40,7 @@ namespace Global.Weapon
 
         protected override IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
         {
-            bulletCountCurrent -= countBulletForShot;
+            bulletCountCurrent--;
             float angleStep = maxAngle / (countBulletForShot - 1);
             float zParentRotation = gameObject.transform.parent.transform.rotation.eulerAngles.z;
             var i = 0;

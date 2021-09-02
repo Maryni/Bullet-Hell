@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: ShotgunBullet
   m_EditorClassIdentifier: 
   bulletType: 1
-  damage: 35
+  damage: 75
   speed: 1.75

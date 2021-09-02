@@ -15,7 +15,7 @@ MonoBehaviour:
   enemyType: 1
   hpMaximum: 100
   speed: 12
-  hpValueCurrent: 100
+  hpValueCurrent: 33
   damage: 15
   defence: 8
   intelligence: 0

@@ -52,6 +52,8 @@ namespace Global.Controllers
         {
             scoreValue += value;
             SetValueToScore();
+            StopAllCoroutines();
+            StartCoroutine(Glowing(scoreText, scoreTextValue));
         }
 
         #endregion public void
