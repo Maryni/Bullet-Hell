@@ -25,7 +25,9 @@ namespace Global.Weapon
         {
             bulletCountCurrent--;
             float zParentRotation = gameObject.transform.parent.transform.rotation.eulerAngles.z;
-            var bullet = (AutomaticalBullet)Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
+            var bullet = /*(AutomaticalBullet)*/Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
+                //зачем ты преобразовуешь пулу в конкретную пулю?
+                //у тебя реализация бейс булета такая, что ты можешь напрямую вызывать нужные тебе функции, которые ты реализовал в бейс булете
             bullet.transform.position = transformParent.position;
             bullet.gameObject.SetActive(true);
             bullet.Rotate(zParentRotation);

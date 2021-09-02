@@ -30,6 +30,8 @@ namespace Global.Player
         #region private variables
 
         private SmoothPause smoothPause;
+
+        
         private Action action;
 
         #endregion private variables

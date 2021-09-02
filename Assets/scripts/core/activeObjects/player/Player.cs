@@ -28,23 +28,27 @@ namespace Global.Player
 
         #region public void
 
-        public void DecreaseHp(int hp)
-        {
-            hpValue -= hp;
-            if (hpValue < 0)
-            {
-                hpValue = 0;
-            }
-        }
+        //1. Сделай только одну функцию с флоатом, я тебе это говорил. Мало того, она должна быть в контроллере, не здесь
+        //2. У тебя в любом случае тут нарушается инкапсуляция - сделай поле публичным и меняй его как хочешь - у тебя
+                //сейчас все так же, просто реализовано через функции
 
-        public void DecreaseHp(float hp)
-        {
-            hpValue -= hp;
-            if (hpValue < 0)
-            {
-                hpValue = 0;
-            }
-        }
+        // public void DecreaseHp(int hp)
+        // {
+        //     hpValue -= hp;
+        //     if (hpValue < 0)
+        //     {
+        //         hpValue = 0;
+        //     }
+        // }
+        //
+        // public void DecreaseHp(float hp)
+        // {
+        //     hpValue -= hp;
+        //     if (hpValue < 0)
+        //     {
+        //         hpValue = 0;
+        //     }
+        // }
 
         public void SetPlayerStatFromData(int hp, float speed, int defence)
         {
