@@ -75,7 +75,7 @@ namespace Global.Controllers
         public void SetWeapon(WeaponType weaponType)
         {
             var weaponScript = listWeapons.FirstOrDefault(x => x.WeaponType == weaponType);
-            this.baseWeapon = weaponScript;
+            baseWeapon = weaponScript;
             baseWeapon.StopAllCoroutines();
             baseWeapon.ReserCoroutine();
             actionMaximumBulletsChange?.Invoke();

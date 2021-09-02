@@ -25,11 +25,12 @@ namespace Global.Weapon
         {
             bulletCountCurrent--;
             float zParentRotation = gameObject.transform.parent.transform.rotation.eulerAngles.z;
-            var bullet = (AutomaticalBullet)Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
+            var bullet = Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
             bullet.transform.position = transformParent.position;
             bullet.gameObject.SetActive(true);
             bullet.Rotate(zParentRotation);
             bullet.Move();
+            bullet.Rotate(correctAngleForSprite + zParentRotation);
             yield return new WaitForSeconds(weaponStats.shootingRate);
             if (bulletCountCurrent == 0)
             {

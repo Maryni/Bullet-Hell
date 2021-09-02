@@ -30,6 +30,7 @@ namespace Global.Player
         #region private variables
 
         private SmoothPause smoothPause;
+
         private Action action;
 
         #endregion private variables
@@ -40,6 +41,7 @@ namespace Global.Player
         {
             shootController.SetWeapon(Services.GetManager<DataManager>().DynamicData.StartPlayerWeapon);
             smoothPause = FindObjectOfType<SmoothPause>();
+            SetPlayerStatsFromData();
             player.RestoreHPToMaxHP();
         }
 
@@ -69,7 +71,7 @@ namespace Global.Player
 
         public float GetHpPlayerCurrent()
         {
-            return player.HPValue;
+            return player.hpValue;
         }
 
         public int GetHpPlayerMaximum()
@@ -79,58 +81,27 @@ namespace Global.Player
 
         public bool IsPlayerIsDead()
         {
-            if (player.HPValue <= 0)
+            if (player.hpValue <= 0)
             {
+                player.hpValue = 0;
                 return true;
             }
             return false;
         }
 
-        public void DamagePlayer(int damage)
-        {
-            player.DecreaseHp(CalculateDamage(damage));
-            if (IsPlayerIsDead())
-            {
-                smoothPause.StartPauseWhenDead();
-                var controller = FindObjectOfType<GameController>();
-                controller.DisableSpawningEverything();
-                controller.DisableSpawnedItems();
-            }
-            action?.Invoke();
-        }
-
         public void DamagePlayer(float damage)
         {
-            player.DecreaseHp(CalculateDamage(damage));
+            player.hpValue -= (CalculateDamage(damage));
             if (IsPlayerIsDead())
             {
                 smoothPause.StartPauseWhenDead();
-                var controller = FindObjectOfType<GameController>();
-                controller.DisableSpawningEverything();
-                controller.DisableSpawnedItems();
             }
             action?.Invoke();
-        }
-
-        public void SetPlayerStatsFromData()
-        {
-            var data = Services.GetManager<DataManager>().DynamicData.PlayerData;
-            player.SetPlayerStatFromData(data.hp, data.speed, data.defence);
         }
 
         #endregion public void
 
         #region private void
-
-        private int CalculateDamage(int damage)
-        {
-            var hpDecrease = damage - player.Defence;
-            if (hpDecrease < 0)
-            {
-                hpDecrease = 0;
-            }
-            return hpDecrease;
-        }
 
         private float CalculateDamage(float damage)
         {
@@ -140,6 +111,12 @@ namespace Global.Player
                 hpDecrease = 0;
             }
             return hpDecrease;
+        }
+
+        private void SetPlayerStatsFromData()
+        {
+            var data = Services.GetManager<DataManager>().DynamicData.PlayerData;
+            player.SetPlayerStatFromData(data.hp, data.speed, data.defence);
         }
 
         #endregion private void

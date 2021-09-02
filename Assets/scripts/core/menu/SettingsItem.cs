@@ -156,24 +156,15 @@ namespace Global.UI
 
         private string ValueCheckerOnOnlyNumbers(string text)
         {
-            string textValue = "";
-            var textChar = text.ToCharArray();
+            string textValue = text;
+            float floatValue = 0;
 
-            for (int i = 0; i < textChar.Length; i++)
-            {
-                for (int j = 0; j < arrayNumbers.Length; j++)
-                {
-                    if (textChar[i] == arrayNumbers[j] || textChar[i] == '.' || textChar[i] == ',' || textChar[i] == '.')
-                    {
-                        if (textChar[i] == '.')
-                        {
-                            textChar[i] = ',';
-                        }
-                        textValue += textChar[i];
-                        break;
-                    }
-                }
-            }
+            Debug.Log("textValue = " + textValue);
+            textValue = text.Replace('.', ',');
+            float.TryParse(textValue, out floatValue);
+
+            Debug.Log("floatValue = " + floatValue);
+            textValue = floatValue.ToString();
             if (textValue == "")
             {
                 textValue = "0";

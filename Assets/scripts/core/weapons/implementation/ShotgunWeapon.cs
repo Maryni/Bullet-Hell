@@ -62,7 +62,7 @@ namespace Global.Weapon
                     angleBullet = 0;
                 }
 
-                var bullet = (ShotgunBullet)Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
+                var bullet = Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
                 bullet.transform.position = transformParent.position;
                 bullet.gameObject.SetActive(true);
                 bullet.Rotate(angleBullet + zParentRotation);
@@ -84,27 +84,11 @@ namespace Global.Weapon
 
         #region private void
 
-        private void AddOrRemoveValueToInt()
-        {
-            if (weaponStats.bulletCount % countBulletForShot != 0)
-            {
-                if (weaponStats.bulletCount / countBulletForShot > countBulletForShot / 2) // if bulletCount (11) / countBulletForShot (4)  > countBulletForShot/2 (2), 11 / 4  (== 2.75) > 2
-                {
-                    weaponStats.bulletCount++;
-                }
-                else
-                {
-                    weaponStats.bulletCount--;
-                }
-                Start();
-            }
-        }
-
         private void SetValueFromData()
         {
             var data = Services.GetManager<DataManager>().DynamicData;
             countBulletForShot = data.ShotgunData.countBulletsInOnceShoot;
-            angleBullet = data.ShotgunData.angleBullets;
+            maxAngle = data.ShotgunData.angleBullets;
         }
 
         #endregion private void

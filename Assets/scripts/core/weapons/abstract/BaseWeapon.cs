@@ -27,6 +27,7 @@ namespace Global.Shooting
         #region protected variables
 
         protected int bulletCountCurrent;
+        protected float correctAngleForSprite = 90f;
 
         #endregion protected variables
 

@@ -36,9 +36,9 @@ namespace Global.Shooting.BulletSpace
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
-            if (collision.tag == triggerType.ToString() && collision.isTrigger)
+            if (collision.gameObject.tag == triggerType.ToString())
             {
                 if (!useMeOrTriggerObject)
                 {
@@ -58,19 +58,24 @@ namespace Global.Shooting.BulletSpace
                 {
                     if (triggerType == TriggerType.Player)
                     {
-                        collision.GetComponent<PlayerController>().DamagePlayer(baseBullet.BulletStats.damage);
+                        collision.gameObject.GetComponent<PlayerController>().DamagePlayer(baseBullet.BulletStats.damage);
                     }
-                    if (triggerType == TriggerType.Enemy)
+                    if (triggerType == TriggerType.Enemy && collision.gameObject.tag != TriggerType.Bullet.ToString())
                     {
+                        Debug.Log(collision.gameObject.tag);
                         if (baseBullet.BulletStats.bulletType == Managers.Datas.BulletType.RocketLaucherBullet)
                         {
                             ((RocketLaucherBullet)baseBullet).ExplosiveRadiusUp();
-                            collision.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
+                            collision.gameObject.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
                             ((RocketLaucherBullet)baseBullet).ExplosiveRadiusDown();
+                        }
+                        else if (collision.gameObject.GetComponent<EnemyController>())
+                        {
+                            collision.gameObject.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
                         }
                         else
                         {
-                            collision.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
+                            collision.gameObject.GetComponentInParent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
                         }
                     }
                 }

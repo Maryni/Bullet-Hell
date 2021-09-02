@@ -7,7 +7,6 @@ namespace Global.Managers.Datas
 {
     public enum VariableName
     {
-        NoVariables,
         AutomaticGunCountBullets,
         AutomaticGunCooldownTime,
         AutomaticGunShootingRate,
@@ -32,8 +31,6 @@ namespace Global.Managers.Datas
         SpawnItemDataTimeToSpawn,
         SpawnItemDataTimeToHideWeaponAfterSpawn,
         PlayerSpeed,
-        StartWeaponType,
-        StartCameraType,
         CameraDistance,
         PauseTime
     }
@@ -41,22 +38,27 @@ namespace Global.Managers.Datas
     [Serializable]
     public class DynamicData
     {
-        #region private variables
+        #region Inspector variables
 
 #pragma warning disable
-        [SerializeField] private WeaponType startPlayerWeapon;
-        [SerializeField] private SpawnItemData spawnItemData;
+        [Header("Weapon Data"), SerializeField] private WeaponType startPlayerWeapon;
         [SerializeField] private RocketData rocketData;
-        [SerializeField] private PlayerData playerData;
         [SerializeField] private ShotgunData shotgunData;
+
+        [Header("Weapon & PowerUp Data"), SerializeField] private SpawnItemData spawnItemData;
+
+        [Header("Player Data"), SerializeField] private PlayerData playerData;
+
+        [Header("Game Settings"), SerializeField] private GameCameraType cameraType;
         [SerializeField] private PauseData pauseData;
-
-        [SerializeField]
-        private Dictionary<VariableName, Action<string>> values = new Dictionary<VariableName, Action<string>>();
-
-        [SerializeField] private GameCameraType cameraType;
         [SerializeField] private CameraData cameraData;
 #pragma warning restore
+
+        #endregion Inspector variables
+
+        #region private variables
+
+        private Dictionary<VariableName, Action<string>> values = new Dictionary<VariableName, Action<string>>();
 
         #endregion private variables
 
@@ -75,7 +77,6 @@ namespace Global.Managers.Datas
 
         #region public void
 
-        //rewrite to few many functions
         public void SetValueToData(VariableName variableName, string value)
         {
             values[variableName]?.Invoke(value);

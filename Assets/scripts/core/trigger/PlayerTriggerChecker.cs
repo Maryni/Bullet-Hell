@@ -1,4 +1,5 @@
 ﻿using Global.ActiveObjects;
+using Global.Player;
 using System;
 using UnityEngine;
 
@@ -50,16 +51,16 @@ namespace Global.Trigger
 
         #region Unity functions
 
-        private void OnTriggerStay2D(Collider2D collision)
+        private void OnCollisionStay2D(Collision2D collision)
         {
-            if (collision.tag == tagObject)
+            if (collision.gameObject.GetComponent<PlayerController>())
             {
-                if (tagObject == "Player" && canAttack)
+                if (canAttack)
                 {
                     if (player == null || player != collision.gameObject)
                     {
                         player = collision.gameObject;
-                        Debug.Log($"[ {collision.name} ] are triggered by me [ {gameObject.transform.parent.name} ]");
+                        Debug.Log($"[ {collision.gameObject.name} ] are triggered by me [ {gameObject.transform.parent.name} ]");
 
                         if (gameObject.activeInHierarchy)
                         {
@@ -70,17 +71,14 @@ namespace Global.Trigger
             }
         }
 
-        private void OnTriggerExit2D(Collider2D collision)
+        private void OnCollisionExit2D(Collision2D collision)
         {
-            if (collision.tag == tagObject)
+            if (collision.gameObject.GetComponent<PlayerController>())
             {
-                if (tagObject == "Player")
+                if (gameObject.transform.parent.gameObject.activeSelf)
                 {
-                    if (gameObject.transform.parent.gameObject.activeSelf)
-                    {
-                        gameObject.GetComponentInParent<EnemyController>().DisableAttack();
-                        action?.Invoke();
-                    }
+                    gameObject.GetComponentInParent<EnemyController>().DisableAttack();
+                    action?.Invoke();
                 }
             }
         }
