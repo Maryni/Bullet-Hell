@@ -28,6 +28,7 @@ namespace Global.Weapon
             var bullet = Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
             bullet.transform.position = transformParent.position;
             bullet.gameObject.SetActive(true);
+            bullet.ActivateBullet();
             bullet.Rotate(zParentRotation);
             bullet.Move();
             yield return new WaitForSeconds(weaponStats.shootingRate);

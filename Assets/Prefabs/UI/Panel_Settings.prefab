@@ -17058,16 +17058,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startWeapon: {fileID: 1209849634717761558}
   cameraType: {fileID: 3869754093308833783}
-  automaticStatsFile: {fileID: 11400000, guid: ce660fa9e67c913468f5cb0f5fb3c8b0, type: 2}
-  shotgunStatsFile: {fileID: 11400000, guid: 2250b90b13e00064c81f837afd7f9f35, type: 2}
-  rocketLaucherStatsFile: {fileID: 11400000, guid: 127ffa57db4fc99479c47733abff12d7,
-    type: 2}
-  automaticalBulletGameObject: {fileID: 3173164810188786737, guid: ba662eb5ac8f35e458b2ddf92f43706e,
-    type: 3}
-  shotgunBulletGameObject: {fileID: 65897543454702668, guid: efccb17e12f14f448822c54ecbf00cf2,
-    type: 3}
-  rocketLaucherBulletGameObject: {fileID: 4215741702178004210, guid: 14e0a9af979b9354e954ad51d12a0a22,
-    type: 3}
   automaticCountBullets: {fileID: 391989481798234573}
   automaticCooldownTime: {fileID: 1251232018035368112}
   automaticShootingRate: {fileID: 4663992733209409304}
@@ -21105,7 +21095,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Bullet time for acceleration '
+  m_Text: 'Bullet time acceleration '
 --- !u!1 &6534175963403142518
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,5 +35,11 @@ namespace Global.Managers.Datas
             dynamicData.SetActionsToDictionary();
             return true;
         }
+
+        [ContextMenu("Delete Data")]
+        public void DeleteData()
+        {
+            SaveData.DeleteAllData();
+        }
     }
 }

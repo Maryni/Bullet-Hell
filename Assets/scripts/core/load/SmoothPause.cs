@@ -89,6 +89,7 @@ namespace Global.Game.Component
         private void EnableDiePanel()
         {
             losePanel.SetActive(true);
+            Time.timeScale = 0f;
         }
 
         private IEnumerator DecreaseValueTimeScale(float start, float end, float time, bool isDie, Action callback = null)

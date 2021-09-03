@@ -12,14 +12,14 @@ namespace Global.Bullet
 
 #pragma warning disable
         [SerializeField] private Rigidbody2D rig2D;
-        [SerializeField] private BulletStats bulletStats;
+        [SerializeField] private BulletData bulletStats;
 #pragma warning restore
 
         #endregion Inspector variables
 
         #region properties
 
-        public BulletStats BulletStats => bulletStats;
+        public BulletData BulletStats => bulletStats;
         public Rigidbody2D Rig2D => rig2D;
 
         #endregion properties
@@ -34,14 +34,6 @@ namespace Global.Bullet
             }
         }
 
-        private void Start()
-        {
-            if (BulletStats.bulletType == BulletType.RocketLaucherBullet)
-            {
-                bulletStats.speed = Services.GetManager<DataManager>().DynamicData.RocketData.minSpeed;
-            }
-        }
-
         #endregion Unity functions
 
         #region public void
@@ -52,6 +44,28 @@ namespace Global.Bullet
         }
 
         public abstract void Move();
+
+        public void ActivateBullet()
+        {
+            Init();
+        }
+
+        protected void Init()
+        {
+            if (BulletStats.bulletType == BulletType.RocketLaucherBullet)
+            {
+                bulletStats.damage = Services.GetManager<DataManager>().DynamicData.GetBulletDataByType(BulletType.ShotgunBullet).damage;
+                bulletStats.speed = Services.GetManager<DataManager>().DynamicData.RocketData.minSpeed;
+            }
+            if (BulletStats.bulletType == BulletType.ShotgunBullet)
+            {
+                bulletStats = Services.GetManager<DataManager>().DynamicData.GetBulletDataByType(BulletType.ShotgunBullet);
+            }
+            if (BulletStats.bulletType == BulletType.AutomaticBullet)
+            {
+                bulletStats = Services.GetManager<DataManager>().DynamicData.GetBulletDataByType(BulletType.AutomaticBullet);
+            }
+        }
 
         #endregion public void
     }

@@ -51,16 +51,15 @@ namespace Global.Trigger
 
         #region Unity functions
 
-        private void OnCollisionStay2D(Collision2D collision)
+        private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.gameObject.GetComponent<PlayerController>())
+            if (collision.GetComponentInParent<PlayerController>())
             {
                 if (canAttack)
                 {
                     if (player == null || player != collision.gameObject)
                     {
                         player = collision.gameObject;
-                        Debug.Log($"[ {collision.gameObject.name} ] are triggered by me [ {gameObject.transform.parent.name} ]");
 
                         if (gameObject.activeInHierarchy)
                         {
@@ -71,9 +70,9 @@ namespace Global.Trigger
             }
         }
 
-        private void OnCollisionExit2D(Collision2D collision)
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.gameObject.GetComponent<PlayerController>())
+            if (collision.GetComponentInParent<PlayerController>())
             {
                 if (gameObject.transform.parent.gameObject.activeSelf)
                 {

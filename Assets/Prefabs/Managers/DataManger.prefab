@@ -47,25 +47,25 @@ MonoBehaviour:
     startPlayerWeapon: 0
     rocketData:
       timeToBlowUp: 3
-      radiusBlowUp: 2
-      minSpeed: 0
-      maxSpeed: 0
-      timeAcceleration: 0
+      radiusBlowUp: 14
+      minSpeed: 2
+      maxSpeed: 5
+      timeAcceleration: 2
     shotgunData:
-      angleBullets: 0
-      countBulletsInOnceShoot: 0
+      angleBullets: 40
+      countBulletsInOnceShoot: 4
     spawnItemData:
-      spawnTime: 30
-      destroyTime: 24
+      spawnTime: 5
+      destroyTime: 6
     playerData:
       hp: 100
       speed: 2
       defence: 0
-    cameraType: 1
+    cameraType: 0
     pauseData:
-      pauseTime: 0
+      pauseTime: 2
     cameraData:
-      cameraDistance: 0
+      cameraDistance: 10
     meleeSlowEnemyData:
       enemyType: 0
       hpMaximum: 100
@@ -107,17 +107,17 @@ MonoBehaviour:
       speed: 1.25
     automaticWeaponsData:
       weaponType: 0
-      bulletCount: 0
-      cooldownTime: 0
-      shootingRate: 0
+      bulletCount: 20
+      cooldownTime: 0.75
+      shootingRate: 0.2
     shotgunWeaponData:
-      weaponType: 0
-      bulletCount: 0
-      cooldownTime: 0
-      shootingRate: 0
+      weaponType: 1
+      bulletCount: 7
+      cooldownTime: 1.2
+      shootingRate: 0.25
     rocketLaucherWeaponData:
-      weaponType: 0
-      bulletCount: 0
-      cooldownTime: 0
-      shootingRate: 0
+      weaponType: 2
+      bulletCount: 5
+      cooldownTime: 1.75
+      shootingRate: 0.65
   staticData: {fileID: 11400000, guid: d954cc5a7cd76f94d9809cafd4e20c92, type: 2}

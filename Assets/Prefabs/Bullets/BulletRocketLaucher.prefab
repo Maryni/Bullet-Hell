@@ -66,7 +66,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -152,5 +152,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rig2D: {fileID: 4215741702178004208}
-  bulletStats: {fileID: 11400000, guid: 333129b7f7d8ecc4ebe3e01ce878bb4d, type: 2}
+  bulletStats:
+    bulletType: 2
+    damage: 0
+    speed: 0
   circleCollider2D: {fileID: 8892873256103770676}

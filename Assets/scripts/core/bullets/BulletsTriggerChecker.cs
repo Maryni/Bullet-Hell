@@ -2,6 +2,8 @@
 using Global.Player;
 using UnityEngine;
 using Global.Bullet;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace Global.Shooting.BulletSpace
 {
@@ -26,6 +28,12 @@ namespace Global.Shooting.BulletSpace
 
         #endregion Inspector variables
 
+        #region private variables
+
+        private List<GameObject> listTouchingObjects = new List<GameObject>();
+
+        #endregion private variables
+
         #region Unity function
 
         private void OnValidate()
@@ -36,51 +44,60 @@ namespace Global.Shooting.BulletSpace
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.tag == triggerType.ToString())
+            if (collision.GetComponent<EnemyController>())
             {
-                if (!useMeOrTriggerObject)
+                if (!listTouchingObjects.Contains(collision.gameObject))
                 {
-                    if (mustDisable)
-                    {
-                        collision.gameObject.SetActive(false);
-                    }
+                    listTouchingObjects.Add(collision.gameObject);
                 }
-                if (useMeOrTriggerObject)
+                if (baseBullet.BulletStats.bulletType == Managers.Datas.BulletType.RocketLaucherBullet)
                 {
-                    if (mustDisable)
-                    {
-                        gameObject.SetActive(false);
-                    }
+                    ((RocketLaucherBullet)baseBullet).ExplosiveRadiusUp();
+                    collision.gameObject.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
+                    StartCoroutine(LateCall());
                 }
-                if (dealDamage)
+                else
                 {
-                    if (triggerType == TriggerType.Player)
-                    {
-                        collision.gameObject.GetComponent<PlayerController>().DamagePlayer(baseBullet.BulletStats.damage);
-                    }
-                    if (triggerType == TriggerType.Enemy && collision.gameObject.tag != TriggerType.Bullet.ToString())
-                    {
-                        if (baseBullet.BulletStats.bulletType == Managers.Datas.BulletType.RocketLaucherBullet)
-                        {
-                            ((RocketLaucherBullet)baseBullet).ExplosiveRadiusUp();
-                            collision.gameObject.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
-                            ((RocketLaucherBullet)baseBullet).ExplosiveRadiusDown();
-                        }
-                        else if (collision.gameObject.GetComponent<EnemyController>())
-                        {
-                            collision.gameObject.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
-                        }
-                        else
-                        {
-                            collision.gameObject.GetComponentInParent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
-                        }
-                    }
+                    collision.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
+                    gameObject.SetActive(false);
                 }
             }
+            if (collision.GetComponent<BulletsTriggerChecker>() && collision.GetComponent<BulletsTriggerChecker>().triggerType == TriggerType.Bullet)
+            {
+                gameObject.SetActive(false);
+            }
+
+            #endregion Unity function
         }
 
-        #endregion Unity function
+        private IEnumerator LateCall()
+        {
+            yield return new WaitForFixedUpdate();
+            if (baseBullet.BulletStats.bulletType == Managers.Datas.BulletType.RocketLaucherBullet && listTouchingObjects.Count > 0)
+            {
+                yield return new WaitForFixedUpdate();
+                yield return new WaitForEndOfFrame();
+                foreach (GameObject gameObjectItem in listTouchingObjects)
+                {
+                    if (gameObjectItem.activeInHierarchy)
+                    {
+                        gameObjectItem.gameObject.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
+                    }
+                }
+
+                gameObject.SetActive(false);
+                for (int i = 0; i < listTouchingObjects.Count; i++)
+                {
+                    if (!listTouchingObjects[i].activeInHierarchy)
+                    {
+                        listTouchingObjects.RemoveAt(i);
+                    }
+                }
+                ((RocketLaucherBullet)baseBullet).ExplosiveRadiusDown();
+            }
+            yield break;
+        }
     }
 }

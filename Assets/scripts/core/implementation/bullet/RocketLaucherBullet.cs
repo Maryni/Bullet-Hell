@@ -15,6 +15,12 @@ namespace Global.Bullet
 
         #endregion Inspector variables
 
+        #region properties
+
+        public float CurrentRadius => circleCollider2D.radius;
+
+        #endregion properties
+
         #region private variables
 
         private float currentRadius;
@@ -41,11 +47,11 @@ namespace Global.Bullet
         public void ExplosiveRadiusDown()
         {
             circleCollider2D.radius = currentRadius;
-            gameObject.SetActive(false);
         }
 
         public override void Move()
         {
+            ExplosiveRadiusDown();
             Rig2D.AddForce(transform.up * BulletStats.speed, ForceMode2D.Impulse);
             StartCoroutine(ExplosiveByTime());
             StartCoroutine(IncreaseSpeed());

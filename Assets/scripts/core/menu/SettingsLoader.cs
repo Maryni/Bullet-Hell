@@ -11,20 +11,8 @@ namespace Global.UI
         #region Inspector variables
 
 #pragma warning disable
-        [SerializeField] private Dropdown startWeapon;
+        [Header("Start Types"), SerializeField] private Dropdown startWeapon;
         [SerializeField] private Dropdown cameraType;
-
-        [Header("WeaponStats"), SerializeField]
-        private WeaponStats automaticStatsFile;
-
-        [SerializeField] private WeaponStats shotgunStatsFile;
-        [SerializeField] private WeaponStats rocketLaucherStatsFile;
-
-        [Header("BulletsGameObject"), SerializeField]
-        private GameObject automaticalBulletGameObject;
-
-        [SerializeField] private GameObject shotgunBulletGameObject;
-        [SerializeField] private GameObject rocketLaucherBulletGameObject;
 
         [Header("Automatic"), SerializeField]
         private InputField automaticCountBullets;
@@ -81,25 +69,25 @@ namespace Global.UI
         private void Start()
         {
             var data = Services.GetManager<DataManager>().DynamicData;
-            LoadSettings(automaticCountBullets, automaticStatsFile.bulletCount.ToString());
-            LoadSettings(automaticCooldownTime, automaticStatsFile.cooldownTime.ToString());
-            LoadSettings(automaticShootingRate, automaticStatsFile.shootingRate.ToString());
-            LoadSettings(automaticalBulletDamage, automaticalBulletGameObject.GetComponent<AutomaticalBullet>().BulletStats.damage.ToString());
-            LoadSettings(automaticalBulletSpeed, automaticalBulletGameObject.GetComponent<AutomaticalBullet>().BulletStats.speed.ToString());
+            LoadSettings(automaticCountBullets, data.GetWeaponDataByType(WeaponType.AutomaticGun).bulletCount.ToString());
+            LoadSettings(automaticCooldownTime, data.GetWeaponDataByType(WeaponType.AutomaticGun).cooldownTime.ToString());
+            LoadSettings(automaticShootingRate, data.GetWeaponDataByType(WeaponType.AutomaticGun).shootingRate.ToString());
+            LoadSettings(automaticalBulletDamage, data.GetBulletDataByType(BulletType.AutomaticBullet).damage.ToString());
+            LoadSettings(automaticalBulletSpeed, data.GetBulletDataByType(BulletType.AutomaticBullet).speed.ToString());
 
-            LoadSettings(shotgunCountBullets, shotgunStatsFile.bulletCount.ToString());
-            LoadSettings(shotgunCooldownTime, shotgunStatsFile.cooldownTime.ToString());
-            LoadSettings(shotgunShootingRate, shotgunStatsFile.shootingRate.ToString());
+            LoadSettings(shotgunCountBullets, data.GetWeaponDataByType(WeaponType.Shotgun).bulletCount.ToString());
+            LoadSettings(shotgunCooldownTime, data.GetWeaponDataByType(WeaponType.Shotgun).cooldownTime.ToString());
+            LoadSettings(shotgunShootingRate, data.GetWeaponDataByType(WeaponType.Shotgun).shootingRate.ToString());
             LoadSettings(shotgunAngleBullet, data.ShotgunData.angleBullets.ToString());
             LoadSettings(shotgunCountBulletsPerShoot, data.ShotgunData.countBulletsInOnceShoot.ToString());
-            LoadSettings(shotgunBulletDamage, shotgunBulletGameObject.GetComponent<ShotgunBullet>().BulletStats.damage.ToString());
-            LoadSettings(shotgunBulletSpeed, shotgunBulletGameObject.GetComponent<ShotgunBullet>().BulletStats.speed.ToString());
+            LoadSettings(shotgunBulletDamage, data.GetBulletDataByType(BulletType.ShotgunBullet).damage.ToString());
+            LoadSettings(shotgunBulletSpeed, data.GetBulletDataByType(BulletType.ShotgunBullet).speed.ToString());
 
-            LoadSettings(rocketLaucherCountBullets, rocketLaucherStatsFile.bulletCount.ToString());
-            LoadSettings(rocketLaucherCooldownTime, rocketLaucherStatsFile.cooldownTime.ToString());
-            LoadSettings(rocketLaucherShootingRate, rocketLaucherStatsFile.shootingRate.ToString());
-            LoadSettings(rocketLaucherBulletDamage, rocketLaucherBulletGameObject.GetComponent<RocketLaucherBullet>().BulletStats.damage.ToString());
-            LoadSettings(rocketLaucherBulletMinSpeed, rocketLaucherBulletGameObject.GetComponent<RocketLaucherBullet>().BulletStats.speed.ToString());
+            LoadSettings(rocketLaucherCountBullets, data.GetWeaponDataByType(WeaponType.RocketLaucher).bulletCount.ToString());
+            LoadSettings(rocketLaucherCooldownTime, data.GetWeaponDataByType(WeaponType.RocketLaucher).cooldownTime.ToString());
+            LoadSettings(rocketLaucherShootingRate, data.GetWeaponDataByType(WeaponType.RocketLaucher).shootingRate.ToString());
+            LoadSettings(rocketLaucherBulletDamage, data.GetBulletDataByType(BulletType.RocketLaucherBullet).damage.ToString());
+            LoadSettings(rocketLaucherBulletMinSpeed, data.RocketData.maxSpeed.ToString());
             LoadSettings(rocketLaucherBulletMaxSpeed, data.RocketData.maxSpeed.ToString());
             LoadSettings(rocketLaucherBulletTimeAcceleration, data.RocketData.timeAcceleration.ToString());
 

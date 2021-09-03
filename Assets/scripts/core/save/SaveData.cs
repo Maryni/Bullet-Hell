@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System.IO;
+﻿using UnityEngine;
 using Global.Managers.Datas;
 
 namespace Global.Save
@@ -31,6 +28,11 @@ namespace Global.Save
             {
                 Save(saveObject);
             }
+        }
+
+        public static void DeleteAllData()
+        {
+            PlayerPrefs.DeleteAll();
         }
     }
 }

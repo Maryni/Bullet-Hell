@@ -41,6 +41,7 @@ namespace Global.Weapon
         protected override IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
         {
             bulletCountCurrent--;
+            BaseBullet[] bullets = new BaseBullet[countBulletForShot];
             float angleStep = maxAngle / (countBulletForShot - 1);
             float zParentRotation = gameObject.transform.parent.transform.rotation.eulerAngles.z;
             var i = 0;
@@ -65,12 +66,18 @@ namespace Global.Weapon
                 var bullet = Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
                 bullet.transform.position = transformParent.position;
                 bullet.gameObject.SetActive(true);
+                bullet.ActivateBullet();
                 bullet.Rotate(angleBullet + zParentRotation);
-                bullet.Move();
+                bullets[i] = bullet;
 
                 i++;
                 yield return null;
             }
+            for (int j = 0; j < bullets.Length; j++)
+            {
+                bullets[j].Move();
+            }
+
             yield return new WaitForSeconds(weaponStats.shootingRate);
             if (bulletCountCurrent <= 0)
             {
