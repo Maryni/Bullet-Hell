@@ -64,6 +64,8 @@ namespace Global.UI
         [Header("Player"), SerializeField]
         private InputField playerSpeed;
 
+        [SerializeField] private InputField playerHp;
+
         [Header("Camera"), SerializeField]
         private InputField cameraDistance;
 
@@ -106,6 +108,7 @@ namespace Global.UI
 
             LoadSettings(timerToSpawnItem, data.SpawnItemData.spawnTime.ToString());
             LoadSettings(timerToDisableItems, data.SpawnItemData.destroyTime.ToString());
+            LoadSettings(playerHp, data.PlayerData.hp.ToString());
             LoadSettings(playerSpeed, data.PlayerData.speed.ToString());
             LoadSettings(startWeapon, data.StartPlayerWeapon.ToString());
             LoadSettings(cameraType, data.StartCameraType.ToString());

@@ -88,10 +88,7 @@ namespace Global.Game.Component
 
         private void EnableDiePanel()
         {
-            if (coroutineDecreaseToOne == null)
-            {
-                coroutineDecreaseToOne = StartCoroutine(DecreaseValueTimeScale(maxTimeScale, minTimeScale, timeScaleSeconds, true));
-            }
+            losePanel.SetActive(true);
         }
 
         private IEnumerator DecreaseValueTimeScale(float start, float end, float time, bool isDie, Action callback = null)

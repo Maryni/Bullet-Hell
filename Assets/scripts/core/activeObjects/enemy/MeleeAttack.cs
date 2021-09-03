@@ -65,7 +65,7 @@ namespace Global.Weapon
         {
             if (canAttack)
             {
-                var stats = Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType);
+                var stats = Services.GetManager<DataManager>().DynamicData.GetEnemyStatsByType(enemyType);
                 player = playerTriggerChecker.GetPlayer();
                 if (player != null)
                 {

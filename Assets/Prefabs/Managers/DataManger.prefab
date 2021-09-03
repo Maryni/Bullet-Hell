@@ -45,26 +45,79 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dynamicData:
     startPlayerWeapon: 0
-    spawnItemData:
-      spawnTime: 30
-      destroyTime: 24
     rocketData:
       timeToBlowUp: 3
       radiusBlowUp: 2
+      minSpeed: 0
+      maxSpeed: 0
+      timeAcceleration: 0
+    shotgunData:
+      angleBullets: 0
+      countBulletsInOnceShoot: 0
+    spawnItemData:
+      spawnTime: 30
+      destroyTime: 24
     playerData:
       hp: 100
-      speed: 0
+      speed: 2
       defence: 0
-    bulletsData:
-      bulletStats:
-      - {fileID: 11400000, guid: f69459a68ade3ad4e89ba92d3410b3ea, type: 2}
-      - {fileID: 11400000, guid: 19bba6a1cb1fd2640be7d2c52c838cf9, type: 2}
-      - {fileID: 11400000, guid: 333129b7f7d8ecc4ebe3e01ce878bb4d, type: 2}
-      automaticBulletStats: {fileID: 11400000, guid: f69459a68ade3ad4e89ba92d3410b3ea,
-        type: 2}
-      shotgunBulletStats: {fileID: 11400000, guid: 19bba6a1cb1fd2640be7d2c52c838cf9,
-        type: 2}
-      rocketLaucherBulletStats: {fileID: 11400000, guid: 333129b7f7d8ecc4ebe3e01ce878bb4d,
-        type: 2}
     cameraType: 1
+    pauseData:
+      pauseTime: 0
+    cameraData:
+      cameraDistance: 0
+    meleeSlowEnemyData:
+      enemyType: 0
+      hpMaximum: 100
+      speed: 7.5
+      hpValueCurrent: 100
+      damage: 20
+      defence: 15
+      intelligence: 0
+      attackRate: 2
+    meleeMiddleEnemyData:
+      enemyType: 1
+      hpMaximum: 100
+      speed: 12
+      hpValueCurrent: 100
+      damage: 15
+      defence: 8
+      intelligence: 0
+      attackRate: 2
+    meleeFastEnemyData:
+      enemyType: 2
+      hpMaximum: 100
+      speed: 18
+      hpValueCurrent: 100
+      damage: 15
+      defence: 0
+      intelligence: 0
+      attackRate: 2
+    automaticBulletData:
+      bulletType: 0
+      damage: 75
+      speed: 2
+    shotgunBulletData:
+      bulletType: 1
+      damage: 100
+      speed: 1.75
+    rocketBulletData:
+      bulletType: 2
+      damage: 150
+      speed: 1.25
+    automaticWeaponsData:
+      weaponType: 0
+      bulletCount: 0
+      cooldownTime: 0
+      shootingRate: 0
+    shotgunWeaponData:
+      weaponType: 0
+      bulletCount: 0
+      cooldownTime: 0
+      shootingRate: 0
+    rocketLaucherWeaponData:
+      weaponType: 0
+      bulletCount: 0
+      cooldownTime: 0
+      shootingRate: 0
   staticData: {fileID: 11400000, guid: d954cc5a7cd76f94d9809cafd4e20c92, type: 2}

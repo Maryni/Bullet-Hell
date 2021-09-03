@@ -6,6 +6,15 @@ using UnityEngine.UI;
 
 namespace Global.Controllers
 {
+    public enum TypeGlowing
+    {
+        Score,
+        HpCurrent,
+        HpMaximum,
+        BulletsCurrent,
+        BulletsMaximum
+    }
+
     public class HUDController : MonoBehaviour
     {
         #region Inspector variables
@@ -28,8 +37,8 @@ namespace Global.Controllers
 
         #region private variables
 
-        private PlayerController playerController;
         private int scoreValue;
+        private PlayerController playerController;
 
         #endregion private variables
 
@@ -37,109 +46,96 @@ namespace Global.Controllers
 
         private void Start()
         {
-            if (playerController == null)
-            {
-                playerController = FindObjectOfType<PlayerController>();
-            }
-            SetValues();
+            playerController = FindObjectOfType<PlayerController>();
         }
 
         #endregion Unity functions
 
         #region public void
 
+        public void SetHPMaximum(float value)
+        {
+            hpMaximumTextValue.text = value.ToString();
+        }
+
         public void AddScore(int value)
         {
             scoreValue += value;
-            SetValueToScore();
-            StopAllCoroutines();
-            StartCoroutine(Glowing(scoreText, scoreTextValue));
+            GlowingByType(TypeGlowing.Score, scoreValue);
+        }
+
+        public void GlowingByType(TypeGlowing typeGlowing, float valueTaken)
+        {
+            float range = maxAlpha - minAlpha;
+            float step = range / timeGlowing;
+            if (typeGlowing == TypeGlowing.Score)
+            {
+                StopCoroutine(Glow(scoreText, step));
+                StopCoroutine(Glow(scoreTextValue, step));
+                StopAllCoroutines();
+                StartCoroutine(Glow(scoreText, step));
+                StartCoroutine(Glow(scoreTextValue, step));
+                scoreTextValue.text = valueTaken.ToString();
+            }
+            if (typeGlowing == TypeGlowing.HpCurrent)
+            {
+                StopCoroutine(Glow(hpText, step));
+                StopCoroutine(Glow(hpCurrentTextValue, step));
+                StopAllCoroutines();
+                StartCoroutine(Glow(hpText, step));
+                StartCoroutine(Glow(hpCurrentTextValue, step));
+                hpCurrentTextValue.text = valueTaken.ToString();
+            }
+            if (typeGlowing == TypeGlowing.HpMaximum)
+            {
+                StopCoroutine(Glow(hpText, step));
+                StopCoroutine(Glow(hpMaximumTextValue, step));
+                StopAllCoroutines();
+                StartCoroutine(Glow(hpText, step));
+                StartCoroutine(Glow(hpMaximumTextValue, step));
+                hpMaximumTextValue.text = valueTaken.ToString();
+            }
+            if (typeGlowing == TypeGlowing.BulletsCurrent)
+            {
+                //StopCoroutine(Glow(bulletstText, step));
+                //StopCoroutine(Glow(bulletsCurrentTextValue, step));
+                StopAllCoroutines();
+                StartCoroutine(Glow(bulletstText, step));
+                StartCoroutine(Glow(bulletsCurrentTextValue, step));
+                bulletsCurrentTextValue.text = valueTaken.ToString();
+            }
+            if (typeGlowing == TypeGlowing.BulletsMaximum)
+            {
+                StopCoroutine(Glow(bulletstText, step));
+                StopCoroutine(Glow(bulletsMaximumTextValue, step));
+                StopAllCoroutines();
+                StartCoroutine(Glow(bulletstText, step));
+                StartCoroutine(Glow(bulletsMaximumTextValue, step));
+                bulletsMaximumTextValue.text = valueTaken.ToString();
+            }
         }
 
         #endregion public void
 
         #region private void
 
-        private IEnumerator Glowing(params Text[] texts)
+        private IEnumerator Glow(Text text, float step)
         {
-            float value = minAlpha;
-            float range = maxAlpha - minAlpha;
-            float step = range / timeGlowing;
-            value = ((Color32)texts[0].color).a;
-            while (value < maxAlpha)
-            {
-                value += (step * Time.deltaTime);
-                for (int i = 0; i < texts.Length; i++)
-                {
-                    Color32 temp = texts[i].color;
-                    temp.a = (byte)value;
-                    texts[i].color = temp;
-                }
+            float value = maxAlpha;
+            Color32 temp = text.color;
+            temp.a = (byte)value;
+            text.color = temp;
 
-                yield return null;
-            }
             while (value > minAlpha)
             {
                 value -= (step * Time.deltaTime);
-                for (int i = 0; i < texts.Length; i++)
-                {
-                    Color32 temp = texts[i].color;
-                    temp.a = (byte)value;
-                    texts[i].color = temp;
-                }
+
+                temp = text.color;
+                temp.a = (byte)value;
+                text.color = temp;
 
                 yield return null;
             }
-            yield break;
-        }
-
-        private void SetValues()
-        {
-            GetValueFromScore();
-            SetValueHPFromPlayer();
-            SetValueBulletsCurrentFromPlayer();
-            SetValueBulletsMaximumFromPlayer();
-            SubscribeForChanges();
-        }
-
-        private void SubscribeForChanges()
-        {
-            playerController.AddEvent(() => SetValueHPFromPlayer());
-            playerController.AddEvent(() => StopAllCoroutines());
-            playerController.AddEvent(() => StartCoroutine(Glowing(hpText, hpCurrentTextValue, hpMaximumTextValue)));
-            playerController.ShootController.AddEventToCurrentBulletsChange(() => SetValueBulletsCurrentFromPlayer());
-            playerController.ShootController.AddEventToCurrentBulletsChange(() => StopAllCoroutines());
-            playerController.ShootController.AddEventToCurrentBulletsChange(() => StartCoroutine(Glowing(bulletstText, bulletsCurrentTextValue)));
-            playerController.ShootController.AddEventToMaximumBulletsChange(() => SetValueBulletsMaximumFromPlayer());
-            playerController.ShootController.AddEventToMaximumBulletsChange(() => StopAllCoroutines());
-            playerController.ShootController.AddEventToCurrentBulletsChange(() => StartCoroutine(Glowing(bulletstText, bulletsMaximumTextValue)));
-        }
-
-        private void SetValueHPFromPlayer()
-
-        {
-            hpCurrentTextValue.text = playerController.GetHpPlayerCurrent().ToString();
-            hpMaximumTextValue.text = playerController.GetHpPlayerMaximum().ToString();
-        }
-
-        private void SetValueBulletsCurrentFromPlayer()
-        {
-            bulletsCurrentTextValue.text = playerController.GetCountCurrentBulletsByCurrentWeapon().ToString();
-        }
-
-        private void SetValueBulletsMaximumFromPlayer()
-        {
-            bulletsMaximumTextValue.text = playerController.GetCountMaxBulletsByCurrentWeapon().ToString();
-        }
-
-        private void GetValueFromScore()
-        {
-            scoreValue = int.Parse(scoreTextValue.text);
-        }
-
-        private void SetValueToScore()
-        {
-            scoreTextValue.text = scoreValue.ToString();
         }
 
         #endregion private void

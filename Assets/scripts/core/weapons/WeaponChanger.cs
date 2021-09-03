@@ -32,10 +32,9 @@ namespace Global.Weapon
 
         #region Unity functions
 
-        //get collision with player and say GameController change playerWeapon by my weapon
-        private void OnTriggerEnter2D(Collider2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.tag == TriggerType.Player.ToString() && collision.isTrigger)
+            if (collision.gameObject.tag == TriggerType.Player.ToString())
             {
                 SetPlayerWeaponByWeapon(weaponType);
                 gameObject.SetActive(false);

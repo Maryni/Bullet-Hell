@@ -24,14 +24,15 @@ namespace Global.Player
         #region properties
 
         public ShootController ShootController => shootController;
+        public HUDController HUDController => hUDController;
 
         #endregion properties
 
         #region private variables
 
-        private SmoothPause smoothPause;
+        private HUDController hUDController;
 
-        private Action action;
+        private SmoothPause smoothPause;
 
         #endregion private variables
 
@@ -39,44 +40,22 @@ namespace Global.Player
 
         private void Start()
         {
+            SetPlayerStatsFromData();
+            hUDController = FindObjectOfType<HUDController>();
             shootController.SetWeapon(Services.GetManager<DataManager>().DynamicData.StartPlayerWeapon);
             smoothPause = FindObjectOfType<SmoothPause>();
-            SetPlayerStatsFromData();
+
             player.RestoreHPToMaxHP();
+            hUDController.SetHPMaximum(player.HPMaximum);
         }
 
         #endregion Unity functions
 
         #region public void
 
-        public void AddEvent(Action action)
-        {
-            this.action += action;
-        }
-
         public WeaponType GetWeaponTypeByPlayer()
         {
             return shootController.CurrentWeapon.WeaponType;
-        }
-
-        public int GetCountMaxBulletsByCurrentWeapon()
-        {
-            return shootController.CurrentWeapon.WeaponStats.bulletCount;
-        }
-
-        public int GetCountCurrentBulletsByCurrentWeapon()
-        {
-            return shootController.CurrentWeapon.BulletCountCurrent;
-        }
-
-        public float GetHpPlayerCurrent()
-        {
-            return player.hpValue;
-        }
-
-        public int GetHpPlayerMaximum()
-        {
-            return player.HPMaximum;
         }
 
         public bool IsPlayerIsDead()
@@ -96,7 +75,7 @@ namespace Global.Player
             {
                 smoothPause.StartPauseWhenDead();
             }
-            action?.Invoke();
+            hUDController.GlowingByType(TypeGlowing.HpCurrent, player.hpValue);
         }
 
         #endregion public void

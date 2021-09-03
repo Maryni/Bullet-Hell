@@ -2,6 +2,7 @@
 using System;
 using UnityEngine;
 using Global.Managers.Datas;
+using Global.Controllers;
 
 namespace Global.Shooting
 {
@@ -11,7 +12,7 @@ namespace Global.Shooting
 
 #pragma warning disable
         [SerializeField] private WeaponType weaponType;
-        [SerializeField] protected WeaponStats weaponStats;
+        [SerializeField] protected WeaponData weaponStats;
 #pragma warning restore
 
         #endregion Inspector variables
@@ -19,7 +20,7 @@ namespace Global.Shooting
         #region properties
 
         public WeaponType WeaponType => weaponType;
-        public WeaponStats WeaponStats => weaponStats;
+        public WeaponData WeaponStats => weaponStats;
         public int BulletCountCurrent => bulletCountCurrent;
 
         #endregion properties
@@ -34,7 +35,7 @@ namespace Global.Shooting
         #region private variables
 
         private Coroutine coroutineShot;
-        private Action actionBulletsChange;
+        private HUDController hUDController;
 #pragma warning disable
         private Action actionCallback;
 #pragma warning restore
@@ -43,14 +44,14 @@ namespace Global.Shooting
 
         #region public void
 
-        public void AddEventToBulletChange(Action action)
+        public void SetHUDController(HUDController hUDController)
         {
-            actionBulletsChange += action;
+            this.hUDController = hUDController;
         }
 
         public virtual void Init()
         {
-            weaponStats = Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(weaponType);
+            weaponStats = Services.GetManager<DataManager>().DynamicData.GetWeaponDataByType(weaponType);
         }
 
         public void Shoot(Vector2 mousePos, Transform transformParent)
@@ -86,7 +87,7 @@ namespace Global.Shooting
         {
             yield return new WaitForSeconds(weaponStats.cooldownTime);
             bulletCountCurrent = weaponStats.bulletCount;
-            actionBulletsChange?.Invoke();
+            hUDController.GlowingByType(TypeGlowing.BulletsCurrent, bulletCountCurrent);
         }
 
         #endregion protected void

@@ -36,7 +36,7 @@ namespace Global.Shooting.BulletSpace
             }
         }
 
-        private void OnCollisionStay2D(Collision2D collision)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
             if (collision.gameObject.tag == triggerType.ToString())
             {
@@ -62,7 +62,6 @@ namespace Global.Shooting.BulletSpace
                     }
                     if (triggerType == TriggerType.Enemy && collision.gameObject.tag != TriggerType.Bullet.ToString())
                     {
-                        Debug.Log(collision.gameObject.tag);
                         if (baseBullet.BulletStats.bulletType == Managers.Datas.BulletType.RocketLaucherBullet)
                         {
                             ((RocketLaucherBullet)baseBullet).ExplosiveRadiusUp();

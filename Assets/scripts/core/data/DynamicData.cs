@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace Global.Managers.Datas
 {
@@ -30,6 +31,7 @@ namespace Global.Managers.Datas
         RocketLaucherBulleRadiusToBlowUp,
         SpawnItemDataTimeToSpawn,
         SpawnItemDataTimeToHideWeaponAfterSpawn,
+        PlayerHp,
         PlayerSpeed,
         CameraDistance,
         PauseTime
@@ -45,13 +47,26 @@ namespace Global.Managers.Datas
         [SerializeField] private RocketData rocketData;
         [SerializeField] private ShotgunData shotgunData;
 
-        [Header("Weapon & PowerUp Data"), SerializeField] private SpawnItemData spawnItemData;
+        [Header("Weapon & PowerUp Settings"), SerializeField] private SpawnItemData spawnItemData;
 
         [Header("Player Data"), SerializeField] private PlayerData playerData;
 
         [Header("Game Settings"), SerializeField] private GameCameraType cameraType;
         [SerializeField] private PauseData pauseData;
         [SerializeField] private CameraData cameraData;
+
+        [Header("Enemy Data"), SerializeField] private EnemyData meleeSlowEnemyData;
+        [SerializeField] private EnemyData meleeMiddleEnemyData;
+        [SerializeField] private EnemyData meleeFastEnemyData;
+
+        [Header("Bullet Data"), SerializeField] private BulletData automaticBulletData;
+        [SerializeField] private BulletData shotgunBulletData;
+        [SerializeField] private BulletData rocketBulletData;
+
+        [Header("Weapon Data"), SerializeField] private WeaponData automaticWeaponsData;
+        [SerializeField] private WeaponData shotgunWeaponData;
+        [SerializeField] private WeaponData rocketLaucherWeaponData;
+
 #pragma warning restore
 
         #endregion Inspector variables
@@ -76,6 +91,54 @@ namespace Global.Managers.Datas
         #endregion properties
 
         #region public void
+
+        public EnemyData GetEnemyStatsByType(EnemyType enemyType)
+        {
+            if (enemyType == EnemyType.MeleeGrounded_FastSpeed)
+            {
+                return meleeFastEnemyData;
+            }
+            else if (enemyType == EnemyType.MeleeGrounded_LowSpeed)
+            {
+                return meleeSlowEnemyData;
+            }
+            else
+            {
+                return meleeMiddleEnemyData;
+            }
+        }
+
+        public BulletData GetBulletDataByType(BulletType bulletType)
+        {
+            if (bulletType == BulletType.AutomaticBullet)
+            {
+                return automaticBulletData;
+            }
+            else if (bulletType == BulletType.ShotgunBullet)
+            {
+                return shotgunBulletData;
+            }
+            else
+            {
+                return rocketBulletData;
+            }
+        }
+
+        public WeaponData GetWeaponDataByType(WeaponType weaponType)
+        {
+            if (weaponType == WeaponType.AutomaticGun)
+            {
+                return automaticWeaponsData;
+            }
+            else if (weaponType == WeaponType.Shotgun)
+            {
+                return shotgunWeaponData;
+            }
+            else
+            {
+                return rocketLaucherWeaponData;
+            }
+        }
 
         public void SetValueToData(VariableName variableName, string value)
         {
@@ -116,6 +179,7 @@ namespace Global.Managers.Datas
             values.Add(VariableName.RocketLaucherBulleRadiusToBlowUp, (string value) => SetValueRocketLaucherBulleRadiusToBlowUp(value));
             values.Add(VariableName.RocketLaucherBulleTimeToBlowUp, (string value) => SetValueRocketLaucherBulleTimeToBlowUp(value));
             values.Add(VariableName.CameraDistance, (string value) => SetValueCameraDistance(value));
+            values.Add(VariableName.PlayerHp, (string value) => SetValuePlayerHp(value));
             values.Add(VariableName.PlayerSpeed, (string value) => SetValuePlayerSpeed(value));
             values.Add(VariableName.PauseTime, (string value) => SetValuePauseTime(value));
             values.Add(VariableName.SpawnItemDataTimeToSpawn, (string value) => SetValueSpawnItemDataTimeToSpawn(value));
@@ -128,42 +192,42 @@ namespace Global.Managers.Datas
 
         private void SetValueAutomatiGunCountBullets(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(WeaponType.AutomaticGun).bulletCount = int.Parse(value);
+            GetWeaponDataByType(WeaponType.AutomaticGun).bulletCount = int.Parse(value);
         }
 
         private void SetValueAutomaticGunCooldownTime(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(WeaponType.AutomaticGun).cooldownTime = float.Parse(value);
+            GetWeaponDataByType(WeaponType.AutomaticGun).cooldownTime = float.Parse(value);
         }
 
         private void SetValueAutomaticGunShootingRate(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(WeaponType.AutomaticGun).shootingRate = float.Parse(value);
+            GetWeaponDataByType(WeaponType.AutomaticGun).shootingRate = float.Parse(value);
         }
 
         private void SetValueAutomaticBulletDamage(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetBulletStatsByType(BulletType.AutomaticBullet).damage = int.Parse(value);
+            GetBulletDataByType(BulletType.AutomaticBullet).damage = int.Parse(value);
         }
 
         private void SetValueAutomaticBulletSpeed(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetBulletStatsByType(BulletType.AutomaticBullet).speed = float.Parse(value);
+            GetBulletDataByType(BulletType.AutomaticBullet).speed = float.Parse(value);
         }
 
         private void SetValueShotGunCountBullets(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(WeaponType.Shotgun).bulletCount = int.Parse(value);
+            GetWeaponDataByType(WeaponType.Shotgun).bulletCount = int.Parse(value);
         }
 
         private void SetValueShotGunCooldownTime(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(WeaponType.Shotgun).cooldownTime = float.Parse(value);
+            GetWeaponDataByType(WeaponType.Shotgun).cooldownTime = float.Parse(value);
         }
 
         private void SetValueShotGunShootingRate(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(WeaponType.Shotgun).shootingRate = float.Parse(value);
+            GetWeaponDataByType(WeaponType.Shotgun).shootingRate = float.Parse(value);
         }
 
         private void SetValueShotGunAngleBullet(string value)
@@ -178,32 +242,32 @@ namespace Global.Managers.Datas
 
         private void SetValueShotGunBulletDamage(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetBulletStatsByType(BulletType.ShotgunBullet).damage = int.Parse(value);
+            GetBulletDataByType(BulletType.ShotgunBullet).damage = int.Parse(value);
         }
 
         private void SetValueShotGunBulletSpeed(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetBulletStatsByType(BulletType.ShotgunBullet).speed = float.Parse(value);
+            GetBulletDataByType(BulletType.ShotgunBullet).speed = float.Parse(value);
         }
 
         private void SetValueRocketLaucherCountBullets(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(WeaponType.RocketLaucher).bulletCount = int.Parse(value);
+            GetWeaponDataByType(WeaponType.RocketLaucher).bulletCount = int.Parse(value);
         }
 
         private void SetValueRocketLaucherCooldownTime(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(WeaponType.RocketLaucher).cooldownTime = float.Parse(value);
+            GetWeaponDataByType(WeaponType.RocketLaucher).cooldownTime = float.Parse(value);
         }
 
         private void SetValueRocketLaucherShootingRate(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetWeaponStatsByType(WeaponType.RocketLaucher).shootingRate = float.Parse(value);
+            GetWeaponDataByType(WeaponType.RocketLaucher).shootingRate = float.Parse(value);
         }
 
         private void SetValueRocketLaucherBulletDamage(string value)
         {
-            Services.GetManager<DataManager>().StaticData.GetBulletStatsByType(BulletType.RocketLaucherBullet).damage = int.Parse(value);
+            GetBulletDataByType(BulletType.RocketLaucherBullet).damage = int.Parse(value);
         }
 
         private void SetValueRocketLaucherBulletMinSpeed(string value)
@@ -239,6 +303,11 @@ namespace Global.Managers.Datas
         private void SetValueSpawnItemDataTimeToHideWeaponAfterSpawn(string value)
         {
             spawnItemData.destroyTime = int.Parse(value);
+        }
+
+        private void SetValuePlayerHp(string value)
+        {
+            playerData.hp = int.Parse(value);
         }
 
         private void SetValuePlayerSpeed(string value)
@@ -301,5 +370,35 @@ namespace Global.Managers.Datas
     public class PauseData
     {
         public float pauseTime;
+    }
+
+    [Serializable]
+    public class EnemyData
+    {
+        public EnemyType enemyType;
+        public int hpMaximum;
+        public float speed;
+        public float hpValueCurrent;
+        public float damage;
+        public int defence;
+        public int intelligence;
+        public float attackRate;
+    }
+
+    [Serializable]
+    public class BulletData
+    {
+        public BulletType bulletType;
+        public int damage;
+        public float speed;
+    }
+
+    [Serializable]
+    public class WeaponData
+    {
+        public WeaponType weaponType;
+        public int bulletCount;
+        public float cooldownTime;
+        public float shootingRate;
     }
 }

@@ -30,7 +30,6 @@ namespace Global.UI
 
         private int valueInt;
         private float valueFloat;
-        private char[] arrayNumbers = new char[10] { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
         #endregion private variables
 
@@ -159,11 +158,8 @@ namespace Global.UI
             string textValue = text;
             float floatValue = 0;
 
-            Debug.Log("textValue = " + textValue);
             textValue = text.Replace('.', ',');
             float.TryParse(textValue, out floatValue);
-
-            Debug.Log("floatValue = " + floatValue);
             textValue = floatValue.ToString();
             if (textValue == "")
             {

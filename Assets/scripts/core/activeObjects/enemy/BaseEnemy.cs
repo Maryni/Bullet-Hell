@@ -19,14 +19,14 @@ namespace Global.ActiveObjects
 
         #region private variables
 
-        private EnemyStats enemyStatsData;
+        private EnemyData enemyStatsData;
         private Action actionOnDie;
 
         #endregion private variables
 
         #region properties
 
-        public EnemyStats EnemyStats => enemyStatsData;
+        public EnemyData EnemyStats => enemyStatsData;
         public EnemyType EnemyType => enemyType;
         public Transform TransformPlayer => transformPlayer;
         public Rigidbody2D Rig2D => rig2d;
@@ -55,7 +55,7 @@ namespace Global.ActiveObjects
 
         public virtual void Init(EnemyType enemyType)
         {
-            enemyStatsData = Services.GetManager<DataManager>().StaticData.GetEnemyStatsByType(enemyType);
+            enemyStatsData = Services.GetManager<DataManager>().DynamicData.GetEnemyStatsByType(enemyType);
         }
 
         public abstract void GetDamage(float damage);
