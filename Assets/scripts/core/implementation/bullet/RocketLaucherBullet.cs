@@ -40,7 +40,10 @@ namespace Global.Bullet
 
         public void ExplosiveRadiusUp()
         {
-            currentRadius = circleCollider2D.radius;
+            if (circleCollider2D.radius != Services.GetManager<DataManager>().DynamicData.RocketData.radiusBlowUp)
+            {
+                currentRadius = circleCollider2D.radius;
+            }
             circleCollider2D.radius = Services.GetManager<DataManager>().DynamicData.RocketData.radiusBlowUp;
         }
 

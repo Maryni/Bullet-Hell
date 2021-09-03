@@ -55,7 +55,6 @@ namespace Global.Shooting.BulletSpace
                 if (baseBullet.BulletStats.bulletType == Managers.Datas.BulletType.RocketLaucherBullet)
                 {
                     ((RocketLaucherBullet)baseBullet).ExplosiveRadiusUp();
-                    collision.gameObject.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
                     StartCoroutine(LateCall());
                 }
                 else
@@ -83,20 +82,14 @@ namespace Global.Shooting.BulletSpace
                 {
                     if (gameObjectItem.activeInHierarchy)
                     {
-                        gameObjectItem.gameObject.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
+                        gameObjectItem.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
                     }
                 }
 
-                gameObject.SetActive(false);
-                for (int i = 0; i < listTouchingObjects.Count; i++)
-                {
-                    if (!listTouchingObjects[i].activeInHierarchy)
-                    {
-                        listTouchingObjects.RemoveAt(i);
-                    }
-                }
-                ((RocketLaucherBullet)baseBullet).ExplosiveRadiusDown();
+                listTouchingObjects.Clear();
+                gameObject.GetComponent<RocketLaucherBullet>().ExplosiveRadiusDown();
             }
+            gameObject.SetActive(false);
             yield break;
         }
     }
