@@ -1,6 +1,8 @@
 ﻿using Global.Managers.Datas;
 using Global.Player;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -39,10 +41,18 @@ namespace Global.Controllers
 
         private int scoreValue;
         private PlayerController playerController;
+        private Dictionary<TypeGlowing, Action<float, float>> types = new Dictionary<TypeGlowing, Action<float, float>>();
+        private float range;
+        private float step;
 
         #endregion private variables
 
         #region Unity functions
+
+        private void Awake()
+        {
+            AddActionsToDictionary();
+        }
 
         private void Start()
         {
@@ -58,61 +68,11 @@ namespace Global.Controllers
             hpMaximumTextValue.text = value.ToString();
         }
 
-        public void AddScore(int value)
-        {
-            scoreValue += value;
-            GlowingByType(TypeGlowing.Score, scoreValue);
-        }
-
         public void GlowingByType(TypeGlowing typeGlowing, float valueTaken)
         {
-            float range = maxAlpha - minAlpha;
-            float step = range / timeGlowing;
-            if (typeGlowing == TypeGlowing.Score)
-            {
-                StopCoroutine(Glow(scoreText, step));
-                StopCoroutine(Glow(scoreTextValue, step));
-                StopAllCoroutines();
-                StartCoroutine(Glow(scoreText, step));
-                StartCoroutine(Glow(scoreTextValue, step));
-                scoreTextValue.text = valueTaken.ToString();
-            }
-            if (typeGlowing == TypeGlowing.HpCurrent)
-            {
-                StopCoroutine(Glow(hpText, step));
-                StopCoroutine(Glow(hpCurrentTextValue, step));
-                StopAllCoroutines();
-                StartCoroutine(Glow(hpText, step));
-                StartCoroutine(Glow(hpCurrentTextValue, step));
-                hpCurrentTextValue.text = valueTaken.ToString();
-            }
-            if (typeGlowing == TypeGlowing.HpMaximum)
-            {
-                StopCoroutine(Glow(hpText, step));
-                StopCoroutine(Glow(hpMaximumTextValue, step));
-                StopAllCoroutines();
-                StartCoroutine(Glow(hpText, step));
-                StartCoroutine(Glow(hpMaximumTextValue, step));
-                hpMaximumTextValue.text = valueTaken.ToString();
-            }
-            if (typeGlowing == TypeGlowing.BulletsCurrent)
-            {
-                //StopCoroutine(Glow(bulletstText, step));
-                //StopCoroutine(Glow(bulletsCurrentTextValue, step));
-                StopAllCoroutines();
-                StartCoroutine(Glow(bulletstText, step));
-                StartCoroutine(Glow(bulletsCurrentTextValue, step));
-                bulletsCurrentTextValue.text = valueTaken.ToString();
-            }
-            if (typeGlowing == TypeGlowing.BulletsMaximum)
-            {
-                StopCoroutine(Glow(bulletstText, step));
-                StopCoroutine(Glow(bulletsMaximumTextValue, step));
-                StopAllCoroutines();
-                StartCoroutine(Glow(bulletstText, step));
-                StartCoroutine(Glow(bulletsMaximumTextValue, step));
-                bulletsMaximumTextValue.text = valueTaken.ToString();
-            }
+            range = maxAlpha - minAlpha;
+            step = range / timeGlowing;
+            types[typeGlowing]?.Invoke(valueTaken, step);
         }
 
         #endregion public void
@@ -136,6 +96,57 @@ namespace Global.Controllers
 
                 yield return null;
             }
+            yield break;
+        }
+
+        private void AddActionsToDictionary()
+        {
+            types.Add(TypeGlowing.Score, (float valueTaken, float step) => GlowScore(valueTaken, step));
+            types.Add(TypeGlowing.HpCurrent, (float valueTaken, float step) => GlowHpCurrent(valueTaken, step));
+            types.Add(TypeGlowing.HpMaximum, (float valueTaken, float step) => GlowHpMaximum(valueTaken, step));
+            types.Add(TypeGlowing.BulletsCurrent, (float valueTaken, float step) => GlowBulletsCurrent(valueTaken, step));
+            types.Add(TypeGlowing.BulletsMaximum, (float valueTaken, float step) => GlowBulletsMaximum(valueTaken, step));
+        }
+
+        private void GlowScore(float valueTaken, float step)
+        {
+            scoreValue += (int)valueTaken;
+            StopAllCoroutines();
+            StartCoroutine(Glow(scoreText, step));
+            StartCoroutine(Glow(scoreTextValue, step));
+            scoreTextValue.text = scoreValue.ToString();
+        }
+
+        private void GlowHpCurrent(float valueTaken, float step)
+        {
+            StopAllCoroutines();
+            StartCoroutine(Glow(hpText, step));
+            StartCoroutine(Glow(hpCurrentTextValue, step));
+            hpCurrentTextValue.text = valueTaken.ToString();
+        }
+
+        private void GlowHpMaximum(float valueTaken, float step)
+        {
+            StopAllCoroutines();
+            StartCoroutine(Glow(hpText, step));
+            StartCoroutine(Glow(hpMaximumTextValue, step));
+            hpMaximumTextValue.text = valueTaken.ToString();
+        }
+
+        private void GlowBulletsCurrent(float valueTaken, float step)
+        {
+            StopAllCoroutines();
+            StartCoroutine(Glow(bulletstText, step));
+            StartCoroutine(Glow(bulletsCurrentTextValue, step));
+            bulletsCurrentTextValue.text = valueTaken.ToString();
+        }
+
+        private void GlowBulletsMaximum(float valueTaken, float step)
+        {
+            StopAllCoroutines();
+            StartCoroutine(Glow(bulletstText, step));
+            StartCoroutine(Glow(bulletsMaximumTextValue, step));
+            bulletsMaximumTextValue.text = valueTaken.ToString();
         }
 
         #endregion private void

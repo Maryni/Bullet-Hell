@@ -37,7 +37,7 @@ namespace Global.ActiveObjects
 
         private void AddScore()
         {
-            hUDController.AddScore(Random.Range(minValueScore, maxValueScore + 1));
+            hUDController.GlowingByType(TypeGlowing.Score, Random.Range(minValueScore, maxValueScore + 1));
         }
 
         private void SubscribeOnDieEnemy()
