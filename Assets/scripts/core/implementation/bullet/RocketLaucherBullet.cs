@@ -87,7 +87,7 @@ namespace Global.Bullet
             {
                 Rig2D.velocity = Vector2.zero;
                 Rig2D.AddForce(transform.up * currentSpeed, ForceMode2D.Impulse);
-                currentSpeed += step;
+                currentSpeed += step * Time.deltaTime;
                 yield return null;
             }
         }

@@ -60,7 +60,7 @@ MonoBehaviour:
     playerData:
       hp: 100
       speed: 2
-      defence: 0
+      defence: 1
     cameraType: 0
     pauseData:
       pauseTime: 2
