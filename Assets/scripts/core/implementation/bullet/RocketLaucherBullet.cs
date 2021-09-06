@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Global.Bullet
 {
-    public class RocketLaucherBullet : BaseBullet
+    public class RocketLaucherBullet : BaseBullet //нейминг, ошибки в слове
     {
         #region Inspector variables
 
@@ -31,6 +31,7 @@ namespace Global.Bullet
 
         private void OnValidate()
         {
+            //каждый раз при сериализации в юнити оно будет его доставать
             circleCollider2D = GetComponent<CircleCollider2D>();
         }
 
@@ -40,6 +41,8 @@ namespace Global.Bullet
 
         public void ExplosiveRadiusUp()
         {
+            //здесь у тебя ты можешь не получить нужные тебе значения
+            //тут нужно считать разницу между ними и проверять на какое-то значение
             if (circleCollider2D.radius != Services.GetManager<DataManager>().DynamicData.RocketData.radiusBlowUp)
             {
                 currentRadius = circleCollider2D.radius;
@@ -67,13 +70,15 @@ namespace Global.Bullet
         private IEnumerator ExplosiveByTime()
         {
             yield return new WaitForSeconds(Services.GetManager<DataManager>().DynamicData.RocketData.timeToBlowUp);
-            float tempRadius = circleCollider2D.radius;
+            //мне нужны будут факты почему ты так написал
+            //я бы вообще этот код удалил
+            /*float tempRadius = circleCollider2D.radius;
             circleCollider2D.radius = Services.GetManager<DataManager>().DynamicData.RocketData.radiusBlowUp;
-            circleCollider2D.radius = tempRadius;
+            circleCollider2D.radius = tempRadius;*/
 
             gameObject.SetActive(false);
 
-            yield break;
+            yield break; //не вызывается
         }
 
         private IEnumerator IncreaseSpeed()

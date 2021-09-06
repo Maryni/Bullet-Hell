@@ -7,40 +7,47 @@ using UnityEngine;
 
 namespace Global.Weapon
 {
-    public class AutomaticGunWeapon : BaseWeapon
-    {
-        #region Unity functions
+	public class AutomaticGunWeapon : BaseWeapon
+	{
+#region Unity functions
 
-        private void Start()
-        {
-            Init();
-            bulletCountCurrent = weaponStats.bulletCount;
-        }
+		private void Start()
+		{
+			Init();
+			bulletCountCurrent = weaponStats.bulletCount;
+		}
 
-        #endregion Unity functions
+#endregion Unity functions
 
-        #region public void
+#region public void
 
-        protected override IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
-        {
-            bulletCountCurrent--;
-            float zParentRotation = gameObject.transform.parent.transform.rotation.eulerAngles.z;
-            var bullet = Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
-            bullet.transform.position = transformParent.position;
-            bullet.gameObject.SetActive(true);
-            bullet.ActivateBullet();
-            bullet.Rotate(zParentRotation);
-            bullet.Move();
-            bullet.Rotate(correctAngleForSprite + zParentRotation);
-            yield return new WaitForSeconds(weaponStats.shootingRate);
-            if (bulletCountCurrent == 0)
-            {
-                yield return Reload();
-            }
-            StartCoroutine(base.Shoot(mousePos, transformParent, callback));
-            callback?.Invoke();
-        }
+		//у тебя AutomaticGunWeapon и RocketLaucherWeapon Shoot функции похожи
+		//подумай как и перепиши ее
 
-        #endregion public void
-    }
+		protected override IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
+		{
+			bulletCountCurrent--;
+			float zParentRotation = gameObject.transform.parent.transform.rotation.eulerAngles.z;
+			var bullet = Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
+
+			//ты можешь все эти штуки вызывать при инициализации, перепиши
+
+			// bullet.transform.position = transformParent.position;
+			// bullet.gameObject.SetActive(true);
+			// bullet.ActivateBullet();
+			// bullet.Rotate(zParentRotation);
+			// bullet.Move();
+			// bullet.Rotate(correctAngleForSprite + zParentRotation);
+			yield return new WaitForSeconds(weaponStats.shootingRate);
+			if (bulletCountCurrent == 0)
+			{
+				yield return Reload();
+			}
+
+			StartCoroutine(base.Shoot(mousePos, transformParent, callback));
+			callback?.Invoke();
+		}
+
+#endregion public void
+	}
 }

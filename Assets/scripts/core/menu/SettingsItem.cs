@@ -6,6 +6,8 @@ using Global.Camera;
 
 namespace Global.UI
 {
+    //он используеться в куче обьектов, и при этом у тебя тут лист
+    //у тебя должен быть контроллер этих итемов, а не сами итемы должны управлять собой
     public class SettingsItem : MonoBehaviour
     {
         #region Inspector variables
@@ -159,7 +161,7 @@ namespace Global.UI
             float floatValue = 0;
 
             textValue = text.Replace('.', ',');
-            float.TryParse(textValue, out floatValue);
+            float.TryParse(textValue, out floatValue); //трай парс отдает бул, проверяй или оно смогло спрарсить
             textValue = floatValue.ToString();
             if (textValue == "")
             {

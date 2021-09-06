@@ -6,141 +6,143 @@ using UnityEngine;
 
 namespace Global.Game.Component
 {
-    public class SmoothPause : MonoBehaviour
-    {
-        #region Inspector variables
+	//у тебя скрипт нарушает принцип единой ответственности, думаю, ты сам найдешь почему
+	public class SmoothPause : MonoBehaviour
+	{
+#region Inspector variables
 
 #pragma warning disable
-        [SerializeField] private GameObject panelMenu;
-        [SerializeField] private GameObject losePanel;
-        [SerializeField] private float timeScaleSeconds;
+		[SerializeField] private GameObject panelMenu;
+		[SerializeField] private GameObject losePanel;
+		[SerializeField] private float timeScaleSeconds;
 
 #pragma warning restore
 
-        #endregion Inspector variables
+#endregion Inspector variables
 
-        #region private variables
+#region private variables
 
-        private Coroutine coroutineDecreaseToOne;
-        private float minTimeScale = 0f;
-        private float maxTimeScale;
+		private Coroutine coroutineDecreaseToOne; //нейминг плохой
+		private float minTimeScale = 0f;
+		private float maxTimeScale;
 
-        #endregion private variables
+#endregion private variables
 
-        #region Unity functions
+#region Unity functions
 
-        private void Start()
-        {
-            SetValueFromData();
-            maxTimeScale = Time.timeScale;
-        }
+		private void Start()
+		{
+			SetValueFromData();
+			maxTimeScale = Time.timeScale;
+		}
 
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.Escape))
-            {
-                EnablePause();
-            }
-        }
+		private void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.Escape))
+			{
+				EnablePause();
+			}
+		}
 
-        #endregion Unity functions
+#endregion Unity functions
 
-        #region public void
+#region public void
 
-        public void StartPauseWhenDead()
-        {
-            EnableDiePanel();
-        }
+		public void StartPauseWhenDead()
+		{
+			EnableDiePanel();
+		}
 
-        public void StartPause()
-        {
-            EnablePause();
-        }
+		public void StartPause()
+		{
+			EnablePause();
+		}
 
-        public void ValueMoveFromZero()
-        {
-            StartCoroutine(IncreaseValueTimeScale(minTimeScale, maxTimeScale, timeScaleSeconds));
-        }
+		public void ValueMoveFromZero()
+		{
+			StartCoroutine(IncreaseValueTimeScale(minTimeScale, maxTimeScale, timeScaleSeconds));
+		}
 
-        public void ResetTimeScale()
-        {
-            StopAllCoroutines();
-            Time.timeScale = 1f;
-        }
+		public void ResetTimeScale()
+		{
+			StopAllCoroutines();
+			Time.timeScale = 1f; //у тебя есть своя переменная для этого, сейчас это магический код
+		}
 
-        #endregion public void
+#endregion public void
 
-        #region private void
+#region private void
 
-        private void SetValueFromData()
-        {
-            var data = Services.GetManager<DataManager>().DynamicData;
-            timeScaleSeconds = data.PauseData.pauseTime;
-        }
+		private void SetValueFromData()
+		{
+			var data = Services.GetManager<DataManager>().DynamicData; //можешь напрямую вызывать, без var
+			timeScaleSeconds = data.PauseData.pauseTime;
+		}
 
-        private void EnablePause()
-        {
-            if (coroutineDecreaseToOne == null)
-            {
-                coroutineDecreaseToOne = StartCoroutine(DecreaseValueTimeScale(maxTimeScale, minTimeScale, timeScaleSeconds, false));
-            }
-        }
+		private void EnablePause()
+		{
+			if (coroutineDecreaseToOne == null)
+			{
+				coroutineDecreaseToOne
+					= StartCoroutine(DecreaseValueTimeScale(maxTimeScale, minTimeScale, timeScaleSeconds, false));
+			}
+		}
 
-        private void EnableDiePanel()
-        {
-            losePanel.SetActive(true);
-            Time.timeScale = 0f;
-        }
+		private void EnableDiePanel()
+		{
+			losePanel.SetActive(true);
+			Time.timeScale = 0f;
+		}
 
-        private IEnumerator DecreaseValueTimeScale(float start, float end, float time, bool isDie, Action callback = null)
-        {
-            float lastTime = Time.realtimeSinceStartup;
-            float timer = 0.0f;
+		private IEnumerator DecreaseValueTimeScale(float start, float end, float time, bool isDie, Action callback = null)
+		{
+			float lastTime = Time.realtimeSinceStartup;
+			float timer = 0.0f;
 
-            while (timer < time)
-            {
-                Time.timeScale = Mathf.Lerp(start, end, timer / time);
-                timer += (Time.realtimeSinceStartup - lastTime);
-                lastTime = Time.realtimeSinceStartup;
-                yield return null;
-            }
+			while (timer < time)
+			{
+				Time.timeScale = Mathf.Lerp(start, end, timer / time);
+				timer += (Time.realtimeSinceStartup - lastTime);
+				lastTime = Time.realtimeSinceStartup;
+				yield return null;
+			}
 
-            Time.timeScale = end;
-            if (isDie)
-            {
-                losePanel.SetActive(true);
-            }
-            else
-            {
-                panelMenu.SetActive(true);
-            }
+			Time.timeScale = end;
+			if (isDie)
+			{
+				losePanel.SetActive(true);
+			}
+			else
+			{
+				panelMenu.SetActive(true);
+			}
 
-            StopPauseCoroutine(DecreaseValueTimeScale(start, end, time, isDie, callback));
-            callback?.Invoke();
-        }
+			StopPauseCoroutine(DecreaseValueTimeScale(start, end, time, isDie, callback));
+			callback?.Invoke();
+		}
 
-        private IEnumerator IncreaseValueTimeScale(float start, float end, float time)
-        {
-            float lastTime = Time.realtimeSinceStartup;
-            float timer = 0.0f;
+		private IEnumerator IncreaseValueTimeScale(float start, float end, float time)
+		{
+			float lastTime = Time.realtimeSinceStartup;
+			float timer = 0.0f;
 
-            while (timer < time)
-            {
-                Time.timeScale = Mathf.Lerp(start, end, timer / time);
-                timer += (Time.realtimeSinceStartup - lastTime);
-                lastTime = Time.realtimeSinceStartup;
-                yield return null;
-            }
+			while (timer < time)
+			{
+				Time.timeScale = Mathf.Lerp(start, end, timer / time);
+				timer += (Time.realtimeSinceStartup - lastTime);
+				lastTime = Time.realtimeSinceStartup;
+				yield return null;
+			}
 
-            Time.timeScale = end;
-        }
+			Time.timeScale = end;
+		}
 
-        private void StopPauseCoroutine(IEnumerator coroutine)
-        {
-            StopCoroutine(coroutine);
-            coroutineDecreaseToOne = null;
-        }
+		private void StopPauseCoroutine(IEnumerator coroutine)
+		{
+			StopCoroutine(coroutine);
+			coroutineDecreaseToOne = null;
+		}
 
-        #endregion private void
-    }
+#endregion private void
+	}
 }

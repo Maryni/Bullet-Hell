@@ -4,42 +4,45 @@ using Global.Save;
 
 namespace Global.Managers.Datas
 {
-    public class DataManager : BaseManager
-    {
-        #region private variables
+	public class DataManager : BaseManager
+	{
+#region private variables
 
 #pragma warning disable
-        [SerializeField] private DynamicData dynamicData;
-        [SerializeField] private StaticData staticData;
+		[SerializeField] private DynamicData dynamicData;
+		[SerializeField] private StaticData staticData;
 #pragma warning restore
 
-        #endregion private variables
+#endregion private variables
 
-        #region properties
+#region properties
 
-        public DynamicData DynamicData => dynamicData;
-        public StaticData StaticData => staticData;
-        public override Type ManagerType => typeof(DataManager);
+		public DynamicData DynamicData => dynamicData;
+		public StaticData StaticData => staticData;
+		public override Type ManagerType => typeof(DataManager);
 
-        #endregion properties
+#endregion properties
 
-        public void SaveDynamicData()
-        {
-            SaveData.Save(dynamicData);
-        }
+		public void SaveDynamicData()
+		{
+			SaveData.Save(dynamicData);
+		}
 
-        protected override bool OnInit()
-        {
-            SaveData.DefaultSave(dynamicData);
-            dynamicData = SaveData.Load();
-            dynamicData.SetActionsToDictionary();
-            return true;
-        }
+		protected override bool OnInit()
+		{
+			SaveData.DefaultSave(dynamicData);
+			dynamicData = SaveData.Load();
+			dynamicData.SetActionsToDictionary();
+			return true;
+		}
 
-        [ContextMenu("Delete Data")]
-        public void DeleteData()
-        {
-            SaveData.DeleteAllData();
-        }
-    }
+		//сделай эту функцию через эдитор, так будет лучше
+		//+ что-то новое узнаешь
+
+		[ContextMenu("Delete Data")]
+		public void DeleteData()
+		{
+			SaveData.DeleteAllData();
+		}
+	}
 }
