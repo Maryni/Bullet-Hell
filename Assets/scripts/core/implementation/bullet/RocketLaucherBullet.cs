@@ -57,6 +57,13 @@ namespace Global.Bullet
             ExplosiveRadiusDown();
             Rig2D.AddForce(transform.up * BulletStats.speed, ForceMode2D.Impulse);
             StartCoroutine(IncreaseSpeed());
+            StartCoroutine(DisableByTime(Services.GetManager<DataManager>().DynamicData.RocketData.timeToBlowUp));
+        }
+
+        private IEnumerator DisableByTime(float time)
+        {
+            yield return new WaitForSeconds(time);
+            gameObject.SetActive(false);
         }
 
         #endregion public void
