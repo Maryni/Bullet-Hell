@@ -85,7 +85,6 @@ namespace Global.Controllers
             Color32 temp = text.color;
             temp.a = (byte)value;
             text.color = temp;
-
             while (value > minAlpha)
             {
                 value -= (step * Time.deltaTime);
@@ -93,7 +92,6 @@ namespace Global.Controllers
                 temp = text.color;
                 temp.a = (byte)value;
                 text.color = temp;
-
                 yield return null;
             }
             yield break;
@@ -111,7 +109,8 @@ namespace Global.Controllers
         private void GlowScore(float valueTaken, float step)
         {
             scoreValue += (int)valueTaken;
-            StopAllCoroutines();
+            StopCoroutine(Glow(scoreText, step));
+            StopCoroutine(Glow(scoreTextValue, step));
             StartCoroutine(Glow(scoreText, step));
             StartCoroutine(Glow(scoreTextValue, step));
             scoreTextValue.text = scoreValue.ToString();
@@ -119,7 +118,8 @@ namespace Global.Controllers
 
         private void GlowHpCurrent(float valueTaken, float step)
         {
-            StopAllCoroutines();
+            StopCoroutine(Glow(hpText, step));
+            StopCoroutine(Glow(hpCurrentTextValue, step));
             StartCoroutine(Glow(hpText, step));
             StartCoroutine(Glow(hpCurrentTextValue, step));
             hpCurrentTextValue.text = valueTaken.ToString();
@@ -127,7 +127,8 @@ namespace Global.Controllers
 
         private void GlowHpMaximum(float valueTaken, float step)
         {
-            StopAllCoroutines();
+            StopCoroutine(Glow(hpText, step));
+            StopCoroutine(Glow(hpMaximumTextValue, step));
             StartCoroutine(Glow(hpText, step));
             StartCoroutine(Glow(hpMaximumTextValue, step));
             hpMaximumTextValue.text = valueTaken.ToString();
@@ -143,7 +144,8 @@ namespace Global.Controllers
 
         private void GlowBulletsMaximum(float valueTaken, float step)
         {
-            StopAllCoroutines();
+            StopCoroutine(Glow(bulletstText, step));
+            StopCoroutine(Glow(bulletsMaximumTextValue, step));
             StartCoroutine(Glow(bulletstText, step));
             StartCoroutine(Glow(bulletsMaximumTextValue, step));
             bulletsMaximumTextValue.text = valueTaken.ToString();

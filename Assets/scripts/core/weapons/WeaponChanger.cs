@@ -36,6 +36,7 @@ namespace Global.Weapon
         {
             if (collision.gameObject.tag == TriggerType.Player.ToString())
             {
+                Debug.Log("AAA");
                 SetPlayerWeaponByWeapon(weaponType);
                 gameObject.SetActive(false);
             }

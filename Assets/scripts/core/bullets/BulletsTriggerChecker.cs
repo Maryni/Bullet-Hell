@@ -90,7 +90,6 @@ namespace Global.Shooting.BulletSpace
                 gameObject.GetComponent<RocketLaucherBullet>().ExplosiveRadiusDown();
             }
             gameObject.SetActive(false);
-            yield break;
         }
     }
 }

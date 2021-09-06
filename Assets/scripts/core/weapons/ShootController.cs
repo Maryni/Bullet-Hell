@@ -61,8 +61,8 @@ namespace Global.Controllers
             baseWeapon.SetHUDController(playerController.HUDController);
             baseWeapon.StopAllCoroutines();
             baseWeapon.ReserCoroutine();
-            playerController.HUDController.GlowingByType(TypeGlowing.BulletsMaximum, CurrentWeapon.WeaponStats.bulletCount);
             playerController.HUDController.GlowingByType(TypeGlowing.BulletsCurrent, CurrentWeapon.BulletCountCurrent);
+            playerController.HUDController.GlowingByType(TypeGlowing.BulletsMaximum, CurrentWeapon.WeaponStats.bulletCount);
         }
 
         #endregion public void

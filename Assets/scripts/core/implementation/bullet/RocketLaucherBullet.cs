@@ -56,25 +56,12 @@ namespace Global.Bullet
         {
             ExplosiveRadiusDown();
             Rig2D.AddForce(transform.up * BulletStats.speed, ForceMode2D.Impulse);
-            StartCoroutine(ExplosiveByTime());
             StartCoroutine(IncreaseSpeed());
         }
 
         #endregion public void
 
         #region private void
-
-        private IEnumerator ExplosiveByTime()
-        {
-            yield return new WaitForSeconds(Services.GetManager<DataManager>().DynamicData.RocketData.timeToBlowUp);
-            float tempRadius = circleCollider2D.radius;
-            circleCollider2D.radius = Services.GetManager<DataManager>().DynamicData.RocketData.radiusBlowUp;
-            circleCollider2D.radius = tempRadius;
-
-            gameObject.SetActive(false);
-
-            yield break;
-        }
 
         private IEnumerator IncreaseSpeed()
         {
