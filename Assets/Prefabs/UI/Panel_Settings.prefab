@@ -12814,7 +12814,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pause time
+  m_Text: Dispawn time
 --- !u!1 &3254365991791273462
 GameObject:
   m_ObjectHideFlags: 0
@@ -28068,7 +28068,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pause time
+  m_Text: Spawn time
 --- !u!1 &7183162671447674430
 GameObject:
   m_ObjectHideFlags: 0
@@ -29296,7 +29296,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Pause time
+  m_Text: Duration on player
 --- !u!1 &7541842916162724800
 GameObject:
   m_ObjectHideFlags: 0

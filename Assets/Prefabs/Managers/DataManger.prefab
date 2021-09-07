@@ -60,6 +60,7 @@ MonoBehaviour:
     powerUpSpawnItemData:
       spawnTime: 10
       destroyTime: 12
+      duration: 10
     playerData:
       hp: 100
       speed: 2
