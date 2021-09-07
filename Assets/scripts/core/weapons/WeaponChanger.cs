@@ -37,6 +37,7 @@ namespace Global.Weapon
             if (collision.gameObject.tag == TriggerType.Player.ToString())
             {
                 SetPlayerWeaponByWeapon(weaponType);
+                StopAllCoroutines();
                 gameObject.SetActive(false);
             }
         }

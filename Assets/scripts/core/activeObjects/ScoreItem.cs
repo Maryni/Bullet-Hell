@@ -38,6 +38,7 @@ namespace Global.ActiveObjects
         private void AddScore()
         {
             hUDController.GlowingByType(TypeGlowing.Score, Random.Range(minValueScore, maxValueScore + 1));
+            hUDController.GlowingByType(TypeGlowing.KilledEnemy, 0);
         }
 
         private void SubscribeOnDieEnemy()

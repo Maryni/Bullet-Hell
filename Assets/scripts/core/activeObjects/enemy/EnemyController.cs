@@ -51,7 +51,10 @@ namespace Global.ActiveObjects
 
         public void AddEventToEnemy(Action action)
         {
-            meleeEnemy.AddEventOnDie(action);
+            if (meleeEnemy.ActionOnDie != action)
+            {
+                meleeEnemy.AddEventOnDie(action);
+            }
         }
 
         public void SetPlayerTransform()

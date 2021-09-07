@@ -30,6 +30,7 @@ namespace Global.ActiveObjects
         public EnemyType EnemyType => enemyType;
         public Transform TransformPlayer => transformPlayer;
         public Rigidbody2D Rig2D => rig2d;
+        public Action ActionOnDie => actionOnDie;
 
         #endregion properties
 

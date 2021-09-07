@@ -11,6 +11,7 @@ namespace Global.Controllers
     public enum TypeGlowing
     {
         Score,
+        KilledEnemy,
         HpCurrent,
         HpMaximum,
         BulletsCurrent,
@@ -27,6 +28,8 @@ namespace Global.Controllers
         [SerializeField] private int maxAlpha;
         [SerializeField] private Text scoreText;
         [SerializeField] private Text scoreTextValue;
+        [SerializeField] private Text killedEnemyText;
+        [SerializeField] private Text killedEnemyTextValue;
         [SerializeField] private Text hpText;
         [SerializeField] private Text hpMaximumTextValue;
         [SerializeField] private Text hpCurrentTextValue;
@@ -40,6 +43,7 @@ namespace Global.Controllers
         #region private variables
 
         private int scoreValue;
+        private int killedCountValue;
         private PlayerController playerController;
         private Dictionary<TypeGlowing, Action<float, float>> types = new Dictionary<TypeGlowing, Action<float, float>>();
         private float range;
@@ -100,6 +104,7 @@ namespace Global.Controllers
         private void AddActionsToDictionary()
         {
             types.Add(TypeGlowing.Score, (float valueTaken, float step) => GlowScore(valueTaken, step));
+            types.Add(TypeGlowing.KilledEnemy, (float valueTaken, float step) => GlowKilledScore(step));
             types.Add(TypeGlowing.HpCurrent, (float valueTaken, float step) => GlowHpCurrent(valueTaken, step));
             types.Add(TypeGlowing.HpMaximum, (float valueTaken, float step) => GlowHpMaximum(valueTaken, step));
             types.Add(TypeGlowing.BulletsCurrent, (float valueTaken, float step) => GlowBulletsCurrent(valueTaken, step));
@@ -114,6 +119,16 @@ namespace Global.Controllers
             StartCoroutine(Glow(scoreText, step));
             StartCoroutine(Glow(scoreTextValue, step));
             scoreTextValue.text = scoreValue.ToString();
+        }
+
+        private void GlowKilledScore(float step)
+        {
+            killedCountValue++;
+            StopCoroutine(Glow(killedEnemyText, step));
+            StopCoroutine(Glow(killedEnemyTextValue, step));
+            StartCoroutine(Glow(killedEnemyText, step));
+            StartCoroutine(Glow(killedEnemyTextValue, step));
+            killedEnemyTextValue.text = killedCountValue.ToString();
         }
 
         private void GlowHpCurrent(float valueTaken, float step)

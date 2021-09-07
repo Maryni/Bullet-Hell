@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
 namespace Global.Managers.Datas
 {
@@ -34,7 +33,10 @@ namespace Global.Managers.Datas
         PlayerHp,
         PlayerSpeed,
         CameraDistance,
-        PauseTime
+        PauseTime,
+        SlowEnemySpeed,
+        MiddleEnemySpeed,
+        FastEnemySpeed
     }
 
     [Serializable]
@@ -184,6 +186,9 @@ namespace Global.Managers.Datas
             values.Add(VariableName.PauseTime, (string value) => SetValuePauseTime(value));
             values.Add(VariableName.SpawnItemDataTimeToSpawn, (string value) => SetValueSpawnItemDataTimeToSpawn(value));
             values.Add(VariableName.SpawnItemDataTimeToHideWeaponAfterSpawn, (string value) => SetValueSpawnItemDataTimeToHideWeaponAfterSpawn(value));
+            values.Add(VariableName.SlowEnemySpeed, (string value) => SetValueSlowEnemySpeed(value));
+            values.Add(VariableName.MiddleEnemySpeed, (string value) => SetValueMiddleEnemySpeed(value));
+            values.Add(VariableName.FastEnemySpeed, (string value) => SetValueFastEnemySpeed(value));
         }
 
         #endregion public void
@@ -323,6 +328,21 @@ namespace Global.Managers.Datas
         private void SetValuePauseTime(string value)
         {
             pauseData.pauseTime = float.Parse(value);
+        }
+
+        private void SetValueSlowEnemySpeed(string value)
+        {
+            meleeSlowEnemyData.speed = float.Parse(value);
+        }
+
+        private void SetValueMiddleEnemySpeed(string value)
+        {
+            meleeMiddleEnemyData.speed = float.Parse(value);
+        }
+
+        private void SetValueFastEnemySpeed(string value)
+        {
+            meleeFastEnemyData.speed = float.Parse(value);
         }
 
         #endregion private void

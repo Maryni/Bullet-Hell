@@ -4,7 +4,6 @@ using Global.Player;
 using System.Collections.Generic;
 using Global.Managers.Datas;
 using System.Linq;
-using System;
 
 namespace Global.Controllers
 {

@@ -106,6 +106,10 @@ namespace Global.UI
             LoadSettings(cameraType, data.StartCameraType.ToString());
             LoadSettings(cameraDistance, data.CameraData.cameraDistance.ToString());
             LoadSettings(pauseTime, data.PauseData.pauseTime.ToString());
+
+            LoadSettings(slowEnemySpeed, data.GetEnemyStatsByType(EnemyType.MeleeGrounded_LowSpeed).speed.ToString());
+            LoadSettings(middleEnemySpeed, data.GetEnemyStatsByType(EnemyType.MeleeGrounded_MiddleSpeed).speed.ToString());
+            LoadSettings(fastEnemySpeed, data.GetEnemyStatsByType(EnemyType.MeleeGrounded_FastSpeed).speed.ToString());
         }
 
         #endregion Unity functions
