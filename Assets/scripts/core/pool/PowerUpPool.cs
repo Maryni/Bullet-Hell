@@ -1,4 +1,5 @@
 ﻿using Global.Upgrates;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -58,6 +59,16 @@ namespace Global.Managers.Datas
                     listPowerUps[i].gameObject.SetActive(false);
                 }
             }
+        }
+
+        public TypePowerUp GetRandomPowerUp()
+        {
+            return (TypePowerUp)UnityEngine.Random.Range(0, GetTypePowerUpLength());
+        }
+
+        public int GetTypePowerUpLength()
+        {
+            return Enum.GetValues(typeof(TypePowerUp)).Length;
         }
 
         #endregion public void

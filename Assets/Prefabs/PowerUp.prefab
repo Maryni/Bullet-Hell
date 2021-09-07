@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 620608734217197600}
   - component: {fileID: 8193380746208898748}
-  - component: {fileID: 4142794949397258585}
+  - component: {fileID: 2157142280141973875}
   - component: {fileID: 5519400516784186663}
   m_Layer: 0
   m_Name: PowerUp
@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 53865754740641898}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.59734, y: -2.7547607, z: -60.434814}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,19 +72,20 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: -6300230066066138356, guid: 54a877d1e10c2684295a7d9fc8bada1c,
+    type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.28, y: 1.28}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &4142794949397258585
-BoxCollider2D:
+--- !u!58 &2157142280141973875
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -97,18 +98,8 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
-  m_EdgeRadius: 0
+  m_Radius: 0.64
 --- !u!114 &5519400516784186663
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,3 +113,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   typePowerUp: 0
+  damageSprite: {fileID: -6300230066066138356, guid: 54a877d1e10c2684295a7d9fc8bada1c,
+    type: 3}
+  defenceSprite: {fileID: 3674751036012978118, guid: 54a877d1e10c2684295a7d9fc8bada1c,
+    type: 3}
+  speedSprite: {fileID: -7580393870125072238, guid: 54a877d1e10c2684295a7d9fc8bada1c,
+    type: 3}
+  killAreaSprite: {fileID: 4932434266601472998, guid: 54a877d1e10c2684295a7d9fc8bada1c,
+    type: 3}
+  spriteRenderer: {fileID: 8193380746208898748}
+  coll2D: {fileID: 2157142280141973875}

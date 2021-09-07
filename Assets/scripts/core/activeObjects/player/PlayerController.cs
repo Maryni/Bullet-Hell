@@ -5,6 +5,8 @@ using System.Linq;
 using Global.Game.Component;
 using Tools;
 using System;
+using System.Collections.Generic;
+using System.Collections;
 
 namespace Global.Player
 {
@@ -33,6 +35,8 @@ namespace Global.Player
         private HUDController hUDController;
 
         private SmoothPause smoothPause;
+        private bool canDamaged = true;
+        private Coroutine immortalityCoroutine;
 
         #endregion private variables
 
@@ -53,6 +57,11 @@ namespace Global.Player
 
         #region public void
 
+        public void RefreshPlayerStatsFromData()
+        {
+            SetPlayerStatsFromData();
+        }
+
         public WeaponType GetWeaponTypeByPlayer()
         {
             return shootController.CurrentWeapon.WeaponType;
@@ -70,7 +79,10 @@ namespace Global.Player
 
         public void DamagePlayer(float damage)
         {
-            player.hpValue -= (CalculateDamage(damage));
+            if (canDamaged)
+            {
+                player.hpValue -= (CalculateDamage(damage));
+            }
             if (IsPlayerIsDead())
             {
                 smoothPause.StartPauseWhenDead();
@@ -78,9 +90,26 @@ namespace Global.Player
             hUDController.GlowingByType(TypeGlowing.HpCurrent, player.hpValue);
         }
 
+        public void EnableImmortalityOnTime(float time)
+        {
+            if (immortalityCoroutine == null)
+            {
+                immortalityCoroutine = StartCoroutine(Immortality(time));
+            }
+        }
+
         #endregion public void
 
         #region private void
+
+        private IEnumerator Immortality(float time)
+        {
+            print("defence");
+            canDamaged = false;
+            yield return new WaitForSeconds(time);
+            canDamaged = true;
+            immortalityCoroutine = null;
+        }
 
         private float CalculateDamage(float damage)
         {

@@ -54,6 +54,7 @@ namespace Global.UI
 
         [SerializeField] private InputField timerToDisableItemPowerUp;
         [SerializeField] private InputField durationTime;
+        [SerializeField] private InputField killAreaRadius;
 
         [Header("Player"), SerializeField]
         private InputField playerSpeed;
@@ -110,6 +111,7 @@ namespace Global.UI
             LoadSettings(timerToSpawnItemPowerUp, data.PowerUpSpawnItemData.spawnTime.ToString());
             LoadSettings(timerToDisableItemPowerUp, data.PowerUpSpawnItemData.destroyTime.ToString());
             LoadSettings(durationTime, data.PowerUpSpawnItemData.duration.ToString());
+            LoadSettings(killAreaRadius, data.PowerUpSpawnItemData.killAreaRadius.ToString());
 
             LoadSettings(playerHp, data.PlayerData.hp.ToString());
             LoadSettings(playerSpeed, data.PlayerData.speed.ToString());

@@ -1,5 +1,6 @@
 ﻿using Global.Camera;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -33,6 +34,7 @@ namespace Global.Managers.Datas
         SpawnPowerUpDataTime,
         DispawnPowerUpDataTime,
         DurationPowerUpOnPlayer,
+        KillAreaRadiusPowerUp,
         PlayerHp,
         PlayerSpeed,
         CameraDistance,
@@ -48,6 +50,8 @@ namespace Global.Managers.Datas
         #region Inspector variables
 
 #pragma warning disable
+        [SerializeField] private float powerUpModifier;
+
         [Header("Weapon Data"), SerializeField] private WeaponType startPlayerWeapon;
         [SerializeField] private RocketData rocketData;
         [SerializeField] private ShotgunData shotgunData;
@@ -77,12 +81,6 @@ namespace Global.Managers.Datas
 
         #endregion Inspector variables
 
-        #region private variables
-
-        private Dictionary<VariableName, Action<string>> values = new Dictionary<VariableName, Action<string>>();
-
-        #endregion private variables
-
         #region properties
 
         public SpawnPowerUpData PowerUpSpawnItemData => powerUpSpawnItemData;
@@ -96,6 +94,13 @@ namespace Global.Managers.Datas
         public GameCameraType StartCameraType => cameraType;
 
         #endregion properties
+
+        #region private variables
+
+        private Dictionary<VariableName, Action<string>> values = new Dictionary<VariableName, Action<string>>();
+        private Dictionary<TypePowerUp, Action<bool>> powerUpFunctions = new Dictionary<TypePowerUp, Action<bool>>();
+
+        #endregion private variables
 
         #region public void
 
@@ -152,6 +157,11 @@ namespace Global.Managers.Datas
             values[variableName]?.Invoke(value);
         }
 
+        public void EnablesPowerUpByType(TypePowerUp typePowerUp, bool value)
+        {
+            powerUpFunctions[typePowerUp]?.Invoke(value);
+        }
+
         public void SetStartPlayerWeapon(WeaponType weaponType)
         {
             startPlayerWeapon = weaponType;
@@ -196,11 +206,18 @@ namespace Global.Managers.Datas
             values.Add(VariableName.SlowEnemySpeed, (string value) => SetValueSlowEnemySpeed(value));
             values.Add(VariableName.MiddleEnemySpeed, (string value) => SetValueMiddleEnemySpeed(value));
             values.Add(VariableName.FastEnemySpeed, (string value) => SetValueFastEnemySpeed(value));
+
+            powerUpFunctions.Add(TypePowerUp.IncreaseDamage, (bool value) => DamagePowerUp(value));
+            powerUpFunctions.Add(TypePowerUp.IncreaseSpeed, (bool value) => SpeedPowerUp(value));
         }
 
         #endregion public void
 
         #region private void
+
+        #region Dictinary functions
+
+        #region Data Functions
 
         private void SetValueAutomatiGunCountBullets(string value)
         {
@@ -362,6 +379,42 @@ namespace Global.Managers.Datas
             meleeFastEnemyData.speed = float.Parse(value);
         }
 
+        #endregion Data Functions
+
+        #region PowerUp
+
+        private void DamagePowerUp(bool value)
+        {
+            if (value)
+            {
+                automaticBulletData.damage = (int)(automaticBulletData.damage * powerUpModifier);
+                shotgunBulletData.damage = (int)(shotgunBulletData.damage * powerUpModifier);
+                rocketBulletData.damage = (int)(rocketBulletData.damage * powerUpModifier);
+            }
+            else
+            {
+                automaticBulletData.damage = (int)(automaticBulletData.damage / powerUpModifier);
+                shotgunBulletData.damage = (int)(shotgunBulletData.damage / powerUpModifier);
+                rocketBulletData.damage = (int)(rocketBulletData.damage / powerUpModifier);
+            }
+        }
+
+        private void SpeedPowerUp(bool value)
+        {
+            if (value)
+            {
+                playerData.speed *= powerUpModifier;
+            }
+            else
+            {
+                playerData.speed /= powerUpModifier;
+            }
+        }
+
+        #endregion PowerUp
+
+        #endregion Dictinary functions
+
         #endregion private void
     }
 
@@ -384,6 +437,7 @@ namespace Global.Managers.Datas
         public int spawnTime;
         public int destroyTime;
         public float duration;
+        public float killAreaRadius;
     }
 
     [Serializable]

@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dynamicData:
+    powerUpModifier: 1.5
     startPlayerWeapon: 0
     rocketData:
       timeToBlowUp: 3
@@ -61,6 +62,7 @@ MonoBehaviour:
       spawnTime: 10
       destroyTime: 12
       duration: 10
+      killAreaRadius: 0
     playerData:
       hp: 100
       speed: 2

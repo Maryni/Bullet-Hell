@@ -1,7 +1,11 @@
 ﻿using Global.ActiveObjects;
 using Global.Managers;
 using Global.Managers.Datas;
+using Global.Player;
+using Global.Upgrates;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Global.Controllers
@@ -22,6 +26,8 @@ namespace Global.Controllers
 
         #region private variables
 
+        private PlayerController playerController;
+        private Dictionary<TypePowerUp, Action> values = new Dictionary<TypePowerUp, Action>();
         private UnityEngine.Camera cam;
         private float height;
         private float width;
@@ -30,10 +36,19 @@ namespace Global.Controllers
         private int timerDispawnWeapon;
         private int timerSpawnPowerUp;
         private int timerDispawnPowerUp;
+        private float timerDuration;
+        private PowerUp tempObject;
+        private Coroutine coroutineDamage;
+        private Coroutine coroutineSpeed;
 
         #endregion private variables
 
         #region Unity functions
+
+        private void Awake()
+        {
+            SetValuesToDictionary();
+        }
 
         private void Start()
         {
@@ -41,14 +56,25 @@ namespace Global.Controllers
             {
                 cam = UnityEngine.Camera.allCameras[0];
             }
+            playerController = FindObjectOfType<PlayerController>();
+
             SetTimersFromData();
             StartCoroutine(SpawnEnemyByTimeByCount(timerSpawnEnemy, countSpawnEnemy));
             StartCoroutine(SpawnWeaponByTime(timerSpawnWeapon));
+            StartCoroutine(SpawnPowerUpByTime(timerSpawnPowerUp));
         }
 
         #endregion Unity functions
 
         #region public void
+
+        public void SetPowerUpByType(TypePowerUp typePowerUp, PowerUp gameObjectUsedMethod)
+        {
+            tempObject = gameObjectUsedMethod;
+            values[typePowerUp]?.Invoke();
+            tempObject.gameObject.SetActive(false);
+            tempObject = null;
+        }
 
         public void DisableSpawningEverything()
         {
@@ -82,6 +108,7 @@ namespace Global.Controllers
 
         private void DisableSpawningPowerUp()
         {
+            StopCoroutine(SpawnPowerUpByTime(timerSpawnPowerUp));
         }
 
         private void DisableEnemies()
@@ -104,6 +131,60 @@ namespace Global.Controllers
             Services.GetManager<PoolManager>().PowerUpPool.DisablePowerUps();
         }
 
+        private void SetValuesToDictionary()
+        {
+            values.Add(TypePowerUp.IncreaseDamage, () => DamagePowerUp());
+            values.Add(TypePowerUp.IncreaseDefence, () => DefencePowerUp());
+            values.Add(TypePowerUp.IncreaseSpeed, () => SpeedPowerUp());
+            values.Add(TypePowerUp.KillEnemies, () => KillAreaPowerUp());
+        }
+
+        private void DamagePowerUp()
+        {
+            if (coroutineDamage == null)
+            {
+                coroutineDamage = StartCoroutine(DamagePowerUpChanging());
+            }
+        }
+
+        private void SpeedPowerUp()
+        {
+            if (coroutineSpeed == null)
+            {
+                coroutineSpeed = StartCoroutine(SpeedPowerUpChanging());
+            }
+        }
+
+        private void DefencePowerUp()
+        {
+            playerController.EnableImmortalityOnTime(timerDuration);
+        }
+
+        private IEnumerator DamagePowerUpChanging()
+        {
+            Services.GetManager<DataManager>().DynamicData.EnablesPowerUpByType(TypePowerUp.IncreaseDamage, true);
+            playerController.RefreshPlayerStatsFromData();
+            yield return new WaitForSeconds(timerDuration);
+            Services.GetManager<DataManager>().DynamicData.EnablesPowerUpByType(TypePowerUp.IncreaseDamage, false);
+            playerController.RefreshPlayerStatsFromData();
+            coroutineDamage = null;
+        }
+
+        private IEnumerator SpeedPowerUpChanging()
+        {
+            Services.GetManager<DataManager>().DynamicData.EnablesPowerUpByType(TypePowerUp.IncreaseSpeed, true);
+            playerController.RefreshPlayerStatsFromData();
+            yield return new WaitForSeconds(timerDuration);
+            Services.GetManager<DataManager>().DynamicData.EnablesPowerUpByType(TypePowerUp.IncreaseSpeed, false);
+            playerController.RefreshPlayerStatsFromData();
+            coroutineSpeed = null;
+        }
+
+        private void KillAreaPowerUp()
+        {
+            tempObject.IncreaseRadius();
+        }
+
         private void SetTimersFromData()
         {
             var data = Services.GetManager<DataManager>();
@@ -111,25 +192,26 @@ namespace Global.Controllers
             timerDispawnWeapon = data.DynamicData.WeaponSpawnItemData.destroyTime;
             timerSpawnPowerUp = data.DynamicData.PowerUpSpawnItemData.spawnTime;
             timerDispawnPowerUp = data.DynamicData.PowerUpSpawnItemData.destroyTime;
+            timerDuration = data.DynamicData.PowerUpSpawnItemData.duration;
         }
 
         private void GetWidthAndHeightForSpawnWithoutCameraView(GameObject gameObjectSpawned)
         {
-            int valuetCorrectorWidth = Random.Range(0, arrTwoValues.Length);
-            int valueCorrectorHeight = Random.Range(0, arrTwoValues.Length);
+            int valuetCorrectorWidth = UnityEngine.Random.Range(0, arrTwoValues.Length);
+            int valueCorrectorHeight = UnityEngine.Random.Range(0, arrTwoValues.Length);
             valuetCorrectorWidth = arrTwoValues[valuetCorrectorWidth];
             valueCorrectorHeight = arrTwoValues[valueCorrectorHeight];
             height = cam.orthographicSize + camOffset;
             width = cam.orthographicSize * cam.aspect + camOffset;
             gameObjectSpawned.transform.position = new Vector2(
-                (Random.Range(width, plane.GetComponent<Collider2D>().bounds.size.x / 2)) * valuetCorrectorWidth,
-                (Random.Range(height, plane.GetComponent<Collider2D>().bounds.size.y / 2)) * valueCorrectorHeight);
+                (UnityEngine.Random.Range(width, plane.GetComponent<Collider2D>().bounds.size.x / 2)) * valuetCorrectorWidth,
+                (UnityEngine.Random.Range(height, plane.GetComponent<Collider2D>().bounds.size.y / 2)) * valueCorrectorHeight);
         }
 
         private void GetWidthAndHeightForSpawnInCameraView(GameObject gameObject)
         {
-            float camHeight = Random.Range(cam.ScreenToWorldPoint(new Vector2(0, 0)).y, cam.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
-            float camWidth = Random.Range(cam.ScreenToWorldPoint(new Vector2(0, 0)).x, cam.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
+            float camHeight = UnityEngine.Random.Range(cam.ScreenToWorldPoint(new Vector2(0, 0)).y, cam.ScreenToWorldPoint(new Vector2(0, Screen.height)).y);
+            float camWidth = UnityEngine.Random.Range(cam.ScreenToWorldPoint(new Vector2(0, 0)).x, cam.ScreenToWorldPoint(new Vector2(Screen.width, 0)).x);
             Vector3 spawnPoint = plane.GetComponent<Collider2D>().bounds.ClosestPoint(new Vector2(camWidth, camHeight));
 
             gameObject.transform.position = spawnPoint;
@@ -171,8 +253,13 @@ namespace Global.Controllers
             var tempPowerUpPoolObject = Services.GetManager<PoolManager>().PowerUpPool;
             var tempObject = tempPowerUpPoolObject.GetObject();
             tempObject.gameObject.SetActive(true);
-            tempObject.CheckAndSetPlayerTransform();
+            tempObject.CheckAndSetGameController();
+            tempObject.SetPowerUpType(tempPowerUpPoolObject.GetRandomPowerUp());
+            tempObject.SetSprite();
             GetWidthAndHeightForSpawnInCameraView(tempObject.gameObject);
+            tempObject.DispawnObjectByTime(timerDispawnPowerUp);
+            yield return new WaitForSeconds(timesRepeat);
+            yield return SpawnPowerUpByTime(timesRepeat);
         }
 
         #endregion private void
