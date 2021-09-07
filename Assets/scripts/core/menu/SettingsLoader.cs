@@ -60,6 +60,10 @@ namespace Global.UI
         [Header("Pause"), SerializeField]
         private InputField pauseTime;
 
+        [Header("Slow enemy"), SerializeField] private InputField slowEnemySpeed;
+        [Header("Middle enemy"), SerializeField] private InputField middleEnemySpeed;
+        [Header("Fast enemy"), SerializeField] private InputField fastEnemySpeed;
+
 #pragma warning restore
 
         #endregion Inspector variables

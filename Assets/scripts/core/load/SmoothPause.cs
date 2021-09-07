@@ -65,7 +65,7 @@ namespace Global.Game.Component
         public void ResetTimeScale()
         {
             StopAllCoroutines();
-            Time.timeScale = 1f;
+            Time.timeScale = maxTimeScale;
         }
 
         #endregion public void

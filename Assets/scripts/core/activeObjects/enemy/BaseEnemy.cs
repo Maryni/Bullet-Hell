@@ -70,16 +70,6 @@ namespace Global.ActiveObjects
             actionOnDie?.Invoke();
         }
 
-        protected int DamageTakenCalculator(int damage)
-        {
-            var hpDecrease = damage - EnemyStats.defence;
-            if (hpDecrease < 0)
-            {
-                hpDecrease = 0;
-            }
-            return hpDecrease;
-        }
-
         protected float DamageTakenCalculator(float damage)
         {
             var hpDecrease = damage - EnemyStats.defence;

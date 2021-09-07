@@ -6,7 +6,6 @@ namespace Global.Save
     public static class SaveData
     {
         public static string key = "SaveData";
-        public static string fileName = "data";
 
         public static void Save(DynamicData saveObject)
         {

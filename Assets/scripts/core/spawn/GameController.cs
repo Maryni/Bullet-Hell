@@ -10,8 +10,6 @@ namespace Global.Controllers
     {
         #region Inspector variables
 
-        //Add spawning random when camera not see enemy
-
 #pragma warning disable
         [SerializeField] private GameObject plane;
         [SerializeField] private int countSpawnEnemy;

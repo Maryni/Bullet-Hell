@@ -36,9 +36,6 @@ namespace Global.Shooting
 
         private Coroutine coroutineShot;
         private HUDController hUDController;
-#pragma warning disable
-        private Action actionCallback;
-#pragma warning restore
 
         #endregion private variables
 
@@ -58,7 +55,7 @@ namespace Global.Shooting
         {
             if (coroutineShot == null)
             {
-                coroutineShot = StartCoroutine(Shoot(mousePos, transformParent, () => actionCallback = null));
+                coroutineShot = StartCoroutine(Shoot(mousePos, transformParent, null));
             }
         }
 
@@ -79,7 +76,7 @@ namespace Global.Shooting
         protected virtual IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
         {
             yield return null;
-            StopCoroutine(Shoot(mousePos, transformParent, () => actionCallback = null));
+            StopCoroutine(Shoot(mousePos, transformParent, null));
             coroutineShot = null;
         }
 
