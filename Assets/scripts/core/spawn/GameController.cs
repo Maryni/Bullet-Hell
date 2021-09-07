@@ -131,7 +131,7 @@ namespace Global.Controllers
             tempObject.SetSprite();
             GetWidthAndHeightForSpawnInCameraView(tempObject.gameObject);
             tempObject.StopAllCoroutines();
-            StartCoroutine(tempObject.DisableObjectByTime(timerDispawnWeapon));
+            tempObject.DisableObjectByTime(timerDispawnWeapon);
             yield return new WaitForSeconds(timesRepeat);
             yield return SpawnWeaponByTime(timesRepeat);
         }

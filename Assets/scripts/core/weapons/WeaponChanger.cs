@@ -30,6 +30,12 @@ namespace Global.Weapon
 
         #endregion properties
 
+        #region private variables
+
+        private Coroutine coroutineForDisableWeapon;
+
+        #endregion private variables
+
         #region Unity functions
 
         private void OnCollisionEnter2D(Collision2D collision)
@@ -37,7 +43,6 @@ namespace Global.Weapon
             if (collision.gameObject.tag == TriggerType.Player.ToString())
             {
                 SetPlayerWeaponByWeapon(weaponType);
-                StopAllCoroutines();
                 gameObject.SetActive(false);
             }
         }
@@ -81,12 +86,31 @@ namespace Global.Weapon
             player.GetComponentInChildren<ShootController>().SetWeapon(weaponType);
         }
 
-        public IEnumerator DisableObjectByTime(int time)
+        public void DisableObjectByTime(int time)
         {
-            yield return new WaitForSeconds(time);
-            gameObject.SetActive(false);
+            if (coroutineForDisableWeapon == null)
+            {
+                coroutineForDisableWeapon = StartCoroutine(DisableObjectByTimeCoroutine(time));
+            }
         }
 
         #endregion public void
+
+        #region private void
+
+        private IEnumerator DisableObjectByTimeCoroutine(int time)
+        {
+            yield return new WaitForSeconds(time);
+            gameObject.SetActive(false);
+            StopCoroutineByCall(coroutineForDisableWeapon);
+        }
+
+        private void StopCoroutineByCall(Coroutine coroutine)
+        {
+            StopCoroutine(coroutine);
+            coroutine = null;
+        }
+
+        #endregion private void
     }
 }
