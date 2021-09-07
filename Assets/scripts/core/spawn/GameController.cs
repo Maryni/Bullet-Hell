@@ -28,6 +28,8 @@ namespace Global.Controllers
         private int[] arrTwoValues = new int[2] { -1, 1 };
         private int timerSpawnWeapon;
         private int timerDispawnWeapon;
+        private int timerSpawnPowerUp;
+        private int timerDispawnPowerUp;
 
         #endregion private variables
 
@@ -52,6 +54,7 @@ namespace Global.Controllers
         {
             DisableSpawningEnemy();
             DisableSpawningGun();
+            DisableSpawningPowerUp();
             StopAllCoroutines();
         }
 
@@ -60,6 +63,7 @@ namespace Global.Controllers
             DisableEnemies();
             DisableBullets();
             DisableWeapons();
+            DisablePowerUps();
         }
 
         #endregion public void
@@ -74,6 +78,10 @@ namespace Global.Controllers
         private void DisableSpawningGun()
         {
             StopCoroutine(SpawnWeaponByTime(timerSpawnWeapon));
+        }
+
+        private void DisableSpawningPowerUp()
+        {
         }
 
         private void DisableEnemies()
@@ -91,11 +99,18 @@ namespace Global.Controllers
             Services.GetManager<PoolManager>().WeaponPool.DisableWeapons();
         }
 
+        private void DisablePowerUps()
+        {
+            Services.GetManager<PoolManager>().PowerUpPool.DisablePowerUps();
+        }
+
         private void SetTimersFromData()
         {
             var data = Services.GetManager<DataManager>();
-            timerSpawnWeapon = data.DynamicData.SpawnItemData.spawnTime;
-            timerDispawnWeapon = data.DynamicData.SpawnItemData.destroyTime;
+            timerSpawnWeapon = data.DynamicData.WeaponSpawnItemData.spawnTime;
+            timerDispawnWeapon = data.DynamicData.WeaponSpawnItemData.destroyTime;
+            timerSpawnPowerUp = data.DynamicData.PowerUpSpawnItemData.spawnTime;
+            timerDispawnPowerUp = data.DynamicData.PowerUpSpawnItemData.destroyTime;
         }
 
         private void GetWidthAndHeightForSpawnWithoutCameraView(GameObject gameObjectSpawned)
@@ -130,7 +145,6 @@ namespace Global.Controllers
             tempObject.SetWeaponRandom();
             tempObject.SetSprite();
             GetWidthAndHeightForSpawnInCameraView(tempObject.gameObject);
-            tempObject.StopAllCoroutines();
             tempObject.DisableObjectByTime(timerDispawnWeapon);
             yield return new WaitForSeconds(timesRepeat);
             yield return SpawnWeaponByTime(timesRepeat);
@@ -149,6 +163,16 @@ namespace Global.Controllers
             }
             yield return new WaitForSeconds(time);
             yield return SpawnEnemyByTimeByCount(time, countSpawnPerTime);
+        }
+
+        private IEnumerator SpawnPowerUpByTime(int timesRepeat)
+        {
+            yield return new WaitForEndOfFrame();
+            var tempPowerUpPoolObject = Services.GetManager<PoolManager>().PowerUpPool;
+            var tempObject = tempPowerUpPoolObject.GetObject();
+            tempObject.gameObject.SetActive(true);
+            tempObject.CheckAndSetPlayerTransform();
+            GetWidthAndHeightForSpawnInCameraView(tempObject.gameObject);
         }
 
         #endregion private void

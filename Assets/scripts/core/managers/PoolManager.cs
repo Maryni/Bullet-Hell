@@ -9,7 +9,9 @@ namespace Global.Managers
         [SerializeField] private BulletPool bulletPool;
         [SerializeField] private EnemyPool enemyPool;
         [SerializeField] private WeaponPool weaponPool;
+        [SerializeField] private PowerUpPool powerUpPool;
 
+        public PowerUpPool PowerUpPool => powerUpPool;
         public BulletPool BulletPool => bulletPool;
         public EnemyPool EnemyPool => enemyPool;
         public WeaponPool WeaponPool => weaponPool;

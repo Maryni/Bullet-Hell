@@ -158,6 +158,7 @@ Transform:
   - {fileID: 2809469079728406956}
   - {fileID: 6269845059344368965}
   - {fileID: 64000626627852203}
+  - {fileID: 1237457050465804042}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -176,6 +177,7 @@ MonoBehaviour:
   bulletPool: {fileID: 96171426784459112}
   enemyPool: {fileID: 8178015600628054382}
   weaponPool: {fileID: 4595973986938697849}
+  powerUpPool: {fileID: 4800411711215156814}
 --- !u!1 &5355707526495263963
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,6 +208,54 @@ Transform:
   m_Father: {fileID: 2809469079728406956}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7676672336391505203
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1237457050465804042}
+  - component: {fileID: 4800411711215156814}
+  m_Layer: 0
+  m_Name: PowerUpPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1237457050465804042
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7676672336391505203}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5248571568406690576}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4800411711215156814
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7676672336391505203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50dfc17b2ccfa1a4088be859bd73f5c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpPrefab: {fileID: 5519400516784186663, guid: 0632fd7bf61777041b2b9e19447fe824,
+    type: 3}
+  listPowerUps: []
+  transformObjectToSpawn: {fileID: 1237457050465804042}
+  countSpawn: 10
 --- !u!1 &7978386686947281495
 GameObject:
   m_ObjectHideFlags: 0

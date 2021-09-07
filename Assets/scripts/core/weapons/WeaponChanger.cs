@@ -13,12 +13,12 @@ namespace Global.Weapon
         #region Inspector variables
 
 #pragma warning disable
+        [SerializeField] private WeaponType weaponType;
         [SerializeField] private Sprite automatic;
         [SerializeField] private Sprite shotgun;
         [SerializeField] private Sprite rocketLaucher;
         [SerializeField] private Sprite sprite;
         [SerializeField] private SpriteRenderer spriteRenderer;
-        [SerializeField] private WeaponType weaponType;
         [SerializeField] private GameObject player;
 #pragma warning restore
 
@@ -40,7 +40,7 @@ namespace Global.Weapon
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.tag == TriggerType.Player.ToString())
+            if (collision.gameObject.GetComponent<PlayerController>())
             {
                 SetPlayerWeaponByWeapon(weaponType);
                 gameObject.SetActive(false);

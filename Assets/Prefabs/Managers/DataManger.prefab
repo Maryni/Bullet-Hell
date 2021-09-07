@@ -54,9 +54,12 @@ MonoBehaviour:
     shotgunData:
       angleBullets: 40
       countBulletsInOnceShoot: 4
-    spawnItemData:
+    weaponSpawnItemData:
       spawnTime: 5
       destroyTime: 6
+    powerUpSpawnItemData:
+      spawnTime: 10
+      destroyTime: 12
     playerData:
       hp: 100
       speed: 2

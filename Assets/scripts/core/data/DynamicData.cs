@@ -28,8 +28,11 @@ namespace Global.Managers.Datas
         RocketLaucherBulletAccelerationTime,
         RocketLaucherBulleTimeToBlowUp,
         RocketLaucherBulleRadiusToBlowUp,
-        SpawnItemDataTimeToSpawn,
-        SpawnItemDataTimeToHideWeaponAfterSpawn,
+        SpawnWeaponDataTime,
+        DispawnWeaponDataTime,
+        SpawnPowerUpDataTime,
+        DispawnPowerUpDataTime,
+        DurationPowerUpOnPlayer,
         PlayerHp,
         PlayerSpeed,
         CameraDistance,
@@ -49,7 +52,8 @@ namespace Global.Managers.Datas
         [SerializeField] private RocketData rocketData;
         [SerializeField] private ShotgunData shotgunData;
 
-        [Header("Weapon & PowerUp Settings"), SerializeField] private SpawnItemData spawnItemData;
+        [Header("Weapon & PowerUp Settings"), SerializeField] private SpawnWeaponData weaponSpawnItemData;
+        [SerializeField] private SpawnPowerUpData powerUpSpawnItemData;
 
         [Header("Player Data"), SerializeField] private PlayerData playerData;
 
@@ -81,7 +85,8 @@ namespace Global.Managers.Datas
 
         #region properties
 
-        public SpawnItemData SpawnItemData => spawnItemData;
+        public SpawnPowerUpData PowerUpSpawnItemData => powerUpSpawnItemData;
+        public SpawnWeaponData WeaponSpawnItemData => weaponSpawnItemData;
         public RocketData RocketData => rocketData;
         public PlayerData PlayerData => playerData;
         public CameraData CameraData => cameraData;
@@ -184,8 +189,10 @@ namespace Global.Managers.Datas
             values.Add(VariableName.PlayerHp, (string value) => SetValuePlayerHp(value));
             values.Add(VariableName.PlayerSpeed, (string value) => SetValuePlayerSpeed(value));
             values.Add(VariableName.PauseTime, (string value) => SetValuePauseTime(value));
-            values.Add(VariableName.SpawnItemDataTimeToSpawn, (string value) => SetValueSpawnItemDataTimeToSpawn(value));
-            values.Add(VariableName.SpawnItemDataTimeToHideWeaponAfterSpawn, (string value) => SetValueSpawnItemDataTimeToHideWeaponAfterSpawn(value));
+            values.Add(VariableName.SpawnWeaponDataTime, (string value) => SetValueSpawnWeaponDataTime(value));
+            values.Add(VariableName.DispawnWeaponDataTime, (string value) => SetValueDispawnWeaponDataTime(value));
+            values.Add(VariableName.SpawnPowerUpDataTime, (string value) => SetValueSpawnPowerUpDataTime(value));
+            values.Add(VariableName.DispawnPowerUpDataTime, (string value) => SetValueDispawnPowerUpDataTime(value));
             values.Add(VariableName.SlowEnemySpeed, (string value) => SetValueSlowEnemySpeed(value));
             values.Add(VariableName.MiddleEnemySpeed, (string value) => SetValueMiddleEnemySpeed(value));
             values.Add(VariableName.FastEnemySpeed, (string value) => SetValueFastEnemySpeed(value));
@@ -300,14 +307,24 @@ namespace Global.Managers.Datas
             rocketData.radiusBlowUp = float.Parse(value);
         }
 
-        private void SetValueSpawnItemDataTimeToSpawn(string value)
+        private void SetValueSpawnWeaponDataTime(string value)
         {
-            spawnItemData.spawnTime = int.Parse(value);
+            weaponSpawnItemData.spawnTime = int.Parse(value);
         }
 
-        private void SetValueSpawnItemDataTimeToHideWeaponAfterSpawn(string value)
+        private void SetValueDispawnWeaponDataTime(string value)
         {
-            spawnItemData.destroyTime = int.Parse(value);
+            weaponSpawnItemData.destroyTime = int.Parse(value);
+        }
+
+        private void SetValueSpawnPowerUpDataTime(string value)
+        {
+            powerUpSpawnItemData.spawnTime = int.Parse(value);
+        }
+
+        private void SetValueDispawnPowerUpDataTime(string value)
+        {
+            powerUpSpawnItemData.destroyTime = int.Parse(value);
         }
 
         private void SetValuePlayerHp(string value)
@@ -355,10 +372,18 @@ namespace Global.Managers.Datas
     }
 
     [Serializable]
-    public class SpawnItemData
+    public class SpawnWeaponData
     {
         public int spawnTime;
         public int destroyTime;
+    }
+
+    [Serializable]
+    public class SpawnPowerUpData
+    {
+        public int spawnTime;
+        public int destroyTime;
+        public float duration;
     }
 
     [Serializable]

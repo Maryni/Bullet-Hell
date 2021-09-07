@@ -44,10 +44,16 @@ namespace Global.UI
         [SerializeField] private InputField rocketTimerBlowUp;
         [SerializeField] private InputField rocketRadiusBlowUp;
 
-        [Header("SpawnItem"), SerializeField]
-        private InputField timerToSpawnItem;
+        [Header("Spawn Weapon"), SerializeField]
+        private InputField timerToSpawnItemWeapon;
 
-        [SerializeField] private InputField timerToDisableItems;
+        [SerializeField] private InputField timerToDisableItemWeapon;
+
+        [Header("Spawn PowerUp"), SerializeField]
+        private InputField timerToSpawnItemPowerUp;
+
+        [SerializeField] private InputField timerToDisableItemPowerUp;
+        [SerializeField] private InputField durationTime;
 
         [Header("Player"), SerializeField]
         private InputField playerSpeed;
@@ -98,8 +104,13 @@ namespace Global.UI
             LoadSettings(rocketTimerBlowUp, data.RocketData.timeToBlowUp.ToString());
             LoadSettings(rocketRadiusBlowUp, data.RocketData.radiusBlowUp.ToString());
 
-            LoadSettings(timerToSpawnItem, data.SpawnItemData.spawnTime.ToString());
-            LoadSettings(timerToDisableItems, data.SpawnItemData.destroyTime.ToString());
+            LoadSettings(timerToSpawnItemWeapon, data.WeaponSpawnItemData.spawnTime.ToString());
+            LoadSettings(timerToDisableItemWeapon, data.WeaponSpawnItemData.destroyTime.ToString());
+
+            LoadSettings(timerToSpawnItemPowerUp, data.PowerUpSpawnItemData.spawnTime.ToString());
+            LoadSettings(timerToDisableItemPowerUp, data.PowerUpSpawnItemData.destroyTime.ToString());
+            LoadSettings(durationTime, data.PowerUpSpawnItemData.duration.ToString());
+
             LoadSettings(playerHp, data.PlayerData.hp.ToString());
             LoadSettings(playerSpeed, data.PlayerData.speed.ToString());
             LoadSettings(startWeapon, data.StartPlayerWeapon.ToString());
