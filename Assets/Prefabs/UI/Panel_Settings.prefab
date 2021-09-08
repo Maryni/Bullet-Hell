@@ -21198,7 +21198,7 @@ MonoBehaviour:
   timerToSpawnItemPowerUp: {fileID: 5677663219296191179}
   timerToDisableItemPowerUp: {fileID: 1436094513383734013}
   durationTime: {fileID: 6700442734174935554}
-  killAreaRadius: {fileID: 0}
+  killAreaRadius: {fileID: 7611799764573202163}
   playerSpeed: {fileID: 5197971836243640549}
   playerHp: {fileID: 1513352931131738884}
   cameraDistance: {fileID: 1713905559720974343}

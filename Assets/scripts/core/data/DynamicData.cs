@@ -203,6 +203,8 @@ namespace Global.Managers.Datas
             values.Add(VariableName.DispawnWeaponDataTime, (string value) => SetValueDispawnWeaponDataTime(value));
             values.Add(VariableName.SpawnPowerUpDataTime, (string value) => SetValueSpawnPowerUpDataTime(value));
             values.Add(VariableName.DispawnPowerUpDataTime, (string value) => SetValueDispawnPowerUpDataTime(value));
+            values.Add(VariableName.DurationPowerUpOnPlayer, (string value) => SetValueDurationPowerUpDataTime(value));
+            values.Add(VariableName.KillAreaRadiusPowerUp, (string value) => SetKillAreaRadiusPowerUp(value));
             values.Add(VariableName.SlowEnemySpeed, (string value) => SetValueSlowEnemySpeed(value));
             values.Add(VariableName.MiddleEnemySpeed, (string value) => SetValueMiddleEnemySpeed(value));
             values.Add(VariableName.FastEnemySpeed, (string value) => SetValueFastEnemySpeed(value));
@@ -342,6 +344,16 @@ namespace Global.Managers.Datas
         private void SetValueDispawnPowerUpDataTime(string value)
         {
             powerUpSpawnItemData.destroyTime = int.Parse(value);
+        }
+
+        private void SetValueDurationPowerUpDataTime(string value)
+        {
+            powerUpSpawnItemData.duration = float.Parse(value);
+        }
+
+        private void SetKillAreaRadiusPowerUp(string value)
+        {
+            powerUpSpawnItemData.killAreaRadius = float.Parse(value);
         }
 
         private void SetValuePlayerHp(string value)

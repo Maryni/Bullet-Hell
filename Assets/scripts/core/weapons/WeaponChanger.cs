@@ -44,6 +44,7 @@ namespace Global.Weapon
             {
                 SetPlayerWeaponByWeapon(weaponType);
                 gameObject.SetActive(false);
+                coroutineForDisableWeapon = null;
             }
         }
 
@@ -92,6 +93,11 @@ namespace Global.Weapon
             {
                 coroutineForDisableWeapon = StartCoroutine(DisableObjectByTimeCoroutine(time));
             }
+        }
+
+        public void ResetCoroutine()
+        {
+            coroutineForDisableWeapon = null;
         }
 
         #endregion public void

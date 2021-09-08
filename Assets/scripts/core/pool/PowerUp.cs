@@ -26,7 +26,6 @@ namespace Global.Upgrates
 
         private Coroutine coroutineDispawnObject;
         private GameController gameController;
-        private List<GameObject> listTouched;
         private float startRadius;
 
         #endregion private variables

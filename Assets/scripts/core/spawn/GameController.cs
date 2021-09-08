@@ -81,7 +81,7 @@ namespace Global.Controllers
             DisableSpawningEnemy();
             DisableSpawningGun();
             DisableSpawningPowerUp();
-            StopAllCoroutines();
+            //StopAllCoroutines();
         }
 
         public void DisableSpawnedItems()
@@ -223,6 +223,7 @@ namespace Global.Controllers
             var tempWeaponPool = Services.GetManager<PoolManager>().WeaponPool;
             var tempObject = tempWeaponPool.GetObject();
             tempObject.gameObject.SetActive(true);
+            tempObject.ResetCoroutine();
             tempObject.CheckAndSetPlayerTransform();
             tempObject.SetWeaponRandom();
             tempObject.SetSprite();
