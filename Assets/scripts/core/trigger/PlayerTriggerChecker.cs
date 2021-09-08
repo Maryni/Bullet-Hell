@@ -53,7 +53,8 @@ namespace Global.Trigger
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (collision.GetComponentInParent<PlayerController>())
+            Debug.Log(collision.gameObject.name);
+            if (collision.GetComponent<PlayerController>())
             {
                 if (canAttack)
                 {
@@ -72,13 +73,11 @@ namespace Global.Trigger
 
         private void OnTriggerExit2D(Collider2D collision)
         {
-            if (collision.GetComponentInParent<PlayerController>())
+            Debug.Log(collision.gameObject.name);
+            if (collision.GetComponent<PlayerController>())
             {
-                if (gameObject.transform.parent.gameObject.activeSelf)
-                {
-                    gameObject.GetComponentInParent<EnemyController>().DisableAttack();
-                    action?.Invoke();
-                }
+                gameObject.GetComponentInParent<EnemyController>().DisableAttack();
+                action?.Invoke();
             }
         }
 

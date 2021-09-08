@@ -1502,7 +1502,7 @@ GameObject:
   - component: {fileID: 7334389348601109420}
   - component: {fileID: 3458427522991592175}
   m_Layer: 5
-  m_Name: Settings2
+  m_Name: Settings_AutomaticGunCooldownTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1547,7 +1547,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 1251232018035368112}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &491015891964933088
 GameObject:
   m_ObjectHideFlags: 0
@@ -2076,7 +2076,7 @@ GameObject:
   - component: {fileID: 3198677856512633602}
   - component: {fileID: 4748032607451660176}
   m_Layer: 5
-  m_Name: Settings1
+  m_Name: Settings_RocketLauncherCountBullets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2121,7 +2121,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 2266243662965463788}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &665626514820797514
 GameObject:
   m_ObjectHideFlags: 0
@@ -3188,7 +3188,7 @@ GameObject:
   - component: {fileID: 1913398351228021419}
   - component: {fileID: 1085794571026961964}
   m_Layer: 5
-  m_Name: Settings2
+  m_Name: Settings_RocketLauncherCooldownTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3233,7 +3233,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 8058014070388208132}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &826473952960034957
 GameObject:
   m_ObjectHideFlags: 0
@@ -7759,7 +7759,7 @@ GameObject:
   - component: {fileID: 5673047573727607878}
   - component: {fileID: 691220305632930492}
   m_Layer: 5
-  m_Name: Settings4
+  m_Name: Settings_RocketLauncherBulletDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7804,7 +7804,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 1595507626340090803}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &1804791720828156819
 GameObject:
   m_ObjectHideFlags: 0
@@ -8102,7 +8102,7 @@ GameObject:
   - component: {fileID: 39010260525475647}
   - component: {fileID: 2893511336107281224}
   m_Layer: 5
-  m_Name: Settings4
+  m_Name: Settings_AutomaticGunBulletDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8147,7 +8147,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 5445965189598733764}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &1900011859474034771
 GameObject:
   m_ObjectHideFlags: 0
@@ -8801,7 +8801,7 @@ GameObject:
   - component: {fileID: 1803721483756064753}
   - component: {fileID: 7542536258755946061}
   m_Layer: 5
-  m_Name: Settings5
+  m_Name: Settings_AutomaticGunBulletSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8846,7 +8846,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 870819878738782344}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &2143233930558521074
 GameObject:
   m_ObjectHideFlags: 0
@@ -10730,11 +10730,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71bbbde1aa98ae45afe7b230887a39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variableName: 25
+  variableName: 35
   textUsed: {fileID: 7704174702057983437}
   textFieldUsed: {fileID: 0}
   valueToFloat: 0
-  listFields: []
+  currentText: 
 --- !u!1 &2527611403533877418
 GameObject:
   m_ObjectHideFlags: 0
@@ -11398,7 +11398,7 @@ GameObject:
   - component: {fileID: 1868664829545381989}
   - component: {fileID: 7495581777434321049}
   m_Layer: 5
-  m_Name: Settings1
+  m_Name: Settings_AutomaticGunCountBullets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11443,7 +11443,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 391989481798234573}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &2664040041089246046
 GameObject:
   m_ObjectHideFlags: 0
@@ -12097,7 +12097,7 @@ GameObject:
   - component: {fileID: 5971529438334114741}
   - component: {fileID: 1658099300967871940}
   m_Layer: 5
-  m_Name: Settings4
+  m_Name: Settings_KillAreaRadiusPowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12142,7 +12142,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 7611799764573202163}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &2880671995225781220
 GameObject:
   m_ObjectHideFlags: 0
@@ -12284,7 +12284,7 @@ GameObject:
   - component: {fileID: 3515495792354484330}
   - component: {fileID: 9163531524629521778}
   m_Layer: 5
-  m_Name: Settings4
+  m_Name: Settings_DispawnWeaponDataTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12329,7 +12329,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 8458202779850783968}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &2900960712451562995
 GameObject:
   m_ObjectHideFlags: 0
@@ -13655,7 +13655,7 @@ GameObject:
   - component: {fileID: 2042757025479803530}
   - component: {fileID: 8372728034264280382}
   m_Layer: 5
-  m_Name: Settings6
+  m_Name: Settings_RocketLaucherBulletMaxSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13700,7 +13700,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 1971971102341363948}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &3412039963356259853
 GameObject:
   m_ObjectHideFlags: 0
@@ -14310,7 +14310,7 @@ GameObject:
   - component: {fileID: 3164673556713026466}
   - component: {fileID: 8684466806621449763}
   m_Layer: 5
-  m_Name: Settings8
+  m_Name: Settings_RocketLauncherTimeToBlowUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14355,7 +14355,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 4723593368744747978}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &3557199758074671860
 GameObject:
   m_ObjectHideFlags: 0
@@ -14445,7 +14445,7 @@ GameObject:
   - component: {fileID: 5763968192366727874}
   - component: {fileID: 6843450011780881077}
   m_Layer: 5
-  m_Name: Settings2
+  m_Name: Settings_DispawnPowerUpDataTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14490,7 +14490,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 1436094513383734013}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &3579835519044393587
 GameObject:
   m_ObjectHideFlags: 0
@@ -14976,7 +14976,7 @@ GameObject:
   - component: {fileID: 4779638949134839159}
   - component: {fileID: 2074566703374852206}
   m_Layer: 5
-  m_Name: Settings1
+  m_Name: Settings_PlayerHp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -15021,7 +15021,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 1513352931131738884}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &3742312013171578037
 GameObject:
   m_ObjectHideFlags: 0
@@ -15957,7 +15957,7 @@ GameObject:
   - component: {fileID: 1524759280443740474}
   - component: {fileID: 8002756003093885511}
   m_Layer: 5
-  m_Name: Settings1_Speed
+  m_Name: Settings_FastEnemySpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16002,7 +16002,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 688780163840083285}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &3986292589902891356
 GameObject:
   m_ObjectHideFlags: 0
@@ -16014,7 +16014,7 @@ GameObject:
   - component: {fileID: 4385065075103165708}
   - component: {fileID: 4662725284956936018}
   m_Layer: 5
-  m_Name: Settings7
+  m_Name: Settings_ShotgunBulletSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16059,7 +16059,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 3118493656666877744}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &4028425430075862393
 GameObject:
   m_ObjectHideFlags: 0
@@ -16738,7 +16738,7 @@ GameObject:
   - component: {fileID: 6369033504799953656}
   - component: {fileID: 673308200536606250}
   m_Layer: 5
-  m_Name: Settings5
+  m_Name: Settings_RocketLaucherBulletMinSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16783,7 +16783,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 3278792231165607532}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &4087972848858258734
 GameObject:
   m_ObjectHideFlags: 0
@@ -17533,7 +17533,7 @@ GameObject:
   - component: {fileID: 5200056562413626968}
   - component: {fileID: 4377298624761909318}
   m_Layer: 5
-  m_Name: Settings2
+  m_Name: Settings_ShotgunCooldownTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17578,7 +17578,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 1018427431882080550}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &4296549754164094063
 GameObject:
   m_ObjectHideFlags: 0
@@ -18832,7 +18832,7 @@ GameObject:
   - component: {fileID: 1152559983350392466}
   - component: {fileID: 2113317634312985903}
   m_Layer: 5
-  m_Name: Settings3
+  m_Name: Settings_SpawnWeaponDataTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18877,7 +18877,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 4250682654401881509}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &4654357555229853487
 GameObject:
   m_ObjectHideFlags: 0
@@ -19317,7 +19317,7 @@ GameObject:
   - component: {fileID: 8719977315085235038}
   - component: {fileID: 9094172218823183279}
   m_Layer: 5
-  m_Name: Settings3
+  m_Name: Settings_RocketLauncherShootingRate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19362,7 +19362,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 591888131405409404}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &4803089956945738192
 GameObject:
   m_ObjectHideFlags: 0
@@ -19655,7 +19655,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4832771800962723530}
-        m_MethodName: SetStartWeaponByText
+        m_MethodName: SetValueFromText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19807,7 +19807,7 @@ GameObject:
   - component: {fileID: 3542831070122268544}
   - component: {fileID: 6874856761565419709}
   m_Layer: 5
-  m_Name: Settings1_Speed
+  m_Name: Settings_SlowEnemySpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19852,7 +19852,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 5936496685174103966}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &4927879191280652901
 GameObject:
   m_ObjectHideFlags: 0
@@ -20056,7 +20056,7 @@ GameObject:
   - component: {fileID: 4765823552405219739}
   - component: {fileID: 1494643295827864986}
   m_Layer: 5
-  m_Name: Settings1_Speed
+  m_Name: Settings_MiddleEnemySpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20101,7 +20101,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 9085363590421495781}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &4996583235021160404
 GameObject:
   m_ObjectHideFlags: 0
@@ -20321,7 +20321,7 @@ GameObject:
   - component: {fileID: 5527327065477776666}
   - component: {fileID: 2588618223326320259}
   m_Layer: 5
-  m_Name: Settings6
+  m_Name: Settings_ShotgunBulletDamage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20366,7 +20366,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 5206784283425398956}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &5065261907187971335
 GameObject:
   m_ObjectHideFlags: 0
@@ -20979,7 +20979,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 10239354583755728}
+      - m_Target: {fileID: 4204180558472436692}
         m_MethodName: SaveDataOnExit
         m_Mode: 1
         m_Arguments:
@@ -21091,6 +21091,7 @@ GameObject:
   - component: {fileID: 5129890662995596769}
   - component: {fileID: 5129890662995596768}
   - component: {fileID: 4108669570417743676}
+  - component: {fileID: 4204180558472436692}
   m_Layer: 5
   m_Name: Panel_Settings
   m_TagString: Untagged
@@ -21206,6 +21207,55 @@ MonoBehaviour:
   slowEnemySpeed: {fileID: 5936496685174103966}
   middleEnemySpeed: {fileID: 9085363590421495781}
   fastEnemySpeed: {fileID: 688780163840083285}
+--- !u!114 &4204180558472436692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5129890662995596318}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f34c548d307ddc4381ea39fa8495fdf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settingsItems:
+  - {fileID: 2113317634312985903}
+  - {fileID: 9163531524629521778}
+  - {fileID: 7495581777434321049}
+  - {fileID: 3458427522991592175}
+  - {fileID: 1555553575310383159}
+  - {fileID: 2893511336107281224}
+  - {fileID: 7542536258755946061}
+  - {fileID: 1580825749874903309}
+  - {fileID: 4377298624761909318}
+  - {fileID: 8954848718367234007}
+  - {fileID: 6085706640960902759}
+  - {fileID: 5697307818222026854}
+  - {fileID: 2588618223326320259}
+  - {fileID: 4662725284956936018}
+  - {fileID: 4748032607451660176}
+  - {fileID: 1085794571026961964}
+  - {fileID: 9094172218823183279}
+  - {fileID: 691220305632930492}
+  - {fileID: 673308200536606250}
+  - {fileID: 8372728034264280382}
+  - {fileID: 382480493097161082}
+  - {fileID: 8684466806621449763}
+  - {fileID: 326631942482360082}
+  - {fileID: 4832771800962723530}
+  - {fileID: 1538370429242283764}
+  - {fileID: 2074566703374852206}
+  - {fileID: 540705818119937321}
+  - {fileID: 4528781091423826935}
+  - {fileID: 5262747453872238906}
+  - {fileID: 4474550397765040749}
+  - {fileID: 6843450011780881077}
+  - {fileID: 3407040613469289330}
+  - {fileID: 1658099300967871940}
+  - {fileID: 6874856761565419709}
+  - {fileID: 1494643295827864986}
+  - {fileID: 8002756003093885511}
 --- !u!1 &5150301848787623402
 GameObject:
   m_ObjectHideFlags: 0
@@ -21659,7 +21709,7 @@ GameObject:
   - component: {fileID: 784752217577405213}
   - component: {fileID: 3407040613469289330}
   m_Layer: 5
-  m_Name: Settings3
+  m_Name: Settings_DurationPowerUpOnPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21704,7 +21754,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 6700442734174935554}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &5246193755098708710
 GameObject:
   m_ObjectHideFlags: 0
@@ -23216,7 +23266,7 @@ GameObject:
   - component: {fileID: 2986501245267728780}
   - component: {fileID: 6085706640960902759}
   m_Layer: 5
-  m_Name: Settings4
+  m_Name: Settings_ShotgunAngleBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23261,7 +23311,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 8122881525012646879}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &5605685892820368028
 GameObject:
   m_ObjectHideFlags: 0
@@ -25872,7 +25922,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1538370429242283764}
-        m_MethodName: SetCameraTypeByText
+        m_MethodName: SetValueFromText
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -27017,7 +27067,7 @@ GameObject:
   - component: {fileID: 1370685664932816424}
   - component: {fileID: 382480493097161082}
   m_Layer: 5
-  m_Name: Settings7
+  m_Name: Settings_RocketLaucherBulletAccelerationTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27062,7 +27112,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 3084041322808352113}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &6704071251755779128
 GameObject:
   m_ObjectHideFlags: 0
@@ -27230,7 +27280,7 @@ GameObject:
   - component: {fileID: 4772551735679593732}
   - component: {fileID: 1555553575310383159}
   m_Layer: 5
-  m_Name: Settings3
+  m_Name: Settings_AutomaticGunShootingRate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27275,7 +27325,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 4663992733209409304}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &6758303366957501525
 GameObject:
   m_ObjectHideFlags: 0
@@ -27326,11 +27376,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e71bbbde1aa98ae45afe7b230887a39f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variableName: 25
+  variableName: 34
   textUsed: {fileID: 5664886936396064493}
   textFieldUsed: {fileID: 0}
   valueToFloat: 0
-  listFields: []
+  currentText: 
 --- !u!1 &6805610127668770666
 GameObject:
   m_ObjectHideFlags: 0
@@ -27824,7 +27874,7 @@ GameObject:
   - component: {fileID: 3853406816880953513}
   - component: {fileID: 4528781091423826935}
   m_Layer: 5
-  m_Name: Settings3
+  m_Name: Settings_CameraDistance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27869,7 +27919,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 1713905559720974343}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &6919888392142580926
 GameObject:
   m_ObjectHideFlags: 0
@@ -28739,7 +28789,7 @@ GameObject:
   - component: {fileID: 7934787133641470555}
   - component: {fileID: 326631942482360082}
   m_Layer: 5
-  m_Name: Settings9
+  m_Name: Settings_RocketLauncherRadiusToBlowUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28784,7 +28834,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 7204771226684625227}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &7182446911146299723
 GameObject:
   m_ObjectHideFlags: 0
@@ -29394,7 +29444,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7765127365380594937}
-  - component: {fileID: 10239354583755728}
   m_Layer: 5
   m_Name: OtherButton
   m_TagString: Untagged
@@ -29422,57 +29471,6 @@ RectTransform:
   m_AnchoredPosition: {x: -150, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &10239354583755728
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7342960241736233233}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e71bbbde1aa98ae45afe7b230887a39f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  variableName: 0
-  textUsed: {fileID: 5129890662738115020}
-  textFieldUsed: {fileID: 0}
-  valueToFloat: 0
-  listFields:
-  - {fileID: 391989481798234573}
-  - {fileID: 1251232018035368112}
-  - {fileID: 4663992733209409304}
-  - {fileID: 5445965189598733764}
-  - {fileID: 870819878738782344}
-  - {fileID: 1238911026417601985}
-  - {fileID: 1018427431882080550}
-  - {fileID: 4774179926592667731}
-  - {fileID: 5206784283425398956}
-  - {fileID: 3118493656666877744}
-  - {fileID: 2266243662965463788}
-  - {fileID: 8058014070388208132}
-  - {fileID: 591888131405409404}
-  - {fileID: 1595507626340090803}
-  - {fileID: 3278792231165607532}
-  - {fileID: 4723593368744747978}
-  - {fileID: 7204771226684625227}
-  - {fileID: 5197971836243640549}
-  - {fileID: 4250682654401881509}
-  - {fileID: 8458202779850783968}
-  - {fileID: 1713905559720974343}
-  - {fileID: 8122881525012646879}
-  - {fileID: 3352980764887043970}
-  - {fileID: 6939910871171279913}
-  - {fileID: 1971971102341363948}
-  - {fileID: 3084041322808352113}
-  - {fileID: 1513352931131738884}
-  - {fileID: 5936496685174103966}
-  - {fileID: 9085363590421495781}
-  - {fileID: 688780163840083285}
-  - {fileID: 5677663219296191179}
-  - {fileID: 1436094513383734013}
-  - {fileID: 6700442734174935554}
-  - {fileID: 7611799764573202163}
 --- !u!1 &7406450577389116446
 GameObject:
   m_ObjectHideFlags: 0
@@ -30467,7 +30465,7 @@ GameObject:
   - component: {fileID: 434921314434971799}
   - component: {fileID: 4474550397765040749}
   m_Layer: 5
-  m_Name: Settings1
+  m_Name: Settings_SpawnPowerUpDateTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30512,7 +30510,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 5677663219296191179}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &7678545046509519663
 GameObject:
   m_ObjectHideFlags: 0
@@ -32820,7 +32818,7 @@ GameObject:
   - component: {fileID: 5117754571246704046}
   - component: {fileID: 540705818119937321}
   m_Layer: 5
-  m_Name: Settings2
+  m_Name: Settings_PlayerSpeed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32865,7 +32863,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 5197971836243640549}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &8171857435325751837
 GameObject:
   m_ObjectHideFlags: 0
@@ -32877,7 +32875,7 @@ GameObject:
   - component: {fileID: 7310818483493890427}
   - component: {fileID: 1580825749874903309}
   m_Layer: 5
-  m_Name: Settings1
+  m_Name: Settings_ShotgunCountBullets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32922,7 +32920,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 1238911026417601985}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &8179693311699005426
 GameObject:
   m_ObjectHideFlags: 0
@@ -34855,7 +34853,7 @@ GameObject:
   - component: {fileID: 2136719924606620427}
   - component: {fileID: 5262747453872238906}
   m_Layer: 5
-  m_Name: Settings4
+  m_Name: Settings_PauseTime
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34900,7 +34898,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 6939910871171279913}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &8784870599389185554
 GameObject:
   m_ObjectHideFlags: 0
@@ -35595,7 +35593,7 @@ GameObject:
   - component: {fileID: 124599736530621147}
   - component: {fileID: 5697307818222026854}
   m_Layer: 5
-  m_Name: Settings5
+  m_Name: Settings_ShotgunCountBulletsPerShoot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35640,7 +35638,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 3352980764887043970}
   valueToFloat: 1
-  listFields: []
+  currentText: 
 --- !u!1 &9024188680626672328
 GameObject:
   m_ObjectHideFlags: 0
@@ -36120,7 +36118,7 @@ GameObject:
   - component: {fileID: 3974381516729835668}
   - component: {fileID: 8954848718367234007}
   m_Layer: 5
-  m_Name: Settings3
+  m_Name: Settings_ShotgunShootingRate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36165,7 +36163,7 @@ MonoBehaviour:
   textUsed: {fileID: 0}
   textFieldUsed: {fileID: 4774179926592667731}
   valueToFloat: 0.1
-  listFields: []
+  currentText: 
 --- !u!1 &9216220989435291296
 GameObject:
   m_ObjectHideFlags: 0

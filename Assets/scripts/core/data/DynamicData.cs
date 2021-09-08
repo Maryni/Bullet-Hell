@@ -41,7 +41,9 @@ namespace Global.Managers.Datas
         PauseTime,
         SlowEnemySpeed,
         MiddleEnemySpeed,
-        FastEnemySpeed
+        FastEnemySpeed,
+        StartWeapon,
+        StartCameraType
     }
 
     [Serializable]
@@ -162,16 +164,6 @@ namespace Global.Managers.Datas
             powerUpFunctions[typePowerUp]?.Invoke(value);
         }
 
-        public void SetStartPlayerWeapon(WeaponType weaponType)
-        {
-            startPlayerWeapon = weaponType;
-        }
-
-        public void SetStartCameraType(GameCameraType cameraType)
-        {
-            this.cameraType = cameraType;
-        }
-
         public void SetActionsToDictionary()
         {
             values.Add(VariableName.AutomaticGunCountBullets, (string value) => SetValueAutomatiGunCountBullets(value));
@@ -208,6 +200,8 @@ namespace Global.Managers.Datas
             values.Add(VariableName.SlowEnemySpeed, (string value) => SetValueSlowEnemySpeed(value));
             values.Add(VariableName.MiddleEnemySpeed, (string value) => SetValueMiddleEnemySpeed(value));
             values.Add(VariableName.FastEnemySpeed, (string value) => SetValueFastEnemySpeed(value));
+            values.Add(VariableName.StartWeapon, (string value) => SetStartWeapon(value));
+            values.Add(VariableName.StartCameraType, (string value) => SetStartCameraType(value));
 
             powerUpFunctions.Add(TypePowerUp.IncreaseDamage, (bool value) => DamagePowerUp(value));
             powerUpFunctions.Add(TypePowerUp.IncreaseSpeed, (bool value) => SpeedPowerUp(value));
@@ -220,6 +214,31 @@ namespace Global.Managers.Datas
         #region Dictinary functions
 
         #region Data Functions
+
+        private void SetStartWeapon(string value)
+        {
+            WeaponType weaponType = WeaponType.AutomaticGun;
+            if (value == WeaponType.Shotgun.ToString())
+            {
+                weaponType = WeaponType.Shotgun;
+            }
+            if (value == WeaponType.RocketLaucher.ToString())
+            {
+                weaponType = WeaponType.RocketLaucher;
+            }
+
+            startPlayerWeapon = weaponType;
+        }
+
+        private void SetStartCameraType(string value)
+        {
+            GameCameraType cameraType = GameCameraType.DynamicCamera;
+            if (value == GameCameraType.StaticCamera.ToString())
+            {
+                cameraType = GameCameraType.StaticCamera;
+            }
+            this.cameraType = cameraType;
+        }
 
         private void SetValueAutomatiGunCountBullets(string value)
         {

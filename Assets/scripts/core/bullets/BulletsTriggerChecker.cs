@@ -54,8 +54,8 @@ namespace Global.Shooting.BulletSpace
                 }
                 if (baseBullet.BulletStats.bulletType == Managers.Datas.BulletType.RocketLaucherBullet)
                 {
-                    ((RocketLaucherBullet)baseBullet).ExplosiveRadiusUp();
-                    StartCoroutine(LateCall());
+                    ((RocketLauncherBullet)baseBullet).ExplosiveRadiusUp();
+                    StartCoroutine(ExplosiveWithDelay());
                 }
                 else
                 {
@@ -71,13 +71,11 @@ namespace Global.Shooting.BulletSpace
             #endregion Unity function
         }
 
-        private IEnumerator LateCall()
+        private IEnumerator ExplosiveWithDelay()
         {
-            yield return new WaitForFixedUpdate();
+            yield return new WaitForEndOfFrame();
             if (baseBullet.BulletStats.bulletType == Managers.Datas.BulletType.RocketLaucherBullet && listTouchingObjects.Count > 0)
             {
-                yield return new WaitForFixedUpdate();
-                yield return new WaitForEndOfFrame();
                 foreach (GameObject gameObjectItem in listTouchingObjects)
                 {
                     if (gameObjectItem.activeInHierarchy)
@@ -87,7 +85,7 @@ namespace Global.Shooting.BulletSpace
                 }
 
                 listTouchingObjects.Clear();
-                gameObject.GetComponent<RocketLaucherBullet>().ExplosiveRadiusDown();
+                gameObject.GetComponent<RocketLauncherBullet>().ExplosiveRadiusDown();
             }
             gameObject.SetActive(false);
         }

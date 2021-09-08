@@ -18,7 +18,7 @@ namespace Global.Managers.Datas
         [SerializeField] private List<BaseBullet> poolRocketList;
         [SerializeField] private AutomaticalBullet automaticBulletPrefab;
         [SerializeField] private ShotgunBullet shotgunBulletPrefab;
-        [SerializeField] private RocketLaucherBullet rocketBulletPrefab;
+        [SerializeField] private RocketLauncherBullet rocketBulletPrefab;
         [SerializeField] private Transform transformAutomatic;
         [SerializeField] private Transform transformShotgun;
         [SerializeField] private Transform transformRocket;

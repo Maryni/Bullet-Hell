@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dynamicData:
     powerUpModifier: 1.5
-    startPlayerWeapon: 0
+    startPlayerWeapon: 1
     rocketData:
       timeToBlowUp: 3
       radiusBlowUp: 14

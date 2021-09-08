@@ -59,7 +59,7 @@ namespace Global.Controllers
             baseWeapon = weaponScript;
             baseWeapon.SetHUDController(playerController.HUDController);
             baseWeapon.StopAllCoroutines();
-            baseWeapon.ReserCoroutine();
+            baseWeapon.ResetCoroutineShot();
             playerController.HUDController.GlowingByType(TypeGlowing.BulletsCurrent, CurrentWeapon.BulletCountCurrent);
             playerController.HUDController.GlowingByType(TypeGlowing.BulletsMaximum, CurrentWeapon.WeaponStats.bulletCount);
         }
@@ -74,7 +74,7 @@ namespace Global.Controllers
             {
                 if (Input.GetKey(KeyCode.Mouse0))
                 {
-                    baseWeapon.Shoot(mousePos, bulletPool);
+                    baseWeapon.Shoot(mousePos, bulletPool, true);
                     playerController.HUDController.GlowingByType(TypeGlowing.BulletsCurrent, CurrentWeapon.BulletCountCurrent);
                 }
             }

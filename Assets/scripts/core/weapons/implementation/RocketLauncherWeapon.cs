@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace Global.Weapon
 {
-    public class AutomaticGunWeapon : BaseWeapon
+    public class RocketLauncherWeapon : BaseWeapon
     {
         #region Unity functions
 
@@ -23,7 +23,7 @@ namespace Global.Weapon
 
         protected override IEnumerator Shooting(Vector2 mousePos, Transform transformParent, bool enableRotation)
         {
-            StartCoroutine(base.Shooting(mousePos, transformParent, true));
+            StartCoroutine(base.Shooting(mousePos, transformParent, false));
             yield return null;
         }
 

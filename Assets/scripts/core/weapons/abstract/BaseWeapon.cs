@@ -3,6 +3,7 @@ using System;
 using UnityEngine;
 using Global.Managers.Datas;
 using Global.Controllers;
+using Global.Managers;
 
 namespace Global.Shooting
 {
@@ -51,11 +52,11 @@ namespace Global.Shooting
             weaponStats = Services.GetManager<DataManager>().DynamicData.GetWeaponDataByType(weaponType);
         }
 
-        public void Shoot(Vector2 mousePos, Transform transformParent)
+        public void Shoot(Vector2 mousePos, Transform transformParent, bool enableRotation)
         {
             if (coroutineShot == null)
             {
-                coroutineShot = StartCoroutine(Shoot(mousePos, transformParent, null));
+                coroutineShot = StartCoroutine(Shooting(mousePos, transformParent, enableRotation));
             }
         }
 
@@ -64,7 +65,7 @@ namespace Global.Shooting
             this.weaponType = weaponType;
         }
 
-        public void ReserCoroutine()
+        public void ResetCoroutineShot()
         {
             coroutineShot = null;
         }
@@ -73,10 +74,31 @@ namespace Global.Shooting
 
         #region protected void
 
-        protected virtual IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
+        protected virtual IEnumerator Shooting(Vector2 mousePos, Transform transformParent, bool enableRotation)
         {
-            yield return null;
-            StopCoroutine(Shoot(mousePos, transformParent, null));
+            bulletCountCurrent--;
+            float zParentRotation = gameObject.transform.parent.transform.rotation.eulerAngles.z;
+            var bullet = Services.GetManager<PoolManager>().BulletPool.GetObject(WeaponType);
+            bullet.transform.position = transformParent.position;
+            bullet.gameObject.SetActive(true);
+            bullet.ActivateBullet();
+            bullet.Rotate(zParentRotation);
+            bullet.Move();
+            if (enableRotation)
+            {
+                bullet.Rotate(correctAngleForSprite + zParentRotation);
+            }
+            yield return new WaitForSeconds(weaponStats.shootingRate);
+            if (bulletCountCurrent == 0)
+            {
+                yield return Reload();
+            }
+            StopCoroutineShooting();
+        }
+
+        protected void StopCoroutineShooting()
+        {
+            StopCoroutine(coroutineShot);
             coroutineShot = null;
         }
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Global.Bullet
 {
-    public class RocketLaucherBullet : BaseBullet
+    public class RocketLauncherBullet : BaseBullet
     {
         #region Inspector variables
 
@@ -31,7 +31,10 @@ namespace Global.Bullet
 
         private void OnValidate()
         {
-            circleCollider2D = GetComponent<CircleCollider2D>();
+            if (circleCollider2D == null)
+            {
+                circleCollider2D = GetComponent<CircleCollider2D>();
+            }
         }
 
         #endregion Unity functions
@@ -43,8 +46,8 @@ namespace Global.Bullet
             if (circleCollider2D.radius != Services.GetManager<DataManager>().DynamicData.RocketData.radiusBlowUp)
             {
                 currentRadius = circleCollider2D.radius;
+                circleCollider2D.radius = Services.GetManager<DataManager>().DynamicData.RocketData.radiusBlowUp;
             }
-            circleCollider2D.radius = Services.GetManager<DataManager>().DynamicData.RocketData.radiusBlowUp;
         }
 
         public void ExplosiveRadiusDown()

@@ -38,7 +38,7 @@ namespace Global.Weapon
 
         #region public void
 
-        protected override IEnumerator Shoot(Vector2 mousePos, Transform transformParent, Action callback = null)
+        protected override IEnumerator Shooting(Vector2 mousePos, Transform transformParent, bool enableRotation)
         {
             bulletCountCurrent--;
             BaseBullet[] bullets = new BaseBullet[countBulletForShot];
@@ -83,8 +83,7 @@ namespace Global.Weapon
             {
                 yield return Reload();
             }
-            StartCoroutine(base.Shoot(mousePos, transformParent, callback));
-            callback?.Invoke();
+            base.StopCoroutineShooting();
         }
 
         #endregion public void

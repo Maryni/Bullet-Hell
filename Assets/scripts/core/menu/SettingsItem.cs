@@ -15,13 +15,14 @@ namespace Global.UI
         [SerializeField] private Text textUsed;
         [SerializeField] private InputField textFieldUsed;
         [SerializeField] private float valueToFloat;
-        [SerializeField] private List<InputField> listFields;
+        [SerializeField] private string currentText;
 #pragma warning restore
 
         #endregion Inspector variables
 
         #region properties
 
+        public string CurrentText => currentText;
         public VariableName VariableName => variableName;
 
         #endregion properties
@@ -44,31 +45,6 @@ namespace Global.UI
 
         #region public void
 
-        public void SetCameraTypeByText()
-        {
-            GameCameraType cameraType = GameCameraType.DynamicCamera;
-            if (textUsed.text == GameCameraType.StaticCamera.ToString())
-            {
-                cameraType = GameCameraType.StaticCamera;
-            }
-            Services.GetManager<DataManager>().DynamicData.SetStartCameraType(cameraType);
-        }
-
-        public void SetStartWeaponByText()
-        {
-            WeaponType weaponType = WeaponType.AutomaticGun;
-            if (textUsed.text == WeaponType.Shotgun.ToString())
-            {
-                weaponType = WeaponType.Shotgun;
-            }
-            if (textUsed.text == WeaponType.RocketLaucher.ToString())
-            {
-                weaponType = WeaponType.RocketLaucher;
-            }
-
-            Services.GetManager<DataManager>().DynamicData.SetStartPlayerWeapon(weaponType);
-        }
-
         #region void AddLessValue
 
         public void AddValueToText(bool usedLikeFloat)
@@ -76,12 +52,14 @@ namespace Global.UI
             if (usedLikeFloat)
             {
                 valueFloat += valueToFloat;
-                textFieldUsed.text = valueFloat.ToString();
+                currentText = valueFloat.ToString();
+                textFieldUsed.text = currentText;
             }
             else
             {
                 valueInt++;
-                textFieldUsed.text = valueInt.ToString();
+                currentText = valueInt.ToString();
+                textFieldUsed.text = currentText;
             }
         }
 
@@ -90,30 +68,18 @@ namespace Global.UI
             if (usedLikeFloat)
             {
                 valueFloat -= valueToFloat;
-                textFieldUsed.text = valueFloat.ToString();
+                currentText = valueFloat.ToString();
+                textFieldUsed.text = currentText;
             }
             else
             {
                 valueInt--;
-                textFieldUsed.text = valueInt.ToString();
+                currentText = valueInt.ToString();
+                textFieldUsed.text = currentText;
             }
         }
 
         #endregion void AddLessValue
-
-        public void SaveDataOnExit()
-        {
-            if (listFields.Count > 0)
-            {
-                var dataManager = Services.GetManager<DataManager>();
-                for (int i = 0; i < listFields.Count; i++)
-                {
-                    dataManager.DynamicData.SetValueToData(listFields[i].transform.parent.GetComponent<SettingsItem>().VariableName,
-                        listFields[i].transform.parent.GetComponent<SettingsItem>().textFieldUsed.text);
-                }
-                dataManager.SaveDynamicData();
-            }
-        }
 
         public void SetTextFromValue()
         {
@@ -121,37 +87,46 @@ namespace Global.UI
             {
                 if (valueFloat != 0)
                 {
-                    textUsed.text = valueFloat.ToString();
+                    currentText = valueFloat.ToString();
+                    textUsed.text = currentText;
                 }
                 if (valueInt != 0)
                 {
-                    textUsed.text = valueInt.ToString();
+                    currentText = valueFloat.ToString();
+                    textUsed.text = currentText;
                 }
             }
             if (textFieldUsed != null)
             {
                 if (valueFloat != 0)
                 {
-                    textFieldUsed.text = valueFloat.ToString();
+                    currentText = valueFloat.ToString();
+                    textFieldUsed.text = currentText;
                 }
                 if (valueInt != 0)
                 {
-                    textFieldUsed.text = valueInt.ToString();
+                    currentText = valueFloat.ToString();
+                    textFieldUsed.text = currentText;
                 }
+            }
+        }
+
+        public void SetValueFromText()
+        {
+            if (textFieldUsed != null)
+            {
+                valueFloat = float.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
+                currentText = valueFloat.ToString();
+            }
+            else
+            {
+                currentText = textUsed.text;
             }
         }
 
         #endregion public void
 
         #region private void
-
-        private void SetValueFromText()
-        {
-            if (textFieldUsed != null)
-            {
-                valueFloat = float.Parse(ValueCheckerOnOnlyNumbers(textFieldUsed.text));
-            }
-        }
 
         private string ValueCheckerOnOnlyNumbers(string text)
         {

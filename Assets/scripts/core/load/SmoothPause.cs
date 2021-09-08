@@ -21,9 +21,9 @@ namespace Global.Game.Component
 
         #region private variables
 
-        private Coroutine coroutineDecreaseToOne;
-        private float minTimeScale = 0f;
-        private float maxTimeScale;
+        private Coroutine coroutineDecreaseTimeScaleToOne;
+        [Range(0f, 1f)] private float minTimeScale = 0f;
+        [Range(0f, 1f)] private float maxTimeScale;
 
         #endregion private variables
 
@@ -74,22 +74,21 @@ namespace Global.Game.Component
 
         private void SetValueFromData()
         {
-            var data = Services.GetManager<DataManager>().DynamicData;
-            timeScaleSeconds = data.PauseData.pauseTime;
+            timeScaleSeconds = Services.GetManager<DataManager>().DynamicData.PauseData.pauseTime;
         }
 
         private void EnablePause()
         {
-            if (coroutineDecreaseToOne == null)
+            if (coroutineDecreaseTimeScaleToOne == null)
             {
-                coroutineDecreaseToOne = StartCoroutine(DecreaseValueTimeScale(maxTimeScale, minTimeScale, timeScaleSeconds, false));
+                coroutineDecreaseTimeScaleToOne = StartCoroutine(DecreaseValueTimeScale(maxTimeScale, minTimeScale, timeScaleSeconds, false));
             }
         }
 
         private void EnableDiePanel()
         {
             losePanel.SetActive(true);
-            Time.timeScale = 0f;
+            Time.timeScale = minTimeScale;
         }
 
         private IEnumerator DecreaseValueTimeScale(float start, float end, float time, bool isDie, Action callback = null)
@@ -138,7 +137,7 @@ namespace Global.Game.Component
         private void StopPauseCoroutine(IEnumerator coroutine)
         {
             StopCoroutine(coroutine);
-            coroutineDecreaseToOne = null;
+            coroutine = null;
         }
 
         #endregion private void
