@@ -41,6 +41,24 @@ namespace Global.Bullet
 
         #region public void
 
+        public override void TriggetBulletOnCollision()
+        {
+            if (coroutineOnCollisionCalled == null)
+            {
+                Debug.Log("Coroutine started");
+                coroutineOnCollisionCalled = StartCoroutine(TriggerOnCollisionRealization(coroutineOnCollisionCalled));
+            }
+        }
+
+        private IEnumerator TriggerOnCollisionRealization(Coroutine coroutine)
+        {
+            ExplosiveRadiusUp();
+            yield return null;
+            ExplosiveRadiusDown();
+
+            base.TriggetBulletOnCollision();
+        }
+
         public void ExplosiveRadiusUp()
         {
             if (circleCollider2D.radius != Services.GetManager<DataManager>().DynamicData.RocketData.radiusBlowUp)
@@ -52,7 +70,10 @@ namespace Global.Bullet
 
         public void ExplosiveRadiusDown()
         {
-            circleCollider2D.radius = currentRadius;
+            if (currentRadius > 0.5f)
+            {
+                circleCollider2D.radius = currentRadius;
+            }
         }
 
         public override void Move()
@@ -66,6 +87,9 @@ namespace Global.Bullet
         private IEnumerator DisableByTime(float time)
         {
             yield return new WaitForSeconds(time);
+            ExplosiveRadiusUp();
+            yield return null;
+            ExplosiveRadiusDown();
             gameObject.SetActive(false);
         }
 
@@ -88,6 +112,25 @@ namespace Global.Bullet
                 yield return null;
             }
         }
+
+        //private IEnumerator ExplosiveWithDelay()
+        //{
+        //    yield return new WaitForEndOfFrame();
+        //    if (listTouchingObjects.Count > 0)
+        //    {
+        //        foreach (GameObject gameObjectItem in listTouchingObjects)
+        //        {
+        //            if (gameObjectItem.activeInHierarchy)
+        //            {
+        //                gameObjectItem.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
+        //            }
+        //        }
+
+        //        listTouchingObjects.Clear();
+        //        gameObject.GetComponent<RocketLauncherBullet>().ExplosiveRadiusDown();
+        //    }
+        //    gameObject.SetActive(false);
+        //}
 
         #endregion private void
     }

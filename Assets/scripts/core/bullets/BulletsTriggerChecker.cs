@@ -52,16 +52,9 @@ namespace Global.Shooting.BulletSpace
                 {
                     listTouchingObjects.Add(collision.gameObject);
                 }
-                if (baseBullet.BulletStats.bulletType == Managers.Datas.BulletType.RocketLaucherBullet)
-                {
-                    ((RocketLauncherBullet)baseBullet).ExplosiveRadiusUp();
-                    StartCoroutine(ExplosiveWithDelay());
-                }
-                else
-                {
-                    collision.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
-                    gameObject.SetActive(false);
-                }
+
+                baseBullet.TriggetBulletOnCollision();
+                collision.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
             }
             if (collision.GetComponent<BulletsTriggerChecker>() && collision.GetComponent<BulletsTriggerChecker>().triggerType == TriggerType.Bullet)
             {
@@ -69,25 +62,6 @@ namespace Global.Shooting.BulletSpace
             }
 
             #endregion Unity function
-        }
-
-        private IEnumerator ExplosiveWithDelay()
-        {
-            yield return new WaitForEndOfFrame();
-            if (baseBullet.BulletStats.bulletType == Managers.Datas.BulletType.RocketLaucherBullet && listTouchingObjects.Count > 0)
-            {
-                foreach (GameObject gameObjectItem in listTouchingObjects)
-                {
-                    if (gameObjectItem.activeInHierarchy)
-                    {
-                        gameObjectItem.GetComponent<EnemyController>().DamageEnemy(baseBullet.BulletStats.damage);
-                    }
-                }
-
-                listTouchingObjects.Clear();
-                gameObject.GetComponent<RocketLauncherBullet>().ExplosiveRadiusDown();
-            }
-            gameObject.SetActive(false);
         }
     }
 }

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1291679828040550650}
   - component: {fileID: 2041063571288853126}
+  - component: {fileID: 3502715857317935371}
   m_Layer: 0
   m_Name: DataManger
   m_TagString: Untagged
@@ -56,13 +57,13 @@ MonoBehaviour:
       angleBullets: 40
       countBulletsInOnceShoot: 4
     weaponSpawnItemData:
-      spawnTime: 5
+      spawnTime: 7
       destroyTime: 6
     powerUpSpawnItemData:
       spawnTime: 10
       destroyTime: 12
       duration: 10
-      killAreaRadius: 14
+      killAreaRadius: 18
     playerData:
       hp: 100
       speed: 2
@@ -127,3 +128,15 @@ MonoBehaviour:
       cooldownTime: 1.75
       shootingRate: 0.65
   staticData: {fileID: 11400000, guid: d954cc5a7cd76f94d9809cafd4e20c92, type: 2}
+--- !u!114 &3502715857317935371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8913973780054140200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f169f4d729b0d224ebaa8eb70065c67c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

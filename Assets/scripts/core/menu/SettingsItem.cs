@@ -29,6 +29,7 @@ namespace Global.UI
 
         #region private variables
 
+        private char[] numberArray = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
         private int valueInt;
         private float valueFloat;
 
@@ -134,7 +135,23 @@ namespace Global.UI
             float floatValue = 0;
 
             textValue = text.Replace('.', ',');
-            float.TryParse(textValue, out floatValue);
+            if (!float.TryParse(textValue, out floatValue))
+            {
+                var textAfterParse = "";
+                var charArray = textValue.ToCharArray();
+                for (int i = 0; i < charArray.Length; i++)
+                {
+                    for (int j = 0; j < numberArray.Length; j++)
+                    {
+                        if (charArray[i] == numberArray[j] || charArray[i] == ',')
+                        {
+                            textAfterParse += charArray[i];
+                            break;
+                        }
+                    }
+                }
+                floatValue = float.Parse(textAfterParse);
+            }
             textValue = floatValue.ToString();
             if (textValue == "")
             {

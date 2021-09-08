@@ -24,6 +24,12 @@ namespace Global.Bullet
 
         #endregion properties
 
+        #region protected variables
+
+        protected Coroutine coroutineOnCollisionCalled;
+
+        #endregion protected variables
+
         #region Unity functions
 
         private void OnValidate()
@@ -37,6 +43,13 @@ namespace Global.Bullet
         #endregion Unity functions
 
         #region public void
+
+        public virtual void TriggetBulletOnCollision()
+        {
+            gameObject.SetActive(false);
+            StopCoroutine(coroutineOnCollisionCalled);
+            coroutineOnCollisionCalled = null;
+        }
 
         public void Rotate(float angle)
         {
